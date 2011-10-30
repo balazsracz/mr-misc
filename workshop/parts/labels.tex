@@ -1,0 +1,67 @@
+\documentclass[a4paper,times]{article}
+
+\usepackage{times}
+
+\newcommand{\smalllabel}[1]{
+\fbox{
+\vbox to 10mm {
+\hbox to 3.5cm{
+\parbox[c]{3.5cm}{
+\scriptsize{
+#1}}}\vfil}}}
+
+
+\begin{document}
+
+
+
+foo bar
+
+foo bar
+
+foo bar
+
+\framebox[3.15cm][c]{
+
+aa bb cc
+
+
+aaa bb cc
+
+}
+
+
+\vbox to 2.25cm{
+aaa bb bc
+}
+
+
+\smalllabel{
+Some info
+
+aaa
+
+
+aaa
+
+aaa
+
+aaa
+aa
+
+aaa
+
+aaa
+
+
+aaa
+
+aaa
+
+}
+
+\smalllabel{test label}
+
+
+
+\end{document}
