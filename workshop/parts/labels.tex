@@ -14,54 +14,32 @@
 \begin{document}
 
 
-
-foo bar
-
-foo bar
-
-foo bar
-
-\framebox[3.15cm][c]{
-
-aa bb cc
-
-
-aaa bb cc
-
-}
-
-
-\vbox to 2.25cm{
-aaa bb bc
-}
-
-
-\smalllabel{
-Some info
-
-aaa
-
-
-aaa
-
-aaa
-
-aaa
-aa
-
-aaa
-
-aaa
-
-
-aaa
-
-aaa
-
-}
-
 \smalllabel{test label}
 
 
+\smalllabel{
+RESISTOR 0207 R=1$\Omega$
+
+$\mathrm{P}_\textrm{max}$=$0.6\mathrm{W}$
+
+L(00-00-00) P(0.05 CHF/pcs.)
+
+}
+
+\newcommand{\resistor}[7]{
+\smalllabel{
+RESISTOR #1 R=#2$\Omega$
+
+$\mathrm{P}_\textrm{max}$=$#3\mathrm{W}$
+
+$\mathrm{U}_\textrm{max}$=$#4\mathrm{V}$
+$\mathrm{I}_\textrm{max}$=$#5\mathrm{A}$
+
+L(#6) #7 CHF
+}
+}
+
+
+\resistor{0207}{1}{0.6}{0.6}{0.7}{00-00-00}{0.05}
 
 \end{document}
