@@ -84,7 +84,7 @@ depend:
 	$(CC) -E -MM $(CIFLAGS) $(ADEFINES) *.[sS] Microchip_Peripherals/*.[sS] >> .depend
 #	$(CC) -E -MM $(CIFLAGS) $(ADEFINES) *.s   Microchip_Peripherals/*.s >> .depend
 
-include .depend
+-include .depend
 
 
 CPP_Demo.hex: Makefile $(LDSCRIPT) regs.S PIC32MX-reset.S $(OBJS)
