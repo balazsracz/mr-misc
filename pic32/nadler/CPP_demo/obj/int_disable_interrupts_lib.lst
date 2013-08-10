@@ -1,0 +1,112 @@
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccYVpaaa.s 			page 1
+
+
+   1              		.section .mdebug.abi32
+   2              		.previous
+   3              		.gnu_attribute 4, 3
+  11              	.Ltext0:
+  12              		.align	2
+  13              		.globl	INTDisableInterrupts
+  14              	.LFB3:
+  15              		.file 1 "Microchip_Peripherals/int_disable_interrupts_lib.c"
+   1:Microchip_Peripherals/int_disable_interrupts_lib.c **** /********************************************************************
+   2:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * FileName:		int_disable_interrupts_lib.c
+   3:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * Dependencies:
+   4:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * Processor:		PIC32
+   5:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * Hardware:		N/A
+   6:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * Assembler:		N/A
+   7:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * Linker:		    N/A
+   8:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * Company:		    Microchip Technology Inc..
+   9:Microchip_Peripherals/int_disable_interrupts_lib.c ****  *
+  10:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * Software License Agreement:
+  11:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * The software supplied herewith by Microchip Technology Incorporated
+  12:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * (the “Company”) for its PICmicro® Microcontroller is intended and
+  13:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * supplied to you, the Company’s customer, for use solely and
+  14:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * exclusively on Microchip PICmicro Microcontroller products. The
+  15:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * software is owned by the Company and/or its supplier, and is
+  16:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * protected under applicable copyright laws. All rights are reserved.
+  17:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * Any use in violation of the foregoing restrictions may subject the
+  18:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * user to criminal sanctions under applicable laws, as well as to
+  19:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * civil liability for the breach of the terms and conditions of this
+  20:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * license.
+  21:Microchip_Peripherals/int_disable_interrupts_lib.c ****  *
+  22:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * THIS SOFTWARE IS PROVIDED IN AN “AS IS” CONDITION. NO WARRANTIES,
+  23:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING, BUT NOT LIMITED
+  24:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * TO, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+  25:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * PARTICULAR PURPOSE APPLY TO THIS SOFTWARE. THE COMPANY SHALL NOT,
+  26:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL OR
+  27:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+  28:Microchip_Peripherals/int_disable_interrupts_lib.c ****  *
+  29:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * $Id: int_disable_interrupts_lib.c 3048 2007-04-19 16:33:08Z rajbhartin $
+  30:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * $Name:  $
+  31:Microchip_Peripherals/int_disable_interrupts_lib.c **** 
+  32:Microchip_Peripherals/int_disable_interrupts_lib.c ****  ********************************************************************/
+  33:Microchip_Peripherals/int_disable_interrupts_lib.c **** 
+  34:Microchip_Peripherals/int_disable_interrupts_lib.c **** #include <p32xxxx.h>
+  35:Microchip_Peripherals/int_disable_interrupts_lib.c **** #include <peripheral/int.h>
+  36:Microchip_Peripherals/int_disable_interrupts_lib.c **** 
+  37:Microchip_Peripherals/int_disable_interrupts_lib.c **** /*********************************************************************
+  38:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * Function:        mINTDisableInterrupts()
+  39:Microchip_Peripherals/int_disable_interrupts_lib.c ****  *
+  40:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * PreCondition:    None
+  41:Microchip_Peripherals/int_disable_interrupts_lib.c ****  *
+  42:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * Input:           None
+  43:Microchip_Peripherals/int_disable_interrupts_lib.c ****  *
+  44:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * Output:          None
+  45:Microchip_Peripherals/int_disable_interrupts_lib.c ****  *
+  46:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * Side Effects:    Interrupts are disabled
+  47:Microchip_Peripherals/int_disable_interrupts_lib.c ****  *
+  48:Microchip_Peripherals/int_disable_interrupts_lib.c ****  * Overview:        Interrupts are disabled by clearing the IE bit
+  49:Microchip_Peripherals/int_disable_interrupts_lib.c ****  *                  in the status register
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccYVpaaa.s 			page 2
+
+
+  50:Microchip_Peripherals/int_disable_interrupts_lib.c ****  ********************************************************************/
+  51:Microchip_Peripherals/int_disable_interrupts_lib.c **** unsigned int __attribute__((nomips16)) INTDisableInterrupts(void)
+  52:Microchip_Peripherals/int_disable_interrupts_lib.c **** {
+  16              		.loc 1 52 0
+  17              		.set	nomips16
+  18              		.ent	INTDisableInterrupts
+  19              	INTDisableInterrupts:
+  20              		.frame	$fp,16,$31		# vars= 8, regs= 1/0, args= 0, gp= 0
+  21              		.mask	0x40000000,-4
+  22              		.fmask	0x00000000,0
+  23 0000 F0FFBD27 		addiu	$sp,$sp,-16
+  24              	.LCFI0:
+  25 0004 0C00BEAF 		sw	$fp,12($sp)
+  26              	.LCFI1:
+  27 0008 21F0A003 		move	$fp,$sp
+  28              	.LCFI2:
+  53:Microchip_Peripherals/int_disable_interrupts_lib.c ****     unsigned int status = 0;
+  29              		.loc 1 53 0
+  30 000c 0000C0AF 		sw	$0,0($fp)
+  54:Microchip_Peripherals/int_disable_interrupts_lib.c **** 
+  55:Microchip_Peripherals/int_disable_interrupts_lib.c ****     asm volatile("di    %0" : "=r"(status));
+  31              		.loc 1 55 0
+  32              	 #APP
+  33              	 # 55 "Microchip_Peripherals/int_disable_interrupts_lib.c" 1
+  34 0010 00606241 		di    $2
+  35              	 # 0 "" 2
+  36              	 #NO_APP
+  37 0014 0000C2AF 		sw	$2,0($fp)
+  56:Microchip_Peripherals/int_disable_interrupts_lib.c **** 
+  57:Microchip_Peripherals/int_disable_interrupts_lib.c ****     return status;
+  38              		.loc 1 57 0
+  39 0018 0000C28F 		lw	$2,0($fp)
+  58:Microchip_Peripherals/int_disable_interrupts_lib.c **** }
+  40              		.loc 1 58 0
+  41 001c 21E8C003 		move	$sp,$fp
+  42 0020 0C00BE8F 		lw	$fp,12($sp)
+  43 0024 0800E003 		addiu	$sp,$sp,16
+  44 0028 1000BD27 		j	$31
+  45              		.end	INTDisableInterrupts
+  46              	.LFE3:
+  84              	.Letext0:
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccYVpaaa.s 			page 3
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 Microchip_Peripherals/int_disable_interrupts_lib.c
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccYVpaaa.s:19     .text:0000000000000000 INTDisableInterrupts
+
+NO UNDEFINED SYMBOLS

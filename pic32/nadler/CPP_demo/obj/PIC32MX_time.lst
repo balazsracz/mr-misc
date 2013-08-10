@@ -1,0 +1,422 @@
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSGpaaa.s 			page 1
+
+
+   1              		.section .mdebug.abi32
+   2              		.previous
+   3              		.gnu_attribute 4, 3
+  11              	.Ltext0:
+  12              		.align	2
+  13              	.LFB23:
+  14              		.file 1 "PIC32MX_time.cpp"
+   1:PIC32MX_time.cpp **** // PIC32MX_time.cpp - Simulated realtime clock, timer support
+   2:PIC32MX_time.cpp **** //
+   3:PIC32MX_time.cpp **** // Provides:
+   4:PIC32MX_time.cpp **** // - one-millisecond timer resolution
+   5:PIC32MX_time.cpp **** // - POSIX-style "time" (second resolution)
+   6:PIC32MX_time.cpp **** //
+   7:PIC32MX_time.cpp **** // Copyright (c) 2009 Dave Nadler
+   8:PIC32MX_time.cpp **** //
+   9:PIC32MX_time.cpp **** // The authors hereby grant permission to use, copy, modify, distribute,
+  10:PIC32MX_time.cpp **** // and license this software and its documentation for any purpose, provided
+  11:PIC32MX_time.cpp **** // that existing copyright notices are retained in all copies and that this
+  12:PIC32MX_time.cpp **** // notice is included verbatim in any distributions.  No written agreement,
+  13:PIC32MX_time.cpp **** // license, or royalty fee is required for any of the authorized uses.
+  14:PIC32MX_time.cpp **** // Modifications to this software may be copyrighted by their authors
+  15:PIC32MX_time.cpp **** // and need not follow the licensing terms described here, provided that
+  16:PIC32MX_time.cpp **** // the new terms are clearly indicated on the first page of each file where
+  17:PIC32MX_time.cpp **** // they apply.
+  18:PIC32MX_time.cpp **** //
+  19:PIC32MX_time.cpp **** // Modification History:
+  20:PIC32MX_time.cpp **** //   29Aug09 DRNadler:  Set default date to 15-July-2009
+  21:PIC32MX_time.cpp **** //   18Aug09 DRNadler:  Add Timer2 support
+  22:PIC32MX_time.cpp **** //   13Jun09 DRNadler:  Initial Coding
+  23:PIC32MX_time.cpp **** //
+  24:PIC32MX_time.cpp **** // PIC32MX has a counter/timer in the CPU  core ("CoreTimer"), plus a
+  25:PIC32MX_time.cpp **** // set of "general purpose" peripheral counter/timers.
+  26:PIC32MX_time.cpp **** //
+  27:PIC32MX_time.cpp **** // CoreTimer: 32-bit, incremented every other CPU clock cycle, with
+  28:PIC32MX_time.cpp **** // interrupt generated on match to a compare register. Counter does not
+  29:PIC32MX_time.cpp **** // reset automatically on compare match; not good for timebase !
+  30:PIC32MX_time.cpp **** //
+  31:PIC32MX_time.cpp **** // Peripheral Timer Type A:
+  32:PIC32MX_time.cpp **** // - works during CPU SLEEP (well, only with external clock, not
+  33:PIC32MX_time.cpp **** //   applicable in this application) - and CPU IDLE (applicable)
+  34:PIC32MX_time.cpp **** // - 16-bit only
+  35:PIC32MX_time.cpp **** // - PBclk source possible, max 256:1 prescale, 30,000,000UL/256...
+  36:PIC32MX_time.cpp **** // - reset to zero on match to "period" register
+  37:PIC32MX_time.cpp **** //
+  38:PIC32MX_time.cpp **** // Code here uses peripheral Timer1 or Timer2
+  39:PIC32MX_time.cpp **** #define USE_TIMER1
+  40:PIC32MX_time.cpp **** 
+  41:PIC32MX_time.cpp **** #include <time.h> // time_t
+  42:PIC32MX_time.cpp **** #include "HardwareProfile.h"
+  43:PIC32MX_time.cpp **** 
+  44:PIC32MX_time.cpp **** static bool timer_initialized = false;
+  45:PIC32MX_time.cpp **** static volatile time_t posixTime = (39*365+205)*24*60*60; // Default date is 15-July-2009
+  46:PIC32MX_time.cpp **** static volatile int milliseconds = 0; // since system start
+  47:PIC32MX_time.cpp **** 
+  48:PIC32MX_time.cpp **** static void timer_init(void) {
+  15              		.loc 1 48 0
+  16              		.set	nomips16
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSGpaaa.s 			page 2
+
+
+  17              		.ent	_ZL10timer_initv
+  18              	_ZL10timer_initv:
+  19              		.frame	$fp,8,$31		# vars= 0, regs= 1/0, args= 0, gp= 0
+  20              		.mask	0x40000000,-4
+  21              		.fmask	0x00000000,0
+  22              		.set	noreorder
+  23              		.set	nomacro
+  24              		
+  25 0000 F8FFBD27 		addiu	$sp,$sp,-8
+  26              	.LCFI0:
+  27 0004 0400BEAF 		sw	$fp,4($sp)
+  28              	.LCFI1:
+  29 0008 21F0A003 		move	$fp,$sp
+  30              	.LCFI2:
+  49:PIC32MX_time.cpp ****     if(timer_initialized) return;
+  31              		.loc 1 49 0
+  32 000c 08C08293 		lbu	$2,%gp_rel(_ZL17timer_initialized)($28)
+  33 0010 18004014 		bne	$2,$0,.L3
+  34 0014 00000000 		nop
+  35              	
+  50:PIC32MX_time.cpp ****     timer_initialized = true;
+  36              		.loc 1 50 0
+  37 0018 01000224 		li	$2,1
+  38 001c 08C082A3 		sb	$2,%gp_rel(_ZL17timer_initialized)($28)
+  51:PIC32MX_time.cpp ****   #ifdef USE_TIMER1
+  52:PIC32MX_time.cpp ****     T1CON = T1_OFF          |   // timer OFF until setup complete
+  53:PIC32MX_time.cpp ****             T1_IDLE_CON     |   // continue counting in CPU IDLE state
+  54:PIC32MX_time.cpp ****             T1_PS_1_8       |   // pre-scale clock-divisor 8:1
+  55:PIC32MX_time.cpp ****             T1_SYNC_EXT_OFF |   // no external clock synchronization
+  56:PIC32MX_time.cpp ****             T1_SOURCE_INT   |   // clock source is internal PBclock
+  57:PIC32MX_time.cpp ****             0;
+  39              		.loc 1 57 0
+  40 0020 0000033C 		lui	$3,%hi(T1CON)
+  41 0024 10000224 		li	$2,16			# 0x10
+  42 0028 000062AC 		sw	$2,%lo(T1CON)($3)
+  58:PIC32MX_time.cpp ****     TMR1 = 0;
+  43              		.loc 1 58 0
+  44 002c 0000023C 		lui	$2,%hi(TMR1)
+  45 0030 000040AC 		sw	$0,%lo(TMR1)($2)
+  59:PIC32MX_time.cpp ****     // period for 1-millisecond interrupts (1000 interrupts/sec)
+  60:PIC32MX_time.cpp ****     PR1 = (int)( (PERIPHERAL_CLOCK/8 /*prescale*/) / 1000); // 3750.00 for 30MHz PBclk
+  46              		.loc 1 60 0
+  47 0034 0000033C 		lui	$3,%hi(PR1)
+  48 0038 A60E0224 		li	$2,3750			# 0xea6
+  49 003c 000062AC 		sw	$2,%lo(PR1)($3)
+  61:PIC32MX_time.cpp ****     IPC1bits.T1IP = 3; // 1 is lowest interrupt priority
+  50              		.loc 1 61 0
+  51 0040 0000043C 		lui	$4,%hi(IPC1)
+  52 0044 0000828C 		lw	$2,%lo(IPC1)($4)
+  53 0048 03000324 		li	$3,3			# 0x3
+  54 004c 8420627C 		ins	$2,$3,2,3
+  55 0050 000082AC 		sw	$2,%lo(IPC1)($4)
+  62:PIC32MX_time.cpp ****     IEC0bits.T1IE = 1; // enable timer1 interrupt
+  56              		.loc 1 62 0
+  57 0054 0000043C 		lui	$4,%hi(IEC0)
+  58 0058 0000828C 		lw	$2,%lo(IEC0)($4)
+  59 005c 01000324 		li	$3,1			# 0x1
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSGpaaa.s 			page 3
+
+
+  60 0060 0421627C 		ins	$2,$3,4,1
+  61 0064 000082AC 		sw	$2,%lo(IEC0)($4)
+  63:PIC32MX_time.cpp ****     T1CONSET = T1_ON;
+  62              		.loc 1 63 0
+  63 0068 0000033C 		lui	$3,%hi(T1CONSET)
+  64 006c 00800234 		li	$2,32768			# 0x8000
+  65 0070 000062AC 		sw	$2,%lo(T1CONSET)($3)
+  66              	.L3:
+  64:PIC32MX_time.cpp ****   #else
+  65:PIC32MX_time.cpp ****     T2CON = T2_OFF          |   // timer OFF until setup complete
+  66:PIC32MX_time.cpp ****             T2_IDLE_CON     |   // continue counting in CPU IDLE state
+  67:PIC32MX_time.cpp ****             T2_PS_1_8       |   // pre-scale clock-divisor 8:1
+  68:PIC32MX_time.cpp ****             T2_SOURCE_INT   |   // clock source is internal PBclock
+  69:PIC32MX_time.cpp ****             0;
+  70:PIC32MX_time.cpp ****     TMR2 = 0;
+  71:PIC32MX_time.cpp ****     // period for 1-millisecond interrupts (1000 interrupts/sec)
+  72:PIC32MX_time.cpp ****     PR2 = (int)( (PERIPHERAL_CLOCK/8 /*prescale*/) / 1000); // 3750.00 for 30MHz PBclk
+  73:PIC32MX_time.cpp ****     IPC2bits.T2IP = 3; // 1 is lowest interrupt priority
+  74:PIC32MX_time.cpp ****     IEC0bits.T2IE = 1; // enable timer1 interrupt
+  75:PIC32MX_time.cpp ****     T2CONSET = T2_ON;
+  76:PIC32MX_time.cpp ****   #endif
+  77:PIC32MX_time.cpp **** };
+  67              		.loc 1 77 0
+  68 0074 21E8C003 		move	$sp,$fp
+  69 0078 0400BE8F 		lw	$fp,4($sp)
+  70 007c 0800BD27 		addiu	$sp,$sp,8
+  71 0080 0800E003 		j	$31
+  72 0084 00000000 		nop
+  73              	
+  74              		.set	macro
+  75              		.set	reorder
+  76              		.end	_ZL10timer_initv
+  77              	.LFE23:
+  79              		.align	2
+  80              		.globl	c_vector_4_ISR
+  81              	.LFB24:
+  78:PIC32MX_time.cpp **** 
+  79:PIC32MX_time.cpp **** extern "C" void
+  80:PIC32MX_time.cpp ****   #ifdef USE_TIMER1
+  81:PIC32MX_time.cpp ****      c_vector_4_ISR(void)
+  82              		.loc 1 81 0
+  83              		.set	nomips16
+  84              		.ent	c_vector_4_ISR
+  85              	c_vector_4_ISR:
+  86              		.frame	$fp,8,$31		# vars= 0, regs= 1/0, args= 0, gp= 0
+  87              		.mask	0x40000000,-4
+  88              		.fmask	0x00000000,0
+  89              		.set	noreorder
+  90              		.set	nomacro
+  91              		
+  92 0088 F8FFBD27 		addiu	$sp,$sp,-8
+  93              	.LCFI3:
+  94 008c 0400BEAF 		sw	$fp,4($sp)
+  95              	.LCFI4:
+  96 0090 21F0A003 		move	$fp,$sp
+  97              	.LCFI5:
+  98              	.LBB2:
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSGpaaa.s 			page 4
+
+
+  82:PIC32MX_time.cpp ****   #else
+  83:PIC32MX_time.cpp ****      c_vector_8_ISR(void)
+  84:PIC32MX_time.cpp ****   #endif
+  85:PIC32MX_time.cpp **** {
+  86:PIC32MX_time.cpp ****     milliseconds++;
+  99              		.loc 1 86 0
+ 100 0094 00C0828F 		lw	$2,%gp_rel(_ZL12milliseconds)($28)
+ 101 0098 01004224 		addiu	$2,$2,1
+ 102 009c 00C082AF 		sw	$2,%gp_rel(_ZL12milliseconds)($28)
+  87:PIC32MX_time.cpp ****     static int msSinceSeconds = 0;
+  88:PIC32MX_time.cpp ****     if(++msSinceSeconds>=1000) {
+ 103              		.loc 1 88 0
+ 104 00a0 04C0828F 		lw	$2,%gp_rel(_ZZ14c_vector_4_ISRE14msSinceSeconds)($28)
+ 105 00a4 01004224 		addiu	$2,$2,1
+ 106 00a8 04C082AF 		sw	$2,%gp_rel(_ZZ14c_vector_4_ISRE14msSinceSeconds)($28)
+ 107 00ac 04C0828F 		lw	$2,%gp_rel(_ZZ14c_vector_4_ISRE14msSinceSeconds)($28)
+ 108 00b0 E8034228 		slt	$2,$2,1000
+ 109 00b4 01004238 		xori	$2,$2,0x1
+ 110 00b8 FF004230 		andi	$2,$2,0x00ff
+ 111 00bc 05004010 		beq	$2,$0,.L5
+ 112 00c0 00000000 		nop
+ 113              	
+  89:PIC32MX_time.cpp ****         msSinceSeconds = 0;
+ 114              		.loc 1 89 0
+ 115 00c4 04C080AF 		sw	$0,%gp_rel(_ZZ14c_vector_4_ISRE14msSinceSeconds)($28)
+  90:PIC32MX_time.cpp ****         posixTime++;
+ 116              		.loc 1 90 0
+ 117 00c8 00C0828F 		lw	$2,%gp_rel(_ZL9posixTime)($28)
+ 118 00cc 01004224 		addiu	$2,$2,1
+ 119 00d0 00C082AF 		sw	$2,%gp_rel(_ZL9posixTime)($28)
+ 120              	.L5:
+  91:PIC32MX_time.cpp ****     };
+  92:PIC32MX_time.cpp ****   #ifdef USE_TIMER1
+  93:PIC32MX_time.cpp ****     IFS0CLR = _IFS0_T1IF_MASK; // clear interrupt request as required prior ISR exit
+ 121              		.loc 1 93 0
+ 122 00d4 0000033C 		lui	$3,%hi(IFS0CLR)
+ 123 00d8 10000224 		li	$2,16			# 0x10
+ 124 00dc 000062AC 		sw	$2,%lo(IFS0CLR)($3)
+ 125              	.LBE2:
+  94:PIC32MX_time.cpp ****   #else
+  95:PIC32MX_time.cpp ****     IFS0CLR = _IFS0_T2IF_MASK; // clear interrupt request as required prior ISR exit
+  96:PIC32MX_time.cpp ****   #endif
+  97:PIC32MX_time.cpp **** };
+ 126              		.loc 1 97 0
+ 127 00e0 21E8C003 		move	$sp,$fp
+ 128 00e4 0400BE8F 		lw	$fp,4($sp)
+ 129 00e8 0800BD27 		addiu	$sp,$sp,8
+ 130 00ec 0800E003 		j	$31
+ 131 00f0 00000000 		nop
+ 132              	
+ 133              		.set	macro
+ 134              		.set	reorder
+ 135              		.end	c_vector_4_ISR
+ 136              	.LFE24:
+ 138              		.align	2
+ 139              		.globl	SetSystemTime
+ 140              	.LFB25:
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSGpaaa.s 			page 5
+
+
+  98:PIC32MX_time.cpp **** 
+  99:PIC32MX_time.cpp **** // Set POSIX time, which will count forward from this value
+ 100:PIC32MX_time.cpp **** extern "C" void SetSystemTime(time_t t) {
+ 141              		.loc 1 100 0
+ 142              		.set	nomips16
+ 143              		.ent	SetSystemTime
+ 144              	SetSystemTime:
+ 145              		.frame	$fp,24,$31		# vars= 0, regs= 2/0, args= 16, gp= 0
+ 146              		.mask	0xc0000000,-4
+ 147              		.fmask	0x00000000,0
+ 148              		.set	noreorder
+ 149              		.set	nomacro
+ 150              		
+ 151 00f4 E8FFBD27 		addiu	$sp,$sp,-24
+ 152              	.LCFI6:
+ 153 00f8 1400BFAF 		sw	$31,20($sp)
+ 154              	.LCFI7:
+ 155 00fc 1000BEAF 		sw	$fp,16($sp)
+ 156              	.LCFI8:
+ 157 0100 21F0A003 		move	$fp,$sp
+ 158              	.LCFI9:
+ 159 0104 1800C4AF 		sw	$4,24($fp)
+ 101:PIC32MX_time.cpp ****     timer_init();
+ 160              		.loc 1 101 0
+ 161 0108 0000000C 		jal	_ZL10timer_initv
+ 162 010c 00000000 		nop
+ 163              	
+ 102:PIC32MX_time.cpp ****     posixTime = t;
+ 164              		.loc 1 102 0
+ 165 0110 1800C28F 		lw	$2,24($fp)
+ 166 0114 00C082AF 		sw	$2,%gp_rel(_ZL9posixTime)($28)
+ 103:PIC32MX_time.cpp **** };
+ 167              		.loc 1 103 0
+ 168 0118 21E8C003 		move	$sp,$fp
+ 169 011c 1400BF8F 		lw	$31,20($sp)
+ 170 0120 1000BE8F 		lw	$fp,16($sp)
+ 171 0124 1800BD27 		addiu	$sp,$sp,24
+ 172 0128 0800E003 		j	$31
+ 173 012c 00000000 		nop
+ 174              	
+ 175              		.set	macro
+ 176              		.set	reorder
+ 177              		.end	SetSystemTime
+ 178              	.LFE25:
+ 180              		.align	2
+ 181              		.globl	systemMilliseconds
+ 182              	.LFB26:
+ 104:PIC32MX_time.cpp **** // Get milliseconds since timer started
+ 105:PIC32MX_time.cpp **** extern "C" int systemMilliseconds(void) { timer_init(); return milliseconds; };
+ 183              		.loc 1 105 0
+ 184              		.set	nomips16
+ 185              		.ent	systemMilliseconds
+ 186              	systemMilliseconds:
+ 187              		.frame	$fp,24,$31		# vars= 0, regs= 2/0, args= 16, gp= 0
+ 188              		.mask	0xc0000000,-4
+ 189              		.fmask	0x00000000,0
+ 190              		.set	noreorder
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSGpaaa.s 			page 6
+
+
+ 191              		.set	nomacro
+ 192              		
+ 193 0130 E8FFBD27 		addiu	$sp,$sp,-24
+ 194              	.LCFI10:
+ 195 0134 1400BFAF 		sw	$31,20($sp)
+ 196              	.LCFI11:
+ 197 0138 1000BEAF 		sw	$fp,16($sp)
+ 198              	.LCFI12:
+ 199 013c 21F0A003 		move	$fp,$sp
+ 200              	.LCFI13:
+ 201              		.loc 1 105 0
+ 202 0140 0000000C 		jal	_ZL10timer_initv
+ 203 0144 00000000 		nop
+ 204              	
+ 205 0148 00C0828F 		lw	$2,%gp_rel(_ZL12milliseconds)($28)
+ 206 014c 21E8C003 		move	$sp,$fp
+ 207 0150 1400BF8F 		lw	$31,20($sp)
+ 208 0154 1000BE8F 		lw	$fp,16($sp)
+ 209 0158 1800BD27 		addiu	$sp,$sp,24
+ 210 015c 0800E003 		j	$31
+ 211 0160 00000000 		nop
+ 212              	
+ 213              		.set	macro
+ 214              		.set	reorder
+ 215              		.end	systemMilliseconds
+ 216              	.LFE26:
+ 218              		.align	2
+ 219              		.globl	time
+ 220              	.LFB27:
+ 106:PIC32MX_time.cpp **** 
+ 107:PIC32MX_time.cpp **** // Emulate system call "time"
+ 108:PIC32MX_time.cpp **** extern "C" time_t time(time_t *pt) {
+ 221              		.loc 1 108 0
+ 222              		.set	nomips16
+ 223              		.ent	time
+ 224              	time:
+ 225              		.frame	$fp,24,$31		# vars= 0, regs= 2/0, args= 16, gp= 0
+ 226              		.mask	0xc0000000,-4
+ 227              		.fmask	0x00000000,0
+ 228              		.set	noreorder
+ 229              		.set	nomacro
+ 230              		
+ 231 0164 E8FFBD27 		addiu	$sp,$sp,-24
+ 232              	.LCFI14:
+ 233 0168 1400BFAF 		sw	$31,20($sp)
+ 234              	.LCFI15:
+ 235 016c 1000BEAF 		sw	$fp,16($sp)
+ 236              	.LCFI16:
+ 237 0170 21F0A003 		move	$fp,$sp
+ 238              	.LCFI17:
+ 239 0174 1800C4AF 		sw	$4,24($fp)
+ 109:PIC32MX_time.cpp ****     timer_init();
+ 240              		.loc 1 109 0
+ 241 0178 0000000C 		jal	_ZL10timer_initv
+ 242 017c 00000000 		nop
+ 243              	
+ 110:PIC32MX_time.cpp ****     if(pt) *pt = posixTime;
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSGpaaa.s 			page 7
+
+
+ 244              		.loc 1 110 0
+ 245 0180 1800C28F 		lw	$2,24($fp)
+ 246 0184 04004010 		beq	$2,$0,.L12
+ 247 0188 00000000 		nop
+ 248              	
+ 249 018c 00C0838F 		lw	$3,%gp_rel(_ZL9posixTime)($28)
+ 250 0190 1800C28F 		lw	$2,24($fp)
+ 251 0194 000043AC 		sw	$3,0($2)
+ 252              	.L12:
+ 111:PIC32MX_time.cpp ****     return posixTime;
+ 253              		.loc 1 111 0
+ 254 0198 00C0828F 		lw	$2,%gp_rel(_ZL9posixTime)($28)
+ 112:PIC32MX_time.cpp **** }
+ 255              		.loc 1 112 0
+ 256 019c 21E8C003 		move	$sp,$fp
+ 257 01a0 1400BF8F 		lw	$31,20($sp)
+ 258 01a4 1000BE8F 		lw	$fp,16($sp)
+ 259 01a8 1800BD27 		addiu	$sp,$sp,24
+ 260 01ac 0800E003 		j	$31
+ 261 01b0 00000000 		nop
+ 262              	
+ 263              		.set	macro
+ 264              		.set	reorder
+ 265              		.end	time
+ 266              	.LFE27:
+ 268              		.section	.sdata,"aw",@progbits
+ 269              		.align	2
+ 272              	_ZL9posixTime:
+ 273 0000 001C5D4A 		.word	1247616000
+ 274              		.local	_ZL12milliseconds
+ 275              		.comm	_ZL12milliseconds,4,4
+ 276              		.local	_ZZ14c_vector_4_ISRE14msSinceSeconds
+ 277              		.comm	_ZZ14c_vector_4_ISRE14msSinceSeconds,4,4
+ 278              		.local	_ZL17timer_initialized
+ 279              		.comm	_ZL17timer_initialized,1,1
+ 402              	.Letext0:
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSGpaaa.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 PIC32MX_time.cpp
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSGpaaa.s:18     .text:0000000000000000 _ZL10timer_initv
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSGpaaa.s:277    .sbss:0000000000000008 _ZL17timer_initialized
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSGpaaa.s:85     .text:0000000000000088 c_vector_4_ISR
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSGpaaa.s:275    .sbss:0000000000000000 _ZL12milliseconds
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSGpaaa.s:277    .sbss:0000000000000004 _ZZ14c_vector_4_ISRE14msSinceSeconds
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSGpaaa.s:273    .sdata:0000000000000000 _ZL9posixTime
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSGpaaa.s:144    .text:00000000000000f4 SetSystemTime
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSGpaaa.s:186    .text:0000000000000130 systemMilliseconds
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSGpaaa.s:224    .text:0000000000000164 time
+
+UNDEFINED SYMBOLS
+T1CON
+TMR1
+PR1
+IPC1
+IEC0
+T1CONSET
+IFS0CLR

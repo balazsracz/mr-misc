@@ -1,0 +1,2761 @@
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 1
+
+
+   1              		.section .mdebug.abi32
+   2              		.previous
+   3              		.gnu_attribute 4, 3
+  11              	.Ltext0:
+  12              		.section	.text._ZN13C_ElapsedTime23millisecondsHaveElapsedEi,"axG",@progbits,_ZN13C_ElapsedTime23m
+  13              		.align	2
+  14              		.weak	_ZN13C_ElapsedTime23millisecondsHaveElapsedEi
+  15              	.LFB28:
+  16              		.file 1 "PIC32MX_time.h"
+   1:PIC32MX_time.h **** // PIC32MX_time.h - Simulated realtime clock, timer support
+   2:PIC32MX_time.h **** //
+   3:PIC32MX_time.h **** // Provides:
+   4:PIC32MX_time.h **** // - one-millisecond timer resolution
+   5:PIC32MX_time.h **** // - POSIX-style "time" (second resolution)
+   6:PIC32MX_time.h **** //
+   7:PIC32MX_time.h **** // Copyright (c) 2009 Dave Nadler
+   8:PIC32MX_time.h **** //
+   9:PIC32MX_time.h **** // The authors hereby grant permission to use, copy, modify, distribute,
+  10:PIC32MX_time.h **** // and license this software and its documentation for any purpose, provided
+  11:PIC32MX_time.h **** // that existing copyright notices are retained in all copies and that this
+  12:PIC32MX_time.h **** // notice is included verbatim in any distributions.  No written agreement,
+  13:PIC32MX_time.h **** // license, or royalty fee is required for any of the authorized uses.
+  14:PIC32MX_time.h **** // Modifications to this software may be copyrighted by their authors
+  15:PIC32MX_time.h **** // and need not follow the licensing terms described here, provided that
+  16:PIC32MX_time.h **** // the new terms are clearly indicated on the first page of each file where
+  17:PIC32MX_time.h **** // they apply.
+  18:PIC32MX_time.h **** //
+  19:PIC32MX_time.h **** // Modification History:
+  20:PIC32MX_time.h **** //   28Aug09 DRNadler:  Add millisecondsHaveElapsed
+  21:PIC32MX_time.h **** //   13Jun09 DRNadler:  Initial Coding
+  22:PIC32MX_time.h **** 
+  23:PIC32MX_time.h **** #ifdef __cplusplus
+  24:PIC32MX_time.h ****   extern "C" {
+  25:PIC32MX_time.h **** #endif
+  26:PIC32MX_time.h **** 
+  27:PIC32MX_time.h **** // set POSIX time, which will count forward from this value
+  28:PIC32MX_time.h **** void SetSystemTime(time_t t);
+  29:PIC32MX_time.h **** // get milliseconds since timer started
+  30:PIC32MX_time.h **** int systemMilliseconds(void);
+  31:PIC32MX_time.h **** 
+  32:PIC32MX_time.h **** #ifdef __cplusplus
+  33:PIC32MX_time.h ****   }; /* end of extern "C" */
+  34:PIC32MX_time.h **** #endif
+  35:PIC32MX_time.h **** 
+  36:PIC32MX_time.h **** #ifdef __cplusplus
+  37:PIC32MX_time.h ****   // delay manager class
+  38:PIC32MX_time.h ****   class C_ElapsedTime {
+  39:PIC32MX_time.h ****     private:
+  40:PIC32MX_time.h ****       int start_milliseconds;
+  41:PIC32MX_time.h ****     public:
+  42:PIC32MX_time.h ****       C_ElapsedTime() { reset(); /* Note the start time */ };
+  43:PIC32MX_time.h ****       void reset() { start_milliseconds = systemMilliseconds(); };
+  44:PIC32MX_time.h ****       int elapsed_seconds() {
+  45:PIC32MX_time.h ****           return (systemMilliseconds()-start_milliseconds)/1000;
+  46:PIC32MX_time.h ****       };
+  47:PIC32MX_time.h ****       bool millisecondsHaveElapsed(int n) {
+  17              		.loc 1 47 0
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 2
+
+
+  18              		.set	nomips16
+  19              		.ent	_ZN13C_ElapsedTime23millisecondsHaveElapsedEi
+  20              	_ZN13C_ElapsedTime23millisecondsHaveElapsedEi:
+  21              		.frame	$fp,24,$31		# vars= 0, regs= 2/0, args= 16, gp= 0
+  22              		.mask	0xc0000000,-4
+  23              		.fmask	0x00000000,0
+  24              		.set	noreorder
+  25              		.set	nomacro
+  26              		
+  27 0000 E8FFBD27 		addiu	$sp,$sp,-24
+  28              	.LCFI0:
+  29 0004 1400BFAF 		sw	$31,20($sp)
+  30              	.LCFI1:
+  31 0008 1000BEAF 		sw	$fp,16($sp)
+  32              	.LCFI2:
+  33 000c 21F0A003 		move	$fp,$sp
+  34              	.LCFI3:
+  35 0010 1800C4AF 		sw	$4,24($fp)
+  36 0014 1C00C5AF 		sw	$5,28($fp)
+  48:PIC32MX_time.h ****           return ((systemMilliseconds()-start_milliseconds) > n);
+  37              		.loc 1 48 0
+  38 0018 0000000C 		jal	systemMilliseconds
+  39 001c 00000000 		nop
+  40              	
+  41 0020 21184000 		move	$3,$2
+  42 0024 1800C28F 		lw	$2,24($fp)
+  43 0028 0000428C 		lw	$2,0($2)
+  44 002c 23186200 		subu	$3,$3,$2
+  45 0030 1C00C28F 		lw	$2,28($fp)
+  46 0034 2A104300 		slt	$2,$2,$3
+  47 0038 FF004230 		andi	$2,$2,0x00ff
+  49:PIC32MX_time.h ****       };
+  48              		.loc 1 49 0
+  49 003c 21E8C003 		move	$sp,$fp
+  50 0040 1400BF8F 		lw	$31,20($sp)
+  51 0044 1000BE8F 		lw	$fp,16($sp)
+  52 0048 1800BD27 		addiu	$sp,$sp,24
+  53 004c 0800E003 		j	$31
+  54 0050 00000000 		nop
+  55              	
+  56              		.set	macro
+  57              		.set	reorder
+  58              		.end	_ZN13C_ElapsedTime23millisecondsHaveElapsedEi
+  59              	.LFE28:
+  61              		.section	.text._ZN13C_ElapsedTime5resetEv,"axG",@progbits,_ZN13C_ElapsedTime5resetEv,comdat
+  62              		.align	2
+  63              		.weak	_ZN13C_ElapsedTime5resetEv
+  64              	.LFB26:
+  65              		.loc 1 43 0
+  66              		.set	nomips16
+  67              		.ent	_ZN13C_ElapsedTime5resetEv
+  68              	_ZN13C_ElapsedTime5resetEv:
+  69              		.frame	$fp,24,$31		# vars= 0, regs= 2/0, args= 16, gp= 0
+  70              		.mask	0xc0000000,-4
+  71              		.fmask	0x00000000,0
+  72              		.set	noreorder
+  73              		.set	nomacro
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 3
+
+
+  74              		
+  75 0000 E8FFBD27 		addiu	$sp,$sp,-24
+  76              	.LCFI4:
+  77 0004 1400BFAF 		sw	$31,20($sp)
+  78              	.LCFI5:
+  79 0008 1000BEAF 		sw	$fp,16($sp)
+  80              	.LCFI6:
+  81 000c 21F0A003 		move	$fp,$sp
+  82              	.LCFI7:
+  83 0010 1800C4AF 		sw	$4,24($fp)
+  84              		.loc 1 43 0
+  85 0014 0000000C 		jal	systemMilliseconds
+  86 0018 00000000 		nop
+  87              	
+  88 001c 21184000 		move	$3,$2
+  89 0020 1800C28F 		lw	$2,24($fp)
+  90 0024 000043AC 		sw	$3,0($2)
+  91 0028 21E8C003 		move	$sp,$fp
+  92 002c 1400BF8F 		lw	$31,20($sp)
+  93 0030 1000BE8F 		lw	$fp,16($sp)
+  94 0034 1800BD27 		addiu	$sp,$sp,24
+  95 0038 0800E003 		j	$31
+  96 003c 00000000 		nop
+  97              	
+  98              		.set	macro
+  99              		.set	reorder
+ 100              		.end	_ZN13C_ElapsedTime5resetEv
+ 101              	.LFE26:
+ 103              		.section	.text._ZN13C_ElapsedTimeC1Ev,"axG",@progbits,_ZN13C_ElapsedTimeC1Ev,comdat
+ 104              		.align	2
+ 105              		.weak	_ZN13C_ElapsedTimeC1Ev
+ 106              	.LFB25:
+ 107              		.loc 1 42 0
+ 108              		.set	nomips16
+ 109              		.ent	_ZN13C_ElapsedTimeC1Ev
+ 110              	_ZN13C_ElapsedTimeC1Ev:
+ 111              		.frame	$fp,24,$31		# vars= 0, regs= 2/0, args= 16, gp= 0
+ 112              		.mask	0xc0000000,-4
+ 113              		.fmask	0x00000000,0
+ 114              		.set	noreorder
+ 115              		.set	nomacro
+ 116              		
+ 117 0000 E8FFBD27 		addiu	$sp,$sp,-24
+ 118              	.LCFI8:
+ 119 0004 1400BFAF 		sw	$31,20($sp)
+ 120              	.LCFI9:
+ 121 0008 1000BEAF 		sw	$fp,16($sp)
+ 122              	.LCFI10:
+ 123 000c 21F0A003 		move	$fp,$sp
+ 124              	.LCFI11:
+ 125 0010 1800C4AF 		sw	$4,24($fp)
+ 126              	.LBB2:
+ 127              		.loc 1 42 0
+ 128 0014 1800C48F 		lw	$4,24($fp)
+ 129 0018 0000000C 		jal	_ZN13C_ElapsedTime5resetEv
+ 130 001c 00000000 		nop
+ 131              	
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 4
+
+
+ 132              	.LBE2:
+ 133 0020 21E8C003 		move	$sp,$fp
+ 134 0024 1400BF8F 		lw	$31,20($sp)
+ 135 0028 1000BE8F 		lw	$fp,16($sp)
+ 136 002c 1800BD27 		addiu	$sp,$sp,24
+ 137 0030 0800E003 		j	$31
+ 138 0034 00000000 		nop
+ 139              	
+ 140              		.set	macro
+ 141              		.set	reorder
+ 142              		.end	_ZN13C_ElapsedTimeC1Ev
+ 143              	.LFE25:
+ 145              		.section	.text._ZN13C_ElapsedTime8waitMsecEi,"axG",@progbits,_ZN13C_ElapsedTime8waitMsecEi,comdat
+ 146              		.align	2
+ 147              		.weak	_ZN13C_ElapsedTime8waitMsecEi
+ 148              	.LFB29:
+  50:PIC32MX_time.h ****       void waitMsec(int delay) {
+ 149              		.loc 1 50 0
+ 150              		.set	nomips16
+ 151              		.ent	_ZN13C_ElapsedTime8waitMsecEi
+ 152              	_ZN13C_ElapsedTime8waitMsecEi:
+ 153              		.frame	$fp,24,$31		# vars= 0, regs= 2/0, args= 16, gp= 0
+ 154              		.mask	0xc0000000,-4
+ 155              		.fmask	0x00000000,0
+ 156              		.set	noreorder
+ 157              		.set	nomacro
+ 158              		
+ 159 0000 E8FFBD27 		addiu	$sp,$sp,-24
+ 160              	.LCFI12:
+ 161 0004 1400BFAF 		sw	$31,20($sp)
+ 162              	.LCFI13:
+ 163 0008 1000BEAF 		sw	$fp,16($sp)
+ 164              	.LCFI14:
+ 165 000c 21F0A003 		move	$fp,$sp
+ 166              	.LCFI15:
+ 167 0010 1800C4AF 		sw	$4,24($fp)
+ 168 0014 1C00C5AF 		sw	$5,28($fp)
+ 169              	.L8:
+  51:PIC32MX_time.h ****           while( (systemMilliseconds()-start_milliseconds) < delay ) {};
+ 170              		.loc 1 51 0
+ 171 0018 0000000C 		jal	systemMilliseconds
+ 172 001c 00000000 		nop
+ 173              	
+ 174 0020 21184000 		move	$3,$2
+ 175 0024 1800C28F 		lw	$2,24($fp)
+ 176 0028 0000428C 		lw	$2,0($2)
+ 177 002c 23186200 		subu	$3,$3,$2
+ 178 0030 1C00C28F 		lw	$2,28($fp)
+ 179 0034 2A106200 		slt	$2,$3,$2
+ 180 0038 FF004230 		andi	$2,$2,0x00ff
+ 181 003c F6FF4014 		bne	$2,$0,.L8
+ 182 0040 00000000 		nop
+ 183              	
+  52:PIC32MX_time.h ****       };
+ 184              		.loc 1 52 0
+ 185 0044 21E8C003 		move	$sp,$fp
+ 186 0048 1400BF8F 		lw	$31,20($sp)
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 5
+
+
+ 187 004c 1000BE8F 		lw	$fp,16($sp)
+ 188 0050 1800BD27 		addiu	$sp,$sp,24
+ 189 0054 0800E003 		j	$31
+ 190 0058 00000000 		nop
+ 191              	
+ 192              		.set	macro
+ 193              		.set	reorder
+ 194              		.end	_ZN13C_ElapsedTime8waitMsecEi
+ 195              	.LFE29:
+ 197              		.rdata
+ 198              		.align	2
+ 199              	.LC0:
+ 200 0000 54696D65 		.ascii	"Time = %s\012\000"
+ 200      203D2025 
+ 200      730A00
+ 201              		.text
+ 202              		.align	2
+ 203              		.globl	main
+ 204              	.LFB30:
+ 205              		.file 2 "CPP_Demo.cpp"
+   1:CPP_Demo.cpp  **** /*
+   2:CPP_Demo.cpp  **** ** Minimal C++ Example to run on Microchip USB Starter Board:
+   3:CPP_Demo.cpp  **** ** - blinks LEDs
+   4:CPP_Demo.cpp  **** ** - outputs minimal diagnostic on UART1 (no RS232 hardware on this board)
+   5:CPP_Demo.cpp  **** **
+   6:CPP_Demo.cpp  **** **
+   7:CPP_Demo.cpp  **** ** Copyright (c) 2009 Dave Nadler
+   8:CPP_Demo.cpp  **** **
+   9:CPP_Demo.cpp  **** ** The authors hereby grant permission to use, copy, modify, distribute,
+  10:CPP_Demo.cpp  **** ** and license this software and its documentation for any purpose, provided
+  11:CPP_Demo.cpp  **** ** that existing copyright notices are retained in all copies and that this
+  12:CPP_Demo.cpp  **** ** notice is included verbatim in any distributions.  No written agreement,
+  13:CPP_Demo.cpp  **** ** license, or royalty fee is required for any of the authorized uses.
+  14:CPP_Demo.cpp  **** ** Modifications to this software may be copyrighted by their authors
+  15:CPP_Demo.cpp  **** ** and need not follow the licensing terms described here, provided that
+  16:CPP_Demo.cpp  **** ** the new terms are clearly indicated on the first page of each file where
+  17:CPP_Demo.cpp  **** ** they apply.
+  18:CPP_Demo.cpp  **** **
+  19:CPP_Demo.cpp  **** ** History:
+  20:CPP_Demo.cpp  **** **   8Aug09 DRNadler: Initial Coding.
+  21:CPP_Demo.cpp  **** */
+  22:CPP_Demo.cpp  **** 
+  23:CPP_Demo.cpp  **** #include <string.h>  // memcmp
+  24:CPP_Demo.cpp  **** #include <time.h>
+  25:CPP_Demo.cpp  **** #include <stdio.h>   // printf
+  26:CPP_Demo.cpp  **** 
+  27:CPP_Demo.cpp  **** extern "C" {
+  28:CPP_Demo.cpp  ****   #include "HardwareProfile.h"
+  29:CPP_Demo.cpp  ****   #include "plib.h"
+  30:CPP_Demo.cpp  **** };
+  31:CPP_Demo.cpp  **** 
+  32:CPP_Demo.cpp  **** #include "PIC32MX_time.h"	// DRN time routines
+  33:CPP_Demo.cpp  **** 
+  34:CPP_Demo.cpp  **** int i;
+  35:CPP_Demo.cpp  **** const char *hello = "Hi there debugger";
+  36:CPP_Demo.cpp  **** 
+  37:CPP_Demo.cpp  **** int main ( void )
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 6
+
+
+ 206              		.loc 2 37 0
+ 207              		.set	nomips16
+ 208              		.ent	main
+ 209              	main:
+ 210              		.frame	$fp,136,$31		# vars= 112, regs= 2/0, args= 16, gp= 0
+ 211              		.mask	0xc0000000,-4
+ 212              		.fmask	0x00000000,0
+ 213              		.set	noreorder
+ 214              		.set	nomacro
+ 215              		
+ 216 0000 78FFBD27 		addiu	$sp,$sp,-136
+ 217              	.LCFI16:
+ 218 0004 8400BFAF 		sw	$31,132($sp)
+ 219              	.LCFI17:
+ 220 0008 8000BEAF 		sw	$fp,128($sp)
+ 221              	.LCFI18:
+ 222 000c 21F0A003 		move	$fp,$sp
+ 223              	.LCFI19:
+ 224              		.loc 2 37 0
+ 225 0010 9303023C 		li	$2,59965440			# 0x3930000
+ 226 0014 00874234 		ori	$2,$2,0x8700
+ 227 0018 6C00C2AF 		sw	$2,108($fp)
+ 228 001c 05000224 		li	$2,5			# 0x5
+ 229 0020 7000C2AF 		sw	$2,112($fp)
+ 230              	.LBB40:
+ 231              	.LBB41:
+ 232              		.file 3 "d:/pic32includes2/peripheral/system.h"
+   1:d:/pic32includes2/peripheral\system.h **** /********************************************************************
+   2:d:/pic32includes2/peripheral\system.h ****  * FileName:		System.h
+   3:d:/pic32includes2/peripheral\system.h ****  * Dependencies:
+   4:d:/pic32includes2/peripheral\system.h ****  * Processor:		PIC32
+   5:d:/pic32includes2/peripheral\system.h ****  * Hardware:		N/A
+   6:d:/pic32includes2/peripheral\system.h ****  * Assembler:		N/A
+   7:d:/pic32includes2/peripheral\system.h ****  * Linker:		    N/A
+   8:d:/pic32includes2/peripheral\system.h ****  * Company:		    Microchip Technology Inc..
+   9:d:/pic32includes2/peripheral\system.h ****  *
+  10:d:/pic32includes2/peripheral\system.h ****  * Software License Agreement:
+  11:d:/pic32includes2/peripheral\system.h ****  * The software supplied herewith by Microchip Technology Incorporated
+  12:d:/pic32includes2/peripheral\system.h ****  * (the “Company”) for its PICmicro® Microcontroller is intended and
+  13:d:/pic32includes2/peripheral\system.h ****  * supplied to you, the Company’s customer, for use solely and
+  14:d:/pic32includes2/peripheral\system.h ****  * exclusively on Microchip PICmicro Microcontroller products. The
+  15:d:/pic32includes2/peripheral\system.h ****  * software is owned by the Company and/or its supplier, and is
+  16:d:/pic32includes2/peripheral\system.h ****  * protected under applicable copyright laws. All rights are reserved.
+  17:d:/pic32includes2/peripheral\system.h ****  * Any use in violation of the foregoing restrictions may subject the
+  18:d:/pic32includes2/peripheral\system.h ****  * user to criminal sanctions under applicable laws, as well as to
+  19:d:/pic32includes2/peripheral\system.h ****  * civil liability for the breach of the terms and conditions of this
+  20:d:/pic32includes2/peripheral\system.h ****  * license.
+  21:d:/pic32includes2/peripheral\system.h ****  *
+  22:d:/pic32includes2/peripheral\system.h ****  * THIS SOFTWARE IS PROVIDED IN AN “AS IS” CONDITION. NO WARRANTIES,
+  23:d:/pic32includes2/peripheral\system.h ****  * WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING, BUT NOT LIMITED
+  24:d:/pic32includes2/peripheral\system.h ****  * TO, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+  25:d:/pic32includes2/peripheral\system.h ****  * PARTICULAR PURPOSE APPLY TO THIS SOFTWARE. THE COMPANY SHALL NOT,
+  26:d:/pic32includes2/peripheral\system.h ****  * IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL OR
+  27:d:/pic32includes2/peripheral\system.h ****  * CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+  28:d:/pic32includes2/peripheral\system.h ****  *
+  29:d:/pic32includes2/peripheral\system.h ****  * $Id: CoreTimer.h,v 1.2 2006/11/03 15:07:21 C12923 Exp $
+  30:d:/pic32includes2/peripheral\system.h ****  * $Name:  $
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 7
+
+
+  31:d:/pic32includes2/peripheral\system.h ****  ********************************************************************/
+  32:d:/pic32includes2/peripheral\system.h **** 
+  33:d:/pic32includes2/peripheral\system.h **** #ifndef _SYSTEM_HEADER_FILE
+  34:d:/pic32includes2/peripheral\system.h **** #define _SYSTEM_HEADER_FILE
+  35:d:/pic32includes2/peripheral\system.h **** 
+  36:d:/pic32includes2/peripheral\system.h **** #include <p32xxxx.h>
+  37:d:/pic32includes2/peripheral\system.h **** #include <peripheral/int.h>
+  38:d:/pic32includes2/peripheral\system.h **** #include <peripheral/pcache.h>
+  39:d:/pic32includes2/peripheral\system.h **** #include <peripheral/osc.h>
+  40:d:/pic32includes2/peripheral\system.h **** #include <peripheral/dma.h>
+  41:d:/pic32includes2/peripheral\system.h **** #include <peripheral/bmx.h>
+  42:d:/pic32includes2/peripheral\system.h **** #include <peripheral/lock.h>
+  43:d:/pic32includes2/peripheral\system.h **** 
+  44:d:/pic32includes2/peripheral\system.h **** #define FLASH_SPEED_HZ          30000000
+  45:d:/pic32includes2/peripheral\system.h **** #define PB_BUS_MAX_FREQ_HZ      80000000
+  46:d:/pic32includes2/peripheral\system.h **** 
+  47:d:/pic32includes2/peripheral\system.h **** /*********************************************************************
+  48:d:/pic32includes2/peripheral\system.h ****  * SYSTEMConfig Flags
+  49:d:/pic32includes2/peripheral\system.h ****  *********************************************************************/
+  50:d:/pic32includes2/peripheral\system.h **** #define SYS_CFG_WAIT_STATES     0x00000001
+  51:d:/pic32includes2/peripheral\system.h **** #define SYS_CFG_PB_BUS          0x00000002
+  52:d:/pic32includes2/peripheral\system.h **** #define SYS_CFG_PCACHE          0x00000004
+  53:d:/pic32includes2/peripheral\system.h **** #define SYS_CFG_ALL             0xFFFFFFFF
+  54:d:/pic32includes2/peripheral\system.h **** 
+  55:d:/pic32includes2/peripheral\system.h **** /*********************************************************************
+  56:d:/pic32includes2/peripheral\system.h ****  * Function:       unsigned int SYSTEMConfigPB(unsigned int sys_clock)
+  57:d:/pic32includes2/peripheral\system.h ****  *
+  58:d:/pic32includes2/peripheral\system.h ****  * PreCondition:    None
+  59:d:/pic32includes2/peripheral\system.h ****  *
+  60:d:/pic32includes2/peripheral\system.h ****  * Input:           sys_clock - system clock in Hz
+  61:d:/pic32includes2/peripheral\system.h ****  *
+  62:d:/pic32includes2/peripheral\system.h ****  * Output:          the PB clock frequency
+  63:d:/pic32includes2/peripheral\system.h ****  *
+  64:d:/pic32includes2/peripheral\system.h ****  * Side Effects:    
+  65:d:/pic32includes2/peripheral\system.h ****  *
+  66:d:/pic32includes2/peripheral\system.h ****  * Overview:	    The function sets the PB divider to the optimum value.
+  67:d:/pic32includes2/peripheral\system.h ****  *
+  68:d:/pic32includes2/peripheral\system.h ****  * Note:            The interrupts are disabled shortly, the DMA is suspended and the system is unl
+  69:d:/pic32includes2/peripheral\system.h ****  *                  Upon return the previous status of the interrupts and the DMA are restored. The
+  70:d:/pic32includes2/peripheral\system.h ****  *
+  71:d:/pic32includes2/peripheral\system.h ****  * Example:	    SYSTEMConfigPB(72000000);
+  72:d:/pic32includes2/peripheral\system.h ****  ********************************************************************/
+  73:d:/pic32includes2/peripheral\system.h **** extern inline unsigned int __attribute__((always_inline)) SYSTEMConfigPB(unsigned int sys_clock)
+  74:d:/pic32includes2/peripheral\system.h **** {
+  75:d:/pic32includes2/peripheral\system.h ****     unsigned int dma_status;
+  76:d:/pic32includes2/peripheral\system.h ****     unsigned int int_status;
+  77:d:/pic32includes2/peripheral\system.h ****     unsigned int pb_clock;
+  78:d:/pic32includes2/peripheral\system.h **** 
+  79:d:/pic32includes2/peripheral\system.h ****     pb_clock = sys_clock;
+  80:d:/pic32includes2/peripheral\system.h **** 
+  81:d:/pic32includes2/peripheral\system.h ****     mSYSTEMUnlock(int_status, dma_status);
+  82:d:/pic32includes2/peripheral\system.h **** 
+  83:d:/pic32includes2/peripheral\system.h ****     // set the PB Div
+  84:d:/pic32includes2/peripheral\system.h ****     if(sys_clock > PB_BUS_MAX_FREQ_HZ)
+  85:d:/pic32includes2/peripheral\system.h ****     {
+  86:d:/pic32includes2/peripheral\system.h ****         mOSCSetPBDIV(OSC_PB_DIV_2);
+  87:d:/pic32includes2/peripheral\system.h ****         pb_clock >>= 1;
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 8
+
+
+  88:d:/pic32includes2/peripheral\system.h ****     }
+  89:d:/pic32includes2/peripheral\system.h ****     else
+  90:d:/pic32includes2/peripheral\system.h ****     {
+  91:d:/pic32includes2/peripheral\system.h ****         mOSCSetPBDIV(OSC_PB_DIV_1);
+  92:d:/pic32includes2/peripheral\system.h ****     }
+  93:d:/pic32includes2/peripheral\system.h **** 
+  94:d:/pic32includes2/peripheral\system.h ****     mSYSTEMLock(int_status, dma_status);
+  95:d:/pic32includes2/peripheral\system.h **** 
+  96:d:/pic32includes2/peripheral\system.h ****     return pb_clock;
+  97:d:/pic32includes2/peripheral\system.h **** }
+  98:d:/pic32includes2/peripheral\system.h **** 
+  99:d:/pic32includes2/peripheral\system.h **** 
+ 100:d:/pic32includes2/peripheral\system.h **** /*********************************************************************
+ 101:d:/pic32includes2/peripheral\system.h ****  * Function:        unsigned int SYSTEMConfigWaitStates(unsigned int sys_clock)
+ 102:d:/pic32includes2/peripheral\system.h ****  *
+ 103:d:/pic32includes2/peripheral\system.h ****  * PreCondition:    None
+ 104:d:/pic32includes2/peripheral\system.h ****  *
+ 105:d:/pic32includes2/peripheral\system.h ****  * Input:           sys_clock - system clock in Hz
+ 106:d:/pic32includes2/peripheral\system.h ****  *
+ 107:d:/pic32includes2/peripheral\system.h ****  * Output:          None
+ 108:d:/pic32includes2/peripheral\system.h ****  *
+ 109:d:/pic32includes2/peripheral\system.h ****  * Side Effects:    None
+ 110:d:/pic32includes2/peripheral\system.h ****  *
+ 111:d:/pic32includes2/peripheral\system.h ****  * Overview:	    The function sets the Flash Wait states to the optimum value.
+ 112:d:/pic32includes2/peripheral\system.h ****  *
+ 113:d:/pic32includes2/peripheral\system.h ****  * Note:            The interrupts are disabled shortly, the DMA is suspended and the system is unl
+ 114:d:/pic32includes2/peripheral\system.h ****  *                  Upon return the previous status of the interrupts and the DMA are restored. The
+ 115:d:/pic32includes2/peripheral\system.h ****  *
+ 116:d:/pic32includes2/peripheral\system.h ****  * Example:	    SYSTEMConfigWaitStates(72000000);
+ 117:d:/pic32includes2/peripheral\system.h ****  ********************************************************************/
+ 118:d:/pic32includes2/peripheral\system.h **** extern inline void __attribute__((always_inline)) SYSTEMConfigWaitStates(unsigned int sys_clock)
+ 119:d:/pic32includes2/peripheral\system.h **** {
+ 120:d:/pic32includes2/peripheral\system.h **** #ifdef _PCACHE
+ 121:d:/pic32includes2/peripheral\system.h ****     unsigned int wait_states;
+ 122:d:/pic32includes2/peripheral\system.h ****     unsigned int int_status;
+ 123:d:/pic32includes2/peripheral\system.h **** #endif
+ 124:d:/pic32includes2/peripheral\system.h **** 
+ 125:d:/pic32includes2/peripheral\system.h **** #ifdef _PCACHE
+ 126:d:/pic32includes2/peripheral\system.h ****     wait_states = 0;
+ 127:d:/pic32includes2/peripheral\system.h **** 
+ 128:d:/pic32includes2/peripheral\system.h ****     while(sys_clock > FLASH_SPEED_HZ)
+ 129:d:/pic32includes2/peripheral\system.h ****     {
+ 130:d:/pic32includes2/peripheral\system.h ****         wait_states++;
+ 131:d:/pic32includes2/peripheral\system.h ****         sys_clock -= FLASH_SPEED_HZ;
+ 132:d:/pic32includes2/peripheral\system.h ****     }
+ 133:d:/pic32includes2/peripheral\system.h **** 
+ 134:d:/pic32includes2/peripheral\system.h ****     int_status=INTDisableInterrupts();
+ 135:d:/pic32includes2/peripheral\system.h ****     mCheConfigure(wait_states);
+ 136:d:/pic32includes2/peripheral\system.h ****     INTRestoreInterrupts(int_status);
+ 137:d:/pic32includes2/peripheral\system.h **** 
+ 138:d:/pic32includes2/peripheral\system.h **** #endif
+ 139:d:/pic32includes2/peripheral\system.h **** }
+ 140:d:/pic32includes2/peripheral\system.h **** 
+ 141:d:/pic32includes2/peripheral\system.h **** /*********************************************************************
+ 142:d:/pic32includes2/peripheral\system.h ****  * Function:        unsigned int SYSTEMConfigWaitStatesAndPB(unsigned int sys_clock)
+ 143:d:/pic32includes2/peripheral\system.h ****  *
+ 144:d:/pic32includes2/peripheral\system.h ****  * PreCondition:    None
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 9
+
+
+ 145:d:/pic32includes2/peripheral\system.h ****  *
+ 146:d:/pic32includes2/peripheral\system.h ****  * Input:           sys_clock - system clock in Hz
+ 147:d:/pic32includes2/peripheral\system.h ****  *
+ 148:d:/pic32includes2/peripheral\system.h ****  * Output:          the PB clock frequency
+ 149:d:/pic32includes2/peripheral\system.h ****  *
+ 150:d:/pic32includes2/peripheral\system.h ****  * Side Effects:    None
+ 151:d:/pic32includes2/peripheral\system.h ****  *
+ 152:d:/pic32includes2/peripheral\system.h ****  * Overview:	    The function sets the PB divider and the Flash Wait states to the optimum value.
+ 153:d:/pic32includes2/peripheral\system.h ****  *
+ 154:d:/pic32includes2/peripheral\system.h ****  * Note:            The interrupts are disabled shortly, the DMA is suspended and the system is unl
+ 155:d:/pic32includes2/peripheral\system.h ****  *                  Upon return the previous status of the interrupts and the DMA are restored. The
+ 156:d:/pic32includes2/peripheral\system.h ****  *
+ 157:d:/pic32includes2/peripheral\system.h ****  * Example:	    SYSTEMConfigWaitStatesAndPB(72000000);
+ 158:d:/pic32includes2/peripheral\system.h ****  ********************************************************************/
+ 159:d:/pic32includes2/peripheral\system.h **** extern inline unsigned int __attribute__((always_inline)) SYSTEMConfigWaitStatesAndPB(unsigned int 
+ 160:d:/pic32includes2/peripheral\system.h **** {
+ 161:d:/pic32includes2/peripheral\system.h **** #ifdef _PCACHE
+ 162:d:/pic32includes2/peripheral\system.h ****     unsigned int wait_states;
+ 163:d:/pic32includes2/peripheral\system.h **** #endif
+ 164:d:/pic32includes2/peripheral\system.h ****     unsigned int pb_clock;
+ 165:d:/pic32includes2/peripheral\system.h ****     unsigned int int_status;
+ 166:d:/pic32includes2/peripheral\system.h **** 
+ 167:d:/pic32includes2/peripheral\system.h ****     pb_clock = SYSTEMConfigPB(sys_clock);
+ 168:d:/pic32includes2/peripheral\system.h **** 
+ 169:d:/pic32includes2/peripheral\system.h **** 
+ 170:d:/pic32includes2/peripheral\system.h ****     // set the flash wait states based on 1 wait state
+ 171:d:/pic32includes2/peripheral\system.h ****     // for every 20 MHz
+ 172:d:/pic32includes2/peripheral\system.h **** #ifdef _PCACHE
+ 173:d:/pic32includes2/peripheral\system.h ****     wait_states = 0;
+ 174:d:/pic32includes2/peripheral\system.h **** 
+ 175:d:/pic32includes2/peripheral\system.h ****     while(sys_clock > FLASH_SPEED_HZ)
+ 176:d:/pic32includes2/peripheral\system.h ****     {
+ 177:d:/pic32includes2/peripheral\system.h ****         wait_states++;
+ 178:d:/pic32includes2/peripheral\system.h ****         sys_clock -= FLASH_SPEED_HZ;
+ 179:d:/pic32includes2/peripheral\system.h ****     }
+ 180:d:/pic32includes2/peripheral\system.h **** 
+ 181:d:/pic32includes2/peripheral\system.h ****     int_status=INTDisableInterrupts();
+ 182:d:/pic32includes2/peripheral\system.h ****     mCheConfigure(wait_states);
+ 183:d:/pic32includes2/peripheral\system.h ****     INTRestoreInterrupts(int_status);
+ 184:d:/pic32includes2/peripheral\system.h **** 
+ 185:d:/pic32includes2/peripheral\system.h **** #endif
+ 186:d:/pic32includes2/peripheral\system.h **** 
+ 187:d:/pic32includes2/peripheral\system.h ****     return pb_clock;
+ 188:d:/pic32includes2/peripheral\system.h **** }
+ 189:d:/pic32includes2/peripheral\system.h **** /*********************************************************************
+ 190:d:/pic32includes2/peripheral\system.h ****  * Function:       unsigned int SYSTEMConfigPerformance(unsigned int sys_clock)
+ 191:d:/pic32includes2/peripheral\system.h ****  *
+ 192:d:/pic32includes2/peripheral\system.h ****  * PreCondition:    None
+ 193:d:/pic32includes2/peripheral\system.h ****  *
+ 194:d:/pic32includes2/peripheral\system.h ****  * Input:           sys_clock - system clock in Hz
+ 195:d:/pic32includes2/peripheral\system.h ****  *
+ 196:d:/pic32includes2/peripheral\system.h ****  * Output:          the PB clock frequency
+ 197:d:/pic32includes2/peripheral\system.h ****  *
+ 198:d:/pic32includes2/peripheral\system.h ****  * Side Effects:    Sets the PB and Flash Wait states
+ 199:d:/pic32includes2/peripheral\system.h ****  *
+ 200:d:/pic32includes2/peripheral\system.h ****  * Overview:	    The function sets the PB divider, the Flash Wait states and the DRM wait states to
+ 201:d:/pic32includes2/peripheral\system.h ****  *                  It also enables the cacheability for the K0 segment.
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 10
+
+
+ 202:d:/pic32includes2/peripheral\system.h ****  *
+ 203:d:/pic32includes2/peripheral\system.h ****  * Note:            The interrupts are disabled shortly, the DMA is suspended and the system is unl
+ 204:d:/pic32includes2/peripheral\system.h ****  *                  Upon return the previous status of the interrupts and the DMA are restored. The
+ 205:d:/pic32includes2/peripheral\system.h ****  *
+ 206:d:/pic32includes2/peripheral\system.h ****  * Example:	    SYSTEMConfigPerformance(72000000);
+ 207:d:/pic32includes2/peripheral\system.h ****  ********************************************************************/
+ 208:d:/pic32includes2/peripheral\system.h **** extern inline unsigned int __attribute__((always_inline)) SYSTEMConfigPerformance(unsigned int sys_
+ 209:d:/pic32includes2/peripheral\system.h **** {
+ 210:d:/pic32includes2/peripheral\system.h ****     // set up the wait states
+ 211:d:/pic32includes2/peripheral\system.h ****     unsigned int pb_clk;
+ 212:d:/pic32includes2/peripheral\system.h **** #ifdef _PCACHE
+ 213:d:/pic32includes2/peripheral\system.h ****     unsigned int cache_status;
+ 214:d:/pic32includes2/peripheral\system.h **** #endif
+ 215:d:/pic32includes2/peripheral\system.h ****     unsigned int int_status;
+ 216:d:/pic32includes2/peripheral\system.h **** 
+ 217:d:/pic32includes2/peripheral\system.h ****     pb_clk = SYSTEMConfigWaitStatesAndPB(sys_clock);
+ 218:d:/pic32includes2/peripheral\system.h **** 
+ 219:d:/pic32includes2/peripheral\system.h ****     int_status=INTDisableInterrupts();
+ 220:d:/pic32includes2/peripheral\system.h **** 
+ 221:d:/pic32includes2/peripheral\system.h ****     mBMXDisableDRMWaitState();
+ 222:d:/pic32includes2/peripheral\system.h **** 
+ 223:d:/pic32includes2/peripheral\system.h **** #ifdef _PCACHE
+ 224:d:/pic32includes2/peripheral\system.h ****     cache_status = mCheGetCon();
+ 225:d:/pic32includes2/peripheral\system.h ****     cache_status |= CHE_CONF_PF_ALL;
+ 226:d:/pic32includes2/peripheral\system.h ****     mCheConfigure(cache_status);
+ 227:d:/pic32includes2/peripheral\system.h ****     CheKseg0CacheOn();
+ 228:d:/pic32includes2/peripheral\system.h **** #endif
+ 229:d:/pic32includes2/peripheral\system.h **** 
+ 230:d:/pic32includes2/peripheral\system.h ****     INTRestoreInterrupts(int_status);
+ 231:d:/pic32includes2/peripheral\system.h **** 
+ 232:d:/pic32includes2/peripheral\system.h ****     return pb_clk;
+ 233:d:/pic32includes2/peripheral\system.h **** 
+ 234:d:/pic32includes2/peripheral\system.h **** }
+ 235:d:/pic32includes2/peripheral\system.h **** /*********************************************************************
+ 236:d:/pic32includes2/peripheral\system.h ****  * Function:       unsigned int SYSTEMConfig(unsigned int sys_clock, unsigned int flags)
+ 237:d:/pic32includes2/peripheral\system.h ****  *
+ 238:d:/pic32includes2/peripheral\system.h ****  * PreCondition:    None
+ 239:d:/pic32includes2/peripheral\system.h ****  *
+ 240:d:/pic32includes2/peripheral\system.h ****  * Input:           sys_clock - system clock in Hz
+ 241:d:/pic32includes2/peripheral\system.h ****  *                  flags
+ 242:d:/pic32includes2/peripheral\system.h ****  *                      SYS_CFG_WAIT_STATES  - configure the flash wait states from the system cloc
+ 243:d:/pic32includes2/peripheral\system.h ****  *                      SYS_CFG_PB_BUS       - configure the PB bus from the system clock       
+ 244:d:/pic32includes2/peripheral\system.h ****  *                      SYS_CFG_PCACHE      - configure the pCache (if used)    
+ 245:d:/pic32includes2/peripheral\system.h ****  *                      SYS_CFG_ALL          - configure all based off of system clock    
+ 246:d:/pic32includes2/peripheral\system.h ****  *
+ 247:d:/pic32includes2/peripheral\system.h ****  * Output:          the PB clock frequency
+ 248:d:/pic32includes2/peripheral\system.h ****  *
+ 249:d:/pic32includes2/peripheral\system.h ****  * Side Effects:    Could set the wait state, pb bus and turn on the pre-fetch buffer and cache. Se
+ 250:d:/pic32includes2/peripheral\system.h ****  *                  wait state to 0.
+ 251:d:/pic32includes2/peripheral\system.h ****  *
+ 252:d:/pic32includes2/peripheral\system.h ****  * Overview:	    The function sets the PB divider, the Flash Wait states and the DRM wait states to
+ 253:d:/pic32includes2/peripheral\system.h ****  *                  It also enables the cacheability for the K0 segment.
+ 254:d:/pic32includes2/peripheral\system.h ****  *
+ 255:d:/pic32includes2/peripheral\system.h ****  * Note:            The interrupts are disabled shortly, the DMA is suspended and the system is unl
+ 256:d:/pic32includes2/peripheral\system.h ****  *                  Upon return the previous status of the interrupts and the DMA are restored. The
+ 257:d:/pic32includes2/peripheral\system.h ****  *
+ 258:d:/pic32includes2/peripheral\system.h ****  * Example:	    SYSTEMConfig(72000000, SYS_CFG_ALL);
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 11
+
+
+ 259:d:/pic32includes2/peripheral\system.h ****  ********************************************************************/
+ 260:d:/pic32includes2/peripheral\system.h **** extern inline unsigned int __attribute__((always_inline)) SYSTEMConfig(unsigned int sys_clock, unsi
+ 261:d:/pic32includes2/peripheral\system.h **** {
+ 262:d:/pic32includes2/peripheral\system.h ****     unsigned int pb_clk;
+ 263:d:/pic32includes2/peripheral\system.h ****     unsigned int int_status;
+ 264:d:/pic32includes2/peripheral\system.h **** #ifdef _PCACHE
+ 265:d:/pic32includes2/peripheral\system.h ****     unsigned int cache_status;
+ 266:d:/pic32includes2/peripheral\system.h **** #endif
+ 267:d:/pic32includes2/peripheral\system.h **** 
+ 268:d:/pic32includes2/peripheral\system.h ****     int_status=INTDisableInterrupts();
+ 233              		.loc 3 268 0
+ 234 0024 0000000C 		jal	INTDisableInterrupts
+ 235 0028 00000000 		nop
+ 236              	
+ 237              	.LBB42:
+ 238              	.LBB43:
+ 239 002c 6400C2AF 		sw	$2,100($fp)
+ 269:d:/pic32includes2/peripheral\system.h **** 
+ 270:d:/pic32includes2/peripheral\system.h ****     mBMXDisableDRMWaitState();
+ 240              		.loc 3 270 0
+ 241 0030 0000033C 		lui	$3,%hi(BMXCONCLR)
+ 242 0034 40000224 		li	$2,64			# 0x40
+ 243 0038 000062AC 		sw	$2,%lo(BMXCONCLR)($3)
+ 271:d:/pic32includes2/peripheral\system.h **** 
+ 272:d:/pic32includes2/peripheral\system.h ****     if(flags & SYS_CFG_WAIT_STATES)
+ 244              		.loc 3 272 0
+ 245 003c 7000C28F 		lw	$2,112($fp)
+ 246 0040 01004230 		andi	$2,$2,0x1
+ 247 0044 FF004230 		andi	$2,$2,0x00ff
+ 248 0048 1D004010 		beq	$2,$0,.L11
+ 249 004c 00000000 		nop
+ 250              	
+ 251 0050 6C00C28F 		lw	$2,108($fp)
+ 252 0054 5C00C2AF 		sw	$2,92($fp)
+ 253              	.LBB44:
+ 254              	.LBB45:
+ 255              	.LBB46:
+ 256              		.loc 3 126 0
+ 257 0058 5400C0AF 		sw	$0,84($fp)
+ 258 005c 21000008 		j	.L12
+ 259 0060 00000000 		nop
+ 260              	
+ 261              	.L13:
+ 262              		.loc 3 130 0
+ 263 0064 5400C28F 		lw	$2,84($fp)
+ 264 0068 01004224 		addiu	$2,$2,1
+ 265 006c 5400C2AF 		sw	$2,84($fp)
+ 266              		.loc 3 131 0
+ 267 0070 5C00C38F 		lw	$3,92($fp)
+ 268 0074 36FE023C 		li	$2,-30015488			# 0xfffffffffe360000
+ 269 0078 803C4234 		ori	$2,$2,0x3c80
+ 270 007c 21106200 		addu	$2,$3,$2
+ 271 0080 5C00C2AF 		sw	$2,92($fp)
+ 272              	.L12:
+ 273              		.loc 3 128 0
+ 274 0084 5C00C38F 		lw	$3,92($fp)
+ 275 0088 C901023C 		li	$2,29949952			# 0x1c90000
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 12
+
+
+ 276 008c 81C34234 		ori	$2,$2,0xc381
+ 277 0090 2B106200 		sltu	$2,$3,$2
+ 278 0094 F3FF4010 		beq	$2,$0,.L13
+ 279 0098 00000000 		nop
+ 280              	
+ 281              	.LBE46:
+ 282              	.LBE45:
+ 283              		.loc 3 134 0
+ 284 009c 0000000C 		jal	INTDisableInterrupts
+ 285 00a0 00000000 		nop
+ 286              	
+ 287              	.LBB48:
+ 288              	.LBB47:
+ 289 00a4 5800C2AF 		sw	$2,88($fp)
+ 290              		.loc 3 135 0
+ 291 00a8 0000033C 		lui	$3,%hi(CHECON)
+ 292 00ac 5400C28F 		lw	$2,84($fp)
+ 293 00b0 000062AC 		sw	$2,%lo(CHECON)($3)
+ 294              		.loc 3 136 0
+ 295 00b4 5800C48F 		lw	$4,88($fp)
+ 296 00b8 0000000C 		jal	INTRestoreInterrupts
+ 297 00bc 00000000 		nop
+ 298              	
+ 299              	.L11:
+ 300              	.LBE47:
+ 301              	.LBE48:
+ 302              	.LBE44:
+ 273:d:/pic32includes2/peripheral\system.h ****     {
+ 274:d:/pic32includes2/peripheral\system.h ****         SYSTEMConfigWaitStates(sys_clock);
+ 275:d:/pic32includes2/peripheral\system.h ****     }
+ 276:d:/pic32includes2/peripheral\system.h **** 
+ 277:d:/pic32includes2/peripheral\system.h ****     if(flags & SYS_CFG_PB_BUS)
+ 303              		.loc 3 277 0
+ 304 00c0 7000C28F 		lw	$2,112($fp)
+ 305 00c4 02004230 		andi	$2,$2,0x2
+ 306 00c8 FC004010 		beq	$2,$0,.L14
+ 307 00cc 00000000 		nop
+ 308              	
+ 309 00d0 6C00C28F 		lw	$2,108($fp)
+ 310 00d4 5000C2AF 		sw	$2,80($fp)
+ 311              	.LBB49:
+ 312              	.LBB50:
+ 313              	.LBB52:
+ 314              		.loc 3 79 0
+ 315 00d8 5000C28F 		lw	$2,80($fp)
+ 316 00dc 3C00C2AF 		sw	$2,60($fp)
+ 317              	.LBE52:
+ 318              	.LBE50:
+ 319              		.loc 3 81 0
+ 320 00e0 0000000C 		jal	INTDisableInterrupts
+ 321 00e4 00000000 		nop
+ 322              	
+ 323              	.LBB81:
+ 324              	.LBB79:
+ 325 00e8 3800C2AF 		sw	$2,56($fp)
+ 326              	.LBB62:
+ 327              	.LBB63:
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 13
+
+
+ 328              	.LBB64:
+ 329              		.file 4 "d:/pic32includes2/peripheral/dma.h"
+   1:d:/pic32includes2/peripheral\dma.h **** // DRN 28Jan09: rename duplicate "reserved" enumerators
+   2:d:/pic32includes2/peripheral\dma.h **** 
+   3:d:/pic32includes2/peripheral\dma.h **** /*********************************************************************
+   4:d:/pic32includes2/peripheral\dma.h ****  *
+   5:d:/pic32includes2/peripheral\dma.h ****  *                  DMA API definitions
+   6:d:/pic32includes2/peripheral\dma.h ****  *
+   7:d:/pic32includes2/peripheral\dma.h ****  *********************************************************************
+   8:d:/pic32includes2/peripheral\dma.h ****  * FileName:        Dma.h
+   9:d:/pic32includes2/peripheral\dma.h ****  * Dependencies:	p32xxxx.h
+  10:d:/pic32includes2/peripheral\dma.h ****  * 					int.h
+  11:d:/pic32includes2/peripheral\dma.h ****  *
+  12:d:/pic32includes2/peripheral\dma.h ****  * Processor:       PIC32
+  13:d:/pic32includes2/peripheral\dma.h ****  *
+  14:d:/pic32includes2/peripheral\dma.h ****  * Complier:        MPLAB C32
+  15:d:/pic32includes2/peripheral\dma.h ****  *                  MPLAB IDE
+  16:d:/pic32includes2/peripheral\dma.h ****  * Company:         Microchip Technology Inc.
+  17:d:/pic32includes2/peripheral\dma.h ****  *
+  18:d:/pic32includes2/peripheral\dma.h ****  * Software License Agreement
+  19:d:/pic32includes2/peripheral\dma.h ****  *
+  20:d:/pic32includes2/peripheral\dma.h ****  * The software supplied herewith by Microchip Technology Incorporated
+  21:d:/pic32includes2/peripheral\dma.h ****  * (the “Company”) for its PIC32/PIC24F Microcontroller is intended
+  22:d:/pic32includes2/peripheral\dma.h ****  * and supplied to you, the Company’s customer, for use solely and
+  23:d:/pic32includes2/peripheral\dma.h ****  * exclusively on Microchip PIC32/PIC24F Microcontroller products.
+  24:d:/pic32includes2/peripheral\dma.h ****  * The software is owned by the Company and/or its supplier, and is
+  25:d:/pic32includes2/peripheral\dma.h ****  * protected under applicable copyright laws. All rights are reserved.
+  26:d:/pic32includes2/peripheral\dma.h ****  * Any use in violation of the foregoing restrictions may subject the
+  27:d:/pic32includes2/peripheral\dma.h ****  * user to criminal sanctions under applicable laws, as well as to
+  28:d:/pic32includes2/peripheral\dma.h ****  * civil liability for the breach of the terms and conditions of this
+  29:d:/pic32includes2/peripheral\dma.h ****  * license.
+  30:d:/pic32includes2/peripheral\dma.h ****  *
+  31:d:/pic32includes2/peripheral\dma.h ****  * THIS SOFTWARE IS PROVIDED IN AN “AS IS” CONDITION. NO WARRANTIES,
+  32:d:/pic32includes2/peripheral\dma.h ****  * WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING, BUT NOT LIMITED
+  33:d:/pic32includes2/peripheral\dma.h ****  * TO, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+  34:d:/pic32includes2/peripheral\dma.h ****  * PARTICULAR PURPOSE APPLY TO THIS SOFTWARE. THE COMPANY SHALL NOT,
+  35:d:/pic32includes2/peripheral\dma.h ****  * IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL OR
+  36:d:/pic32includes2/peripheral\dma.h ****  * CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+  37:d:/pic32includes2/peripheral\dma.h ****  *
+  38:d:/pic32includes2/peripheral\dma.h ****  *
+  39:d:/pic32includes2/peripheral\dma.h ****  * $Id: Dma.h,v 1.9 2007/01/17 21:35:46 C12878 Exp $
+  40:d:/pic32includes2/peripheral\dma.h ****  * $Name:  $
+  41:d:/pic32includes2/peripheral\dma.h ****  *
+  42:d:/pic32includes2/peripheral\dma.h ****  ********************************************************************/
+  43:d:/pic32includes2/peripheral\dma.h **** 
+  44:d:/pic32includes2/peripheral\dma.h **** #ifndef _DMA_H_
+  45:d:/pic32includes2/peripheral\dma.h **** #define _DMA_H_
+  46:d:/pic32includes2/peripheral\dma.h **** 
+  47:d:/pic32includes2/peripheral\dma.h **** #include <p32xxxx.h>
+  48:d:/pic32includes2/peripheral\dma.h **** #include <peripheral/int.h>
+  49:d:/pic32includes2/peripheral\dma.h **** 
+  50:d:/pic32includes2/peripheral\dma.h **** 
+  51:d:/pic32includes2/peripheral\dma.h **** // DMA definitions
+  52:d:/pic32includes2/peripheral\dma.h **** 
+  53:d:/pic32includes2/peripheral\dma.h **** #ifdef _DMAC0
+  54:d:/pic32includes2/peripheral\dma.h **** 	#define _DMA_CHANNELS		// DMA channels exist
+  55:d:/pic32includes2/peripheral\dma.h **** 
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 14
+
+
+  56:d:/pic32includes2/peripheral\dma.h **** 
+  57:d:/pic32includes2/peripheral\dma.h **** // existent DMA channels
+  58:d:/pic32includes2/peripheral\dma.h **** 	enum
+  59:d:/pic32includes2/peripheral\dma.h **** 	{
+  60:d:/pic32includes2/peripheral\dma.h **** 		DMA_CHANNEL0,
+  61:d:/pic32includes2/peripheral\dma.h **** 	#ifdef _DMAC1
+  62:d:/pic32includes2/peripheral\dma.h **** 		DMA_CHANNEL1,
+  63:d:/pic32includes2/peripheral\dma.h **** 	#ifdef _DMAC2
+  64:d:/pic32includes2/peripheral\dma.h **** 		DMA_CHANNEL2,
+  65:d:/pic32includes2/peripheral\dma.h **** 	#ifdef _DMAC3
+  66:d:/pic32includes2/peripheral\dma.h **** 		DMA_CHANNEL3,
+  67:d:/pic32includes2/peripheral\dma.h **** 	#endif	// _DMAC3
+  68:d:/pic32includes2/peripheral\dma.h **** 	#endif	// _DMAC2
+  69:d:/pic32includes2/peripheral\dma.h **** 	#endif	// _DMAC1
+  70:d:/pic32includes2/peripheral\dma.h **** 		//	add/remove DMA channel as needed here
+  71:d:/pic32includes2/peripheral\dma.h **** 
+  72:d:/pic32includes2/peripheral\dma.h **** 		DMA_CHANNELS	// number of current available channels
+  73:d:/pic32includes2/peripheral\dma.h **** 	};
+  74:d:/pic32includes2/peripheral\dma.h **** 
+  75:d:/pic32includes2/peripheral\dma.h **** 
+  76:d:/pic32includes2/peripheral\dma.h **** 	// Relative Dma channels priority, between each other
+  77:d:/pic32includes2/peripheral\dma.h **** 	typedef enum
+  78:d:/pic32includes2/peripheral\dma.h **** 	{
+  79:d:/pic32includes2/peripheral\dma.h **** 		DMA_CHN_PRI0,
+  80:d:/pic32includes2/peripheral\dma.h **** 		DMA_CHN_PRI1,
+  81:d:/pic32includes2/peripheral\dma.h **** 		DMA_CHN_PRI2,
+  82:d:/pic32includes2/peripheral\dma.h **** 		DMA_CHN_PRI3
+  83:d:/pic32includes2/peripheral\dma.h **** 	}DmaChannelPri;
+  84:d:/pic32includes2/peripheral\dma.h **** 
+  85:d:/pic32includes2/peripheral\dma.h **** 
+  86:d:/pic32includes2/peripheral\dma.h **** 
+  87:d:/pic32includes2/peripheral\dma.h **** 	// high level definitions for the API functions
+  88:d:/pic32includes2/peripheral\dma.h **** 
+  89:d:/pic32includes2/peripheral\dma.h **** 	typedef enum
+  90:d:/pic32includes2/peripheral\dma.h **** 	{
+  91:d:/pic32includes2/peripheral\dma.h **** 		DMA_OPEN_DEFAULT = 0,							// DAM default operation
+  92:d:/pic32includes2/peripheral\dma.h **** 		DMA_OPEN_AUTO	= _DCH0CON_CHAEN_MASK,					// DMA channel is auto enabled
+  93:d:/pic32includes2/peripheral\dma.h **** 		DMA_OPEN_CHAIN_LOW  = (_DCH0CON_CHCHN_MASK|_DCH0CON_CHCHNS_MASK),	// DMA channel is chained to lo
+  94:d:/pic32includes2/peripheral\dma.h **** 		DMA_OPEN_CHAIN_HI  = (_DCH0CON_CHCHN_MASK),				// DMA channel is chained to higher channel
+  95:d:/pic32includes2/peripheral\dma.h **** 		DMA_OPEN_DET_EN = _DCH0CON_CHAED_MASK,					// events detection enabled while channel off
+  96:d:/pic32includes2/peripheral\dma.h **** 		DMA_OPEN_ENABLE = _DCH0CON_CHEN_MASK,					// DMA channel is enabled after open
+  97:d:/pic32includes2/peripheral\dma.h **** 		DMA_OPEN_MATCH	= 0x80000000,						// DMA channel stops on match
+  98:d:/pic32includes2/peripheral\dma.h **** 	}DmaOpenFlags;	// flags for the channel configuration
+  99:d:/pic32includes2/peripheral\dma.h **** 
+ 100:d:/pic32includes2/peripheral\dma.h **** 
+ 101:d:/pic32includes2/peripheral\dma.h **** 	typedef enum
+ 102:d:/pic32includes2/peripheral\dma.h **** 	{
+ 103:d:/pic32includes2/peripheral\dma.h **** 		DMA_EV_ERR =			0x1,		// address error event
+ 104:d:/pic32includes2/peripheral\dma.h **** 		DMA_EV_ABORT = 			0x2,		// transfer abort event
+ 105:d:/pic32includes2/peripheral\dma.h **** 		DMA_EV_CELL_DONE =		0x4,		// cell transfer complete event
+ 106:d:/pic32includes2/peripheral\dma.h **** 		DMA_EV_BLOCK_DONE =		0x8,		// block transfer complete event
+ 107:d:/pic32includes2/peripheral\dma.h **** 		DMA_EV_DST_HALF =		0x10,		// destination half event
+ 108:d:/pic32includes2/peripheral\dma.h **** 		DMA_EV_DST_FULL =		0x20,		// destination full event
+ 109:d:/pic32includes2/peripheral\dma.h **** 		DMA_EV_SRC_HALF =		0x40,		// source half event
+ 110:d:/pic32includes2/peripheral\dma.h **** 		DMA_EV_SRC_FULL =		0x80,		// source full event
+ 111:d:/pic32includes2/peripheral\dma.h **** 
+ 112:d:/pic32includes2/peripheral\dma.h **** 		DMA_EV_ALL_EVNTS=		(DMA_EV_ERR|DMA_EV_ABORT|DMA_EV_CELL_DONE|DMA_EV_BLOCK_DONE|DMA_EV_DST_HALF|
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 15
+
+
+ 113:d:/pic32includes2/peripheral\dma.h **** 									DMA_EV_DST_FULL|DMA_EV_SRC_HALF|DMA_EV_SRC_FULL)				// all available events
+ 114:d:/pic32includes2/peripheral\dma.h **** 	}DmaEvFlags;	// flags for controlling the DMA channel events; Bit fields from the processor header
+ 115:d:/pic32includes2/peripheral\dma.h **** 
+ 116:d:/pic32includes2/peripheral\dma.h **** 
+ 117:d:/pic32includes2/peripheral\dma.h **** 	typedef enum
+ 118:d:/pic32includes2/peripheral\dma.h **** 	{
+ 119:d:/pic32includes2/peripheral\dma.h **** 		DMA_TXFER_OK,			// the transfer was performed successfully
+ 120:d:/pic32includes2/peripheral\dma.h **** 		DMA_TXFER_ADD_ERR,		// address error while performing the transfer
+ 121:d:/pic32includes2/peripheral\dma.h **** 		DMA_TXFER_ABORT,		// the DMA transfer was aborted
+ 122:d:/pic32includes2/peripheral\dma.h **** 		DMA_TXFER_BC_ERR,		// block complete not set after the DMA transfer performed
+ 123:d:/pic32includes2/peripheral\dma.h **** 		DMA_TXFER_CC_ERR,		// cell complete not set after the DMA transfer performed
+ 124:d:/pic32includes2/peripheral\dma.h **** 		DMA_TXFER_TMO			// DMA transfer timeout
+ 125:d:/pic32includes2/peripheral\dma.h **** 	}DmaTxferRes;		// DMA transfer result
+ 126:d:/pic32includes2/peripheral\dma.h **** 
+ 127:d:/pic32includes2/peripheral\dma.h **** 	typedef enum
+ 128:d:/pic32includes2/peripheral\dma.h **** 	{
+ 129:d:/pic32includes2/peripheral\dma.h **** 		DMA_WAIT_NOT,		// don't wait for the transfer to complete, return immediately
+ 130:d:/pic32includes2/peripheral\dma.h **** 		DMA_WAIT_CELL,		// wait for the cell transfer to complete, than return
+ 131:d:/pic32includes2/peripheral\dma.h **** 		DMA_WAIT_BLOCK		// wait for the block transfer to complete, than return
+ 132:d:/pic32includes2/peripheral\dma.h **** 	}DmaWaitMode;		// DMA transfer wait mode
+ 133:d:/pic32includes2/peripheral\dma.h **** 
+ 134:d:/pic32includes2/peripheral\dma.h **** 
+ 135:d:/pic32includes2/peripheral\dma.h **** 
+ 136:d:/pic32includes2/peripheral\dma.h **** 
+ 137:d:/pic32includes2/peripheral\dma.h **** 
+ 138:d:/pic32includes2/peripheral\dma.h **** /* Function Prototypes */
+ 139:d:/pic32includes2/peripheral\dma.h **** 
+ 140:d:/pic32includes2/peripheral\dma.h **** 
+ 141:d:/pic32includes2/peripheral\dma.h **** 	/********************** high level DMA channel functions *******************************/
+ 142:d:/pic32includes2/peripheral\dma.h **** 
+ 143:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 144:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        void DmaChnOpen(int chn, DmaChannelPri chPri, DmaOpenFlags oFlags)
+ 145:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 146:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    chPri	- valid channel priority, 0-3
+ 147:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 148:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			chn		- channel to be configured in the DMA controller
+ 149:d:/pic32includes2/peripheral\dma.h **** 	 * 					chPri	- the priority given to the channel, 0-3
+ 150:d:/pic32includes2/peripheral\dma.h **** 	 * 					oFlags	- orred flags specifying the open mode:
+ 151:d:/pic32includes2/peripheral\dma.h **** 	 * 					                DMA_OPEN_DEFAULT: DMA default operation mode
+ 152:d:/pic32includes2/peripheral\dma.h **** 	 * 							DMA_OPEN_AUTO:	DMA channel is auto enabled
+ 153:d:/pic32includes2/peripheral\dma.h **** 	 * 							DMA_OPEN_CHAIN_LOW: DMA channel is chained to lower channel
+ 154:d:/pic32includes2/peripheral\dma.h **** 	 * 							DMA_OPEN_CHAIN_HI: DMA channel is chained to higher channel
+ 155:d:/pic32includes2/peripheral\dma.h **** 	 * 							DMA_OPEN_DET_EN: events detection enabled while channel off
+ 156:d:/pic32includes2/peripheral\dma.h **** 	 * 							DMA_OPEN_ENABLE: DMA channel is enabled when opened
+ 157:d:/pic32includes2/peripheral\dma.h **** 	 * 							DMA_OPEN_MATCH:	DMA channel stops on match
+ 158:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 159:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 160:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 161:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          None
+ 162:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 163:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 164:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 165:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function opens and configures the selected DMA channel using the supplied user f
+ 166:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 167:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            - This is a high level access function that doesn't give access to all the set
+ 168:d:/pic32includes2/peripheral\dma.h **** 	 * 					Use the low level functions to address special settings.
+ 169:d:/pic32includes2/peripheral\dma.h **** 	 * 					- After calling this function, the channel should be enabled using DmaChnEnable(chn) call
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 16
+
+
+ 170:d:/pic32includes2/peripheral\dma.h **** 	 * 					if DMA_OPEN_ENABLE flag was not specified.
+ 171:d:/pic32includes2/peripheral\dma.h **** 	 *					- If the CRC is attached to the submitted channel, the CRC append mode will be turned off.
+ 172:d:/pic32includes2/peripheral\dma.h **** 	 * 						This way, the transfer will occur correctly together with CRC calculation.
+ 173:d:/pic32includes2/peripheral\dma.h **** 	 * 					- The start and abort Irqs will be disabled and the channel event enable flags are disable
+ 174:d:/pic32includes2/peripheral\dma.h **** 	* 						User has to call event channel functions to enable the event flags if needed.
+ 175:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 176:d:/pic32includes2/peripheral\dma.h **** 	 * Example:			DmaChnOpen(3, DMA_CHN_PRI2, DMA_OPEN_AUTO|DMA_OPEN_MATCH|DMA_OPEN_ENABLE);
+ 177:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+ 178:d:/pic32includes2/peripheral\dma.h **** 	 void			DmaChnOpen(int chn, DmaChannelPri chPri, DmaOpenFlags oFlags);
+ 179:d:/pic32includes2/peripheral\dma.h **** 
+ 180:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 181:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        void DmaChnEnable(int chn)
+ 182:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 183:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    None
+ 184:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 185:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			chn		- channel to be enabled
+ 186:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 187:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          None
+ 188:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 189:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 190:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 191:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function enables a previously configured DMA channel.
+ 192:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 193:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            DmaChnOpen() should have been called before.
+ 194:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 195:d:/pic32includes2/peripheral\dma.h **** 	 * Example:			DmaChnEnable(3);
+ 196:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+ 197:d:/pic32includes2/peripheral\dma.h **** 	 void			DmaChnEnable(int chn);
+ 198:d:/pic32includes2/peripheral\dma.h **** 
+ 199:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 200:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        void DmaChnDisable(int chn)
+ 201:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 202:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    None
+ 203:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 204:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			chn		- selected channel in the DMA controller
+ 205:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 206:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          None
+ 207:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 208:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 209:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 210:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function disables a DMA channel. The channel operation stops.
+ 211:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 212:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            None.
+ 213:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 214:d:/pic32includes2/peripheral\dma.h **** 	 * Example:			DmaChnDisable(3);
+ 215:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+ 216:d:/pic32includes2/peripheral\dma.h **** 	 void			DmaChnDisable(int chn);
+ 217:d:/pic32includes2/peripheral\dma.h **** 
+ 218:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 219:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        void DmaChnSetTxfer(int chn, const void* vSrcAdd, void* vDstAdd, int srcSize, 
+ 220:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 221:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    chn		- valid DMA channel
+ 222:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 223:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			chn			- DMA channel number
+ 224:d:/pic32includes2/peripheral\dma.h **** 	 * 								- vSrcAdd: source of the DMA transfer
+ 225:d:/pic32includes2/peripheral\dma.h **** 	 * 								- vDstAdd: destination of the DMA transfer
+ 226:d:/pic32includes2/peripheral\dma.h **** 	 * 								- srcSize: source buffer size, 1 to DmaGetMaxTxferSize() bytes, wrapped arround
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 17
+
+
+ 227:d:/pic32includes2/peripheral\dma.h **** 	 * 								- dstSize: destination buffer size, 1 to DmaGetMaxTxferSize() bytes, wrapped around
+ 228:d:/pic32includes2/peripheral\dma.h **** 	 * 								- cellSize: cell transfer size, 1 to DmaGetMaxTxferSize() bytes.
+ 229:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 230:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          None
+ 231:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 232:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 233:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 234:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function sets the transfer characteristics for a DMA channel transfer:
+ 235:d:/pic32includes2/peripheral\dma.h **** 	 * 					the source and the destination addresses.
+ 236:d:/pic32includes2/peripheral\dma.h **** 	 * 					the source and destination lengths
+ 237:d:/pic32includes2/peripheral\dma.h **** 	 * 					and the number of bytes	transferred per event.
+ 238:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 239:d:/pic32includes2/peripheral\dma.h **** 	 * Note:			The function clears the existing DMA channel event flags.
+ 240:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 241:d:/pic32includes2/peripheral\dma.h **** 	 * Example:			DmaChnSetTxfer(3, &U2RXREG, dstBuff, 1, 200, 1);
+ 242:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+ 243:d:/pic32includes2/peripheral\dma.h **** 	 void			DmaChnSetTxfer(int chn, const void* vSrcAdd, void* vDstAdd, int srcSize, int dstSize, int 
+ 244:d:/pic32includes2/peripheral\dma.h **** 
+ 245:d:/pic32includes2/peripheral\dma.h **** 
+ 246:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 247:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        void DmaChnSetSrcAdd(int chn, const void* vSrcAdd)
+ 248:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 249:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    chn		- valid DMA channel
+ 250:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 251:d:/pic32includes2/peripheral\dma.h **** 	 * Input:           chn		- DMA channel number
+ 252:d:/pic32includes2/peripheral\dma.h **** 	 * 				- vSrcAdd: source (virtual) of the DMA transfer
+ 253:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          None
+ 254:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 255:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 256:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 257:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:        The function is a helper to set directly the transfer source address.
+ 258:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 259:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            None.
+ 260:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 261:d:/pic32includes2/peripheral\dma.h **** 	 * Example:         DmaChnSetSrcAdd(2, srcBuff+sizeof(srcBuff));
+ 262:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+ 263:d:/pic32includes2/peripheral\dma.h **** 	 void			DmaChnSetSrcAdd(int chn, const void* vSrcAdd);
+ 264:d:/pic32includes2/peripheral\dma.h **** 
+ 265:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 266:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        void DmaChnSetDstAdd(int chn, void* vDstAdd)
+ 267:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 268:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    chn		- valid DMA channel
+ 269:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 270:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			chn			- DMA channel number
+ 271:d:/pic32includes2/peripheral\dma.h **** 	 * 								- vDstAdd: destination (virtual) of the DMA transfer
+ 272:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          None
+ 273:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 274:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 275:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 276:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function is a helper to set directly the transfer destination address.
+ 277:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 278:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            None
+ 279:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 280:d:/pic32includes2/peripheral\dma.h **** 	 * Example:         DmaChnSetDstAdd(2, dstBuff+sizeof(dstBuff));
+ 281:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+ 282:d:/pic32includes2/peripheral\dma.h **** 	 void			DmaChnSetDstAdd(int chn, void* vDstAdd);
+ 283:d:/pic32includes2/peripheral\dma.h **** 
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 18
+
+
+ 284:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 285:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        void DmaChnSetMatchPattern(int chn, int pattern)
+ 286:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 287:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    chn	- valid DMA channel
+ 288:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 289:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			chn		- DMA channel number
+ 290:d:/pic32includes2/peripheral\dma.h **** 	 * 					pattern	-  the match pattern
+ 291:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 292:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          None
+ 293:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 294:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 295:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 296:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function sets the curent match pattern for the selected DMA channel.
+ 297:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 298:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            None.
+ 299:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 300:d:/pic32includes2/peripheral\dma.h **** 	 * Example:			DmaChnSetMatchPattern(3, '\r');
+ 301:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+ 302:d:/pic32includes2/peripheral\dma.h **** 	 void			DmaChnSetMatchPattern(int chn, int pattern);
+ 303:d:/pic32includes2/peripheral\dma.h **** 
+ 304:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 305:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        int DmaChnGetMatchPattern(int chn)
+ 306:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 307:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    chn	- valid DMA channel
+ 308:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 309:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			chn		- DMA channel number
+ 310:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 311:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          The channel match pattern.
+ 312:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 313:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 314:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 315:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function retrieves the curent match pattern for the selected DMA channel.
+ 316:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 317:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            None.
+ 318:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 319:d:/pic32includes2/peripheral\dma.h **** 	 * Example:			int pattern=DmaChnGetMatchPattern(3);
+ 320:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+ 321:d:/pic32includes2/peripheral\dma.h **** 	 int			DmaChnGetMatchPattern(int chn);
+ 322:d:/pic32includes2/peripheral\dma.h **** 
+ 323:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 324:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        DmaTxferRes DmaChnStartTxfer(int chn, DmaWaitMode wMode, unsigned long retries
+ 325:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 326:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    chn	- valid DMA channel
+ 327:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 328:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			chn		- DMA channel number
+ 329:d:/pic32includes2/peripheral\dma.h **** 	 * 					wMode	- if DMA_WAIT_NOT, return immediately
+ 330:d:/pic32includes2/peripheral\dma.h **** 	 * 							- if DMA_WAIT_CELL, return after the cell transfer complete
+ 331:d:/pic32includes2/peripheral\dma.h **** 	 * 							- if DMA_WAIT_BLOCK, return after the whole transfer is done
+ 332:d:/pic32includes2/peripheral\dma.h **** 	 * 					retries	- retry counter: if transfer not complete after so many retries, return with tmo.
+ 333:d:/pic32includes2/peripheral\dma.h **** 	 * 								If 0, wait forever.
+ 334:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 335:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          DMA_TXFER_OK if not waiting for the transfer completion or if the transfer end
+ 336:d:/pic32includes2/peripheral\dma.h **** 	 * 					an DmaTxferRes error code  otherwise
+ 337:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 338:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 339:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 340:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function initiates (forces) a DMA transfer for the selected DMA channel.
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 19
+
+
+ 341:d:/pic32includes2/peripheral\dma.h **** 	 * 					The DMA channel is enabled.
+ 342:d:/pic32includes2/peripheral\dma.h **** 	 * 					If waiting for the transfer completion needed (user doesn't use an ISR to catch
+ 343:d:/pic32includes2/peripheral\dma.h **** 	 * 					this event) the function will periodically query the DMA controller for the
+ 344:d:/pic32includes2/peripheral\dma.h **** 	 * 					transfer completion status.
+ 345:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 346:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            None
+ 347:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 348:d:/pic32includes2/peripheral\dma.h **** 	 * Example:         DmaChnStartTxfer(3, DMA_WAIT_BLOCK, 0);
+ 349:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+ 350:d:/pic32includes2/peripheral\dma.h **** 	 DmaTxferRes DmaChnStartTxfer(int chn, DmaWaitMode wMode, unsigned long retries);
+ 351:d:/pic32includes2/peripheral\dma.h **** 
+ 352:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 353:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        void DmaChnForceTxfer(int chn)
+ 354:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 355:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    chn	- valid DMA channel
+ 356:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 357:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			chn		- DMA channel number
+ 358:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 359:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          None
+ 360:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 361:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 362:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 363:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function forces a DMA transfer to occur for the selected DMA channel.
+ 364:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 365:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            None.
+ 366:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 367:d:/pic32includes2/peripheral\dma.h **** 	 * Example:			DmaChnForceTxfer(3);
+ 368:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+ 369:d:/pic32includes2/peripheral\dma.h **** 	 void			DmaChnForceTxfer(int chn);
+ 370:d:/pic32includes2/peripheral\dma.h **** 
+ 371:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 372:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        void DmaChnAbortTxfer(int chn)
+ 373:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 374:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    chn	- valid DMA channel
+ 375:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 376:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			chn		- DMA channel number
+ 377:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 378:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          None
+ 379:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 380:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 381:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 382:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function aborts a current undergoing DMA transfer for the selected DMA channel.
+ 383:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 384:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            None.
+ 385:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 386:d:/pic32includes2/peripheral\dma.h **** 	 * Example:			DmaChnAbortTxfer(3);
+ 387:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+ 388:d:/pic32includes2/peripheral\dma.h **** 	 void			DmaChnAbortTxfer(int chn);
+ 389:d:/pic32includes2/peripheral\dma.h **** 
+ 390:d:/pic32includes2/peripheral\dma.h **** 	// High level channel event and interrupt control functions
+ 391:d:/pic32includes2/peripheral\dma.h **** 
+ 392:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 393:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        void DmaChnSetEvEnableFlags(int chn, DmaEvFlags eFlags)
+ 394:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 395:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    chn	- valid DMA channel
+ 396:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 397:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			chn		- DMA channel number
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 20
+
+
+ 398:d:/pic32includes2/peripheral\dma.h **** 	 * 					eFlags	- event flags with the following significance:
+ 399:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_ERR: address error event
+ 400:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_ABORT: transfer abort event
+ 401:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_CELL_DONE: cell transfer complete event
+ 402:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_BLOCK_DONE: block transfer complete event
+ 403:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_DST_HALF: destination half event
+ 404:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_DST_FULL: destination full event
+ 405:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_SRC_HALF: source half event
+ 406:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_SRC_FULL: source full event
+ 407:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_ALL_EVNTS: all of the above flags
+ 408:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 409:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          None
+ 410:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 411:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 412:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 413:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function sets the event enable flags for the selected DMA channel.
+ 414:d:/pic32includes2/peripheral\dma.h **** 	 * 					Multiple flags can be orr-ed together. Any flag that is set in the eFlags will be
+ 415:d:/pic32includes2/peripheral\dma.h **** 	 * 					enabled for the selected channel, the other channel event flags won't be touched.
+ 416:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 417:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            None.
+ 418:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 419:d:/pic32includes2/peripheral\dma.h **** 	 * Example:			DmaChnSetEvEnableFlags(3, DMA_EV_ERR|DMA_EV_ABORT|DMA_EV_BLOCK_DONE|DMA_EV_SRC_FULL)
+ 420:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+ 421:d:/pic32includes2/peripheral\dma.h **** 	 void			DmaChnSetEvEnableFlags(int chn, DmaEvFlags eFlags);
+ 422:d:/pic32includes2/peripheral\dma.h **** 
+ 423:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 424:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        void DmaChnClrEvEnableFlags(int chn, DmaEvFlags eFlags)
+ 425:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 426:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    chn	- valid DMA channel
+ 427:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 428:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			chn		- DMA channel number
+ 429:d:/pic32includes2/peripheral\dma.h **** 	 * 					eFlags	- event flags with the following significance:
+ 430:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_ERR: address error event
+ 431:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_ABORT: transfer abort event
+ 432:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_CELL_DONE: cell transfer complete event
+ 433:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_BLOCK_DONE: block transfer complete event
+ 434:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_DST_HALF: destination half event
+ 435:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_DST_FULL: destination full event
+ 436:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_SRC_HALF: source half event
+ 437:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_SRC_FULL: source full event
+ 438:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_ALL_EVNTS: all of the above flags
+ 439:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 440:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          None
+ 441:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 442:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 443:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 444:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function clears the event enable flags for the selected DMA channel.
+ 445:d:/pic32includes2/peripheral\dma.h **** 	 * 					Multiple flags can be orr-ed together. Any flag that is set in the eFlags will be
+ 446:d:/pic32includes2/peripheral\dma.h **** 	 * 					disabled for the selected channel, the other channel event flags won't be touched.
+ 447:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 448:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            None.
+ 449:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 450:d:/pic32includes2/peripheral\dma.h **** 	 * Example:			DmaChnClrEvEnableFlags(3, DMA_EV_ERR|DMA_EV_ABORT|DMA_EV_BLOCK_DONE|DMA_EV_SRC_FULL)
+ 451:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+ 452:d:/pic32includes2/peripheral\dma.h **** 	 void			DmaChnClrEvEnableFlags(int chn, DmaEvFlags eFlags);
+ 453:d:/pic32includes2/peripheral\dma.h **** 
+ 454:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 21
+
+
+ 455:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        void DmaChnWriteEvEnableFlags(int chn, DmaEvFlags eFlags)
+ 456:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 457:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    chn	- valid DMA channel
+ 458:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 459:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			chn		- DMA channel number
+ 460:d:/pic32includes2/peripheral\dma.h **** 	 * 					eFlags	- event flags with the following significance:
+ 461:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_ERR: address error event
+ 462:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_ABORT: transfer abort event
+ 463:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_CELL_DONE: cell transfer complete event
+ 464:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_BLOCK_DONE: block transfer complete event
+ 465:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_DST_HALF: destination half event
+ 466:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_DST_FULL: destination full event
+ 467:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_SRC_HALF: source half event
+ 468:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_SRC_FULL: source full event
+ 469:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_ALL_EVNTS: all of the above flags
+ 470:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 471:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          None
+ 472:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 473:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 474:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 475:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function sets the event enable flags for the selected DMA channel.
+ 476:d:/pic32includes2/peripheral\dma.h **** 	 * 					The channel event flags are forced to the eFlags value.
+ 477:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 478:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            None.
+ 479:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 480:d:/pic32includes2/peripheral\dma.h **** 	 * Example:			DmaChnWriteEvEnableFlags(3, DMA_EV_ALL_EVNTS);
+ 481:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+ 482:d:/pic32includes2/peripheral\dma.h **** 	 void			DmaChnWriteEvEnableFlags(int chn, DmaEvFlags eFlags);
+ 483:d:/pic32includes2/peripheral\dma.h **** 
+ 484:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 485:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        DmaEvFlags DmaChnGetEvEnableFlags(int chn)
+ 486:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 487:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    chn	- valid DMA channel
+ 488:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 489:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			chn		- DMA channel number
+ 490:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 491:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          - event flags with the following significance:
+ 492:d:/pic32includes2/peripheral\dma.h **** 	 * 						- DMA_EV_ERR: address error event
+ 493:d:/pic32includes2/peripheral\dma.h **** 	 * 						- DMA_EV_ABORT: transfer abort event
+ 494:d:/pic32includes2/peripheral\dma.h **** 	 * 						- DMA_EV_CELL_DONE: cell transfer complete event
+ 495:d:/pic32includes2/peripheral\dma.h **** 	 * 						- DMA_EV_BLOCK_DONE: block transfer complete event
+ 496:d:/pic32includes2/peripheral\dma.h **** 	 * 						- DMA_EV_DST_HALF: destination half event
+ 497:d:/pic32includes2/peripheral\dma.h **** 	 * 						- DMA_EV_DST_FULL: destination full event
+ 498:d:/pic32includes2/peripheral\dma.h **** 	 * 						- DMA_EV_SRC_HALF: source half event
+ 499:d:/pic32includes2/peripheral\dma.h **** 	 * 						- DMA_EV_SRC_FULL: source full event
+ 500:d:/pic32includes2/peripheral\dma.h **** 	 *						- DMA_EV_ALL_EVNTS: all of the above flags
+ 501:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 502:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 503:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 504:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function returns the event enabled flags for the selected DMA channel.
+ 505:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 506:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            None.
+ 507:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 508:d:/pic32includes2/peripheral\dma.h **** 	 * Example:			DmaEvFlags enabledFlags=DmaChnGetEvEnableFlags(3);
+ 509:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+ 510:d:/pic32includes2/peripheral\dma.h **** 	 DmaEvFlags	DmaChnGetEvEnableFlags(int chn);
+ 511:d:/pic32includes2/peripheral\dma.h **** 
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 22
+
+
+ 512:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 513:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        void DmaChnClrEvFlags(int chn, DmaEvFlags eFlags)
+ 514:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 515:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    chn	- valid DMA channel
+ 516:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 517:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			chn		- DMA channel number
+ 518:d:/pic32includes2/peripheral\dma.h **** 	 * 					eFlags	- event flags with the following significance:
+ 519:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_ERR: address error event
+ 520:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_ABORT: transfer abort event
+ 521:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_CELL_DONE: cell transfer complete event
+ 522:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_BLOCK_DONE: block transfer complete event
+ 523:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_DST_HALF: destination half event
+ 524:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_DST_FULL: destination full event
+ 525:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_SRC_HALF: source half event
+ 526:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_SRC_FULL: source full event
+ 527:d:/pic32includes2/peripheral\dma.h **** 	 * 								- DMA_EV_ALL_EVNTS: all of the above flags
+ 528:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 529:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          None
+ 530:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 531:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 532:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 533:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function clears the event flags for the selected DMA channel.
+ 534:d:/pic32includes2/peripheral\dma.h **** 	 * 					Multiple flags can be orr-ed together. Any flag that is set in the eFlags will be
+ 535:d:/pic32includes2/peripheral\dma.h **** 	 * 					cleared for the selected channel, the other channel event flags won't be touched.
+ 536:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 537:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            None.
+ 538:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 539:d:/pic32includes2/peripheral\dma.h **** 	 * Example:			DmaChnClrEvFlags(3, DMA_EV_ALL_EVNTS);
+ 540:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+ 541:d:/pic32includes2/peripheral\dma.h **** 	 void			DmaChnClrEvFlags(int chn, DmaEvFlags eFlags);
+ 542:d:/pic32includes2/peripheral\dma.h **** 
+ 543:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 544:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        DmaEvFlags DmaChnGetEvFlags(int chn)
+ 545:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 546:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    chn	- valid DMA channel
+ 547:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 548:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			chn		- DMA channel number
+ 549:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 550:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          event flags with the following significance:
+ 551:d:/pic32includes2/peripheral\dma.h **** 	 * 						- DMA_EV_ERR: address error event
+ 552:d:/pic32includes2/peripheral\dma.h **** 	 * 						- DMA_EV_ABORT: transfer abort event
+ 553:d:/pic32includes2/peripheral\dma.h **** 	 * 						- DMA_EV_CELL_DONE: cell transfer complete event
+ 554:d:/pic32includes2/peripheral\dma.h **** 	 * 						- DMA_EV_BLOCK_DONE: block transfer complete event
+ 555:d:/pic32includes2/peripheral\dma.h **** 	 * 						- DMA_EV_DST_HALF: destination half event
+ 556:d:/pic32includes2/peripheral\dma.h **** 	 * 						- DMA_EV_DST_FULL: destination full event
+ 557:d:/pic32includes2/peripheral\dma.h **** 	 * 						- DMA_EV_SRC_HALF: source half event
+ 558:d:/pic32includes2/peripheral\dma.h **** 	 * 						- DMA_EV_SRC_FULL: source full event
+ 559:d:/pic32includes2/peripheral\dma.h **** 	 * 						- DMA_EV_ALL_EVNTS: all of the above flags
+ 560:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 561:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 562:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 563:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function returns the event flags for the selected DMA channel.
+ 564:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 565:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            None.
+ 566:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 567:d:/pic32includes2/peripheral\dma.h **** 	 * Example:			DmaEvFlags intSetFlags=DmaChnGetEvFlags(3);
+ 568:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 23
+
+
+ 569:d:/pic32includes2/peripheral\dma.h **** 	 DmaEvFlags	DmaChnGetEvFlags(int chn);
+ 570:d:/pic32includes2/peripheral\dma.h **** 
+ 571:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 572:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        void DmaChnIntEnable(int chn)
+ 573:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 574:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    chn	- valid DMA channel
+ 575:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 576:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			chn		- DMA channel number
+ 577:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 578:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          None
+ 579:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 580:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 581:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 582:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function enables the interrupts in the Interrupt Controller (EVIC) for the selec
+ 583:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 584:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            None.
+ 585:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 586:d:/pic32includes2/peripheral\dma.h **** 	 * Example:			int chn=3; DmaChnIntEnable(chn);
+ 587:d:/pic32includes2/peripheral\dma.h **** 	 * 					mDmaChnIntEnable(3);
+ 588:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+ 589:d:/pic32includes2/peripheral\dma.h **** 	#define			DmaChnIntEnable(chn)	INTEnable(INT_DMA0+(chn), 1)
+ 590:d:/pic32includes2/peripheral\dma.h **** 	#define			mDmaChnIntEnable(c)		(mDMA##c##IntEnable(1))	// macro version
+ 591:d:/pic32includes2/peripheral\dma.h **** 
+ 592:d:/pic32includes2/peripheral\dma.h **** 
+ 593:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 594:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        void DmaChnIntDisable(int chn)
+ 595:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 596:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    chn	- valid DMA channel
+ 597:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 598:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			chn		- DMA channel number
+ 599:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 600:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          None
+ 601:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 602:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 603:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 604:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function disables the interrupts in the Interrupt Controller (EVIC) for the sele
+ 605:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 606:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            None.
+ 607:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 608:d:/pic32includes2/peripheral\dma.h **** 	 * Example:			int chn=3; DmaChnIntDisable(chn);
+ 609:d:/pic32includes2/peripheral\dma.h **** 	 * 					mDmaChnIntDisable(3);
+ 610:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+ 611:d:/pic32includes2/peripheral\dma.h **** 	#define			DmaChnIntDisable(chn)		INTEnable(INT_DMA0+(chn), 0)
+ 612:d:/pic32includes2/peripheral\dma.h **** 	#define			mDmaChnIntDisable(c)		(mDMA##c##IntEnable(0))	// macro version
+ 613:d:/pic32includes2/peripheral\dma.h **** 
+ 614:d:/pic32includes2/peripheral\dma.h **** 
+ 615:d:/pic32includes2/peripheral\dma.h **** 
+ 616:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 617:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        int DmaChnGetIntEnable(int chn)
+ 618:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 619:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    chn	- valid DMA channel
+ 620:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 621:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			chn		- DMA channel number
+ 622:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 623:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          TRUE if the corresponding interrupt is enabled,
+ 624:d:/pic32includes2/peripheral\dma.h **** 	 * 					FALSE otherwise
+ 625:d:/pic32includes2/peripheral\dma.h **** 	 *
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 24
+
+
+ 626:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 627:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 628:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function returns the Interrupt Controller (EVIC) interrupt enabled status for th
+ 629:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 630:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            None.
+ 631:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 632:d:/pic32includes2/peripheral\dma.h **** 	 * Example:			int chn=3; int isEnabled=DmaChnGetIntEnable(chn);
+ 633:d:/pic32includes2/peripheral\dma.h **** 	 * 					isEnabled=mDmaChnGetIntEnable(3);
+ 634:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+ 635:d:/pic32includes2/peripheral\dma.h **** 	#define			DmaChnGetIntEnable(chn)		INTGetEnable(INT_DMA0+(chn))
+ 636:d:/pic32includes2/peripheral\dma.h **** 	#define			mDmaChnGetIntEnable(c)		(mDMA##c##GetIntEnable())		// macro version
+ 637:d:/pic32includes2/peripheral\dma.h **** 
+ 638:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 639:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        void DmaChnSetIntPriority(int chn, int iPri, int subPri)
+ 640:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 641:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    chn	- valid DMA channel
+ 642:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 643:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			chn		- DMA channel number
+ 644:d:/pic32includes2/peripheral\dma.h **** 	 * 					iPri	- the interrupt priority in the interrupt controller
+ 645:d:/pic32includes2/peripheral\dma.h **** 	 * 					subPri	- the interrupt subpriority in the interrupt controller
+ 646:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 647:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          None
+ 648:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 649:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 650:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 651:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function sets the interrupt priority and subpriority in the Interrupt Controller
+ 652:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 653:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            None.
+ 654:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 655:d:/pic32includes2/peripheral\dma.h **** 	 * Example:			int chn=0; DmaChnSetIntPriority(chn, INT_PRIORITY_LEVEL_5, INT_SUB_PRIORITY_LEVEL_3)
+ 656:d:/pic32includes2/peripheral\dma.h **** 	 * 					mDmaChnSetIntPriority(0, 5, 3);
+ 657:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+ 658:d:/pic32includes2/peripheral\dma.h **** 	#define			DmaChnSetIntPriority(chn, iPri, subPri)		do{INTSetPriority(INT_DMA0+(chn), (iPri)); \
+ 659:d:/pic32includes2/peripheral\dma.h **** 	 															INTSetSubPriority(INT_DMA0+(chn), (subPri));}while(0)
+ 660:d:/pic32includes2/peripheral\dma.h **** 	#define			mDmaChnSetIntPriority(c, iPri, subPri)		(mDMA##c##SetIntPriority(iPri), mDMA##c##SetIntS
+ 661:d:/pic32includes2/peripheral\dma.h **** 
+ 662:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 663:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        int DmaChnGetIntPriority(int chn)
+ 664:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 665:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    chn	- valid DMA channel
+ 666:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 667:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			chn		- DMA channel number
+ 668:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 669:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          the current channel interrupt priority in the INT controller
+ 670:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 671:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 672:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 673:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function reads the current interrupt priority in the Interrupt Controller (EVIC)
+ 674:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 675:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            None.
+ 676:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 677:d:/pic32includes2/peripheral\dma.h **** 	 * Example:			int chn=2; int currPri=DmaChnGetIntPriority(chn);
+ 678:d:/pic32includes2/peripheral\dma.h **** 	 * 					currPri=mDmaChnGetIntPriority(2);
+ 679:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+ 680:d:/pic32includes2/peripheral\dma.h **** 	#define			DmaChnGetIntPriority(chn)	INTGetPriority(INT_DMA0+(chn))
+ 681:d:/pic32includes2/peripheral\dma.h ****  	#define			mDmaChnGetIntPriority(c)	(mDMA##c##GetIntPriority())		// macro version
+ 682:d:/pic32includes2/peripheral\dma.h **** 
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 25
+
+
+ 683:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 684:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        int DmaChnGetIntSubPriority(int chn)
+ 685:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 686:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    chn	- valid DMA channel
+ 687:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 688:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			chn		- DMA channel number
+ 689:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 690:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          the current channel interrupt subpriority in the INT controller
+ 691:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 692:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 693:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 694:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function reads the current subinterrupt priority in the Interrupt Controller (EV
+ 695:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 696:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            None.
+ 697:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 698:d:/pic32includes2/peripheral\dma.h **** 	 * Example:			int chn=2; int currSubPri=DmaChnGetIntSubPriority(chn);
+ 699:d:/pic32includes2/peripheral\dma.h **** 	 * 					currSubPri=mDmaChnGetIntSubPriority(2);
+ 700:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+ 701:d:/pic32includes2/peripheral\dma.h **** 	#define			DmaChnGetIntSubPriority(chn)	INTGetSubPriority(INT_DMA0+(chn))
+ 702:d:/pic32includes2/peripheral\dma.h **** 	#define			mDmaChnGetIntSubPriority(c)		(mDMA##c##GetIntSubPriority())		// macro version
+ 703:d:/pic32includes2/peripheral\dma.h **** 
+ 704:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 705:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        int DmaChnGetIntFlag(int chn)
+ 706:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 707:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    chn	- valid DMA channel
+ 708:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 709:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			chn		- DMA channel number
+ 710:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 711:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          TRUE if the corresponding channel interrupt flag is set
+ 712:d:/pic32includes2/peripheral\dma.h **** 	 * 					FALSE otherwise
+ 713:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 714:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 715:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 716:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function reads the current interrupt flag status in the Interrupt Controller (EV
+ 717:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 718:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            None.
+ 719:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 720:d:/pic32includes2/peripheral\dma.h **** 	 * Example:			int chn=1; int isFlagSet=DmaChnGetIntFlag(chn);
+ 721:d:/pic32includes2/peripheral\dma.h **** 	 * 					isFlagSet=mDmaChnGetIntFlag(1);
+ 722:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+ 723:d:/pic32includes2/peripheral\dma.h **** 	#define			DmaChnGetIntFlag(chn)		INTGetFlag(INT_DMA0+(chn))
+ 724:d:/pic32includes2/peripheral\dma.h ****  	#define			mDmaChnGetIntFlag(c)		(mDMA##c##GetIntFlag())			// macro version
+ 725:d:/pic32includes2/peripheral\dma.h **** 
+ 726:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 727:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        void DmaChnClrIntFlag(int chn)
+ 728:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 729:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    chn	- valid DMA channel
+ 730:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 731:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			chn		- DMA channel number
+ 732:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 733:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          None
+ 734:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 735:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 736:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 737:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function clears the current interrupt flag status in the Interrupt Controller (E
+ 738:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 739:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            None.
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 26
+
+
+ 740:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 741:d:/pic32includes2/peripheral\dma.h **** 	 * Example:			int chn=1; DmaChnClrIntFlag(chn);
+ 742:d:/pic32includes2/peripheral\dma.h **** 	 * 					mDmaChnClrIntFlag(1);
+ 743:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+ 744:d:/pic32includes2/peripheral\dma.h **** 	#define			DmaChnClrIntFlag(chn)		INTClearFlag(INT_DMA0+(chn))
+ 745:d:/pic32includes2/peripheral\dma.h ****  	#define			mDmaChnClrIntFlag(c)		(mDMA##c##ClearIntFlag())		// macro version
+ 746:d:/pic32includes2/peripheral\dma.h **** 
+ 747:d:/pic32includes2/peripheral\dma.h **** 
+ 748:d:/pic32includes2/peripheral\dma.h **** 
+ 749:d:/pic32includes2/peripheral\dma.h **** 	// high level helpers for fast strcpy/memcpy transfers
+ 750:d:/pic32includes2/peripheral\dma.h **** 
+ 751:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 752:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        DmaTxferRes DmaChnMemcpy(void* s1, const void* s2, int n, int chn, DmaChannelP
+ 753:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 754:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    chn		- a valid DMA channel
+ 755:d:/pic32includes2/peripheral\dma.h **** 	 * 					s1, s2	- valid memory pointers
+ 756:d:/pic32includes2/peripheral\dma.h **** 	 * 					n>0, n<=DmaGetMaxTxferSize()
+ 757:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 758:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			s1		- destination pointer
+ 759:d:/pic32includes2/peripheral\dma.h **** 	 * 					s2		- source pointer
+ 760:d:/pic32includes2/peripheral\dma.h **** 	 * 					n		- number of bytes to transfer
+ 761:d:/pic32includes2/peripheral\dma.h **** 	 * 					chn		- the DMA channel to perform the transfer
+ 762:d:/pic32includes2/peripheral\dma.h **** 	 * 					chPri	- the desired channel priority
+ 763:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 764:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          DMA_TXFER_OK if the transfer ended normally,
+ 765:d:/pic32includes2/peripheral\dma.h **** 	 * 					an DmaTxferRes error code  otherwise
+ 766:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 767:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 768:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 769:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function configures a DMA channel for a fast memory transfer.
+ 770:d:/pic32includes2/peripheral\dma.h **** 	 * 			Then it copies one block of memory from source to destination.
+ 771:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 772:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 773:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            - If the CRC is attached to the submitted channel, the CRC append mode will be
+ 774:d:/pic32includes2/peripheral\dma.h **** 	 * 						This way, the transfer will occur correctly together with CRC calculation.
+ 775:d:/pic32includes2/peripheral\dma.h **** 	 * 					- The start and abort Irqs will be disabled and the channel event enable flags are disable
+ 776:d:/pic32includes2/peripheral\dma.h **** 	 * 					- Multiple channels could be opened to perform fast memory transfers, if necessary.
+ 777:d:/pic32includes2/peripheral\dma.h **** 	 * 					- The function clears the suspend state and resumes the operation of the DMA controller.
+ 778:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 779:d:/pic32includes2/peripheral\dma.h ****  	 * Example:		res=DmaChnMemcpy(pDst, pSrc, buffSz, 0, DMA_CHN_PRI3);
+ 780:d:/pic32includes2/peripheral\dma.h ****  	 ********************************************************************/
+ 781:d:/pic32includes2/peripheral\dma.h **** 	 DmaTxferRes	DmaChnMemcpy(void* s1, const void* s2, int n, int chn, DmaChannelPri chPri);
+ 782:d:/pic32includes2/peripheral\dma.h **** 
+ 783:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 784:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        DmaTxferRes DmaChnStrcpy(char* s1, const char* s2, int chn, DmaChannelPri chPr
+ 785:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 786:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    chn		- a valid DMA channel
+ 787:d:/pic32includes2/peripheral\dma.h **** 	 * 					s1, s2	- valid memory pointers
+ 788:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 789:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			s1		- destination pointer
+ 790:d:/pic32includes2/peripheral\dma.h **** 	 * 					s2		- source pointer
+ 791:d:/pic32includes2/peripheral\dma.h **** 	 * 					chn		- the DMA channel to perform the transfer
+ 792:d:/pic32includes2/peripheral\dma.h **** 	 * 					chPri	- the desired channel priority
+ 793:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 794:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          DMA_TXFER_OK if the transfer ended normally,
+ 795:d:/pic32includes2/peripheral\dma.h **** 	 * 					an DmaTxferRes error code  otherwise
+ 796:d:/pic32includes2/peripheral\dma.h **** 	 *
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 27
+
+
+ 797:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 798:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 799:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function configures a DMA channel for a fast memory transfer.
+ 800:d:/pic32includes2/peripheral\dma.h **** 	 * 			Then it copies one zero terminated string from source to destination.
+ 801:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 802:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 803:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            - If the CRC is attached to the submitted channel, the CRC append mode will be
+ 804:d:/pic32includes2/peripheral\dma.h **** 	 *				This way, the transfer will occur correctly together with CRC calculation.
+ 805:d:/pic32includes2/peripheral\dma.h **** 	 *			- The start and abort Irqs will be disabled and the channel event enable flags are disabled.
+ 806:d:/pic32includes2/peripheral\dma.h **** 	 *			- Multiple channels could be opened to perform fast memory transfers, if necessary.
+ 807:d:/pic32includes2/peripheral\dma.h **** 	 * 			- The function clears the suspend state and resumes the operation of the DMA controller.
+ 808:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 809:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 810:d:/pic32includes2/peripheral\dma.h ****  	 * Example:		res=DmaChnStrcpy(str1, str2, 0, DMA_CHN_PRI3);
+ 811:d:/pic32includes2/peripheral\dma.h **** 	 *********************************************************************/
+ 812:d:/pic32includes2/peripheral\dma.h **** 	 DmaTxferRes	DmaChnStrcpy(char* s1, const char* s2, int chn, DmaChannelPri chPri);
+ 813:d:/pic32includes2/peripheral\dma.h **** 
+ 814:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 815:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        DmaTxferRes DmaChnStrncpy(char* s1, const char* s2, int n, int chn, DmaChannel
+ 816:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 817:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    chn		- a valid DMA channel
+ 818:d:/pic32includes2/peripheral\dma.h **** 	 * 					s1, s2	- valid memory pointers
+ 819:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 820:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			s1		- destination pointer
+ 821:d:/pic32includes2/peripheral\dma.h **** 	 * 					s2		- source pointer
+ 822:d:/pic32includes2/peripheral\dma.h **** 	 * 					chn		- the DMA channel to perform the transfer
+ 823:d:/pic32includes2/peripheral\dma.h **** 	 * 					chPri	- the desired channel priority
+ 824:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 825:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          DMA_TXFER_OK if the transfer ended normally,
+ 826:d:/pic32includes2/peripheral\dma.h **** 	 * 					an DmaTxferRes error code  otherwise
+ 827:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 828:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 829:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 830:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function configures a DMA channel for a fast memory transfer.
+ 831:d:/pic32includes2/peripheral\dma.h **** 	 * 			Then it copies one zero terminated string from source to destination.
+ 832:d:/pic32includes2/peripheral\dma.h **** 	 * 			It copies no more than n characters from s2.
+ 833:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 834:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 835:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            - If the CRC is attached to the submitted channel, the CRC append mode will be
+ 836:d:/pic32includes2/peripheral\dma.h **** 	 *				This way, the transfer will occur correctly together with CRC calculation.
+ 837:d:/pic32includes2/peripheral\dma.h **** 	 *			- The start and abort Irqs will be disabled and the channel event enable flags are disabled.
+ 838:d:/pic32includes2/peripheral\dma.h **** 	 *			- Multiple channels could be opened to perform fast memory transfers, if necessary.
+ 839:d:/pic32includes2/peripheral\dma.h **** 	 * 			- The function clears the suspend state and resumes the operation of the DMA controller.
+ 840:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 841:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 842:d:/pic32includes2/peripheral\dma.h ****  	 * Example:		res=DmaChnStrncpy(str1, str2, MAX_STR_LEN, 0, DMA_CHN_PRI3);
+ 843:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+ 844:d:/pic32includes2/peripheral\dma.h **** 	 DmaTxferRes DmaChnStrncpy(char* s1, const char* s2, int n, int chn, DmaChannelPri chPri);
+ 845:d:/pic32includes2/peripheral\dma.h **** 
+ 846:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 847:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        DmaTxferRes DmaChnMemCrc(void* d, const void* s, int n, int chn, DmaChannelPri
+ 848:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 849:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    chn		- a valid DMA channel
+ 850:d:/pic32includes2/peripheral\dma.h **** 	 * 					d, s		- valid memory pointer
+ 851:d:/pic32includes2/peripheral\dma.h **** 	 * 					n>0, n<=DmaGetMaxTxferSize()
+ 852:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 853:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			d		- address where to deposit the result
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 28
+
+
+ 854:d:/pic32includes2/peripheral\dma.h **** 	 * 					s		- source buffer pointer
+ 855:d:/pic32includes2/peripheral\dma.h **** 	 * 					n		- number of bytes in the pointer
+ 856:d:/pic32includes2/peripheral\dma.h **** 	 * 					chn		- the DMA channel to use
+ 857:d:/pic32includes2/peripheral\dma.h **** 	 * 					chPri	- the desired channel priority
+ 858:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 859:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          DMA_TXFER_OK if the transfer ended normally,
+ 860:d:/pic32includes2/peripheral\dma.h **** 	 * 					an DmaTxferRes error code  otherwise
+ 861:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 862:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 863:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 864:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function is a helper that calculates the CRC of a memory block.
+ 865:d:/pic32includes2/peripheral\dma.h **** 	 * 			The function configures the DMA channel for a fast memory transfer and calculates the CRC.
+ 866:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 867:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 868:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            - The CRC generator must have been previously configured using mCrcConfigure()
+ 869:d:/pic32includes2/peripheral\dma.h **** 	 * 					- No transfer is done, just the CRC is calculated.
+ 870:d:/pic32includes2/peripheral\dma.h **** 	 *			- The start and abort Irqs will be disabled and the channel event enable flags are disabled.
+ 871:d:/pic32includes2/peripheral\dma.h **** 	 * 			- The function clears the suspend state and resumes the operation of the DMA controller.
+ 872:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 873:d:/pic32includes2/peripheral\dma.h **** 	 * Example:		int myCrc; DmaChnMemCrc(&myCrc, srcBuff, sizeof(srcBuff), 0, DMA_CHN_PRI3);
+ 874:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+ 875:d:/pic32includes2/peripheral\dma.h **** 	 DmaTxferRes	DmaChnMemCrc(void* d, const void* s, int n, int chn, DmaChannelPri chPri);
+ 876:d:/pic32includes2/peripheral\dma.h **** 
+ 877:d:/pic32includes2/peripheral\dma.h **** 
+ 878:d:/pic32includes2/peripheral\dma.h **** 	// High level CRC functions
+ 879:d:/pic32includes2/peripheral\dma.h **** 
+ 880:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 881:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        void mCrcConfigure(int polynomial, int pLen, int seed)
+ 882:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 883:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    pLen		- valid polynomial length within 1-16
+ 884:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 885:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			polynomial	- the layout of the CRC generator
+ 886:d:/pic32includes2/peripheral\dma.h **** 	 * 					pLen		- the length of the CRC generator polynomial
+ 887:d:/pic32includes2/peripheral\dma.h **** 	 * 					seed		- the initial seed of the CRC generator
+ 888:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 889:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          None
+ 890:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 891:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 892:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 893:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function configures the CRC module by setting the parameters that define the gen
+ 894:d:/pic32includes2/peripheral\dma.h **** 	 * 					- the length of the CRC generator polynomial, pLen;
+ 895:d:/pic32includes2/peripheral\dma.h **** 	 * 					- the function sets the layout of the shift stages that take place in the CRC generation.
+ 896:d:/pic32includes2/peripheral\dma.h **** 	 * 						Setting a bit to 1 enables the XOR input from the MSb (pLen bit) to the selected stage in
+ 897:d:/pic32includes2/peripheral\dma.h **** 	 * 						If bit is cleared, the selected shift stage gets data directly from the previous stage in
+ 898:d:/pic32includes2/peripheral\dma.h **** 	 * 						Note that in a proper CRC polynomial, both the most significant bit (MSb) and least signi
+ 899:d:/pic32includes2/peripheral\dma.h **** 	 * 						are always a '1'. Considering the generator polynomial: X^16+X^15+X^2+1, the value to be 
+ 900:d:/pic32includes2/peripheral\dma.h **** 	 * 						feedback should be 0x8005, or 0x8004, but not 0x018005;
+ 901:d:/pic32includes2/peripheral\dma.h **** 	 *					- the function sets the seed of the CRC generator. This is the initial data present in the
+ 902:d:/pic32includes2/peripheral\dma.h **** 	 * 						CRC shift register before the CRC calculation begins. A good initial value is usually 0xf
+ 903:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 904:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            - Bit 0 of the generator polynomial is always XOR'ed.
+ 905:d:/pic32includes2/peripheral\dma.h **** 	 * 					- When the append mode is set, the attached DMA channel has to have destination size <=4.
+ 906:d:/pic32includes2/peripheral\dma.h **** 	 * 						Upon the transfer completion the calculated CRC is stored at the destination address.
+ 907:d:/pic32includes2/peripheral\dma.h **** 	 * 					- When append mode is cleared, the DMA transfer occurs normally, and the CRC value is avai
+ 908:d:/pic32includes2/peripheral\dma.h **** 	 * 						the CrcResult() function.
+ 909:d:/pic32includes2/peripheral\dma.h **** 	 * 					- The CRC module should be configured before enabled.
+ 910:d:/pic32includes2/peripheral\dma.h **** 	 *
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 29
+
+
+ 911:d:/pic32includes2/peripheral\dma.h **** 	 * Example:			mCrcConfigure(0x8005, 16, 0xffff);
+ 912:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+ 913:d:/pic32includes2/peripheral\dma.h **** 	#define mCrcConfigure(polynomial, pLen, seed)	(DCRCCONCLR=_DCRCCON_PLEN_MASK, DCRCCONSET=((pLen)-1
+ 914:d:/pic32includes2/peripheral\dma.h **** 
+ 915:d:/pic32includes2/peripheral\dma.h **** 
+ 916:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 917:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        void CrcAttachChannel(int chn, int appendMode)
+ 918:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 919:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    chn		- valid DMA channel
+ 920:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 921:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			chn			- the DMA channel to be attached to the CRC generator module.
+ 922:d:/pic32includes2/peripheral\dma.h **** 	 * 					appendMode	- if TRUE the data passed to the CRC generator is not transferred to destinatio
+ 923:d:/pic32includes2/peripheral\dma.h **** 	 * 									but it's written to the destination address when the block transfer is complete.
+ 924:d:/pic32includes2/peripheral\dma.h **** 	 * 								- if FALSE the data is transferred normally while the CRC is calculated. The CRC will
+ 925:d:/pic32includes2/peripheral\dma.h **** 	 * 									be available using the CrcResult function.
+ 926:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 927:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          None
+ 928:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 929:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 930:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 931:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function attaches the CRC module to an DMA channel and enables the CRC generator
+ 932:d:/pic32includes2/peripheral\dma.h **** 	 * 					From now on, all the DMA traffic is directed to the CRC generator. Once the DMA block tran
+ 933:d:/pic32includes2/peripheral\dma.h **** 	 * 					is complete, the CRC result is available both at the DMA destination address and in the CR
+ 934:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 935:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            None
+ 936:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 937:d:/pic32includes2/peripheral\dma.h **** 	 * Example:			CrcAttachChannel(0, TRUE);
+ 938:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+ 939:d:/pic32includes2/peripheral\dma.h **** 	 void			CrcAttachChannel(int chn, int appendMode);
+ 940:d:/pic32includes2/peripheral\dma.h **** 
+ 941:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+ 942:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        int CrcResult(void)
+ 943:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 944:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    None
+ 945:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 946:d:/pic32includes2/peripheral\dma.h **** 	 * Input:			None
+ 947:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 948:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          the current value of the CRC generator.
+ 949:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 950:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+ 951:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 952:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function returns the calculated CRC value.
+ 953:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 954:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            The function returns the valid CRC result by masking out the unused MSbits in 
+ 955:d:/pic32includes2/peripheral\dma.h **** 	 * 					Use CrcGetValue() to get the full CRC register value.
+ 956:d:/pic32includes2/peripheral\dma.h **** 	 *
+ 957:d:/pic32includes2/peripheral\dma.h **** 	 * Example:			int myCrc=CrcResult();
+ 958:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+ 959:d:/pic32includes2/peripheral\dma.h **** 	 int			CrcResult(void);
+ 960:d:/pic32includes2/peripheral\dma.h **** 
+ 961:d:/pic32includes2/peripheral\dma.h **** 
+ 962:d:/pic32includes2/peripheral\dma.h **** /*********************  end of high level functions ****************************************/
+ 963:d:/pic32includes2/peripheral\dma.h **** 
+ 964:d:/pic32includes2/peripheral\dma.h **** 	// low level definitions for the API functions
+ 965:d:/pic32includes2/peripheral\dma.h **** 
+ 966:d:/pic32includes2/peripheral\dma.h **** 
+ 967:d:/pic32includes2/peripheral\dma.h **** 	typedef struct
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 30
+
+
+ 968:d:/pic32includes2/peripheral\dma.h **** 	{
+ 969:d:/pic32includes2/peripheral\dma.h **** 		union
+ 970:d:/pic32includes2/peripheral\dma.h **** 		{
+ 971:d:/pic32includes2/peripheral\dma.h **** 			struct
+ 972:d:/pic32includes2/peripheral\dma.h **** 			{
+ 973:d:/pic32includes2/peripheral\dma.h **** 				unsigned int chn:	3;		// last active DMA channel
+ 974:d:/pic32includes2/peripheral\dma.h **** 				unsigned int rdOp:	1;		// last DMA operation, read if 1, write if 0
+ 975:d:/pic32includes2/peripheral\dma.h **** 			};
+ 976:d:/pic32includes2/peripheral\dma.h **** 			unsigned int	w;						// word access
+ 977:d:/pic32includes2/peripheral\dma.h **** 		}lastAccess;
+ 978:d:/pic32includes2/peripheral\dma.h **** 		void*	lastAddress;		// most recent DMA address
+ 979:d:/pic32includes2/peripheral\dma.h **** 	}DmaStatus;			// DMA controller status
+ 980:d:/pic32includes2/peripheral\dma.h **** 
+ 981:d:/pic32includes2/peripheral\dma.h **** 	typedef enum
+ 982:d:/pic32includes2/peripheral\dma.h **** 	{
+ 983:d:/pic32includes2/peripheral\dma.h **** 		DMA_GFLG_SUSPEND =	_DMACON_SUSPEND_MASK,	// suspend DMA controller operation
+ 984:d:/pic32includes2/peripheral\dma.h **** 		DMA_GFLG_SIDL =		_DMACON_SIDL_MASK,		// DMA controller sleep/active in idle mode
+ 985:d:/pic32includes2/peripheral\dma.h **** 		DMA_GFLG_FRZ =		_DMACON_FRZ_MASK,		// DMA controller frozen/active in debug mode
+ 986:d:/pic32includes2/peripheral\dma.h **** 		DMA_GFLG_ON =		_DMACON_ON_MASK,		// DMA module enabled/desabled
+ 987:d:/pic32includes2/peripheral\dma.h **** 		//
+ 988:d:/pic32includes2/peripheral\dma.h **** 		DMA_GFLG_ALL_FLAGS=	DMA_GFLG_SUSPEND|DMA_GFLG_SIDL|DMA_GFLG_FRZ|DMA_GFLG_ON		// all flags
+ 989:d:/pic32includes2/peripheral\dma.h **** 	}DmaGlblFlags;	// flags for controlling global DMA controller behavior. From processor header file
+ 990:d:/pic32includes2/peripheral\dma.h **** 
+ 991:d:/pic32includes2/peripheral\dma.h **** 
+ 992:d:/pic32includes2/peripheral\dma.h **** 
+ 993:d:/pic32includes2/peripheral\dma.h **** 
+ 994:d:/pic32includes2/peripheral\dma.h **** 	typedef enum
+ 995:d:/pic32includes2/peripheral\dma.h **** 	{
+ 996:d:/pic32includes2/peripheral\dma.h **** 		DMA_EV_ABORT_IRQ_EN =		_DCH0ECON_AIRQEN_MASK,
+ 997:d:/pic32includes2/peripheral\dma.h **** 		DMA_EV_START_IRQ_EN =		_DCH0ECON_SIRQEN_MASK,
+ 998:d:/pic32includes2/peripheral\dma.h **** 		DMA_EV_MATCH_EN =			_DCH0ECON_PATEN_MASK,
+ 999:d:/pic32includes2/peripheral\dma.h **** 	}DmaEvCtrlFlags;	// DMA channel event control fields accessibile as flags
+1000:d:/pic32includes2/peripheral\dma.h **** 	// also part of DmaEvCtrlFlags:
+1001:d:/pic32includes2/peripheral\dma.h **** 	#define	DMA_EV_START_IRQ(irq)	(DMA_EV_START_IRQ_EN | ((irq)<<_DCH0ECON_CHSIRQ_POSITION))	// NOTE: 
+1002:d:/pic32includes2/peripheral\dma.h **** 	#define	DMA_EV_ABORT_IRQ(irq)	(DMA_EV_ABORT_IRQ_EN | ((irq)<<_DCH0ECON_CHAIRQ_POSITION))	// NOTE: 
+1003:d:/pic32includes2/peripheral\dma.h **** 
+1004:d:/pic32includes2/peripheral\dma.h **** 	// DMA channel event control as a structure:
+1005:d:/pic32includes2/peripheral\dma.h **** 	#define	DmaEvCtrl	__DCH0ECONbits_t
+1006:d:/pic32includes2/peripheral\dma.h **** 
+1007:d:/pic32includes2/peripheral\dma.h **** 
+1008:d:/pic32includes2/peripheral\dma.h **** 
+1009:d:/pic32includes2/peripheral\dma.h **** 
+1010:d:/pic32includes2/peripheral\dma.h **** 	typedef enum
+1011:d:/pic32includes2/peripheral\dma.h **** 	{
+1012:d:/pic32includes2/peripheral\dma.h **** 		DMA_CTL_AUTO_EN =		_DCH0CON_CHAEN_MASK,
+1013:d:/pic32includes2/peripheral\dma.h **** 		DMA_CTL_CHAIN_EN =		_DCH0CON_CHCHN_MASK,
+1014:d:/pic32includes2/peripheral\dma.h **** 		DMA_CTL_DET_EN =		_DCH0CON_CHAED_MASK,
+1015:d:/pic32includes2/peripheral\dma.h **** 		DMA_CTL_CHN_EN =		_DCH0CON_CHEN_MASK,
+1016:d:/pic32includes2/peripheral\dma.h **** 		DMA_CTL_CHAIN_DIR =		_DCH0CON_CHCHNS_MASK,
+1017:d:/pic32includes2/peripheral\dma.h **** 	}DmaChnCtrlFlags;	// controlling the DMA channel with flags
+1018:d:/pic32includes2/peripheral\dma.h **** 	// also part of DmaChnCtrlFlags:
+1019:d:/pic32includes2/peripheral\dma.h **** 	#define	DMA_CTL_PRI(pri)	((pri)&_DCH0CON_CHPRI_MASK)
+1020:d:/pic32includes2/peripheral\dma.h **** 
+1021:d:/pic32includes2/peripheral\dma.h **** 	// DMA channel control as a structure:
+1022:d:/pic32includes2/peripheral\dma.h **** 	#define	DmaChnCtrl  	__DCH0CONbits_t
+1023:d:/pic32includes2/peripheral\dma.h **** 
+1024:d:/pic32includes2/peripheral\dma.h **** 	typedef struct
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 31
+
+
+1025:d:/pic32includes2/peripheral\dma.h **** 	{
+1026:d:/pic32includes2/peripheral\dma.h **** 		void*	vSrcAdd;		// source of the DMA transfer, virtual
+1027:d:/pic32includes2/peripheral\dma.h **** 		void*	vDstAdd;		// destination of the DMA transfer, virtual
+1028:d:/pic32includes2/peripheral\dma.h **** 		int	srcSize;		// source buffer size, 1 to DmaGetMaxTxferSize() bytes. Wrapped around.
+1029:d:/pic32includes2/peripheral\dma.h **** 		int	dstSize;		// destination buffer size, 1 to DmaGetMaxTxferSize() bytes. Wrapped around.
+1030:d:/pic32includes2/peripheral\dma.h **** 		int	cellSize;		// no of bytes txferred per event, 1 to DmaGetMaxTxferSize().
+1031:d:/pic32includes2/peripheral\dma.h **** 	}DmaTxferCtrl;		// transfer setting: the transfer source, destination addresses and size, cell siz
+1032:d:/pic32includes2/peripheral\dma.h **** 
+1033:d:/pic32includes2/peripheral\dma.h **** 
+1034:d:/pic32includes2/peripheral\dma.h **** 	/********************** low level DMA channel functions *******************************/
+1035:d:/pic32includes2/peripheral\dma.h **** 
+1036:d:/pic32includes2/peripheral\dma.h **** 
+1037:d:/pic32includes2/peripheral\dma.h **** 
+1038:d:/pic32includes2/peripheral\dma.h **** 	// Global DMA controller functions
+1039:d:/pic32includes2/peripheral\dma.h **** 
+1040:d:/pic32includes2/peripheral\dma.h **** 
+1041:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+1042:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        void mDmaEnable(void)
+1043:d:/pic32includes2/peripheral\dma.h **** 	 *
+1044:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    None
+1045:d:/pic32includes2/peripheral\dma.h **** 	 *
+1046:d:/pic32includes2/peripheral\dma.h **** 	 * Input:		None
+1047:d:/pic32includes2/peripheral\dma.h **** 	 *
+1048:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          None
+1049:d:/pic32includes2/peripheral\dma.h **** 	 *
+1050:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+1051:d:/pic32includes2/peripheral\dma.h **** 	 *
+1052:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function/macro enables the DMA controller.
+1053:d:/pic32includes2/peripheral\dma.h **** 	 *
+1054:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            None.
+1055:d:/pic32includes2/peripheral\dma.h **** 	 *
+1056:d:/pic32includes2/peripheral\dma.h **** 	 * Example:			DmaEnable();
+1057:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+1058:d:/pic32includes2/peripheral\dma.h **** 	#define		mDmaEnable()	(DMACONSET=_DMACON_ON_MASK)
+1059:d:/pic32includes2/peripheral\dma.h **** 
+1060:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+1061:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        void mDmaDisable(void)
+1062:d:/pic32includes2/peripheral\dma.h **** 	 *
+1063:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    None
+1064:d:/pic32includes2/peripheral\dma.h **** 	 *
+1065:d:/pic32includes2/peripheral\dma.h **** 	 * Input:		None
+1066:d:/pic32includes2/peripheral\dma.h **** 	 *
+1067:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          None
+1068:d:/pic32includes2/peripheral\dma.h **** 	 *
+1069:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+1070:d:/pic32includes2/peripheral\dma.h **** 	 *
+1071:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function/macro disables the DMA controller.
+1072:d:/pic32includes2/peripheral\dma.h **** 	 *
+1073:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            None.
+1074:d:/pic32includes2/peripheral\dma.h **** 	 *
+1075:d:/pic32includes2/peripheral\dma.h **** 	 * Example:			mDmaDisable();
+1076:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+1077:d:/pic32includes2/peripheral\dma.h **** 	#define		mDmaDisable()	do{DMACONCLR=_DMACON_ON_MASK; while(DMACONbits.ON);}while(0)
+1078:d:/pic32includes2/peripheral\dma.h **** 
+1079:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+1080:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        void mDmaReset(void)
+1081:d:/pic32includes2/peripheral\dma.h **** 	 *
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 32
+
+
+1082:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    None
+1083:d:/pic32includes2/peripheral\dma.h **** 	 *
+1084:d:/pic32includes2/peripheral\dma.h **** 	 * Input:		None
+1085:d:/pic32includes2/peripheral\dma.h **** 	 *
+1086:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          None
+1087:d:/pic32includes2/peripheral\dma.h **** 	 *
+1088:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+1089:d:/pic32includes2/peripheral\dma.h **** 	 *
+1090:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function/macro resets the DMA controller.
+1091:d:/pic32includes2/peripheral\dma.h **** 	 *
+1092:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            None.
+1093:d:/pic32includes2/peripheral\dma.h **** 	 *
+1094:d:/pic32includes2/peripheral\dma.h **** 	 * Example:			mDmaReset();
+1095:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+1096:d:/pic32includes2/peripheral\dma.h **** 	#define		mDmaReset()	mDmaDisable()
+1097:d:/pic32includes2/peripheral\dma.h **** 
+1098:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+1099:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        int DmaSuspend(void)
+1100:d:/pic32includes2/peripheral\dma.h **** 	 *
+1101:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    None
+1102:d:/pic32includes2/peripheral\dma.h **** 	 *
+1103:d:/pic32includes2/peripheral\dma.h **** 	 * Input:		None
+1104:d:/pic32includes2/peripheral\dma.h **** 	 *
+1105:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          true if the DMA was previously suspended, false otherwise
+1106:d:/pic32includes2/peripheral\dma.h **** 	 *
+1107:d:/pic32includes2/peripheral\dma.h **** 	 *
+1108:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+1109:d:/pic32includes2/peripheral\dma.h **** 	 *
+1110:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function suspends the DMA controller.
+1111:d:/pic32includes2/peripheral\dma.h **** 	 *
+1112:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            None.
+1113:d:/pic32includes2/peripheral\dma.h **** 	 *
+1114:d:/pic32includes2/peripheral\dma.h **** 	 * Example:			int susp=DmaSuspend();
+1115:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+1116:d:/pic32includes2/peripheral\dma.h **** 	extern __inline__ int __attribute__((always_inline)) DmaSuspend(void)
+1117:d:/pic32includes2/peripheral\dma.h **** 	{
+1118:d:/pic32includes2/peripheral\dma.h **** 		int suspSt;
+1119:d:/pic32includes2/peripheral\dma.h **** 		if(!(suspSt=DMACONbits.SUSPEND))
+ 330              		.loc 4 1119 0
+ 331 00ec 0000023C 		lui	$2,%hi(DMACON)
+ 332 00f0 0000428C 		lw	$2,%lo(DMACON)($2)
+ 333 00f4 0003427C 		ext	$2,$2,12,1
+ 334 00f8 FF004230 		andi	$2,$2,0x00ff
+ 335 00fc 3000C2AF 		sw	$2,48($fp)
+ 336 0100 3000C28F 		lw	$2,48($fp)
+ 337 0104 0100422C 		sltu	$2,$2,1
+ 338 0108 FF004230 		andi	$2,$2,0x00ff
+ 339 010c 0C004010 		beq	$2,$0,.L15
+ 340 0110 00000000 		nop
+ 341              	
+1120:d:/pic32includes2/peripheral\dma.h **** 		{
+1121:d:/pic32includes2/peripheral\dma.h **** 			DMACONSET=_DMACON_SUSPEND_MASK;		// suspend
+ 342              		.loc 4 1121 0
+ 343 0114 0000033C 		lui	$3,%hi(DMACONSET)
+ 344 0118 00100224 		li	$2,4096			# 0x1000
+ 345 011c 000062AC 		sw	$2,%lo(DMACONSET)($3)
+ 346              	.L16:
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 33
+
+
+1122:d:/pic32includes2/peripheral\dma.h **** 			while(!(DMACONbits.SUSPEND));	// wait to be actually suspended
+ 347              		.loc 4 1122 0
+ 348 0120 0000023C 		lui	$2,%hi(DMACON)
+ 349 0124 0000428C 		lw	$2,%lo(DMACON)($2)
+ 350 0128 0003427C 		ext	$2,$2,12,1
+ 351 012c FF004230 		andi	$2,$2,0x00ff
+ 352 0130 0100422C 		sltu	$2,$2,1
+ 353 0134 FF004230 		andi	$2,$2,0x00ff
+ 354 0138 F9FF4014 		bne	$2,$0,.L16
+ 355 013c 00000000 		nop
+ 356              	
+ 357              	.L15:
+1123:d:/pic32includes2/peripheral\dma.h **** 		}
+1124:d:/pic32includes2/peripheral\dma.h **** 		return suspSt;
+ 358              		.loc 4 1124 0
+ 359 0140 3000C28F 		lw	$2,48($fp)
+ 360              	.LBE64:
+ 361              	.LBE63:
+ 362              	.LBE62:
+ 363              		.loc 3 81 0
+ 364 0144 3400C2AF 		sw	$2,52($fp)
+ 365 0148 0000023C 		lui	$2,%hi(SYSKEY)
+ 366 014c 000040AC 		sw	$0,%lo(SYSKEY)($2)
+ 367 0150 0000033C 		lui	$3,%hi(SYSKEY)
+ 368 0154 99AA023C 		li	$2,-1432813568			# 0xffffffffaa990000
+ 369 0158 55664234 		ori	$2,$2,0x6655
+ 370 015c 000062AC 		sw	$2,%lo(SYSKEY)($3)
+ 371 0160 0000033C 		lui	$3,%hi(SYSKEY)
+ 372 0164 6655023C 		li	$2,1432748032			# 0x55660000
+ 373 0168 AA994234 		ori	$2,$2,0x99aa
+ 374 016c 000062AC 		sw	$2,%lo(SYSKEY)($3)
+ 375              		.loc 3 84 0
+ 376 0170 5000C38F 		lw	$3,80($fp)
+ 377 0174 C404023C 		li	$2,79953920			# 0x4c40000
+ 378 0178 01B44234 		ori	$2,$2,0xb401
+ 379 017c 2B106200 		sltu	$2,$3,$2
+ 380 0180 57004014 		bne	$2,$0,.L17
+ 381 0184 00000000 		nop
+ 382              	
+ 383              	.LBE79:
+ 384              	.LBE81:
+ 385              		.loc 3 86 0
+ 386 0188 0000000C 		jal	INTDisableInterrupts
+ 387 018c 00000000 		nop
+ 388              	
+ 389              	.LBB82:
+ 390              	.LBB51:
+ 391              	.LBB53:
+ 392 0190 4000C2AF 		sw	$2,64($fp)
+ 393              	.LBB54:
+ 394              	.LBB55:
+ 395              	.LBB56:
+ 396              		.loc 4 1119 0
+ 397 0194 0000023C 		lui	$2,%hi(DMACON)
+ 398 0198 0000428C 		lw	$2,%lo(DMACON)($2)
+ 399 019c 0003427C 		ext	$2,$2,12,1
+ 400 01a0 FF004230 		andi	$2,$2,0x00ff
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 34
+
+
+ 401 01a4 2C00C2AF 		sw	$2,44($fp)
+ 402 01a8 2C00C28F 		lw	$2,44($fp)
+ 403 01ac 0100422C 		sltu	$2,$2,1
+ 404 01b0 FF004230 		andi	$2,$2,0x00ff
+ 405 01b4 0C004010 		beq	$2,$0,.L18
+ 406 01b8 00000000 		nop
+ 407              	
+ 408              		.loc 4 1121 0
+ 409 01bc 0000033C 		lui	$3,%hi(DMACONSET)
+ 410 01c0 00100224 		li	$2,4096			# 0x1000
+ 411 01c4 000062AC 		sw	$2,%lo(DMACONSET)($3)
+ 412              	.L19:
+ 413              		.loc 4 1122 0
+ 414 01c8 0000023C 		lui	$2,%hi(DMACON)
+ 415 01cc 0000428C 		lw	$2,%lo(DMACON)($2)
+ 416 01d0 0003427C 		ext	$2,$2,12,1
+ 417 01d4 FF004230 		andi	$2,$2,0x00ff
+ 418 01d8 0100422C 		sltu	$2,$2,1
+ 419 01dc FF004230 		andi	$2,$2,0x00ff
+ 420 01e0 F9FF4014 		bne	$2,$0,.L19
+ 421 01e4 00000000 		nop
+ 422              	
+ 423              	.L18:
+ 424              		.loc 4 1124 0
+ 425 01e8 2C00C28F 		lw	$2,44($fp)
+ 426              	.LBE56:
+ 427              	.LBE55:
+ 428              	.LBE54:
+ 429              		.loc 3 86 0
+ 430 01ec 4400C2AF 		sw	$2,68($fp)
+ 431 01f0 0000023C 		lui	$2,%hi(SYSKEY)
+ 432 01f4 000040AC 		sw	$0,%lo(SYSKEY)($2)
+ 433 01f8 0000033C 		lui	$3,%hi(SYSKEY)
+ 434 01fc 99AA023C 		li	$2,-1432813568			# 0xffffffffaa990000
+ 435 0200 55664234 		ori	$2,$2,0x6655
+ 436 0204 000062AC 		sw	$2,%lo(SYSKEY)($3)
+ 437 0208 0000033C 		lui	$3,%hi(SYSKEY)
+ 438 020c 6655023C 		li	$2,1432748032			# 0x55660000
+ 439 0210 AA994234 		ori	$2,$2,0x99aa
+ 440 0214 000062AC 		sw	$2,%lo(SYSKEY)($3)
+ 441 0218 0000033C 		lui	$3,%hi(OSCCONSET)
+ 442 021c 1800023C 		li	$2,1572864			# 0x180000
+ 443 0220 000062AC 		sw	$2,%lo(OSCCONSET)($3)
+ 444 0224 0000033C 		lui	$3,%hi(OSCCONCLR)
+ 445 0228 1000023C 		li	$2,1048576			# 0x100000
+ 446 022c 000062AC 		sw	$2,%lo(OSCCONCLR)($3)
+ 447 0230 0000033C 		lui	$3,%hi(SYSKEY)
+ 448 0234 3333023C 		li	$2,858980352			# 0x33330000
+ 449 0238 33334234 		ori	$2,$2,0x3333
+ 450 023c 000062AC 		sw	$2,%lo(SYSKEY)($3)
+ 451 0240 4400C28F 		lw	$2,68($fp)
+ 452 0244 2800C2AF 		sw	$2,40($fp)
+ 453              	.LBB57:
+ 454              	.LBB58:
+1125:d:/pic32includes2/peripheral\dma.h **** 	}
+1126:d:/pic32includes2/peripheral\dma.h **** 
+1127:d:/pic32includes2/peripheral\dma.h **** 
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 35
+
+
+1128:d:/pic32includes2/peripheral\dma.h **** 
+1129:d:/pic32includes2/peripheral\dma.h **** 	/*********************************************************************
+1130:d:/pic32includes2/peripheral\dma.h **** 	 * Function:        void DmaResume(int susp)
+1131:d:/pic32includes2/peripheral\dma.h **** 	 *
+1132:d:/pic32includes2/peripheral\dma.h **** 	 * PreCondition:    None
+1133:d:/pic32includes2/peripheral\dma.h **** 	 *
+1134:d:/pic32includes2/peripheral\dma.h **** 	 * Input:		the desired DMA suspended state.
+1135:d:/pic32includes2/peripheral\dma.h **** 	 *
+1136:d:/pic32includes2/peripheral\dma.h **** 	 * Output:          None
+1137:d:/pic32includes2/peripheral\dma.h **** 	 *
+1138:d:/pic32includes2/peripheral\dma.h **** 	 * Side Effects:    None
+1139:d:/pic32includes2/peripheral\dma.h **** 	 *
+1140:d:/pic32includes2/peripheral\dma.h **** 	 * Overview:		The function restores the DMA controller activity to the old suspended mode.
+1141:d:/pic32includes2/peripheral\dma.h **** 	 *
+1142:d:/pic32includes2/peripheral\dma.h **** 	 * Note:            None.
+1143:d:/pic32includes2/peripheral\dma.h **** 	 *
+1144:d:/pic32includes2/peripheral\dma.h **** 	 * Example:			int isSusp=DmaSuspend(); {....}; DmaResume(isSusp);
+1145:d:/pic32includes2/peripheral\dma.h **** 	 ********************************************************************/
+1146:d:/pic32includes2/peripheral\dma.h **** 	extern __inline__ void __attribute__((always_inline)) DmaResume(int susp)
+1147:d:/pic32includes2/peripheral\dma.h **** 	{
+1148:d:/pic32includes2/peripheral\dma.h **** 		if(susp)
+ 455              		.loc 4 1148 0
+ 456 0248 2800C28F 		lw	$2,40($fp)
+ 457 024c 18004010 		beq	$2,$0,.L20
+ 458 0250 00000000 		nop
+ 459              	
+ 460              	.LBB59:
+ 461              	.LBB60:
+ 462              	.LBB61:
+ 463              		.loc 4 1119 0
+ 464 0254 0000023C 		lui	$2,%hi(DMACON)
+ 465 0258 0000428C 		lw	$2,%lo(DMACON)($2)
+ 466 025c 0003427C 		ext	$2,$2,12,1
+ 467 0260 FF004230 		andi	$2,$2,0x00ff
+ 468 0264 2400C2AF 		sw	$2,36($fp)
+ 469 0268 2400C28F 		lw	$2,36($fp)
+ 470 026c 0100422C 		sltu	$2,$2,1
+ 471 0270 FF004230 		andi	$2,$2,0x00ff
+ 472 0274 11004010 		beq	$2,$0,.L23
+ 473 0278 00000000 		nop
+ 474              	
+ 475              		.loc 4 1121 0
+ 476 027c 0000033C 		lui	$3,%hi(DMACONSET)
+ 477 0280 00100224 		li	$2,4096			# 0x1000
+ 478 0284 000062AC 		sw	$2,%lo(DMACONSET)($3)
+ 479              	.L22:
+ 480              		.loc 4 1122 0
+ 481 0288 0000023C 		lui	$2,%hi(DMACON)
+ 482 028c 0000428C 		lw	$2,%lo(DMACON)($2)
+ 483 0290 0003427C 		ext	$2,$2,12,1
+ 484 0294 FF004230 		andi	$2,$2,0x00ff
+ 485 0298 0100422C 		sltu	$2,$2,1
+ 486 029c FF004230 		andi	$2,$2,0x00ff
+ 487 02a0 F9FF4014 		bne	$2,$0,.L22
+ 488 02a4 00000000 		nop
+ 489              	
+ 490 02a8 AF000008 		j	.L23
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 36
+
+
+ 491 02ac 00000000 		nop
+ 492              	
+ 493              	.L20:
+ 494              	.LBE61:
+ 495              	.LBE60:
+ 496              	.LBE59:
+1149:d:/pic32includes2/peripheral\dma.h **** 		{
+1150:d:/pic32includes2/peripheral\dma.h **** 			DmaSuspend();
+1151:d:/pic32includes2/peripheral\dma.h **** 		}
+1152:d:/pic32includes2/peripheral\dma.h **** 		else
+1153:d:/pic32includes2/peripheral\dma.h **** 		{
+1154:d:/pic32includes2/peripheral\dma.h **** 			DMACONCLR=_DMACON_SUSPEND_MASK;		// resume DMA activity
+ 497              		.loc 4 1154 0
+ 498 02b0 0000033C 		lui	$3,%hi(DMACONCLR)
+ 499 02b4 00100224 		li	$2,4096			# 0x1000
+ 500 02b8 000062AC 		sw	$2,%lo(DMACONCLR)($3)
+ 501              	.L23:
+ 502              	.LBE58:
+ 503              	.LBE57:
+ 504              		.loc 3 86 0
+ 505 02bc 4000C28F 		lw	$2,64($fp)
+ 506 02c0 21204000 		move	$4,$2
+ 507 02c4 0000000C 		jal	INTRestoreInterrupts
+ 508 02c8 00000000 		nop
+ 509              	
+ 510              	.LBE53:
+ 511              		.loc 3 87 0
+ 512 02cc 3C00C28F 		lw	$2,60($fp)
+ 513 02d0 42100200 		srl	$2,$2,1
+ 514 02d4 3C00C2AF 		sw	$2,60($fp)
+ 515 02d8 09010008 		j	.L24
+ 516 02dc 00000000 		nop
+ 517              	
+ 518              	.L17:
+ 519              	.LBE51:
+ 520              	.LBE82:
+ 521              		.loc 3 91 0
+ 522 02e0 0000000C 		jal	INTDisableInterrupts
+ 523 02e4 00000000 		nop
+ 524              	
+ 525              	.LBB83:
+ 526              	.LBB80:
+ 527              	.LBB65:
+ 528 02e8 4800C2AF 		sw	$2,72($fp)
+ 529              	.LBB66:
+ 530              	.LBB67:
+ 531              	.LBB68:
+ 532              		.loc 4 1119 0
+ 533 02ec 0000023C 		lui	$2,%hi(DMACON)
+ 534 02f0 0000428C 		lw	$2,%lo(DMACON)($2)
+ 535 02f4 0003427C 		ext	$2,$2,12,1
+ 536 02f8 FF004230 		andi	$2,$2,0x00ff
+ 537 02fc 2000C2AF 		sw	$2,32($fp)
+ 538 0300 2000C28F 		lw	$2,32($fp)
+ 539 0304 0100422C 		sltu	$2,$2,1
+ 540 0308 FF004230 		andi	$2,$2,0x00ff
+ 541 030c 0C004010 		beq	$2,$0,.L25
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 37
+
+
+ 542 0310 00000000 		nop
+ 543              	
+ 544              		.loc 4 1121 0
+ 545 0314 0000033C 		lui	$3,%hi(DMACONSET)
+ 546 0318 00100224 		li	$2,4096			# 0x1000
+ 547 031c 000062AC 		sw	$2,%lo(DMACONSET)($3)
+ 548              	.L26:
+ 549              		.loc 4 1122 0
+ 550 0320 0000023C 		lui	$2,%hi(DMACON)
+ 551 0324 0000428C 		lw	$2,%lo(DMACON)($2)
+ 552 0328 0003427C 		ext	$2,$2,12,1
+ 553 032c FF004230 		andi	$2,$2,0x00ff
+ 554 0330 0100422C 		sltu	$2,$2,1
+ 555 0334 FF004230 		andi	$2,$2,0x00ff
+ 556 0338 F9FF4014 		bne	$2,$0,.L26
+ 557 033c 00000000 		nop
+ 558              	
+ 559              	.L25:
+ 560              		.loc 4 1124 0
+ 561 0340 2000C28F 		lw	$2,32($fp)
+ 562              	.LBE68:
+ 563              	.LBE67:
+ 564              	.LBE66:
+ 565              		.loc 3 91 0
+ 566 0344 4C00C2AF 		sw	$2,76($fp)
+ 567 0348 0000023C 		lui	$2,%hi(SYSKEY)
+ 568 034c 000040AC 		sw	$0,%lo(SYSKEY)($2)
+ 569 0350 0000033C 		lui	$3,%hi(SYSKEY)
+ 570 0354 99AA023C 		li	$2,-1432813568			# 0xffffffffaa990000
+ 571 0358 55664234 		ori	$2,$2,0x6655
+ 572 035c 000062AC 		sw	$2,%lo(SYSKEY)($3)
+ 573 0360 0000033C 		lui	$3,%hi(SYSKEY)
+ 574 0364 6655023C 		li	$2,1432748032			# 0x55660000
+ 575 0368 AA994234 		ori	$2,$2,0x99aa
+ 576 036c 000062AC 		sw	$2,%lo(SYSKEY)($3)
+ 577 0370 0000033C 		lui	$3,%hi(OSCCONSET)
+ 578 0374 1800023C 		li	$2,1572864			# 0x180000
+ 579 0378 000062AC 		sw	$2,%lo(OSCCONSET)($3)
+ 580 037c 0000033C 		lui	$3,%hi(OSCCONCLR)
+ 581 0380 1800023C 		li	$2,1572864			# 0x180000
+ 582 0384 000062AC 		sw	$2,%lo(OSCCONCLR)($3)
+ 583 0388 0000033C 		lui	$3,%hi(SYSKEY)
+ 584 038c 3333023C 		li	$2,858980352			# 0x33330000
+ 585 0390 33334234 		ori	$2,$2,0x3333
+ 586 0394 000062AC 		sw	$2,%lo(SYSKEY)($3)
+ 587 0398 4C00C28F 		lw	$2,76($fp)
+ 588 039c 1C00C2AF 		sw	$2,28($fp)
+ 589              	.LBB69:
+ 590              	.LBB70:
+ 591              		.loc 4 1148 0
+ 592 03a0 1C00C28F 		lw	$2,28($fp)
+ 593 03a4 18004010 		beq	$2,$0,.L27
+ 594 03a8 00000000 		nop
+ 595              	
+ 596              	.LBB71:
+ 597              	.LBB72:
+ 598              	.LBB73:
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 38
+
+
+ 599              		.loc 4 1119 0
+ 600 03ac 0000023C 		lui	$2,%hi(DMACON)
+ 601 03b0 0000428C 		lw	$2,%lo(DMACON)($2)
+ 602 03b4 0003427C 		ext	$2,$2,12,1
+ 603 03b8 FF004230 		andi	$2,$2,0x00ff
+ 604 03bc 1800C2AF 		sw	$2,24($fp)
+ 605 03c0 1800C28F 		lw	$2,24($fp)
+ 606 03c4 0100422C 		sltu	$2,$2,1
+ 607 03c8 FF004230 		andi	$2,$2,0x00ff
+ 608 03cc 11004010 		beq	$2,$0,.L30
+ 609 03d0 00000000 		nop
+ 610              	
+ 611              		.loc 4 1121 0
+ 612 03d4 0000033C 		lui	$3,%hi(DMACONSET)
+ 613 03d8 00100224 		li	$2,4096			# 0x1000
+ 614 03dc 000062AC 		sw	$2,%lo(DMACONSET)($3)
+ 615              	.L29:
+ 616              		.loc 4 1122 0
+ 617 03e0 0000023C 		lui	$2,%hi(DMACON)
+ 618 03e4 0000428C 		lw	$2,%lo(DMACON)($2)
+ 619 03e8 0003427C 		ext	$2,$2,12,1
+ 620 03ec FF004230 		andi	$2,$2,0x00ff
+ 621 03f0 0100422C 		sltu	$2,$2,1
+ 622 03f4 FF004230 		andi	$2,$2,0x00ff
+ 623 03f8 F9FF4014 		bne	$2,$0,.L29
+ 624 03fc 00000000 		nop
+ 625              	
+ 626 0400 05010008 		j	.L30
+ 627 0404 00000000 		nop
+ 628              	
+ 629              	.L27:
+ 630              	.LBE73:
+ 631              	.LBE72:
+ 632              	.LBE71:
+ 633              		.loc 4 1154 0
+ 634 0408 0000033C 		lui	$3,%hi(DMACONCLR)
+ 635 040c 00100224 		li	$2,4096			# 0x1000
+ 636 0410 000062AC 		sw	$2,%lo(DMACONCLR)($3)
+ 637              	.L30:
+ 638              	.LBE70:
+ 639              	.LBE69:
+ 640              		.loc 3 91 0
+ 641 0414 4800C28F 		lw	$2,72($fp)
+ 642 0418 21204000 		move	$4,$2
+ 643 041c 0000000C 		jal	INTRestoreInterrupts
+ 644 0420 00000000 		nop
+ 645              	
+ 646              	.L24:
+ 647              	.LBE65:
+ 648              		.loc 3 94 0
+ 649 0424 0000033C 		lui	$3,%hi(SYSKEY)
+ 650 0428 3333023C 		li	$2,858980352			# 0x33330000
+ 651 042c 33334234 		ori	$2,$2,0x3333
+ 652 0430 000062AC 		sw	$2,%lo(SYSKEY)($3)
+ 653 0434 3400C28F 		lw	$2,52($fp)
+ 654 0438 1400C2AF 		sw	$2,20($fp)
+ 655              	.LBB74:
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 39
+
+
+ 656              	.LBB75:
+ 657              		.loc 4 1148 0
+ 658 043c 1400C28F 		lw	$2,20($fp)
+ 659 0440 18004010 		beq	$2,$0,.L31
+ 660 0444 00000000 		nop
+ 661              	
+ 662              	.LBB76:
+ 663              	.LBB77:
+ 664              	.LBB78:
+ 665              		.loc 4 1119 0
+ 666 0448 0000023C 		lui	$2,%hi(DMACON)
+ 667 044c 0000428C 		lw	$2,%lo(DMACON)($2)
+ 668 0450 0003427C 		ext	$2,$2,12,1
+ 669 0454 FF004230 		andi	$2,$2,0x00ff
+ 670 0458 1000C2AF 		sw	$2,16($fp)
+ 671 045c 1000C28F 		lw	$2,16($fp)
+ 672 0460 0100422C 		sltu	$2,$2,1
+ 673 0464 FF004230 		andi	$2,$2,0x00ff
+ 674 0468 11004010 		beq	$2,$0,.L34
+ 675 046c 00000000 		nop
+ 676              	
+ 677              		.loc 4 1121 0
+ 678 0470 0000033C 		lui	$3,%hi(DMACONSET)
+ 679 0474 00100224 		li	$2,4096			# 0x1000
+ 680 0478 000062AC 		sw	$2,%lo(DMACONSET)($3)
+ 681              	.L33:
+ 682              		.loc 4 1122 0
+ 683 047c 0000023C 		lui	$2,%hi(DMACON)
+ 684 0480 0000428C 		lw	$2,%lo(DMACON)($2)
+ 685 0484 0003427C 		ext	$2,$2,12,1
+ 686 0488 FF004230 		andi	$2,$2,0x00ff
+ 687 048c 0100422C 		sltu	$2,$2,1
+ 688 0490 FF004230 		andi	$2,$2,0x00ff
+ 689 0494 F9FF4014 		bne	$2,$0,.L33
+ 690 0498 00000000 		nop
+ 691              	
+ 692 049c 2C010008 		j	.L34
+ 693 04a0 00000000 		nop
+ 694              	
+ 695              	.L31:
+ 696              	.LBE78:
+ 697              	.LBE77:
+ 698              	.LBE76:
+ 699              		.loc 4 1154 0
+ 700 04a4 0000033C 		lui	$3,%hi(DMACONCLR)
+ 701 04a8 00100224 		li	$2,4096			# 0x1000
+ 702 04ac 000062AC 		sw	$2,%lo(DMACONCLR)($3)
+ 703              	.L34:
+ 704              	.LBE75:
+ 705              	.LBE74:
+ 706              		.loc 3 94 0
+ 707 04b0 3800C48F 		lw	$4,56($fp)
+ 708 04b4 0000000C 		jal	INTRestoreInterrupts
+ 709 04b8 00000000 		nop
+ 710              	
+ 711              	.L14:
+ 712              	.LBE80:
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 40
+
+
+ 713              	.LBE83:
+ 714              	.LBE49:
+ 278:d:/pic32includes2/peripheral\system.h ****     {
+ 279:d:/pic32includes2/peripheral\system.h ****         SYSTEMConfigPB(sys_clock);
+ 280:d:/pic32includes2/peripheral\system.h ****     }
+ 281:d:/pic32includes2/peripheral\system.h **** 
+ 282:d:/pic32includes2/peripheral\system.h ****     
+ 283:d:/pic32includes2/peripheral\system.h **** #ifdef _PCACHE
+ 284:d:/pic32includes2/peripheral\system.h ****     if(flags & SYS_CFG_PCACHE)
+ 715              		.loc 3 284 0
+ 716 04bc 7000C28F 		lw	$2,112($fp)
+ 717 04c0 04004230 		andi	$2,$2,0x4
+ 718 04c4 0C004010 		beq	$2,$0,.L35
+ 719 04c8 00000000 		nop
+ 720              	
+ 285:d:/pic32includes2/peripheral\system.h ****     {
+ 286:d:/pic32includes2/peripheral\system.h ****         cache_status = mCheGetCon();
+ 721              		.loc 3 286 0
+ 722 04cc 0000023C 		lui	$2,%hi(CHECON)
+ 723 04d0 0000428C 		lw	$2,%lo(CHECON)($2)
+ 724 04d4 6800C2AF 		sw	$2,104($fp)
+ 287:d:/pic32includes2/peripheral\system.h ****         cache_status |= CHE_CONF_PF_ALL;
+ 725              		.loc 3 287 0
+ 726 04d8 6800C28F 		lw	$2,104($fp)
+ 727 04dc 30004234 		ori	$2,$2,0x30
+ 728 04e0 6800C2AF 		sw	$2,104($fp)
+ 288:d:/pic32includes2/peripheral\system.h ****         mCheConfigure(cache_status);
+ 729              		.loc 3 288 0
+ 730 04e4 0000033C 		lui	$3,%hi(CHECON)
+ 731 04e8 6800C28F 		lw	$2,104($fp)
+ 732 04ec 000062AC 		sw	$2,%lo(CHECON)($3)
+ 289:d:/pic32includes2/peripheral\system.h ****         CheKseg0CacheOn();
+ 733              		.loc 3 289 0
+ 734 04f0 0000000C 		jal	CheKseg0CacheOn
+ 735 04f4 00000000 		nop
+ 736              	
+ 737              	.L35:
+ 290:d:/pic32includes2/peripheral\system.h ****     }
+ 291:d:/pic32includes2/peripheral\system.h **** #endif
+ 292:d:/pic32includes2/peripheral\system.h **** 
+ 293:d:/pic32includes2/peripheral\system.h ****     pb_clk = sys_clock;
+ 738              		.loc 3 293 0
+ 739 04f8 6C00C28F 		lw	$2,108($fp)
+ 740 04fc 6000C2AF 		sw	$2,96($fp)
+ 294:d:/pic32includes2/peripheral\system.h ****     pb_clk >>= OSCCONbits.PBDIV;
+ 741              		.loc 3 294 0
+ 742 0500 0000023C 		lui	$2,%hi(OSCCON)
+ 743 0504 0000428C 		lw	$2,%lo(OSCCON)($2)
+ 744 0508 C00C427C 		ext	$2,$2,19,2
+ 745 050c FF004230 		andi	$2,$2,0x00ff
+ 746 0510 21184000 		move	$3,$2
+ 747 0514 6000C28F 		lw	$2,96($fp)
+ 748 0518 06106200 		srl	$2,$2,$3
+ 749 051c 6000C2AF 		sw	$2,96($fp)
+ 295:d:/pic32includes2/peripheral\system.h **** 
+ 296:d:/pic32includes2/peripheral\system.h ****     INTRestoreInterrupts(int_status);
+ 750              		.loc 3 296 0
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 41
+
+
+ 751 0520 6400C48F 		lw	$4,100($fp)
+ 752 0524 0000000C 		jal	INTRestoreInterrupts
+ 753 0528 00000000 		nop
+ 754              	
+ 755              	.LBE43:
+ 756              	.LBE42:
+ 757              	.LBE41:
+  38:CPP_Demo.cpp  **** {
+  39:CPP_Demo.cpp  ****     // Configure the device for maximum performance but do not change PBDIV
+  40:CPP_Demo.cpp  ****     // Set the flash wait states, RAM wait state and enable prefetch cache,
+  41:CPP_Demo.cpp  ****     // but do NOT change PBDIV.
+  42:CPP_Demo.cpp  ****     // PBDIV is set from the configuration bytes during device reset.
+  43:CPP_Demo.cpp  ****     SYSTEMConfig(GetSystemClock(), SYS_CFG_WAIT_STATES | SYS_CFG_PCACHE);
+  44:CPP_Demo.cpp  **** 
+  45:CPP_Demo.cpp  ****     // Enable the cache for the best performance (assuming we're running in KSEG0)
+  46:CPP_Demo.cpp  ****     CheKseg0CacheOn();
+ 758              		.loc 2 46 0
+ 759 052c 0000000C 		jal	CheKseg0CacheOn
+ 760 0530 00000000 		nop
+ 761              	
+  47:CPP_Demo.cpp  **** 
+  48:CPP_Demo.cpp  ****     CUSTOM_HARDWARE_INITIALIZE;
+ 762              		.loc 2 48 0
+ 763 0534 0000033C 		lui	$3,%hi(AD1PCFG)
+ 764 0538 FFFF0234 		li	$2,65535			# 0xffff
+ 765 053c 000062AC 		sw	$2,%lo(AD1PCFG)($3)
+ 766 0540 0000033C 		lui	$3,%hi(TRISDCLR)
+ 767 0544 01000224 		li	$2,1			# 0x1
+ 768 0548 000062AC 		sw	$2,%lo(TRISDCLR)($3)
+ 769 054c 0000033C 		lui	$3,%hi(LATDCLR)
+ 770 0550 01000224 		li	$2,1			# 0x1
+ 771 0554 000062AC 		sw	$2,%lo(LATDCLR)($3)
+ 772 0558 0000033C 		lui	$3,%hi(TRISDCLR)
+ 773 055c 02000224 		li	$2,2			# 0x2
+ 774 0560 000062AC 		sw	$2,%lo(TRISDCLR)($3)
+ 775 0564 0000033C 		lui	$3,%hi(LATDCLR)
+ 776 0568 02000224 		li	$2,2			# 0x2
+ 777 056c 000062AC 		sw	$2,%lo(LATDCLR)($3)
+ 778 0570 0000023C 		lui	$2,%hi(OC3CON)
+ 779 0574 000040AC 		sw	$0,%lo(OC3CON)($2)
+  49:CPP_Demo.cpp  **** 
+  50:CPP_Demo.cpp  ****     INTEnableInterrupts();
+ 780              		.loc 2 50 0
+ 781 0578 0000000C 		jal	INTEnableInterrupts
+ 782 057c 00000000 		nop
+ 783              	
+  51:CPP_Demo.cpp  **** 
+  52:CPP_Demo.cpp  ****     // Set clock (newlib-accessible, unix emulation) to 15-July-2009
+  53:CPP_Demo.cpp  ****     SetSystemTime( (int)((39*365+205)*24*60*60) );
+ 784              		.loc 2 53 0
+ 785 0580 5D4A023C 		li	$2,1247608832			# 0x4a5d0000
+ 786 0584 001C4434 		ori	$4,$2,0x1c00
+ 787 0588 0000000C 		jal	SetSystemTime
+ 788 058c 00000000 		nop
+ 789              	
+  54:CPP_Demo.cpp  ****     time_t t =  time(0);
+ 790              		.loc 2 54 0
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 42
+
+
+ 791 0590 21200000 		move	$4,$0
+ 792 0594 0000000C 		jal	time
+ 793 0598 00000000 		nop
+ 794              	
+ 795 059c 7400C2AF 		sw	$2,116($fp)
+  55:CPP_Demo.cpp  ****     printf("Time = %s\n",ctime(&t));
+ 796              		.loc 2 55 0
+ 797 05a0 7400C227 		addiu	$2,$fp,116
+ 798 05a4 21204000 		move	$4,$2
+ 799 05a8 0000000C 		jal	ctime
+ 800 05ac 00000000 		nop
+ 801              	
+ 802 05b0 21184000 		move	$3,$2
+ 803 05b4 0000023C 		lui	$2,%hi(.LC0)
+ 804 05b8 00004424 		addiu	$4,$2,%lo(.LC0)
+ 805 05bc 21286000 		move	$5,$3
+ 806 05c0 0000000C 		jal	printf
+ 807 05c4 00000000 		nop
+ 808              	
+  56:CPP_Demo.cpp  **** 
+  57:CPP_Demo.cpp  ****     mPORTDSetBits(BIT_1);   // Setup USB starter board: LED1  ON
+ 809              		.loc 2 57 0
+ 810 05c8 0000033C 		lui	$3,%hi(LATDSET)
+ 811 05cc 02000224 		li	$2,2			# 0x2
+ 812 05d0 000062AC 		sw	$2,%lo(LATDSET)($3)
+  58:CPP_Demo.cpp  ****     C_ElapsedTime demoTimer;
+ 813              		.loc 2 58 0
+ 814 05d4 7800C227 		addiu	$2,$fp,120
+ 815 05d8 21204000 		move	$4,$2
+ 816 05dc 0000000C 		jal	_ZN13C_ElapsedTimeC1Ev
+ 817 05e0 00000000 		nop
+ 818              	
+ 819              	.L37:
+ 820              	.LBB84:
+  59:CPP_Demo.cpp  ****     while(1) {
+  60:CPP_Demo.cpp  ****         if( ! demoTimer.millisecondsHaveElapsed(550)) continue;
+ 821              		.loc 2 60 0
+ 822 05e4 7800C227 		addiu	$2,$fp,120
+ 823 05e8 21204000 		move	$4,$2
+ 824 05ec 26020524 		li	$5,550			# 0x226
+ 825 05f0 0000000C 		jal	_ZN13C_ElapsedTime23millisecondsHaveElapsedEi
+ 826 05f4 00000000 		nop
+ 827              	
+ 828 05f8 01004238 		xori	$2,$2,0x1
+ 829 05fc FF004230 		andi	$2,$2,0x00ff
+ 830 0600 F8FF4014 		bne	$2,$0,.L37
+ 831 0604 00000000 		nop
+ 832              	
+  61:CPP_Demo.cpp  ****         demoTimer.reset();
+ 833              		.loc 2 61 0
+ 834 0608 7800C227 		addiu	$2,$fp,120
+ 835 060c 21204000 		move	$4,$2
+ 836 0610 0000000C 		jal	_ZN13C_ElapsedTime5resetEv
+ 837 0614 00000000 		nop
+ 838              	
+  62:CPP_Demo.cpp  ****         mPORTDToggleBits(BIT_0);   // Toggle LED1
+ 839              		.loc 2 62 0
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 43
+
+
+ 840 0618 0000033C 		lui	$3,%hi(LATDINV)
+ 841 061c 01000224 		li	$2,1			# 0x1
+ 842 0620 000062AC 		sw	$2,%lo(LATDINV)($3)
+  63:CPP_Demo.cpp  ****         mPORTDToggleBits(BIT_1);   // Toggle LED2
+ 843              		.loc 2 63 0
+ 844 0624 0000033C 		lui	$3,%hi(LATDINV)
+ 845 0628 02000224 		li	$2,2			# 0x2
+ 846 062c 000062AC 		sw	$2,%lo(LATDINV)($3)
+  64:CPP_Demo.cpp  ****         C_ElapsedTime demoTimer2;
+ 847              		.loc 2 64 0
+ 848 0630 7C00C227 		addiu	$2,$fp,124
+ 849 0634 21204000 		move	$4,$2
+ 850 0638 0000000C 		jal	_ZN13C_ElapsedTimeC1Ev
+ 851 063c 00000000 		nop
+ 852              	
+  65:CPP_Demo.cpp  ****         demoTimer2.waitMsec(300);
+ 853              		.loc 2 65 0
+ 854 0640 7C00C227 		addiu	$2,$fp,124
+ 855 0644 21204000 		move	$4,$2
+ 856 0648 2C010524 		li	$5,300			# 0x12c
+ 857 064c 0000000C 		jal	_ZN13C_ElapsedTime8waitMsecEi
+ 858 0650 00000000 		nop
+ 859              	
+  66:CPP_Demo.cpp  ****         mPORTDToggleBits(BIT_1);   // Toggle LED2
+ 860              		.loc 2 66 0
+ 861 0654 0000033C 		lui	$3,%hi(LATDINV)
+ 862 0658 02000224 		li	$2,2			# 0x2
+ 863 065c 000062AC 		sw	$2,%lo(LATDINV)($3)
+ 864 0660 79010008 		j	.L37
+ 865 0664 00000000 		nop
+ 866              	
+ 867              	.LBE84:
+ 868              	.LBE40:
+ 869              		.set	macro
+ 870              		.set	reorder
+ 871              		.end	main
+ 872              	.LFE30:
+ 874              		.globl	i
+ 875              		.section	.sbss,"aw",@nobits
+ 876              		.align	2
+ 879              	i:
+ 880 0000 00000000 		.space	4
+ 881              		.globl	hello
+ 882              		.rdata
+ 883 000b 00       		.align	2
+ 884              	.LC1:
+ 885 000c 48692074 		.ascii	"Hi there debugger\000"
+ 885      68657265 
+ 885      20646562 
+ 885      75676765 
+ 885      7200
+ 886 001e 0000     		.section	.sdata,"aw",@progbits
+ 887              		.align	2
+ 890              	hello:
+ 891 0000 0C000000 		.word	.LC1
+ 1018              	.Lframe1:
+ 1019 0000 14000000 		.4byte	.LECIE1-.LSCIE1
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 44
+
+
+ 1020              	.LSCIE1:
+ 1021 0004 00000000 		.4byte	0x0
+ 1022 0008 01       		.byte	0x1
+ 1023              		.globl	__gxx_personality_v0
+ 1024 0009 7A5000   		.ascii	"zP\000"
+ 1025 000c 01       		.uleb128 0x1
+ 1026 000d 7C       		.sleb128 -4
+ 1027 000e 1F       		.byte	0x1f
+ 1028 000f 05       		.uleb128 0x5
+ 1029 0010 00       		.byte	0x0
+ 1030 0011 00000000 		.4byte	__gxx_personality_v0
+ 1031 0015 0C       		.byte	0xc
+ 1032 0016 1D       		.uleb128 0x1d
+ 1033 0017 00       		.uleb128 0x0
+ 1034              		.align	2
+ 1035              	.LECIE1:
+ 1036              	.LSFDE1:
+ 1037 0018 18000000 		.4byte	.LEFDE1-.LASFDE1
+ 1038              	.LASFDE1:
+ 1039 001c 1C000000 		.4byte	.LASFDE1-.Lframe1
+ 1040 0020 00000000 		.4byte	.LFB28
+ 1041 0024 54000000 		.4byte	.LFE28-.LFB28
+ 1042 0028 00       		.uleb128 0x0
+ 1043 0029 44       		.byte	0x4
+ 1044              		.4byte	.LCFI0-.LFB28
+ 1045 002a 0E       		.byte	0xe
+ 1046 002b 18       		.uleb128 0x18
+ 1047 002c 48       		.byte	0x4
+ 1048              		.4byte	.LCFI2-.LCFI0
+ 1049 002d 9E       		.byte	0x9e
+ 1050 002e 02       		.uleb128 0x2
+ 1051 002f 9F       		.byte	0x9f
+ 1052 0030 01       		.uleb128 0x1
+ 1053 0031 44       		.byte	0x4
+ 1054              		.4byte	.LCFI3-.LCFI2
+ 1055 0032 0D       		.byte	0xd
+ 1056 0033 1E       		.uleb128 0x1e
+ 1057              		.align	2
+ 1058              	.LEFDE1:
+ 1059              	.LSFDE3:
+ 1060 0034 18000000 		.4byte	.LEFDE3-.LASFDE3
+ 1061              	.LASFDE3:
+ 1062 0038 38000000 		.4byte	.LASFDE3-.Lframe1
+ 1063 003c 00000000 		.4byte	.LFB26
+ 1064 0040 40000000 		.4byte	.LFE26-.LFB26
+ 1065 0044 00       		.uleb128 0x0
+ 1066 0045 44       		.byte	0x4
+ 1067              		.4byte	.LCFI4-.LFB26
+ 1068 0046 0E       		.byte	0xe
+ 1069 0047 18       		.uleb128 0x18
+ 1070 0048 48       		.byte	0x4
+ 1071              		.4byte	.LCFI6-.LCFI4
+ 1072 0049 9E       		.byte	0x9e
+ 1073 004a 02       		.uleb128 0x2
+ 1074 004b 9F       		.byte	0x9f
+ 1075 004c 01       		.uleb128 0x1
+ 1076 004d 44       		.byte	0x4
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 45
+
+
+ 1077              		.4byte	.LCFI7-.LCFI6
+ 1078 004e 0D       		.byte	0xd
+ 1079 004f 1E       		.uleb128 0x1e
+ 1080              		.align	2
+ 1081              	.LEFDE3:
+ 1082              	.LSFDE5:
+ 1083 0050 18000000 		.4byte	.LEFDE5-.LASFDE5
+ 1084              	.LASFDE5:
+ 1085 0054 54000000 		.4byte	.LASFDE5-.Lframe1
+ 1086 0058 00000000 		.4byte	.LFB25
+ 1087 005c 38000000 		.4byte	.LFE25-.LFB25
+ 1088 0060 00       		.uleb128 0x0
+ 1089 0061 44       		.byte	0x4
+ 1090              		.4byte	.LCFI8-.LFB25
+ 1091 0062 0E       		.byte	0xe
+ 1092 0063 18       		.uleb128 0x18
+ 1093 0064 48       		.byte	0x4
+ 1094              		.4byte	.LCFI10-.LCFI8
+ 1095 0065 9E       		.byte	0x9e
+ 1096 0066 02       		.uleb128 0x2
+ 1097 0067 9F       		.byte	0x9f
+ 1098 0068 01       		.uleb128 0x1
+ 1099 0069 44       		.byte	0x4
+ 1100              		.4byte	.LCFI11-.LCFI10
+ 1101 006a 0D       		.byte	0xd
+ 1102 006b 1E       		.uleb128 0x1e
+ 1103              		.align	2
+ 1104              	.LEFDE5:
+ 1105              	.LSFDE7:
+ 1106 006c 18000000 		.4byte	.LEFDE7-.LASFDE7
+ 1107              	.LASFDE7:
+ 1108 0070 70000000 		.4byte	.LASFDE7-.Lframe1
+ 1109 0074 00000000 		.4byte	.LFB29
+ 1110 0078 5C000000 		.4byte	.LFE29-.LFB29
+ 1111 007c 00       		.uleb128 0x0
+ 1112 007d 44       		.byte	0x4
+ 1113              		.4byte	.LCFI12-.LFB29
+ 1114 007e 0E       		.byte	0xe
+ 1115 007f 18       		.uleb128 0x18
+ 1116 0080 48       		.byte	0x4
+ 1117              		.4byte	.LCFI14-.LCFI12
+ 1118 0081 9E       		.byte	0x9e
+ 1119 0082 02       		.uleb128 0x2
+ 1120 0083 9F       		.byte	0x9f
+ 1121 0084 01       		.uleb128 0x1
+ 1122 0085 44       		.byte	0x4
+ 1123              		.4byte	.LCFI15-.LCFI14
+ 1124 0086 0D       		.byte	0xd
+ 1125 0087 1E       		.uleb128 0x1e
+ 1126              		.align	2
+ 1127              	.LEFDE7:
+ 1128              	.LSFDE9:
+ 1129 0088 1C000000 		.4byte	.LEFDE9-.LASFDE9
+ 1130              	.LASFDE9:
+ 1131 008c 8C000000 		.4byte	.LASFDE9-.Lframe1
+ 1132 0090 00000000 		.4byte	.LFB30
+ 1133 0094 68060000 		.4byte	.LFE30-.LFB30
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 46
+
+
+ 1134 0098 00       		.uleb128 0x0
+ 1135 0099 44       		.byte	0x4
+ 1136              		.4byte	.LCFI16-.LFB30
+ 1137 009a 0E       		.byte	0xe
+ 1138 009b 8801     		.uleb128 0x88
+ 1139 009d 48       		.byte	0x4
+ 1140              		.4byte	.LCFI18-.LCFI16
+ 1141 009e 9E       		.byte	0x9e
+ 1142 009f 02       		.uleb128 0x2
+ 1143 00a0 9F       		.byte	0x9f
+ 1144 00a1 01       		.uleb128 0x1
+ 1145 00a2 44       		.byte	0x4
+ 1146              		.4byte	.LCFI19-.LCFI18
+ 1147 00a3 0D       		.byte	0xd
+ 1148 00a4 1E       		.uleb128 0x1e
+ 1149 00a5 000000   		.align	2
+ 1150              	.LEFDE9:
+ 1151              		.text
+ 1152              	.Letext0:
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s 			page 47
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 PIC32MX_time.h
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s:20     .text._ZN13C_ElapsedTime23millisecondsHaveElapsedEi:0000000000000000 _ZN13C_ElapsedTime23millisecondsHaveElapsedEi
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s:68     .text._ZN13C_ElapsedTime5resetEv:0000000000000000 _ZN13C_ElapsedTime5resetEv
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s:110    .text._ZN13C_ElapsedTimeC1Ev:0000000000000000 _ZN13C_ElapsedTimeC1Ev
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s:152    .text._ZN13C_ElapsedTime8waitMsecEi:0000000000000000 _ZN13C_ElapsedTime8waitMsecEi
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s:209    .text:0000000000000000 main
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s:879    .sbss:0000000000000000 i
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccoZpaaa.s:891    .sdata:0000000000000000 hello
+
+UNDEFINED SYMBOLS
+systemMilliseconds
+INTDisableInterrupts
+BMXCONCLR
+CHECON
+INTRestoreInterrupts
+DMACON
+DMACONSET
+SYSKEY
+OSCCONSET
+OSCCONCLR
+DMACONCLR
+CheKseg0CacheOn
+OSCCON
+AD1PCFG
+TRISDCLR
+LATDCLR
+OC3CON
+INTEnableInterrupts
+SetSystemTime
+time
+ctime
+printf
+LATDSET
+LATDINV
+__gxx_personality_v0

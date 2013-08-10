@@ -1,0 +1,282 @@
+Output of clean build...
+DRNadler 26Sep2009
+
+
+**** Build of configuration PIC32MX-CS for project CPP_demo ****
+
+cs-make all 
+mips-sde-elf-gcc  -EL -g -c -g -msoft-float -D__PIC32MX__ -D__C32__ -D__32MX440F256H__ -D__LANGUAGE_C__ -I. -Id:/pic32includes2  -o obj/pic32mx_cfg_init.o  -Wa,-a,-ad  pic32mx_cfg_init.c  >obj/pic32mx_cfg_init.lst
+mips-sde-elf-gcc  -EL -g -c    -msoft-float -D__PIC32MX__ -D__C32__ -D__32MX440F256H__ -D__LANGUAGE_ASSEMBLY__ -fdollars-in-identifiers -I. -Id:/pic32includes2  -o obj/PIC32MX-reset.o  -Wa,-a,-ad  PIC32MX-reset.S  >obj/PIC32MX-reset.lst
+mips-sde-elf-gcc  -EL -g -c    -msoft-float -D__PIC32MX__ -D__C32__ -D__32MX440F256H__ -D__LANGUAGE_ASSEMBLY__ -fdollars-in-identifiers -I. -Id:/pic32includes2  -o obj/ISRwrapper.o  -Wa,-a,-ad  ISRwrapper.S  >obj/ISRwrapper.lst
+mips-sde-elf-g++ -EL -g -c -g -msoft-float -D__PIC32MX__ -D__C32__ -D__32MX440F256H__ -D__LANGUAGE_C__ -I. -Id:/pic32includes2  -o obj/CPP_Demo.o  -Wa,-a,-ad  CPP_Demo.cpp  >obj/CPP_Demo.lst
+mips-sde-elf-gcc  -EL -g -c -g -msoft-float -D__PIC32MX__ -D__C32__ -D__32MX440F256H__ -D__LANGUAGE_C__ -I. -Id:/pic32includes2  -o obj/DRN_PIC32MX_UART1.o  -Wa,-a,-ad  DRN_PIC32MX_UART1.c  >obj/DRN_PIC32MX_UART1.lst
+mips-sde-elf-gcc  -EL -g -c -g -msoft-float -D__PIC32MX__ -D__C32__ -D__32MX440F256H__ -D__LANGUAGE_C__ -I. -Id:/pic32includes2  -o obj/DRN_PIC32MX_CS_glue.o  -Wa,-a,-ad  DRN_PIC32MX_CS_glue.c  >obj/DRN_PIC32MX_CS_glue.lst
+mips-sde-elf-g++ -EL -g -c -g -msoft-float -D__PIC32MX__ -D__C32__ -D__32MX440F256H__ -D__LANGUAGE_C__ -I. -Id:/pic32includes2  -o obj/PIC32MX_time.o  -Wa,-a,-ad  PIC32MX_time.cpp  >obj/PIC32MX_time.lst
+mips-sde-elf-gcc  -EL -g -c -g -msoft-float -D__PIC32MX__ -D__C32__ -D__32MX440F256H__ -D__LANGUAGE_C__ -I. -Id:/pic32includes2  -o obj/int_enable_interrupts_lib.o  -Wa,-a,-ad  Microchip_Peripherals/int_enable_interrupts_lib.c  >obj/int_enable_interrupts_lib.lst
+mips-sde-elf-gcc  -EL -g -c -g -msoft-float -D__PIC32MX__ -D__C32__ -D__32MX440F256H__ -D__LANGUAGE_C__ -I. -Id:/pic32includes2  -o obj/int_disable_interrupts_lib.o  -Wa,-a,-ad  Microchip_Peripherals/int_disable_interrupts_lib.c  >obj/int_disable_interrupts_lib.lst
+mips-sde-elf-gcc  -EL -g -c -g -msoft-float -D__PIC32MX__ -D__C32__ -D__32MX440F256H__ -D__LANGUAGE_C__ -I. -Id:/pic32includes2  -o obj/int_restore_interrupts_lib.o  -Wa,-a,-ad  Microchip_Peripherals/int_restore_interrupts_lib.c  >obj/int_restore_interrupts_lib.lst
+mips-sde-elf-gcc -EL -g -c -g -msoft-float -D__PIC32MX__ -D__C32__ -D__32MX440F256H__ -D__LANGUAGE_C__            -o obj/p32mx440f256h.o Microchip_Peripherals/p32mx440f256h.S
+mips-sde-elf-gcc  -EL -g -c -g -msoft-float -D__PIC32MX__ -D__C32__ -D__32MX440F256H__ -D__LANGUAGE_C__ -I. -Id:/pic32includes2  -o obj/pcache.o  -Wa,-a,-ad  Microchip_Peripherals/pcache.c  >obj/pcache.lst
+=================== Environment ====================
+PATH=;d:\csgcc\bin;c:\cygwin\bin
+mips-sde-elf-gcc -v
+Using built-in specs.
+Target: mips-sde-elf
+Configured with: /scratch/clm/2008q3-sde-pro/src/gcc-4.3/configure --build=i686-pc-linux-gnu --host=i686-mingw32 --target=mips-sde-elf --enable-threads --disable-libmudflap --disable-libssp --disable-libstdcxx-pch --with-arch=mips32r2 --enable-sgxx-sde-multilibs --disable-threads --with-gnu-as --with-gnu-ld --enable-languages=c,c++ --disable-shared --with-newlib --with-pkgversion='Sourcery G++ 4.3-80' --with-bugurl=https://support.codesourcery.com/GNUToolchain/ --disable-nls --prefix=/opt/codesourcery --with-headers=yes --with-sysroot=/opt/codesourcery/mips-sde-elf --with-build-sysroot=/scratch/clm/2008q3-sde-pro/install/host-i686-mingw32/mips-sde-elf --with-libiconv-prefix=/scratch/clm/2008q3-sde-pro/obj/host-libs-4.3-80-mips-sde-elf-i686-mingw32/usr --with-gmp=/scratch/clm/2008q3-sde-pro/obj/host-libs-4.3-80-mips-sde-elf-i686-mingw32/usr --with-mpfr=/scratch/clm/2008q3-sde-pro/obj/host-libs-4.3-80-mips-sde-elf-i686-mingw32/usr --disable-libgomp --with-license=/scratch/clm/2008q3-sde-pro/obj/host-libs-4.3-80-mips-sde-elf-i686-mingw32/usr --with-csl-license-version=20081211 --with-csl-license-feature=gcc_MIPS_ELF --enable-poison-system-directories --with-debug-prefix-map='/scratch/clm/2008q3-sde-pro/install/host-i686-mingw32=/opt/codesourcery 	    /scratch/clm/2008q3-sde-pro/src/gcc-4.3=/opt/codesourcery/mips-sde-elf/src/gcc /scratch/clm/2008q3-sde-pro/obj/gcc-4.3-80-mips-sde-elf-i686-mingw32=/opt/codesourcery/mips-sde-elf/src/generated/gcc' --with-build-time-tools=/scratch/clm/2008q3-sde-pro/obj/tools-i686-pc-linux-gnu-4.3-80-mips-sde-elf-i686-mingw32/mips-sde-elf/bin --with-build-time-tools=/scratch/clm/2008q3-sde-pro/obj/tools-i686-pc-linux-gnu-4.3-80-mips-sde-elf-i686-mingw32/mips-sde-elf/bin
+Thread model: single
+gcc version 4.3.2 (Sourcery G++ 4.3-80) 
+====================== Link ================================
+mips-sde-elf-g++ -EL -msoft-float -g -Wl,-t -Wl,-Map,CPP_Demo.map -T csGCC_PIC32MX_CPP_Demo.ld -o CPP_Demo.elf obj/pic32mx_cfg_init.o obj/PIC32MX-reset.o obj/ISRwrapper.o obj/CPP_Demo.o obj/DRN_PIC32MX_UART1.o obj/DRN_PIC32MX_CS_glue.o obj/PIC32MX_time.o obj/int_enable_interrupts_lib.o obj/int_disable_interrupts_lib.o obj/int_restore_interrupts_lib.o obj/p32mx440f256h.o obj/pcache.o 
+d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/bin/ld.exe: mode elf32ltsmip
+d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/el/sof/crti.o
+d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/el/sof/crtbegin.o
+obj/pic32mx_cfg_init.o
+obj/PIC32MX-reset.o
+obj/ISRwrapper.o
+obj/CPP_Demo.o
+obj/DRN_PIC32MX_UART1.o
+obj/DRN_PIC32MX_CS_glue.o
+obj/PIC32MX_time.o
+obj/int_enable_interrupts_lib.o
+obj/int_disable_interrupts_lib.o
+obj/int_restore_interrupts_lib.o
+obj/p32mx440f256h.o
+obj/pcache.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libstdc++.a)eh_personality.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libstdc++.a)eh_terminate.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libstdc++.a)eh_throw.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libstdc++.a)eh_unex_handler.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libstdc++.a)eh_alloc.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libstdc++.a)eh_call.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libstdc++.a)eh_catch.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libstdc++.a)eh_exception.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libstdc++.a)eh_globals.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libstdc++.a)eh_term_handler.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libstdc++.a)pure.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libstdc++.a)si_class_type_info.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libstdc++.a)tinfo.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libstdc++.a)vterminate.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libstdc++.a)cp-demangle.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libstdc++.a)class_type_info.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libstdc++.a)del_op.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libstdc++.a)eh_type.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/el/sof\libgcc.a)unwind-dw2.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/el/sof\libgcc.a)unwind-dw2-fde.o
+d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/el/sof/crtend.o
+d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/el/sof/crtn.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-abort.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-ctime.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-fputc.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-fputs.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-fvwrite.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-impure.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-lcltime.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-lcltime_r.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-malloc.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-mallocr.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-memchr.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-memcmp.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-memcpy.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-memmove.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-memset.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-mktm_r.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-mlock.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-printf.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-putc.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-realloc.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-reallocr.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-sbrkr.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-signal.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-signalr.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-strcmp.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-strcpy.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-strlen.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-strncmp.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-tzvars.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-vfprintf.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-wbuf.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-wsetup.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-asctime.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-asctime_r.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-dtoa.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-fflush.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-findfp.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-freer.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-fwalk.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-gettzinfo.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-locale.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-makebuf.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-mprec.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-reent.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-s_isinfd.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-s_isnand.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-sprintf.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-stdio.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-writer.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-callocr.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-closer.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-fclose.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-fstatr.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-isattyr.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-lseekr.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-readr.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libcs3.a)start_c.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libcs3unhosted.a)unhosted-_exit.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libcs3unhosted.a)unhosted-close.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libcs3unhosted.a)unhosted-fstat.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libcs3unhosted.a)unhosted-isatty.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libcs3unhosted.a)unhosted-lseek.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libcs3unhosted.a)unhosted-open.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libcs3unhosted.a)unhosted-sbrk.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libcs3unhosted.a)unhosted-getpid.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libcs3unhosted.a)unhosted-kill.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libcs3unhosted.a)start.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/el/sof\libgcc.a)_udivdi3.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/el/sof\libgcc.a)_umoddi3.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/el/sof\libgcc.a)_addsub_df.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/el/sof\libgcc.a)_mul_df.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/el/sof\libgcc.a)_div_df.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/el/sof\libgcc.a)_eq_df.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/el/sof\libgcc.a)_ne_df.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/el/sof\libgcc.a)_gt_df.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/el/sof\libgcc.a)_ge_df.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/el/sof\libgcc.a)_lt_df.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/el/sof\libgcc.a)_si_to_df.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/el/sof\libgcc.a)_df_to_si.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/el/sof\libgcc.a)_thenan_df.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/el/sof\libgcc.a)_usi_to_df.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/el/sof\libgcc.a)_lshrdi3.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/el/sof\libgcc.a)_ashldi3.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/el/sof\libgcc.a)_ucmpdi2.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/el/sof\libgcc.a)_pack_df.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/el/sof\libgcc.a)_unpack_df.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/el/sof\libgcc.a)_fpcmp_parts_df.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-errno.o
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libc.a)lib_a-init.o
+d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libcs3unhosted.a(unhosted-close.o): warning: IO function 'close' used
+(d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libcs3.a)heap.o
+d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libcs3unhosted.a(unhosted-fstat.o): warning: IO function 'fstat' used
+d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libcs3unhosted.a(unhosted-isatty.o): warning: IO function 'isatty' used
+d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libcs3unhosted.a(unhosted-lseek.o): warning: IO function 'lseek' used
+# mips-sde-elf-nm -n -a CPP_Demo.elf >> CPP_Demo.map
+d:/csgcc/bin/../lib/gcc/mips-sde-elf/4.3.2/../../../../mips-sde-elf/lib/el/sof\libcs3unhosted.a(unhosted-open.o): warning: IO function 'open' used
+mips-sde-elf-objdump -h CPP_Demo.elf
+
+CPP_Demo.elf:     file format elf32-tradlittlemips
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .PIC32MX_cfg_init 00000010  bfc02ff0  bfc02ff0  00042ff0  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .boot_flash_text 00000380  bfc00000  bfc00000  00040000  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .text         000140e4  bd000000  bd000000  00010000  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  3 .eh_frame     00000714  bd0140e4  bd0140e4  000240e4  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  4 .rodata       00001940  bd0147f8  bd0147f8  000247f8  2**3
+                  CONTENTS, ALLOC, LOAD, CODE
+  5 .data         000008b8  a0000010  bd016138  00030010  2**3
+                  CONTENTS, ALLOC, LOAD, DATA
+  6 .startup_data 00000004  a0000000  a0000000  00043000  2**2
+                  CONTENTS, READONLY
+  7 .bss          00000af8  a00008c8  a00008c8  000008c8  2**3
+                  ALLOC
+  8 .vector_4     0000000c  bfc02280  bfc02280  00042280  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  9 .vector_24    0000000c  bfc02500  bfc02500  00042500  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 10 .debug_aranges 00001038  00000000  00000000  00043008  2**3
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_pubnames 00001ee8  00000000  00000000  00044040  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_info   0003174f  00000000  00000000  00045f28  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 13 .debug_abbrev 0000ac3f  00000000  00000000  00077677  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 14 .debug_line   0000a2f8  00000000  00000000  000822b6  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 15 .debug_frame  00002744  00000000  00000000  0008c5b0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 16 .debug_str    0000716a  00000000  00000000  0008ecf4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 17 .debug_loc    00010ec3  00000000  00000000  00095e5e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 18 .reginfo      00000018  00000000  00000000  000a6d24  2**2
+                  CONTENTS, READONLY, LINK_ONCE_DISCARD
+ 19 .pdr          00002880  00000000  00000000  000a6d3c  2**2
+                  CONTENTS, READONLY
+ 20 .debug_ranges 00001318  00000000  00000000  000a95c0  2**3
+                  CONTENTS, READONLY, DEBUGGING
+ 21 .gnu.attributes 00000010  00000000  00000000  000aa8d8  2**0
+                  CONTENTS, READONLY
+ 22 .comment      00000132  00000000  00000000  000aa8e8  2**0
+                  CONTENTS, READONLY
+#mips-sde-elf-readelf --sections CPP_Demo.elf
+================ ELF LMA Adjustment =========================
+# LD cannot handle mapping of PIC32MX logical addresses to physical.
+# Note: Physical address = LMA & 0x1FFFffff
+# Some device programmers take care of this but sadly not Microchip's...
+# Create an ELF with adjusted LMAs prior creating the HEX file.
+mips-sde-elf-objcopy --change-section-lma .PIC32MX_cfg_init-0xA0000000 --change-section-lma .boot_flash_text-0xA0000000 --change-section-lma .text-0xA0000000 --change-section-lma .eh_frame-0xA0000000 --change-section-lma .rodata-0xA0000000 --change-section-lma .data-0xA0000000 --change-section-lma .vector_4-0xA0000000 --change-section-lma .vector_24-0xA0000000 CPP_Demo.elf tmp.elf
+CPP_Demo.cpp CPP_Demo.elf CPP_Demo.map CPP_Demo_build.log DRN_PIC32MX_CS_glue.c DRN_PIC32MX_CS_glue.h DRN_PIC32MX_UART1.c DRN_PIC32MX_UART1.h HardwareProfile.h ISRwrapper.S ISRwrapper.inc Makefile Microchip_Peripherals PIC32MX-reset.S PIC32MX_time.cpp PIC32MX_time.h ReadMe.txt csGCC_PIC32MX_CPP_Demo.ld obj p.bat pic32mx_cfg_init.c regs.S tmp.elf
+CPP_Demo.cpp CPP_Demo.elf CPP_Demo.map CPP_Demo_build.log DRN_PIC32MX_CS_glue.c DRN_PIC32MX_CS_glue.h DRN_PIC32MX_UART1.c DRN_PIC32MX_UART1.h HardwareProfile.h ISRwrapper.S ISRwrapper.inc Makefile Microchip_Peripherals PIC32MX-reset.S PIC32MX_time.cpp PIC32MX_time.h ReadMe.txt csGCC_PIC32MX_CPP_Demo.ld obj p.bat pic32mx_cfg_init.c regs.S tmp.elf VERIFY NO BF.. or BD.. LMA in the sections below ! CPP_Demo.cpp CPP_Demo.elf CPP_Demo.map CPP_Demo_build.log DRN_PIC32MX_CS_glue.c DRN_PIC32MX_CS_glue.h DRN_PIC32MX_UART1.c DRN_PIC32MX_UART1.h HardwareProfile.h ISRwrapper.S ISRwrapper.inc Makefile Microchip_Peripherals PIC32MX-reset.S PIC32MX_time.cpp PIC32MX_time.h ReadMe.txt csGCC_PIC32MX_CPP_Demo.ld obj p.bat pic32mx_cfg_init.c regs.S tmp.elf
+CPP_Demo.cpp CPP_Demo.elf CPP_Demo.map CPP_Demo_build.log DRN_PIC32MX_CS_glue.c DRN_PIC32MX_CS_glue.h DRN_PIC32MX_UART1.c DRN_PIC32MX_UART1.h HardwareProfile.h ISRwrapper.S ISRwrapper.inc Makefile Microchip_Peripherals PIC32MX-reset.S PIC32MX_time.cpp PIC32MX_time.h ReadMe.txt csGCC_PIC32MX_CPP_Demo.ld obj p.bat pic32mx_cfg_init.c regs.S tmp.elf
+mips-sde-elf-objdump -h tmp.elf
+
+tmp.elf:     file format elf32-tradlittlemips
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .PIC32MX_cfg_init 00000010  bfc02ff0  1fc02ff0  00042ff0  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .boot_flash_text 00000380  bfc00000  1fc00000  00040000  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .text         000140e4  bd000000  1d000000  00010000  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  3 .eh_frame     00000714  bd0140e4  1d0140e4  000240e4  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  4 .rodata       00001940  bd0147f8  1d0147f8  000247f8  2**3
+                  CONTENTS, ALLOC, LOAD, CODE
+  5 .data         000008b8  a0000010  1d016138  00030010  2**3
+                  CONTENTS, ALLOC, LOAD, DATA
+  6 .startup_data 00000004  a0000000  a0000000  00043000  2**2
+                  CONTENTS, READONLY
+  7 .bss          00000af8  a00008c8  a00008c8  000008c8  2**3
+                  ALLOC
+  8 .vector_4     0000000c  bfc02280  1fc02280  00042280  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  9 .vector_24    0000000c  bfc02500  1fc02500  00042500  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 10 .debug_aranges 00001038  00000000  00000000  00043008  2**3
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_pubnames 00001ee8  00000000  00000000  00044040  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_info   0003174f  00000000  00000000  00045f28  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 13 .debug_abbrev 0000ac3f  00000000  00000000  00077677  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 14 .debug_line   0000a2f8  00000000  00000000  000822b6  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 15 .debug_frame  00002744  00000000  00000000  0008c5b0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 16 .debug_str    0000716a  00000000  00000000  0008ecf4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 17 .debug_loc    00010ec3  00000000  00000000  00095e5e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 18 .reginfo      00000018  00000000  00000000  000a6d24  2**2
+                  CONTENTS, READONLY, LINK_ONCE_DISCARD
+ 19 .pdr          00002880  00000000  00000000  000a6d3c  2**2
+                  CONTENTS, READONLY
+ 20 .debug_ranges 00001318  00000000  00000000  000a95c0  2**3
+                  CONTENTS, READONLY, DEBUGGING
+ 21 .gnu.attributes 00000010  00000000  00000000  000aa8d8  2**0
+                  CONTENTS, READONLY
+ 22 .comment      00000132  00000000  00000000  000aa8e8  2**0
+                  CONTENTS, READONLY
+=================== ELF to HEX ==============================
+# Translate the ELF file into Intel hex
+mips-sde-elf-objcopy -O ihex tmp.elf CPP_Demo.hex
+Convenience Only - Non-critical parts of build follow
+# make local copy for ease of testing...
+cp CPP_Demo.hex d:/Install/USBJTAG/CPP_Demo.hex

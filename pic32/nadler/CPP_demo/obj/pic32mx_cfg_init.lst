@@ -1,0 +1,26 @@
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/cceIpaaa.s 			page 1
+
+
+   1              		.section .mdebug.abi32
+   2              		.previous
+   3              		.gnu_attribute 4, 3
+  11              	.Ltext0:
+  12              		.globl	cfg_words
+  13              		.section	PIC32MX_cfg_init,"aw",@progbits
+  14              		.align	2
+  17              	cfg_words:
+  18 0000 EFBEADDE 		.word	-559038737
+  19 0004 8979F8FF 		.word	-493175
+  20 0008 5B9A60FF 		.word	-10446245
+  21 000c FFFFFF7F 		.word	2147483647
+  22              		.text
+  23              	.Letext0:
+  24              		.file 1 "pic32mx_cfg_init.c"
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/cceIpaaa.s 			page 2
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 pic32mx_cfg_init.c
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/cceIpaaa.s:18     PIC32MX_cfg_init:0000000000000000 cfg_words
+
+NO UNDEFINED SYMBOLS

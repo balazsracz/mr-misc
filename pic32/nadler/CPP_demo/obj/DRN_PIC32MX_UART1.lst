@@ -1,0 +1,1093 @@
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s 			page 1
+
+
+   1              		.section .mdebug.abi32
+   2              		.previous
+   3              		.gnu_attribute 4, 3
+  11              	.Ltext0:
+  12              		.local	UART1_initialized
+  13              		.comm	UART1_initialized,4,4
+  14              		.align	2
+  15              	.LFB23:
+  16              		.file 1 "DRN_PIC32MX_UART1.c"
+   1:DRN_PIC32MX_UART1.c **** /* DRN_PIC32MX_UART1.c  -  PIC32MX UART1 I/O
+   2:DRN_PIC32MX_UART1.c **** **
+   3:DRN_PIC32MX_UART1.c **** ** UART1 I/O via ISR and local buffer.
+   4:DRN_PIC32MX_UART1.c **** **
+   5:DRN_PIC32MX_UART1.c **** ** Copyright (c) 2009 Dave Nadler
+   6:DRN_PIC32MX_UART1.c **** **
+   7:DRN_PIC32MX_UART1.c **** ** The authors hereby grant permission to use, copy, modify, distribute,
+   8:DRN_PIC32MX_UART1.c **** ** and license this software and its documentation for any purpose, provided
+   9:DRN_PIC32MX_UART1.c **** ** that existing copyright notices are retained in all copies and that this
+  10:DRN_PIC32MX_UART1.c **** ** notice is included verbatim in any distributions.  No written agreement,
+  11:DRN_PIC32MX_UART1.c **** ** license, or royalty fee is required for any of the authorized uses.
+  12:DRN_PIC32MX_UART1.c **** ** Modifications to this software may be copyrighted by their authors
+  13:DRN_PIC32MX_UART1.c **** ** and need not follow the licensing terms described here, provided that
+  14:DRN_PIC32MX_UART1.c **** ** the new terms are clearly indicated on the first page of each file where
+  15:DRN_PIC32MX_UART1.c **** ** they apply.
+  16:DRN_PIC32MX_UART1.c **** **
+  17:DRN_PIC32MX_UART1.c **** ** Modification History:
+  18:DRN_PIC32MX_UART1.c **** **   5Jul09 DRNadler:   Consistent initialization, de-initialize
+  19:DRN_PIC32MX_UART1.c **** **  13Jun09 DRNadler:   Segregated from newlib redirection code, add
+  20:DRN_PIC32MX_UART1.c **** **                      functions to support serial_PIC32 class
+  21:DRN_PIC32MX_UART1.c **** **  11May09 DRNadler:   Initial Coding
+  22:DRN_PIC32MX_UART1.c **** */
+  23:DRN_PIC32MX_UART1.c **** 
+  24:DRN_PIC32MX_UART1.c **** // #include <stdio.h>      // printf (diagnostic use only)
+  25:DRN_PIC32MX_UART1.c **** 
+  26:DRN_PIC32MX_UART1.c **** #include "HardwareProfile.h" // low-level peripherals plus configured speeds
+  27:DRN_PIC32MX_UART1.c **** #include "DRN_PIC32MX_UART1.h" // interface specification for this module
+  28:DRN_PIC32MX_UART1.c **** 
+  29:DRN_PIC32MX_UART1.c **** static int UART1_initialized = 0;
+  30:DRN_PIC32MX_UART1.c **** 
+  31:DRN_PIC32MX_UART1.c **** static void UART1_init(void) {
+  17              		.loc 1 31 0
+  18              		.set	nomips16
+  19              		.ent	UART1_init
+  20              	UART1_init:
+  21              		.frame	$fp,8,$31		# vars= 0, regs= 1/0, args= 0, gp= 0
+  22              		.mask	0x40000000,-4
+  23              		.fmask	0x00000000,0
+  24              		.set	noreorder
+  25              		.set	nomacro
+  26              		
+  27 0000 F8FFBD27 		addiu	$sp,$sp,-8
+  28              	.LCFI0:
+  29 0004 0400BEAF 		sw	$fp,4($sp)
+  30              	.LCFI1:
+  31 0008 21F0A003 		move	$fp,$sp
+  32              	.LCFI2:
+  32:DRN_PIC32MX_UART1.c ****     UART1_initialized = 1;
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s 			page 2
+
+
+  33              		.loc 1 32 0
+  34 000c 01000224 		li	$2,1			# 0x1
+  35 0010 00C082AF 		sw	$2,%gp_rel(UART1_initialized)($28)
+  33:DRN_PIC32MX_UART1.c **** 
+  34:DRN_PIC32MX_UART1.c ****     // Set up UART1 (used for SN10 software load, and for now diagnostics)
+  35:DRN_PIC32MX_UART1.c ****     OpenUART1(
+  36              		.loc 1 35 0
+  37 0014 0000033C 		lui	$3,%hi(U1BRG)
+  38 0018 60000224 		li	$2,96			# 0x60
+  39 001c 000062AC 		sw	$2,%lo(U1BRG)($3)
+  40 0020 0000033C 		lui	$3,%hi(U1MODE)
+  41 0024 00800234 		li	$2,32768			# 0x8000
+  42 0028 000062AC 		sw	$2,%lo(U1MODE)($3)
+  43 002c 0000033C 		lui	$3,%hi(U1STA)
+  44 0030 00140224 		li	$2,5120			# 0x1400
+  45 0034 000062AC 		sw	$2,%lo(U1STA)($3)
+  36:DRN_PIC32MX_UART1.c ****         // config1: UxMODE register parameters
+  37:DRN_PIC32MX_UART1.c ****         UART_EN                 | /* Module enable */
+  38:DRN_PIC32MX_UART1.c ****         UART_IDLE_CON           | /* Work in IDLE (sleep) mode */
+  39:DRN_PIC32MX_UART1.c ****         UART_IRDA_DIS           | /* IRDA encoder and decoder disable */
+  40:DRN_PIC32MX_UART1.c ****         // UART_MODE_SIMPLEX       | /* no flow control */
+  41:DRN_PIC32MX_UART1.c ****         UART_RX_TX              | /* Communication through the normal pins */
+  42:DRN_PIC32MX_UART1.c ****         UART_DIS_BCLK_CTS_RTS   | /* Disable BCLKx, CTS, and RTS pins */
+  43:DRN_PIC32MX_UART1.c ****         // UART_EN_WAKE            | /* useful for NSP only ! Enable Wake-up on START bit Detect du
+  44:DRN_PIC32MX_UART1.c ****         UART_DIS_WAKE           | /* Disable Wake-up on START bit Detect during SLEEP Mode bit */
+  45:DRN_PIC32MX_UART1.c ****         UART_DIS_LOOPBACK       | /* Loop back disabled */
+  46:DRN_PIC32MX_UART1.c ****         UART_DIS_ABAUD          | /* No auto-baud (Input to Capture module from ICx pin) */
+  47:DRN_PIC32MX_UART1.c ****         UART_NO_PAR_8BIT        | /* no parity, 8 bit data */
+  48:DRN_PIC32MX_UART1.c ****         UART_NORMAL_RX          | /* UxRX idle state is '1' */
+  49:DRN_PIC32MX_UART1.c ****         UART_BRGH_SIXTEEN       | /* 16x baud clock divisor - Normal speed */
+  50:DRN_PIC32MX_UART1.c ****         UART_1STOPBIT           | /* May not receive from AM186ES with 2 stop bits specified, so us
+  51:DRN_PIC32MX_UART1.c ****         0,
+  52:DRN_PIC32MX_UART1.c ****         // config2: UxSTA register parameters
+  53:DRN_PIC32MX_UART1.c ****         UART_INT_TX             | /* Interrupt when at least one space available in buffer */
+  54:DRN_PIC32MX_UART1.c ****         UART_RX_ENABLE          | /* Enable receiver pin */
+  55:DRN_PIC32MX_UART1.c ****         UART_TX_ENABLE          | /* Enable transmitter pin */
+  56:DRN_PIC32MX_UART1.c ****         UART_INT_RX_CHAR        | /* Interrupt on every char received */
+  57:DRN_PIC32MX_UART1.c ****         0,
+  58:DRN_PIC32MX_UART1.c ****         // baud rate divisor:
+  59:DRN_PIC32MX_UART1.c ****         (int)(((PERIPHERAL_CLOCK/(16UL*19200UL)))-1)
+  60:DRN_PIC32MX_UART1.c ****         );
+  61:DRN_PIC32MX_UART1.c ****     IPC6bits.U1IP = 3; // arbitrary priority (reserve max priority 7 for USB)
+  46              		.loc 1 61 0
+  47 0038 0000043C 		lui	$4,%hi(IPC6)
+  48 003c 0000828C 		lw	$2,%lo(IPC6)($4)
+  49 0040 03000324 		li	$3,3			# 0x3
+  50 0044 8420627C 		ins	$2,$3,2,3
+  51 0048 000082AC 		sw	$2,%lo(IPC6)($4)
+  62:DRN_PIC32MX_UART1.c ****     IPC6bits.U1IS = 0; // ignore subpriority...
+  52              		.loc 1 62 0
+  53 004c 0000033C 		lui	$3,%hi(IPC6)
+  54 0050 0000628C 		lw	$2,%lo(IPC6)($3)
+  55 0054 0408027C 		ins	$2,$0,0,2
+  56 0058 000062AC 		sw	$2,%lo(IPC6)($3)
+  63:DRN_PIC32MX_UART1.c ****     IEC0bits.U1RXIE = 1;  // enable the receive interrupt
+  57              		.loc 1 63 0
+  58 005c 0000043C 		lui	$4,%hi(IEC0)
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s 			page 3
+
+
+  59 0060 0000828C 		lw	$2,%lo(IEC0)($4)
+  60 0064 01000324 		li	$3,1			# 0x1
+  61 0068 C4DE627C 		ins	$2,$3,27,1
+  62 006c 000082AC 		sw	$2,%lo(IEC0)($4)
+  64:DRN_PIC32MX_UART1.c **** }
+  63              		.loc 1 64 0
+  64 0070 21E8C003 		move	$sp,$fp
+  65 0074 0400BE8F 		lw	$fp,4($sp)
+  66 0078 0800BD27 		addiu	$sp,$sp,8
+  67 007c 0800E003 		j	$31
+  68 0080 00000000 		nop
+  69              	
+  70              		.set	macro
+  71              		.set	reorder
+  72              		.end	UART1_init
+  73              	.LFE23:
+  75              		.section	.sdata,"aw",@progbits
+  76              		.align	2
+  79              	TxNextTx:
+  80 0000 00000000 		.word	TxBuffer
+  81              		.align	2
+  84              	TxNextInsert:
+  85 0004 00000000 		.word	TxBuffer
+  86              		.align	2
+  89              	RxNextRx:
+  90 0008 C8000000 		.word	RxBuffer
+  91              		.align	2
+  94              	RxNextRead:
+  95 000c C8000000 		.word	RxBuffer
+  96              		.text
+  97              		.align	2
+  98              		.globl	__DRN_putc
+  99              	.LFB24:
+  65:DRN_PIC32MX_UART1.c **** 
+  66:DRN_PIC32MX_UART1.c **** // ==========================================================================
+  67:DRN_PIC32MX_UART1.c **** // =======================  UART1 ISR data structures  ======================
+  68:DRN_PIC32MX_UART1.c **** // ==========================================================================
+  69:DRN_PIC32MX_UART1.c **** 
+  70:DRN_PIC32MX_UART1.c **** static unsigned char TxBuffer[200]; // ring buffer
+  71:DRN_PIC32MX_UART1.c **** static unsigned char volatile *TxNextTx    = &TxBuffer[0]; // address of next data to send
+  72:DRN_PIC32MX_UART1.c **** static unsigned char          *TxNextInsert= &TxBuffer[0]; // equal to above when no more data to s
+  73:DRN_PIC32MX_UART1.c **** static unsigned char RxBuffer[200]; // ring buffer
+  74:DRN_PIC32MX_UART1.c **** static unsigned char volatile *RxNextRx    = &RxBuffer[0]; // address for next data received
+  75:DRN_PIC32MX_UART1.c **** static unsigned char          *RxNextRead  = &RxBuffer[0]; // equal to above when no more data to r
+  76:DRN_PIC32MX_UART1.c **** // ring buffer pointer-increment with wrap-around...
+  77:DRN_PIC32MX_UART1.c **** #define INCR_PTR(_ptr,_buf)  \
+  78:DRN_PIC32MX_UART1.c ****     { if(++_ptr > &_buf[sizeof(_buf)-1]) _ptr = &_buf[0]; }
+  79:DRN_PIC32MX_UART1.c **** 
+  80:DRN_PIC32MX_UART1.c **** // Output a character to UART1 (actually, enqueue in output buffer).
+  81:DRN_PIC32MX_UART1.c **** // If the output buffer is full, block until there's space to enqueue
+  82:DRN_PIC32MX_UART1.c **** // this character.
+  83:DRN_PIC32MX_UART1.c **** void __DRN_putc(char c) {
+ 100              		.loc 1 83 0
+ 101              		.set	nomips16
+ 102              		.ent	__DRN_putc
+ 103              	__DRN_putc:
+ 104              		.frame	$fp,32,$31		# vars= 8, regs= 2/0, args= 16, gp= 0
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s 			page 4
+
+
+ 105              		.mask	0xc0000000,-4
+ 106              		.fmask	0x00000000,0
+ 107              		.set	noreorder
+ 108              		.set	nomacro
+ 109              		
+ 110 0084 E0FFBD27 		addiu	$sp,$sp,-32
+ 111              	.LCFI3:
+ 112 0088 1C00BFAF 		sw	$31,28($sp)
+ 113              	.LCFI4:
+ 114 008c 1800BEAF 		sw	$fp,24($sp)
+ 115              	.LCFI5:
+ 116 0090 21F0A003 		move	$fp,$sp
+ 117              	.LCFI6:
+ 118 0094 21108000 		move	$2,$4
+ 119 0098 2000C2A3 		sb	$2,32($fp)
+  84:DRN_PIC32MX_UART1.c ****     if( ! UART1_initialized) UART1_init();
+ 120              		.loc 1 84 0
+ 121 009c 00C0828F 		lw	$2,%gp_rel(UART1_initialized)($28)
+ 122 00a0 03004014 		bne	$2,$0,.L4
+ 123 00a4 00000000 		nop
+ 124              	
+ 125 00a8 0000000C 		jal	UART1_init
+ 126 00ac 00000000 		nop
+ 127              	
+ 128              	.L4:
+  85:DRN_PIC32MX_UART1.c ****     // Copy one character to output buffer
+  86:DRN_PIC32MX_UART1.c ****     unsigned char *TxP2 = TxNextInsert;
+ 129              		.loc 1 86 0
+ 130 00b0 04C0828F 		lw	$2,%gp_rel(TxNextInsert)($28)
+ 131 00b4 1000C2AF 		sw	$2,16($fp)
+  87:DRN_PIC32MX_UART1.c ****     *TxNextInsert = c;
+ 132              		.loc 1 87 0
+ 133 00b8 04C0838F 		lw	$3,%gp_rel(TxNextInsert)($28)
+ 134 00bc 2000C293 		lbu	$2,32($fp)
+ 135 00c0 000062A0 		sb	$2,0($3)
+  88:DRN_PIC32MX_UART1.c ****     INCR_PTR(TxP2, TxBuffer); // when required, wraps around to ring-buffer start
+ 136              		.loc 1 88 0
+ 137 00c4 1000C28F 		lw	$2,16($fp)
+ 138 00c8 01004224 		addiu	$2,$2,1
+ 139 00cc 1000C2AF 		sw	$2,16($fp)
+ 140 00d0 1000C38F 		lw	$3,16($fp)
+ 141 00d4 0000023C 		lui	$2,%hi(TxBuffer+199)
+ 142 00d8 C7004224 		addiu	$2,$2,%lo(TxBuffer+199)
+ 143 00dc 2B104300 		sltu	$2,$2,$3
+ 144 00e0 04004010 		beq	$2,$0,.L5
+ 145 00e4 00000000 		nop
+ 146              	
+ 147 00e8 0000023C 		lui	$2,%hi(TxBuffer)
+ 148 00ec 00004224 		addiu	$2,$2,%lo(TxBuffer)
+ 149 00f0 1000C2AF 		sw	$2,16($fp)
+ 150              	.L5:
+  89:DRN_PIC32MX_UART1.c ****     while(TxP2 == TxNextTx) {}; // WAIT FOR BUFFER TO BE NON-FULL
+ 151              		.loc 1 89 0
+ 152 00f4 1000C38F 		lw	$3,16($fp)
+ 153 00f8 00C0828F 		lw	$2,%gp_rel(TxNextTx)($28)
+ 154 00fc FDFF6210 		beq	$3,$2,.L5
+ 155 0100 00000000 		nop
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s 			page 5
+
+
+ 156              	
+  90:DRN_PIC32MX_UART1.c ****     // Atomically update ptr to next TX buffer insert point
+  91:DRN_PIC32MX_UART1.c ****     //... disable();
+  92:DRN_PIC32MX_UART1.c ****     TxNextInsert = TxP2; // store is atomic on MIPS...
+ 157              		.loc 1 92 0
+ 158 0104 1000C28F 		lw	$2,16($fp)
+ 159 0108 04C082AF 		sw	$2,%gp_rel(TxNextInsert)($28)
+  93:DRN_PIC32MX_UART1.c ****     //... if(interruptsWereEnabled) enable();
+  94:DRN_PIC32MX_UART1.c ****     IEC0bits.U1TXIE = 1;  // enable the transmit interrupt; ISR will do the heavy lifting
+ 160              		.loc 1 94 0
+ 161 010c 0000043C 		lui	$4,%hi(IEC0)
+ 162 0110 0000828C 		lw	$2,%lo(IEC0)($4)
+ 163 0114 01000324 		li	$3,1			# 0x1
+ 164 0118 04E7627C 		ins	$2,$3,28,1
+ 165 011c 000082AC 		sw	$2,%lo(IEC0)($4)
+  95:DRN_PIC32MX_UART1.c ****     IFS0bits.U1TXIF = 1;  // jam interrupt-request bit to force TX interrupt (works, by experiment)
+ 166              		.loc 1 95 0
+ 167 0120 0000043C 		lui	$4,%hi(IFS0)
+ 168 0124 0000828C 		lw	$2,%lo(IFS0)($4)
+ 169 0128 01000324 		li	$3,1			# 0x1
+ 170 012c 04E7627C 		ins	$2,$3,28,1
+ 171 0130 000082AC 		sw	$2,%lo(IFS0)($4)
+  96:DRN_PIC32MX_UART1.c **** }
+ 172              		.loc 1 96 0
+ 173 0134 21E8C003 		move	$sp,$fp
+ 174 0138 1C00BF8F 		lw	$31,28($sp)
+ 175 013c 1800BE8F 		lw	$fp,24($sp)
+ 176 0140 2000BD27 		addiu	$sp,$sp,32
+ 177 0144 0800E003 		j	$31
+ 178 0148 00000000 		nop
+ 179              	
+ 180              		.set	macro
+ 181              		.set	reorder
+ 182              		.end	__DRN_putc
+ 183              	.LFE24:
+ 185              		.align	2
+ 186              		.globl	__DRN_getc
+ 187              	.LFB25:
+  97:DRN_PIC32MX_UART1.c **** // Read a character from UART1 (via input buffer)
+  98:DRN_PIC32MX_UART1.c **** // Return -1 if no data available (non-blocking)
+  99:DRN_PIC32MX_UART1.c **** int __DRN_getc(void) {
+ 188              		.loc 1 99 0
+ 189              		.set	nomips16
+ 190              		.ent	__DRN_getc
+ 191              	__DRN_getc:
+ 192              		.frame	$fp,40,$31		# vars= 16, regs= 2/0, args= 16, gp= 0
+ 193              		.mask	0xc0000000,-4
+ 194              		.fmask	0x00000000,0
+ 195              		.set	noreorder
+ 196              		.set	nomacro
+ 197              		
+ 198 014c D8FFBD27 		addiu	$sp,$sp,-40
+ 199              	.LCFI7:
+ 200 0150 2400BFAF 		sw	$31,36($sp)
+ 201              	.LCFI8:
+ 202 0154 2000BEAF 		sw	$fp,32($sp)
+ 203              	.LCFI9:
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s 			page 6
+
+
+ 204 0158 21F0A003 		move	$fp,$sp
+ 205              	.LCFI10:
+ 100:DRN_PIC32MX_UART1.c ****     if( ! UART1_initialized) UART1_init();
+ 206              		.loc 1 100 0
+ 207 015c 00C0828F 		lw	$2,%gp_rel(UART1_initialized)($28)
+ 208 0160 03004014 		bne	$2,$0,.L8
+ 209 0164 00000000 		nop
+ 210              	
+ 211 0168 0000000C 		jal	UART1_init
+ 212 016c 00000000 		nop
+ 213              	
+ 214              	.L8:
+ 101:DRN_PIC32MX_UART1.c ****     if(RxNextRx == RxNextRead) return -1;
+ 215              		.loc 1 101 0
+ 216 0170 08C0828F 		lw	$2,%gp_rel(RxNextRx)($28)
+ 217 0174 0CC0838F 		lw	$3,%gp_rel(RxNextRead)($28)
+ 218 0178 05004314 		bne	$2,$3,.L9
+ 219 017c 00000000 		nop
+ 220              	
+ 221 0180 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 222 0184 1800C2AF 		sw	$2,24($fp)
+ 223 0188 75000008 		j	.L10
+ 224 018c 00000000 		nop
+ 225              	
+ 226              	.L9:
+ 102:DRN_PIC32MX_UART1.c ****     unsigned char c = *RxNextRead;
+ 227              		.loc 1 102 0
+ 228 0190 0CC0828F 		lw	$2,%gp_rel(RxNextRead)($28)
+ 229 0194 00004290 		lbu	$2,0($2)
+ 230 0198 1000C2A3 		sb	$2,16($fp)
+ 103:DRN_PIC32MX_UART1.c ****     INCR_PTR(RxNextRead, RxBuffer); // when required, wraps around to ring-buffer start
+ 231              		.loc 1 103 0
+ 232 019c 0CC0828F 		lw	$2,%gp_rel(RxNextRead)($28)
+ 233 01a0 01004224 		addiu	$2,$2,1
+ 234 01a4 0CC082AF 		sw	$2,%gp_rel(RxNextRead)($28)
+ 235 01a8 0CC0838F 		lw	$3,%gp_rel(RxNextRead)($28)
+ 236 01ac 0000023C 		lui	$2,%hi(RxBuffer+199)
+ 237 01b0 8F014224 		addiu	$2,$2,%lo(RxBuffer+199)
+ 238 01b4 2B104300 		sltu	$2,$2,$3
+ 239 01b8 04004010 		beq	$2,$0,.L11
+ 240 01bc 00000000 		nop
+ 241              	
+ 242 01c0 0000023C 		lui	$2,%hi(RxBuffer)
+ 243 01c4 C8004224 		addiu	$2,$2,%lo(RxBuffer)
+ 244 01c8 0CC082AF 		sw	$2,%gp_rel(RxNextRead)($28)
+ 245              	.L11:
+ 104:DRN_PIC32MX_UART1.c ****     return (int)c;
+ 246              		.loc 1 104 0
+ 247 01cc 1000C293 		lbu	$2,16($fp)
+ 248 01d0 1800C2AF 		sw	$2,24($fp)
+ 249              	.L10:
+ 250 01d4 1800C28F 		lw	$2,24($fp)
+ 105:DRN_PIC32MX_UART1.c **** }
+ 251              		.loc 1 105 0
+ 252 01d8 21E8C003 		move	$sp,$fp
+ 253 01dc 2400BF8F 		lw	$31,36($sp)
+ 254 01e0 2000BE8F 		lw	$fp,32($sp)
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s 			page 7
+
+
+ 255 01e4 2800BD27 		addiu	$sp,$sp,40
+ 256 01e8 0800E003 		j	$31
+ 257 01ec 00000000 		nop
+ 258              	
+ 259              		.set	macro
+ 260              		.set	reorder
+ 261              		.end	__DRN_getc
+ 262              	.LFE25:
+ 264              		.align	2
+ 265              		.globl	__DRN_UART1_outputBytesQueued
+ 266              	.LFB26:
+ 106:DRN_PIC32MX_UART1.c **** 
+ 107:DRN_PIC32MX_UART1.c **** // Technically, should add number of characters in the transmit FIFO (up to 4)
+ 108:DRN_PIC32MX_UART1.c **** int __DRN_UART1_outputBytesQueued(void) {
+ 267              		.loc 1 108 0
+ 268              		.set	nomips16
+ 269              		.ent	__DRN_UART1_outputBytesQueued
+ 270              	__DRN_UART1_outputBytesQueued:
+ 271              		.frame	$fp,40,$31		# vars= 16, regs= 2/0, args= 16, gp= 0
+ 272              		.mask	0xc0000000,-4
+ 273              		.fmask	0x00000000,0
+ 274              		.set	noreorder
+ 275              		.set	nomacro
+ 276              		
+ 277 01f0 D8FFBD27 		addiu	$sp,$sp,-40
+ 278              	.LCFI11:
+ 279 01f4 2400BFAF 		sw	$31,36($sp)
+ 280              	.LCFI12:
+ 281 01f8 2000BEAF 		sw	$fp,32($sp)
+ 282              	.LCFI13:
+ 283 01fc 21F0A003 		move	$fp,$sp
+ 284              	.LCFI14:
+ 109:DRN_PIC32MX_UART1.c ****     if( ! UART1_initialized) UART1_init();
+ 285              		.loc 1 109 0
+ 286 0200 00C0828F 		lw	$2,%gp_rel(UART1_initialized)($28)
+ 287 0204 03004014 		bne	$2,$0,.L14
+ 288 0208 00000000 		nop
+ 289              	
+ 290 020c 0000000C 		jal	UART1_init
+ 291 0210 00000000 		nop
+ 292              	
+ 293              	.L14:
+ 110:DRN_PIC32MX_UART1.c ****     int delta = TxNextInsert-TxNextTx;
+ 294              		.loc 1 110 0
+ 295 0214 04C0828F 		lw	$2,%gp_rel(TxNextInsert)($28)
+ 296 0218 21184000 		move	$3,$2
+ 297 021c 00C0828F 		lw	$2,%gp_rel(TxNextTx)($28)
+ 298 0220 23106200 		subu	$2,$3,$2
+ 299 0224 1000C2AF 		sw	$2,16($fp)
+ 111:DRN_PIC32MX_UART1.c ****     if(delta >= 0) return delta;
+ 300              		.loc 1 111 0
+ 301 0228 1000C28F 		lw	$2,16($fp)
+ 302 022c 05004004 		bltz	$2,.L15
+ 303 0230 00000000 		nop
+ 304              	
+ 305 0234 1000C28F 		lw	$2,16($fp)
+ 306 0238 1800C2AF 		sw	$2,24($fp)
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s 			page 8
+
+
+ 307 023c 94000008 		j	.L16
+ 308 0240 00000000 		nop
+ 309              	
+ 310              	.L15:
+ 112:DRN_PIC32MX_UART1.c ****     // pointers are straddling ring-buffer wrap-around
+ 113:DRN_PIC32MX_UART1.c ****     return sizeof(TxBuffer)+delta;
+ 311              		.loc 1 113 0
+ 312 0244 1000C28F 		lw	$2,16($fp)
+ 313 0248 C8004224 		addiu	$2,$2,200
+ 314 024c 1800C2AF 		sw	$2,24($fp)
+ 315              	.L16:
+ 316 0250 1800C28F 		lw	$2,24($fp)
+ 114:DRN_PIC32MX_UART1.c **** };
+ 317              		.loc 1 114 0
+ 318 0254 21E8C003 		move	$sp,$fp
+ 319 0258 2400BF8F 		lw	$31,36($sp)
+ 320 025c 2000BE8F 		lw	$fp,32($sp)
+ 321 0260 2800BD27 		addiu	$sp,$sp,40
+ 322 0264 0800E003 		j	$31
+ 323 0268 00000000 		nop
+ 324              	
+ 325              		.set	macro
+ 326              		.set	reorder
+ 327              		.end	__DRN_UART1_outputBytesQueued
+ 328              	.LFE26:
+ 330              		.align	2
+ 331              		.globl	__DRN_UART1_inputBytesQueued
+ 332              	.LFB27:
+ 115:DRN_PIC32MX_UART1.c **** int __DRN_UART1_inputBytesQueued(void) {
+ 333              		.loc 1 115 0
+ 334              		.set	nomips16
+ 335              		.ent	__DRN_UART1_inputBytesQueued
+ 336              	__DRN_UART1_inputBytesQueued:
+ 337              		.frame	$fp,40,$31		# vars= 16, regs= 2/0, args= 16, gp= 0
+ 338              		.mask	0xc0000000,-4
+ 339              		.fmask	0x00000000,0
+ 340              		.set	noreorder
+ 341              		.set	nomacro
+ 342              		
+ 343 026c D8FFBD27 		addiu	$sp,$sp,-40
+ 344              	.LCFI15:
+ 345 0270 2400BFAF 		sw	$31,36($sp)
+ 346              	.LCFI16:
+ 347 0274 2000BEAF 		sw	$fp,32($sp)
+ 348              	.LCFI17:
+ 349 0278 21F0A003 		move	$fp,$sp
+ 350              	.LCFI18:
+ 116:DRN_PIC32MX_UART1.c ****     if( ! UART1_initialized) UART1_init();
+ 351              		.loc 1 116 0
+ 352 027c 00C0828F 		lw	$2,%gp_rel(UART1_initialized)($28)
+ 353 0280 03004014 		bne	$2,$0,.L19
+ 354 0284 00000000 		nop
+ 355              	
+ 356 0288 0000000C 		jal	UART1_init
+ 357 028c 00000000 		nop
+ 358              	
+ 359              	.L19:
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s 			page 9
+
+
+ 117:DRN_PIC32MX_UART1.c ****     int delta = RxNextRx-RxNextRead;
+ 360              		.loc 1 117 0
+ 361 0290 08C0828F 		lw	$2,%gp_rel(RxNextRx)($28)
+ 362 0294 21184000 		move	$3,$2
+ 363 0298 0CC0828F 		lw	$2,%gp_rel(RxNextRead)($28)
+ 364 029c 23106200 		subu	$2,$3,$2
+ 365 02a0 1000C2AF 		sw	$2,16($fp)
+ 118:DRN_PIC32MX_UART1.c ****     if(delta >= 0) return delta;
+ 366              		.loc 1 118 0
+ 367 02a4 1000C28F 		lw	$2,16($fp)
+ 368 02a8 05004004 		bltz	$2,.L20
+ 369 02ac 00000000 		nop
+ 370              	
+ 371 02b0 1000C28F 		lw	$2,16($fp)
+ 372 02b4 1800C2AF 		sw	$2,24($fp)
+ 373 02b8 B3000008 		j	.L21
+ 374 02bc 00000000 		nop
+ 375              	
+ 376              	.L20:
+ 119:DRN_PIC32MX_UART1.c ****     // pointers are straddling ring-buffer wrap-around
+ 120:DRN_PIC32MX_UART1.c ****     return sizeof(RxBuffer)+delta;
+ 377              		.loc 1 120 0
+ 378 02c0 1000C28F 		lw	$2,16($fp)
+ 379 02c4 C8004224 		addiu	$2,$2,200
+ 380 02c8 1800C2AF 		sw	$2,24($fp)
+ 381              	.L21:
+ 382 02cc 1800C28F 		lw	$2,24($fp)
+ 121:DRN_PIC32MX_UART1.c **** };
+ 383              		.loc 1 121 0
+ 384 02d0 21E8C003 		move	$sp,$fp
+ 385 02d4 2400BF8F 		lw	$31,36($sp)
+ 386 02d8 2000BE8F 		lw	$fp,32($sp)
+ 387 02dc 2800BD27 		addiu	$sp,$sp,40
+ 388 02e0 0800E003 		j	$31
+ 389 02e4 00000000 		nop
+ 390              	
+ 391              		.set	macro
+ 392              		.set	reorder
+ 393              		.end	__DRN_UART1_inputBytesQueued
+ 394              	.LFE27:
+ 396              		.align	2
+ 397              		.globl	__DRN_UART1_setBaud
+ 398              	.LFB28:
+ 122:DRN_PIC32MX_UART1.c **** // Clear any input and reset port speed
+ 123:DRN_PIC32MX_UART1.c **** void __DRN_UART1_setBaud(int baud) {
+ 399              		.loc 1 123 0
+ 400              		.set	nomips16
+ 401              		.ent	__DRN_UART1_setBaud
+ 402              	__DRN_UART1_setBaud:
+ 403              		.frame	$fp,32,$31		# vars= 8, regs= 2/0, args= 16, gp= 0
+ 404              		.mask	0xc0000000,-4
+ 405              		.fmask	0x00000000,0
+ 406              		.set	noreorder
+ 407              		.set	nomacro
+ 408              		
+ 409 02e8 E0FFBD27 		addiu	$sp,$sp,-32
+ 410              	.LCFI19:
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s 			page 10
+
+
+ 411 02ec 1C00BFAF 		sw	$31,28($sp)
+ 412              	.LCFI20:
+ 413 02f0 1800BEAF 		sw	$fp,24($sp)
+ 414              	.LCFI21:
+ 415 02f4 21F0A003 		move	$fp,$sp
+ 416              	.LCFI22:
+ 417 02f8 2000C4AF 		sw	$4,32($fp)
+ 124:DRN_PIC32MX_UART1.c ****     if( ! UART1_initialized) UART1_init();
+ 418              		.loc 1 124 0
+ 419 02fc 00C0828F 		lw	$2,%gp_rel(UART1_initialized)($28)
+ 420 0300 03004014 		bne	$2,$0,.L24
+ 421 0304 00000000 		nop
+ 422              	
+ 423 0308 0000000C 		jal	UART1_init
+ 424 030c 00000000 		nop
+ 425              	
+ 426              	.L24:
+ 125:DRN_PIC32MX_UART1.c ****     // presumes 16x baud clock divisor as set above...
+ 126:DRN_PIC32MX_UART1.c ****     U1BRG = (int)(((PERIPHERAL_CLOCK/(16UL*baud)))-1);
+ 427              		.loc 1 126 0
+ 428 0310 2000C28F 		lw	$2,32($fp)
+ 429 0314 00190200 		sll	$3,$2,4
+ 430 0318 C901023C 		li	$2,29949952			# 0x1c90000
+ 431 031c 80C34234 		ori	$2,$2,0xc380
+ 432 0320 1B004300 		divu	$0,$2,$3
+ 433 0324 F4016000 		teq	$3,$0,7
+ 434 0328 12100000 		mflo	$2
+ 435 032c FFFF4324 		addiu	$3,$2,-1
+ 436 0330 0000023C 		lui	$2,%hi(U1BRG)
+ 437 0334 000043AC 		sw	$3,%lo(U1BRG)($2)
+ 127:DRN_PIC32MX_UART1.c ****     __DRN_UART1_flushRx();
+ 438              		.loc 1 127 0
+ 439 0338 0000000C 		jal	__DRN_UART1_flushRx
+ 440 033c 00000000 		nop
+ 441              	
+ 128:DRN_PIC32MX_UART1.c **** };
+ 442              		.loc 1 128 0
+ 443 0340 21E8C003 		move	$sp,$fp
+ 444 0344 1C00BF8F 		lw	$31,28($sp)
+ 445 0348 1800BE8F 		lw	$fp,24($sp)
+ 446 034c 2000BD27 		addiu	$sp,$sp,32
+ 447 0350 0800E003 		j	$31
+ 448 0354 00000000 		nop
+ 449              	
+ 450              		.set	macro
+ 451              		.set	reorder
+ 452              		.end	__DRN_UART1_setBaud
+ 453              	.LFE28:
+ 455              		.align	2
+ 456              		.globl	__DRN_UART1_flushRx
+ 457              	.LFB29:
+ 129:DRN_PIC32MX_UART1.c **** // Clear any input
+ 130:DRN_PIC32MX_UART1.c **** void __DRN_UART1_flushRx(void) {
+ 458              		.loc 1 130 0
+ 459              		.set	nomips16
+ 460              		.ent	__DRN_UART1_flushRx
+ 461              	__DRN_UART1_flushRx:
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s 			page 11
+
+
+ 462              		.frame	$fp,8,$31		# vars= 0, regs= 1/0, args= 0, gp= 0
+ 463              		.mask	0x40000000,-4
+ 464              		.fmask	0x00000000,0
+ 465              		.set	noreorder
+ 466              		.set	nomacro
+ 467              		
+ 468 0358 F8FFBD27 		addiu	$sp,$sp,-8
+ 469              	.LCFI23:
+ 470 035c 0400BEAF 		sw	$fp,4($sp)
+ 471              	.LCFI24:
+ 472 0360 21F0A003 		move	$fp,$sp
+ 473              	.LCFI25:
+ 131:DRN_PIC32MX_UART1.c ****     RxNextRx = RxNextRead  = &RxBuffer[0];
+ 474              		.loc 1 131 0
+ 475 0364 0000023C 		lui	$2,%hi(RxBuffer)
+ 476 0368 C8004224 		addiu	$2,$2,%lo(RxBuffer)
+ 477 036c 0CC082AF 		sw	$2,%gp_rel(RxNextRead)($28)
+ 478 0370 0000023C 		lui	$2,%hi(RxBuffer)
+ 479 0374 C8004224 		addiu	$2,$2,%lo(RxBuffer)
+ 480 0378 08C082AF 		sw	$2,%gp_rel(RxNextRx)($28)
+ 132:DRN_PIC32MX_UART1.c **** };
+ 481              		.loc 1 132 0
+ 482 037c 21E8C003 		move	$sp,$fp
+ 483 0380 0400BE8F 		lw	$fp,4($sp)
+ 484 0384 0800BD27 		addiu	$sp,$sp,8
+ 485 0388 0800E003 		j	$31
+ 486 038c 00000000 		nop
+ 487              	
+ 488              		.set	macro
+ 489              		.set	reorder
+ 490              		.end	__DRN_UART1_flushRx
+ 491              	.LFE29:
+ 493              		.align	2
+ 494              		.globl	__DRN_UART1_disable
+ 495              	.LFB30:
+ 133:DRN_PIC32MX_UART1.c **** // Disable UART and especially interrupts
+ 134:DRN_PIC32MX_UART1.c **** void __DRN_UART1_disable(void) {
+ 496              		.loc 1 134 0
+ 497              		.set	nomips16
+ 498              		.ent	__DRN_UART1_disable
+ 499              	__DRN_UART1_disable:
+ 500              		.frame	$fp,8,$31		# vars= 0, regs= 1/0, args= 0, gp= 0
+ 501              		.mask	0x40000000,-4
+ 502              		.fmask	0x00000000,0
+ 503              		.set	noreorder
+ 504              		.set	nomacro
+ 505              		
+ 506 0390 F8FFBD27 		addiu	$sp,$sp,-8
+ 507              	.LCFI26:
+ 508 0394 0400BEAF 		sw	$fp,4($sp)
+ 509              	.LCFI27:
+ 510 0398 21F0A003 		move	$fp,$sp
+ 511              	.LCFI28:
+ 135:DRN_PIC32MX_UART1.c **** 	// disable receive and transmit interrupts
+ 136:DRN_PIC32MX_UART1.c ****     IEC0bits.U1RXIE = 0;
+ 512              		.loc 1 136 0
+ 513 039c 0000033C 		lui	$3,%hi(IEC0)
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s 			page 12
+
+
+ 514 03a0 0000628C 		lw	$2,%lo(IEC0)($3)
+ 515 03a4 C4DE027C 		ins	$2,$0,27,1
+ 516 03a8 000062AC 		sw	$2,%lo(IEC0)($3)
+ 137:DRN_PIC32MX_UART1.c ****     IEC0bits.U1TXIE = 0;
+ 517              		.loc 1 137 0
+ 518 03ac 0000033C 		lui	$3,%hi(IEC0)
+ 519 03b0 0000628C 		lw	$2,%lo(IEC0)($3)
+ 520 03b4 04E7027C 		ins	$2,$0,28,1
+ 521 03b8 000062AC 		sw	$2,%lo(IEC0)($3)
+ 138:DRN_PIC32MX_UART1.c **** };
+ 522              		.loc 1 138 0
+ 523 03bc 21E8C003 		move	$sp,$fp
+ 524 03c0 0400BE8F 		lw	$fp,4($sp)
+ 525 03c4 0800BD27 		addiu	$sp,$sp,8
+ 526 03c8 0800E003 		j	$31
+ 527 03cc 00000000 		nop
+ 528              	
+ 529              		.set	macro
+ 530              		.set	reorder
+ 531              		.end	__DRN_UART1_disable
+ 532              	.LFE30:
+ 534              		.align	2
+ 535              		.globl	c_vector_24_ISR
+ 536              	.LFB31:
+ 139:DRN_PIC32MX_UART1.c **** 
+ 140:DRN_PIC32MX_UART1.c **** 
+ 141:DRN_PIC32MX_UART1.c **** 
+ 142:DRN_PIC32MX_UART1.c **** // UART1 ISR - serial port 1
+ 143:DRN_PIC32MX_UART1.c **** void c_vector_24_ISR(void) {
+ 537              		.loc 1 143 0
+ 538              		.set	nomips16
+ 539              		.ent	c_vector_24_ISR
+ 540              	c_vector_24_ISR:
+ 541              		.frame	$fp,40,$31		# vars= 32, regs= 1/0, args= 0, gp= 0
+ 542              		.mask	0x40000000,-4
+ 543              		.fmask	0x00000000,0
+ 544              		.set	noreorder
+ 545              		.set	nomacro
+ 546              		
+ 547 03d0 D8FFBD27 		addiu	$sp,$sp,-40
+ 548              	.LCFI29:
+ 549 03d4 2400BEAF 		sw	$fp,36($sp)
+ 550              	.LCFI30:
+ 551 03d8 21F0A003 		move	$fp,$sp
+ 552              	.LCFI31:
+ 144:DRN_PIC32MX_UART1.c ****     // Clear any receive errors (overflow, parity, framing)
+ 145:DRN_PIC32MX_UART1.c ****     if(U1STA & (USTA_OERR | USTA_FERR | USTA_PERR) ) {
+ 553              		.loc 1 145 0
+ 554 03dc 0000023C 		lui	$2,%hi(U1STA)
+ 555 03e0 0000428C 		lw	$2,%lo(U1STA)($2)
+ 556 03e4 0E004230 		andi	$2,$2,0xe
+ 557 03e8 28004010 		beq	$2,$0,.L31
+ 558 03ec 00000000 		nop
+ 559              	
+ 146:DRN_PIC32MX_UART1.c ****         /* DEBUG: ... insert X in receive buffer */
+ 147:DRN_PIC32MX_UART1.c ****         // Documentation says: Reset overflow bit (which flushes receive FIFO)
+ 148:DRN_PIC32MX_UART1.c ****         // Quote: "To keep the data received prior to the overrun, the user should
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s 			page 13
+
+
+ 149:DRN_PIC32MX_UART1.c ****         // first read all five characters, then clear the OERR bit. If the five
+ 150:DRN_PIC32MX_UART1.c ****         // characters can be discarded, the user can simply clear the OERR bit.
+ 151:DRN_PIC32MX_UART1.c ****         // This effectively resets the receive FIFO, and all prior received data is lost".
+ 152:DRN_PIC32MX_UART1.c ****         U1STACLR = USTA_OERR |
+ 560              		.loc 1 152 0
+ 561 03f0 0000033C 		lui	$3,%hi(U1STACLR)
+ 562 03f4 0E000224 		li	$2,14			# 0xe
+ 563 03f8 000062AC 		sw	$2,%lo(U1STACLR)($3)
+ 153:DRN_PIC32MX_UART1.c ****                    USTA_FERR |
+ 154:DRN_PIC32MX_UART1.c ****                    USTA_PERR ;
+ 155:DRN_PIC32MX_UART1.c ****         // *********************** HARDWARE BUG ***********************
+ 156:DRN_PIC32MX_UART1.c ****         // Unfortunately, **SOMETIMES** this doesn't really reset UART;
+ 157:DRN_PIC32MX_UART1.c ****         // What sometimes happens: RXDA remains on and the receive buffer overflows.
+ 158:DRN_PIC32MX_UART1.c ****         // NSP driver example: USTA = 0x01091533:
+ 159:DRN_PIC32MX_UART1.c ****         // - RXDA (x1)
+ 160:DRN_PIC32MX_UART1.c ****         // - overrun (x2)
+ 161:DRN_PIC32MX_UART1.c ****         // - no framing error (x4)
+ 162:DRN_PIC32MX_UART1.c ****         // RXDA sticks set (and will cause a receive buffer overflow).
+ 163:DRN_PIC32MX_UART1.c ****         // Experimentally determined kludge definitely resets UART...
+ 164:DRN_PIC32MX_UART1.c ****         if( (U1STA & (USTA_OERR | USTA_FERR | USTA_PERR)) ||
+ 564              		.loc 1 164 0
+ 565 03fc 0000023C 		lui	$2,%hi(U1STA)
+ 566 0400 0000428C 		lw	$2,%lo(U1STA)($2)
+ 567 0404 0E004230 		andi	$2,$2,0xe
+ 568 0408 07004014 		bne	$2,$0,.L32
+ 569 040c 00000000 		nop
+ 570              	
+ 571 0410 0000023C 		lui	$2,%hi(U1STA)
+ 572 0414 0000428C 		lw	$2,%lo(U1STA)($2)
+ 573 0418 0000427C 		ext	$2,$2,0,1
+ 574 041c FF004230 		andi	$2,$2,0x00ff
+ 575 0420 1A004010 		beq	$2,$0,.L31
+ 576 0424 00000000 		nop
+ 577              	
+ 578              	.L32:
+ 579              	.LBB2:
+ 165:DRN_PIC32MX_UART1.c ****                 U1STAbits.URXDA                                  )
+ 166:DRN_PIC32MX_UART1.c ****         {
+ 167:DRN_PIC32MX_UART1.c ****                 int kludgeCnt;
+ 168:DRN_PIC32MX_UART1.c ****                 for(kludgeCnt=5; kludgeCnt; kludgeCnt--) {
+ 580              		.loc 1 168 0
+ 581 0428 05000224 		li	$2,5			# 0x5
+ 582 042c 1C00C2AF 		sw	$2,28($fp)
+ 583 0430 20010008 		j	.L33
+ 584 0434 00000000 		nop
+ 585              	
+ 586              	.L34:
+ 587              	.LBB3:
+ 169:DRN_PIC32MX_UART1.c ****                         // clear overflow, parity, and framing error bits
+ 170:DRN_PIC32MX_UART1.c ****                         U1STACLR = USTA_OERR |
+ 588              		.loc 1 170 0
+ 589 0438 0000033C 		lui	$3,%hi(U1STACLR)
+ 590 043c 0E000224 		li	$2,14			# 0xe
+ 591 0440 000062AC 		sw	$2,%lo(U1STACLR)($3)
+ 171:DRN_PIC32MX_UART1.c ****                                    USTA_FERR |
+ 172:DRN_PIC32MX_UART1.c ****                                    USTA_PERR ;
+ 173:DRN_PIC32MX_UART1.c ****                         // read dummy characters to "unstick" UART
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s 			page 14
+
+
+ 174:DRN_PIC32MX_UART1.c ****                         int junk1 = U1RXREG;
+ 592              		.loc 1 174 0
+ 593 0444 0000023C 		lui	$2,%hi(U1RXREG)
+ 594 0448 0000428C 		lw	$2,%lo(U1RXREG)($2)
+ 595 044c 1800C2AF 		sw	$2,24($fp)
+ 175:DRN_PIC32MX_UART1.c ****                         int junk2 = U1RXREG;
+ 596              		.loc 1 175 0
+ 597 0450 0000023C 		lui	$2,%hi(U1RXREG)
+ 598 0454 0000428C 		lw	$2,%lo(U1RXREG)($2)
+ 599 0458 1400C2AF 		sw	$2,20($fp)
+ 176:DRN_PIC32MX_UART1.c ****                         int junk3 = U1RXREG;
+ 600              		.loc 1 176 0
+ 601 045c 0000023C 		lui	$2,%hi(U1RXREG)
+ 602 0460 0000428C 		lw	$2,%lo(U1RXREG)($2)
+ 603 0464 1000C2AF 		sw	$2,16($fp)
+ 177:DRN_PIC32MX_UART1.c ****                         int junk4 = U1RXREG;
+ 604              		.loc 1 177 0
+ 605 0468 0000023C 		lui	$2,%hi(U1RXREG)
+ 606 046c 0000428C 		lw	$2,%lo(U1RXREG)($2)
+ 607 0470 0C00C2AF 		sw	$2,12($fp)
+ 608              	.LBE3:
+ 609              		.loc 1 168 0
+ 610 0474 1C00C28F 		lw	$2,28($fp)
+ 611 0478 FFFF4224 		addiu	$2,$2,-1
+ 612 047c 1C00C2AF 		sw	$2,28($fp)
+ 613              	.L33:
+ 614 0480 1C00C28F 		lw	$2,28($fp)
+ 615 0484 ECFF4014 		bne	$2,$0,.L34
+ 616 0488 00000000 		nop
+ 617              	
+ 618              	.L31:
+ 619              	.LBE2:
+ 620              	.LBB4:
+ 178:DRN_PIC32MX_UART1.c ****                 };
+ 179:DRN_PIC32MX_UART1.c ****         }
+ 180:DRN_PIC32MX_UART1.c ****     }
+ 181:DRN_PIC32MX_UART1.c ****     // Receive data into buffer...
+ 182:DRN_PIC32MX_UART1.c ****     {   // Prevent infinite loop if RX data available doesn't clear
+ 183:DRN_PIC32MX_UART1.c ****         // (as it does NOT clear on some error conditions). There cannot
+ 184:DRN_PIC32MX_UART1.c ****         // be more than 5 characters pending (FIFO=4 + shift register)...
+ 185:DRN_PIC32MX_UART1.c ****         IFS0CLR = _IFS0_U1RXIF_MASK; // first, reset interrupt request
+ 621              		.loc 1 185 0
+ 622 048c 0000023C 		lui	$2,%hi(IFS0CLR)
+ 623 0490 0008033C 		li	$3,134217728			# 0x8000000
+ 624 0494 000043AC 		sw	$3,%lo(IFS0CLR)($2)
+ 186:DRN_PIC32MX_UART1.c ****         int rxlimit;
+ 187:DRN_PIC32MX_UART1.c ****         for(rxlimit=5; rxlimit && U1STAbits.URXDA; rxlimit--) {
+ 625              		.loc 1 187 0
+ 626 0498 05000224 		li	$2,5			# 0x5
+ 627 049c 0800C2AF 		sw	$2,8($fp)
+ 628 04a0 48010008 		j	.L35
+ 629 04a4 00000000 		nop
+ 630              	
+ 631              	.L39:
+ 632              	.LBB5:
+ 188:DRN_PIC32MX_UART1.c ****             char d = U1RXREG;
+ 633              		.loc 1 188 0
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s 			page 15
+
+
+ 634 04a8 0000023C 		lui	$2,%hi(U1RXREG)
+ 635 04ac 0000428C 		lw	$2,%lo(U1RXREG)($2)
+ 636 04b0 0400C2A3 		sb	$2,4($fp)
+ 189:DRN_PIC32MX_UART1.c ****             *RxNextRx = d;
+ 637              		.loc 1 189 0
+ 638 04b4 08C0838F 		lw	$3,%gp_rel(RxNextRx)($28)
+ 639 04b8 0400C293 		lbu	$2,4($fp)
+ 640 04bc 000062A0 		sb	$2,0($3)
+ 190:DRN_PIC32MX_UART1.c ****             // advance buffer pointer unless it would cause an overflow
+ 191:DRN_PIC32MX_UART1.c ****             unsigned char volatile *next_RxNextRx = RxNextRx;
+ 641              		.loc 1 191 0
+ 642 04c0 08C0828F 		lw	$2,%gp_rel(RxNextRx)($28)
+ 643 04c4 0000C2AF 		sw	$2,0($fp)
+ 192:DRN_PIC32MX_UART1.c ****             INCR_PTR(next_RxNextRx, RxBuffer);
+ 644              		.loc 1 192 0
+ 645 04c8 0000C28F 		lw	$2,0($fp)
+ 646 04cc 01004224 		addiu	$2,$2,1
+ 647 04d0 0000C2AF 		sw	$2,0($fp)
+ 648 04d4 0000023C 		lui	$2,%hi(RxBuffer+199)
+ 649 04d8 8F014324 		addiu	$3,$2,%lo(RxBuffer+199)
+ 650 04dc 0000C28F 		lw	$2,0($fp)
+ 651 04e0 2B106200 		sltu	$2,$3,$2
+ 652 04e4 04004010 		beq	$2,$0,.L36
+ 653 04e8 00000000 		nop
+ 654              	
+ 655 04ec 0000023C 		lui	$2,%hi(RxBuffer)
+ 656 04f0 C8004224 		addiu	$2,$2,%lo(RxBuffer)
+ 657 04f4 0000C2AF 		sw	$2,0($fp)
+ 658              	.L36:
+ 193:DRN_PIC32MX_UART1.c ****             if(next_RxNextRx != RxNextRead) RxNextRx = next_RxNextRx;
+ 659              		.loc 1 193 0
+ 660 04f8 0CC0828F 		lw	$2,%gp_rel(RxNextRead)($28)
+ 661 04fc 21184000 		move	$3,$2
+ 662 0500 0000C28F 		lw	$2,0($fp)
+ 663 0504 03004310 		beq	$2,$3,.L37
+ 664 0508 00000000 		nop
+ 665              	
+ 666 050c 0000C28F 		lw	$2,0($fp)
+ 667 0510 08C082AF 		sw	$2,%gp_rel(RxNextRx)($28)
+ 668              	.L37:
+ 669              	.LBE5:
+ 670              		.loc 1 187 0
+ 671 0514 0800C28F 		lw	$2,8($fp)
+ 672 0518 FFFF4224 		addiu	$2,$2,-1
+ 673 051c 0800C2AF 		sw	$2,8($fp)
+ 674              	.L35:
+ 675 0520 0800C28F 		lw	$2,8($fp)
+ 676 0524 07004010 		beq	$2,$0,.L38
+ 677 0528 00000000 		nop
+ 678              	
+ 679 052c 0000023C 		lui	$2,%hi(U1STA)
+ 680 0530 0000428C 		lw	$2,%lo(U1STA)($2)
+ 681 0534 0000427C 		ext	$2,$2,0,1
+ 682 0538 FF004230 		andi	$2,$2,0x00ff
+ 683 053c DAFF4014 		bne	$2,$0,.L39
+ 684 0540 00000000 		nop
+ 685              	
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s 			page 16
+
+
+ 686              	.L38:
+ 687              	.LBE4:
+ 194:DRN_PIC32MX_UART1.c ****         }
+ 195:DRN_PIC32MX_UART1.c ****     }
+ 196:DRN_PIC32MX_UART1.c ****     // If there's space in transmit buffer, send any pending output
+ 197:DRN_PIC32MX_UART1.c ****     if(! U1STAbits.UTXBF) {
+ 688              		.loc 1 197 0
+ 689 0544 0000023C 		lui	$2,%hi(U1STA)
+ 690 0548 0000428C 		lw	$2,%lo(U1STA)($2)
+ 691 054c 4002427C 		ext	$2,$2,9,1
+ 692 0550 FF004230 		andi	$2,$2,0x00ff
+ 693 0554 20004014 		bne	$2,$0,.L40
+ 694 0558 00000000 		nop
+ 695              	
+ 198:DRN_PIC32MX_UART1.c ****         IFS0CLR = _IFS0_U1TXIF_MASK;
+ 696              		.loc 1 198 0
+ 697 055c 0000033C 		lui	$3,%hi(IFS0CLR)
+ 698 0560 0010023C 		li	$2,268435456			# 0x10000000
+ 699 0564 000062AC 		sw	$2,%lo(IFS0CLR)($3)
+ 199:DRN_PIC32MX_UART1.c ****         if( TxNextTx != TxNextInsert) {
+ 700              		.loc 1 199 0
+ 701 0568 00C0838F 		lw	$3,%gp_rel(TxNextTx)($28)
+ 702 056c 04C0828F 		lw	$2,%gp_rel(TxNextInsert)($28)
+ 703 0570 15006210 		beq	$3,$2,.L41
+ 704 0574 00000000 		nop
+ 705              	
+ 200:DRN_PIC32MX_UART1.c ****             // send out a character
+ 201:DRN_PIC32MX_UART1.c ****             U1TXREG = *TxNextTx; // enqueue character into UART's transmit FIFO...
+ 706              		.loc 1 201 0
+ 707 0578 00C0828F 		lw	$2,%gp_rel(TxNextTx)($28)
+ 708 057c 00004290 		lbu	$2,0($2)
+ 709 0580 FF004230 		andi	$2,$2,0x00ff
+ 710 0584 21184000 		move	$3,$2
+ 711 0588 0000023C 		lui	$2,%hi(U1TXREG)
+ 712 058c 000043AC 		sw	$3,%lo(U1TXREG)($2)
+ 202:DRN_PIC32MX_UART1.c ****             INCR_PTR(TxNextTx, TxBuffer);
+ 713              		.loc 1 202 0
+ 714 0590 00C0828F 		lw	$2,%gp_rel(TxNextTx)($28)
+ 715 0594 01004224 		addiu	$2,$2,1
+ 716 0598 00C082AF 		sw	$2,%gp_rel(TxNextTx)($28)
+ 717 059c 00C0838F 		lw	$3,%gp_rel(TxNextTx)($28)
+ 718 05a0 0000023C 		lui	$2,%hi(TxBuffer+199)
+ 719 05a4 C7004224 		addiu	$2,$2,%lo(TxBuffer+199)
+ 720 05a8 2B104300 		sltu	$2,$2,$3
+ 721 05ac 0A004010 		beq	$2,$0,.L40
+ 722 05b0 00000000 		nop
+ 723              	
+ 724 05b4 0000023C 		lui	$2,%hi(TxBuffer)
+ 725 05b8 00004224 		addiu	$2,$2,%lo(TxBuffer)
+ 726 05bc 00C082AF 		sw	$2,%gp_rel(TxNextTx)($28)
+ 727 05c0 76010008 		j	.L40
+ 728 05c4 00000000 		nop
+ 729              	
+ 730              	.L41:
+ 203:DRN_PIC32MX_UART1.c ****         } else {
+ 204:DRN_PIC32MX_UART1.c ****             // no data waiting to be sent; disable interrupt to avoid continuous infinite interrupt
+ 205:DRN_PIC32MX_UART1.c ****             IEC0bits.U1TXIE = 0;
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s 			page 17
+
+
+ 731              		.loc 1 205 0
+ 732 05c8 0000033C 		lui	$3,%hi(IEC0)
+ 733 05cc 0000628C 		lw	$2,%lo(IEC0)($3)
+ 734 05d0 04E7027C 		ins	$2,$0,28,1
+ 735 05d4 000062AC 		sw	$2,%lo(IEC0)($3)
+ 736              	.L40:
+ 206:DRN_PIC32MX_UART1.c ****         }
+ 207:DRN_PIC32MX_UART1.c ****     }
+ 208:DRN_PIC32MX_UART1.c ****         IFS0CLR = _IFS0_U1EIF_MASK; // clear error requests (ISR must reset all request flags prior
+ 737              		.loc 1 208 0
+ 738 05d8 0000033C 		lui	$3,%hi(IFS0CLR)
+ 739 05dc 0004023C 		li	$2,67108864			# 0x4000000
+ 740 05e0 000062AC 		sw	$2,%lo(IFS0CLR)($3)
+ 209:DRN_PIC32MX_UART1.c **** }
+ 741              		.loc 1 209 0
+ 742 05e4 21E8C003 		move	$sp,$fp
+ 743 05e8 2400BE8F 		lw	$fp,36($sp)
+ 744 05ec 2800BD27 		addiu	$sp,$sp,40
+ 745 05f0 0800E003 		j	$31
+ 746 05f4 00000000 		nop
+ 747              	
+ 748              		.set	macro
+ 749              		.set	reorder
+ 750              		.end	c_vector_24_ISR
+ 751              	.LFE31:
+ 753              		.align	2
+ 754              		.globl	putsUART1
+ 755              	.LFB32:
+ 210:DRN_PIC32MX_UART1.c **** 
+ 211:DRN_PIC32MX_UART1.c **** // override Microchip library routine, just in case it gets used...
+ 212:DRN_PIC32MX_UART1.c **** void putsUART1(const /*unsigned*/ char *string) {
+ 756              		.loc 1 212 0
+ 757              		.set	nomips16
+ 758              		.ent	putsUART1
+ 759              	putsUART1:
+ 760              		.frame	$fp,32,$31		# vars= 8, regs= 2/0, args= 16, gp= 0
+ 761              		.mask	0xc0000000,-4
+ 762              		.fmask	0x00000000,0
+ 763              		.set	noreorder
+ 764              		.set	nomacro
+ 765              		
+ 766 05f8 E0FFBD27 		addiu	$sp,$sp,-32
+ 767              	.LCFI32:
+ 768 05fc 1C00BFAF 		sw	$31,28($sp)
+ 769              	.LCFI33:
+ 770 0600 1800BEAF 		sw	$fp,24($sp)
+ 771              	.LCFI34:
+ 772 0604 21F0A003 		move	$fp,$sp
+ 773              	.LCFI35:
+ 774 0608 2000C4AF 		sw	$4,32($fp)
+ 775 060c 89010008 		j	.L45
+ 776 0610 00000000 		nop
+ 777              	
+ 778              	.L46:
+ 213:DRN_PIC32MX_UART1.c ****     char c;
+ 214:DRN_PIC32MX_UART1.c ****     while( c = *string++ ) __DRN_putc(c);
+ 779              		.loc 1 214 0
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s 			page 18
+
+
+ 780 0614 1000C293 		lbu	$2,16($fp)
+ 781 0618 21204000 		move	$4,$2
+ 782 061c 0000000C 		jal	__DRN_putc
+ 783 0620 00000000 		nop
+ 784              	
+ 785              	.L45:
+ 786 0624 2000C28F 		lw	$2,32($fp)
+ 787 0628 00004290 		lbu	$2,0($2)
+ 788 062c 1000C2A3 		sb	$2,16($fp)
+ 789 0630 1000C293 		lbu	$2,16($fp)
+ 790 0634 2B100200 		sltu	$2,$0,$2
+ 791 0638 FF004330 		andi	$3,$2,0x00ff
+ 792 063c 2000C28F 		lw	$2,32($fp)
+ 793 0640 01004224 		addiu	$2,$2,1
+ 794 0644 2000C2AF 		sw	$2,32($fp)
+ 795 0648 F2FF6014 		bne	$3,$0,.L46
+ 796 064c 00000000 		nop
+ 797              	
+ 215:DRN_PIC32MX_UART1.c **** }
+ 798              		.loc 1 215 0
+ 799 0650 21E8C003 		move	$sp,$fp
+ 800 0654 1C00BF8F 		lw	$31,28($sp)
+ 801 0658 1800BE8F 		lw	$fp,24($sp)
+ 802 065c 2000BD27 		addiu	$sp,$sp,32
+ 803 0660 0800E003 		j	$31
+ 804 0664 00000000 		nop
+ 805              	
+ 806              		.set	macro
+ 807              		.set	reorder
+ 808              		.end	putsUART1
+ 809              	.LFE32:
+ 811              		.local	TxBuffer
+ 812              		.comm	TxBuffer,200,4
+ 813              		.local	RxBuffer
+ 814              		.comm	RxBuffer,200,4
+ 1043              	.Letext0:
+GAS LISTING C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s 			page 19
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 DRN_PIC32MX_UART1.c
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s:13     .sbss:0000000000000000 UART1_initialized
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s:20     .text:0000000000000000 UART1_init
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s:80     .sdata:0000000000000000 TxNextTx
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s:812    .bss:0000000000000000 TxBuffer
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s:85     .sdata:0000000000000004 TxNextInsert
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s:90     .sdata:0000000000000008 RxNextRx
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s:814    .bss:00000000000000c8 RxBuffer
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s:95     .sdata:000000000000000c RxNextRead
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s:103    .text:0000000000000084 __DRN_putc
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s:191    .text:000000000000014c __DRN_getc
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s:270    .text:00000000000001f0 __DRN_UART1_outputBytesQueued
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s:336    .text:000000000000026c __DRN_UART1_inputBytesQueued
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s:402    .text:00000000000002e8 __DRN_UART1_setBaud
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s:461    .text:0000000000000358 __DRN_UART1_flushRx
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s:499    .text:0000000000000390 __DRN_UART1_disable
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s:540    .text:00000000000003d0 c_vector_24_ISR
+C:\DOCUME~1\DNadler\LOCALS~1\Temp/ccSUpaaa.s:759    .text:00000000000005f8 putsUART1
+
+UNDEFINED SYMBOLS
+U1BRG
+U1MODE
+U1STA
+IPC6
+IEC0
+IFS0
+U1STACLR
+U1RXREG
+IFS0CLR
+U1TXREG
