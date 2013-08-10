@@ -164,6 +164,7 @@ SECTIONS
   .eh_frame_hdr : ALIGN (4)
   {
     KEEP (*(.eh_frame_hdr))
+    *(.eh_frame_entry .eh_frame_entry.*)
   } >PIC32MX_flash_user
   
   .eh_frame : ALIGN (4)
