@@ -471,7 +471,7 @@ void __attribute__((nomips16)) INTSetVectorSpacing(INT_VS vector_spacing);
   Remarks:
     None.
   *****************************************************************************/
-extern inline void __attribute__ ((always_inline)) INTSingleVectorRegisterSet(INT_SV_SS reg_set)
+static inline void __attribute__ ((always_inline)) INTSingleVectorRegisterSet(INT_SV_SS reg_set)
 {
     INTCONCLR   = reg_set;
     INTCONSET    = reg_set;
@@ -511,7 +511,7 @@ extern inline void __attribute__ ((always_inline)) INTSingleVectorRegisterSet(IN
   Remarks:
     The user can refer to the device file to get the vector number defines.
   *****************************************************************************/
-extern inline unsigned int __attribute__ ((always_inline)) INTGetInterruptVectorNumber(void)
+static inline unsigned int __attribute__ ((always_inline)) INTGetInterruptVectorNumber(void)
 {
     return (unsigned int)(INTSTATbits.VEC);
 }
@@ -544,7 +544,7 @@ extern inline unsigned int __attribute__ ((always_inline)) INTGetInterruptVector
   Remarks:
     None.
   *****************************************************************************/
-extern inline INT_PRIORITY __attribute__ ((always_inline)) INTGetInterruptVectorPriority(void)
+static inline INT_PRIORITY __attribute__ ((always_inline)) INTGetInterruptVectorPriority(void)
 {
     return (INT_PRIORITY)(INTSTATbits.SRIPL);
 }
@@ -586,7 +586,7 @@ extern inline INT_PRIORITY __attribute__ ((always_inline)) INTGetInterruptVector
   Remarks:
     None.
   *****************************************************************************/
-extern inline void __attribute__ ((always_inline)) INTGetInterruptVectorNumberAndPriority(unsigned int *number, INT_PRIORITY *priority)
+static inline void __attribute__ ((always_inline)) INTGetInterruptVectorNumberAndPriority(unsigned int *number, INT_PRIORITY *priority)
 {
     *number     = INTSTAT;
     *priority   = (INT_PRIORITY)((*number >> 8) & 7);
@@ -898,7 +898,7 @@ INT_SUB_PRIORITY INTGetVectorSubPriority(INT_VECTOR vector);
   Remarks:
     None
   *****************************************************************************/
-extern inline void __attribute__ ((always_inline)) INTSetIntProximityTimerReload(unsigned int time)
+static inline void __attribute__ ((always_inline)) INTSetIntProximityTimerReload(unsigned int time)
 {
     IPTMR = time;
 }
@@ -931,7 +931,7 @@ extern inline void __attribute__ ((always_inline)) INTSetIntProximityTimerReload
   Remarks:
     None
   *****************************************************************************/
-extern inline unsigned int __attribute__ ((always_inline)) INTGetIntProximityTimer(void)
+static inline unsigned int __attribute__ ((always_inline)) INTGetIntProximityTimer(void)
 {
     return IPTMR;
 }
@@ -962,7 +962,7 @@ extern inline unsigned int __attribute__ ((always_inline)) INTGetIntProximityTim
   Remarks:
     None
   *****************************************************************************/
-extern inline void __attribute__ ((always_inline)) INTSetTemporalProximityControl(INT_TPC_GROUP level)
+static inline void __attribute__ ((always_inline)) INTSetTemporalProximityControl(INT_TPC_GROUP level)
 {
     INTCONCLR = INT_TPC_DISABLE;
 
