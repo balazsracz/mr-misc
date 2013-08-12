@@ -40,7 +40,7 @@ LDFLAGSEXTRA= -Wl,--defsym,__cs3_mips_float_type=2
 # Tell make to look for source files in current directory, then Microchip subdirectory, etc.
 VPATH=.:common:Source:Source/USB:Source/FrameWork
 
-all: CPP_Demo.hex 
+all: bootloader.hex 
 
 OBJS = \
  obj/pic32mx_cfg_init.o             \
@@ -59,7 +59,10 @@ OBJS = \
  obj/pcache.o                       \
  obj/read_core_timer_lib.o \
  obj/write_core_timer_lib.o \
- obj/int_tbl_lib.o \
+
+
+
+# obj/int_tbl_lib.o \
 
 
 
@@ -109,35 +112,35 @@ depend:
 -include .depend
 
 
-CPP_Demo.hex: Makefile $(LDSCRIPT) PIC32MX-reset.S $(OBJS) # regs.S 
+bootloader.hex: Makefile $(LDSCRIPT) PIC32MX-reset.S $(OBJS) # regs.S 
 	@echo ===================  Environment  ====================
 	@echo PATH="$(PATH)"
 	$(CC) -v
 	@echo ======================  Link  ================================
-	$(CPP) -EL -msoft-float -g -Wl,-t -Wl,-Map,CPP_Demo.map -T $(LDSCRIPT) -o CPP_Demo.elf $(LDFLAGSEXTRA) $(OBJS)
-#	# $(NM) -n -a CPP_Demo.elf >> CPP_Demo.map
-	$(OBJDUMP) -h CPP_Demo.elf
-#	#$(PREFIX)-readelf --sections CPP_Demo.elf
+	$(CPP) -EL -msoft-float -g -nostartfiles -nostdlib -Wl,-t -Wl,-Map,bootloader.map -T $(LDSCRIPT) -o bootloader.elf $(LDFLAGSEXTRA) $(OBJS)
+#	# $(NM) -n -a bootloader.elf >> bootloader.map
+	$(OBJDUMP) -h bootloader.elf
+#	#$(PREFIX)-readelf --sections bootloader.elf
 	@echo ================  ELF LMA Adjustment  =========================
 #	# LD cannot handle mapping of PIC32MX logical addresses to physical.
 #	# Note: Physical address = LMA & 0x1FFFffff
 #	# Some device programmers take care of this but sadly not Microchip's...
 #	# Create an ELF with adjusted LMAs prior creating the HEX file.
-	$(OBJCOPY) --change-section-lma .PIC32MX_cfg_init-0xA0000000 --change-section-lma .boot_flash_text-0xA0000000 --change-section-lma .text-0xA0000000 --change-section-lma .eh_frame-0xA0000000 --change-section-lma .rodata-0xA0000000 --change-section-lma .data-0xA0000000 --change-section-lma .vector_4-0xA0000000 --change-section-lma .vector_24-0xA0000000 --change-section-lma .reset-0xA0000000 --change-section-lma .boot-0xA0000000 --change-section-lma .eh_frame_hdr-0xA0000000 CPP_Demo.elf tmp.elf
+	$(OBJCOPY) --change-section-lma .PIC32MX_cfg_init-0xA0000000 --change-section-lma .boot_flash_text-0xA0000000 --change-section-lma .text-0xA0000000 --change-section-lma .eh_frame-0xA0000000 --change-section-lma .rodata-0xA0000000 --change-section-lma .data-0xA0000000 --change-section-lma .vector_4-0xA0000000 --change-section-lma .vector_24-0xA0000000 --change-section-lma .reset-0xA0000000 --change-section-lma .boot-0xA0000000 --change-section-lma .eh_frame_hdr-0xA0000000 bootloader.elf tmp.elf
 	@echo "**************************************************************"
 	@echo === VERIFY NO "BF.." or "BD.." LMA in the sections below ! ===
 	@echo "**************************************************************"
 	$(OBJDUMP) -h tmp.elf
 	@echo ===================  ELF to HEX  ==============================
 #	# Translate the ELF file into Intel hex
-	$(OBJCOPY) -O ihex tmp.elf CPP_Demo.hex
+	$(OBJCOPY) -O ihex tmp.elf bootloader.hex
 	@echo Convenience Only - Non-critical parts of build follow
 	$(SIZE) tmp.elf
 #	# make local copy for ease of testing...
 #	cp CPP_Demo.hex d:/Install/USBJTAG/CPP_Demo.hex
 
 dump:
-	$(OBJDUMP) --disassemble CPP_Demo.elf
+	$(OBJDUMP) --disassemble bootloader.elf
 
 gcctst:
 	$(CC) $(CFLAGS) $(CIFLAGS) -Wa,-a,-ad -o obj/tst.o tst.c >tst.lst
@@ -146,7 +149,7 @@ asmtst:
 	$(CC) $(AFLAGS) $(CIFLAGS) -Wa,-a,-adl -o obj/tst.o tst.S >tst.lst
 
 nm:
-	$(NM) -n CPP_Demo.elf
+	$(NM) -n bootloader.elf
 
 clean:
-	-/bin/rm -f *.o obj/* *~ CPP_Demo.elf CPP_Demo.hex CPP_Demo.map tmp.elf
+	-/bin/rm -f *.o obj/* *~ bootloader.elf bootloader.hex bootloader.map tmp.elf

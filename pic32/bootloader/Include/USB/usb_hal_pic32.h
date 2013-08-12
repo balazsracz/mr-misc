@@ -357,7 +357,16 @@ typedef union _POINTER
             }\
         }
 
-#define USBClearUSBInterrupt() INTClearFlag(INT_USB);
+enum
+{
+	SFR_REG,
+	SFR_CLR,
+	SFR_SET,
+	SFR_INV
+};
+
+
+#define USBClearUSBInterrupt() do { (&IFS1)[SFR_CLR] = _IFS1_USBIF_MASK; } while (0)
 #define USBInterruptFlag  IFS1bits.USBIF
 #if defined(USB_DISABLE_SOF_HANDLER)
     #define USB_SOF_INTERRUPT 0x00

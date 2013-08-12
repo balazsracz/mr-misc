@@ -197,7 +197,7 @@ __cs3_reset_PIC32MX:
 	##################################################################
 	# Branch to _start, which is CS3 C-environment initialization
 	##################################################################
-	jal _start
+	jal _cinit
 
 
 #	===== Skip BEV and General Exception branch code for now =====

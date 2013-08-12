@@ -55,7 +55,7 @@
 #elif defined(__PIC32MX3XX_7XX__)
    // Maximum System frequency of 80MHz for PIC32MX3xx, PIC32MX4xx, 
     // PIC32MX5xx, PIC32MX6xx and PIC32MX7xx devices.
-    #define SYS_FREQ (60000000L)
+    #define SYS_FREQ (80000000L)
 #endif
 
 

@@ -34,8 +34,8 @@ OUTPUT_ARCH(mips)
 ENTRY(__cs3_reset_PIC32MX) /* for debugger support, use actual HW-level entry and not _start */
 SEARCH_DIR(.)
 /* Force repeated search of CS3 and GCC libraries */
-GROUP(-lcs3hal -lgcc -lc -lcs3 -lcs3unhosted)
-
+GROUP( -lgcc -lc -lcs3 )
+/* -lcs3hal -lcs3unhosted */
 /*
 ** NOTE: Device programmers require PIC32MX "physical" addresses.
 ** PIC32MX "physical" addresses ::= "virtual" addresses & 0x1FFFffff
@@ -79,8 +79,8 @@ _ebase_address  = 0xBFC02000; /* must be on a 4kb page boundary; rounded down */
  * overrides are picked up
  */
 EXTERN(__cs3_reset_PIC32MX)
-EXTERN(_start)
-EXTERN(__cs3_start_c main __cs3_stack __cs3_heap_end)
+/*EXTERN(_start __cs3_start_c)*/
+EXTERN(main __cs3_stack __cs3_heap_end)
 
 /*
  * Provide for a minimum stack and heap size
@@ -125,7 +125,7 @@ SECTIONS
   */
   .boot_flash_text :
   {
-    PROVIDE(__cs3_reset_PIC32MX = _start);
+    /*PROVIDE(__cs3_reset_PIC32MX);*/
     __cs3_reset = __cs3_reset_PIC32MX;
     *(.cs3.reset)
 

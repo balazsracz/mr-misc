@@ -88,6 +88,20 @@
 BOOL CheckTrigger(void);
 void JumpToApp(void);
 BOOL ValidAppPresent(void);
+
+
+// Initializes data and bss segments.
+void _cinit(void) {
+  extern unsigned __cs3_regions[];
+  memcpy((unsigned*)__cs3_regions[2], (unsigned*)__cs3_regions[1],
+         __cs3_regions[3]);
+  memset((unsigned*)(__cs3_regions[2] + __cs3_regions[3]), 0, __cs3_regions[4]);
+  main();
+}
+
+
+
+
 /********************************************************************
 * Function: 	main()
 *

@@ -112,12 +112,12 @@ unsigned int cfg_words[4] __attribute__((section("PIC32MX_cfg_init"))) = {
 //  0x00000600 | // Divide by 10
 //  0x00000700 | // Divide by 12
     // 00000070:FPLLMUL:PLL Multiplier bits
-    0x00000000 | // Multiply by 15 // (8MHz crystal/2=4MHz) x 15 = 60MHz
+//    0x00000000 | // Multiply by 15 // (8MHz crystal/2=4MHz) x 15 = 60MHz
 //  0x00000010 | // Multiply by 16
 //  0x00000020 | // Multiply by 17
 //  0x00000030 | // Multiply by 18
 //  0x00000040 | // Multiply by 19
-//  0x00000050 | // Multiply by 20
+    0x00000050 | // Multiply by 20
 //  0x00000060 | // Multiply by 21
 //  0x00000070 | // Multiply by 24
     // 00000007:FPLLIDIV:PLL Input Divider bits
