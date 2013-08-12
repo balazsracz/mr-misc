@@ -12,7 +12,7 @@ OBJDUMP=$(PREFIX)-objdump
 OBJCOPY=$(PREFIX)-objcopy
 SIZE=$(PREFIX)-size
 
-BASEDEFINES= -D__PIC32MX__ -D__XC32 -D__32MX440F256H__ -D__PIC32_FEATURE_SET__=440 -D__need_wint_t
+BASEDEFINES= -D__PIC32MX__ -D__XC32 -D__32MX795F512H__ -D__PIC32_FEATURE_SET__=795 -D__need_wint_t
 CDEFINES=$(BASEDEFINES) -D__LANGUAGE_C__
 ADEFINES=$(BASEDEFINES) -D__LANGUAGE_ASSEMBLY__ -fdollars-in-identifiers
 # -EL - little-endian
@@ -57,7 +57,7 @@ OBJS = \
  obj/int_enable_interrupts_lib.o    \
  obj/int_disable_interrupts_lib.o   \
  obj/int_restore_interrupts_lib.o   \
- obj/p32mx440f256h.o                \
+ obj/p32mx795f512h.o                \
  obj/pcache.o                       \
 # obj/osc_config_lib.o               \
 
@@ -78,6 +78,10 @@ obj/%.o: %.s
 # Special Rules
 obj/p32mx440f256h.o: p32mx440f256h.S
 	$(CC) $(CFLAGS)            -o obj/p32mx440f256h.o $<
+
+obj/p32mx795f512h.o: p32mx795f512h.S
+	$(CC) $(CFLAGS)            -o $@ $<
+
 
 depend:
 	$(CC) -E -MM $(CIFLAGS) $(CDEFINES) *.c*  Microchip_Peripherals/*.c  > .depend
@@ -101,10 +105,10 @@ CPP_Demo.hex: Makefile $(LDSCRIPT) regs.S PIC32MX-reset.S $(OBJS)
 #	# Note: Physical address = LMA & 0x1FFFffff
 #	# Some device programmers take care of this but sadly not Microchip's...
 #	# Create an ELF with adjusted LMAs prior creating the HEX file.
-	$(OBJCOPY) --change-section-lma .PIC32MX_cfg_init-0xA0000000 --change-section-lma .boot_flash_text-0xA0000000 --change-section-lma .text-0xA0000000 --change-section-lma .eh_frame-0xA0000000 --change-section-lma .rodata-0xA0000000 --change-section-lma .data-0xA0000000 --change-section-lma .vector_4-0xA0000000 --change-section-lma .vector_24-0xA0000000 CPP_Demo.elf tmp.elf
-	@echo **************************************************************
-	@echo *** VERIFY NO "BF.." or "BD.." LMA in the sections below ! ***
-	@echo **************************************************************
+	$(OBJCOPY) --change-section-lma .PIC32MX_cfg_init-0xA0000000 --change-section-lma .boot_flash_text-0xA0000000 --change-section-lma .text-0xA0000000 --change-section-lma .eh_frame-0xA0000000 --change-section-lma .rodata-0xA0000000 --change-section-lma .data-0xA0000000 --change-section-lma .vector_4-0xA0000000 --change-section-lma .vector_24-0xA0000000 --change-section-lma .reset-0xA0000000 --change-section-lma .boot-0xA0000000 --change-section-lma .eh_frame_hdr-0xA0000000 CPP_Demo.elf tmp.elf
+	@echo "**************************************************************"
+	@echo === VERIFY NO "BF.." or "BD.." LMA in the sections below ! ===
+	@echo "**************************************************************"
 	$(OBJDUMP) -h tmp.elf
 	@echo ===================  ELF to HEX  ==============================
 #	# Translate the ELF file into Intel hex

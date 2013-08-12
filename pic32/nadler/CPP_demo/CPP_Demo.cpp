@@ -45,6 +45,8 @@ int main ( void )
     // Enable the cache for the best performance (assuming we're running in KSEG0)
     CheKseg0CacheOn();
 
+    //mJTAGPortEnable(DEBUG_JTAGPORT_OFF);
+
     CUSTOM_HARDWARE_INITIALIZE;
 
     INTEnableInterrupts();
@@ -52,18 +54,19 @@ int main ( void )
     // Set clock (newlib-accessible, unix emulation) to 15-July-2009
     SetSystemTime( (int)((39*365+205)*24*60*60) );
     time_t t =  time(0);
-    printf("Time = %s\n",ctime(&t));
+    //printf("Time = %s\n",ctime(&t));
 
-    mPORTDSetBits(BIT_1);   // Setup USB starter board: LED1  ON
+    mPORTBSetPinsDigitalOut( BIT_12 | BIT_15 );
+    mPORTBToggleBits(BIT_12  );
+
+    //mPORTDSetBits(BIT_1);   // Setup USB starter board: LED1  ON
     C_ElapsedTime demoTimer;
     while(1) {
-        if( ! demoTimer.millisecondsHaveElapsed(550)) continue;
+        if( ! demoTimer.millisecondsHaveElapsed(100)) continue;
         demoTimer.reset();
-        mPORTDToggleBits(BIT_0);   // Toggle LED1
-        mPORTDToggleBits(BIT_1);   // Toggle LED2
+        mPORTBToggleBits(BIT_12 | BIT_15  );
         C_ElapsedTime demoTimer2;
         demoTimer2.waitMsec(300);
-        mPORTDToggleBits(BIT_1);   // Toggle LED2
     };
     return 0;
 

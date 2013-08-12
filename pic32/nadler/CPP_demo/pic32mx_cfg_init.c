@@ -38,13 +38,55 @@
 ** they apply.
 */
 
+/**
+
+   Changelog:
+
+   2013-08-10 Balazs Racz: updated for PIC32MX795 (changes in devcfg3) and
+   fixed a few bugs and comments.
+
+ */
+
 // Usage:
 // - fill in your desired value for the "userid" word
 // - uncomment EXACTLY ONE of the bitfield definitions for each bitfield
 
 unsigned int cfg_words[4] __attribute__((section("PIC32MX_cfg_init"))) = {
     // DEVCFG3 at .2FF0 - user-defined ID word
-    0xDEADBEEF,
+    0x0000BEEF |
+
+    // bit 16-18 Which interrupt priority shall have shadow register set?
+    0x00070000 | // Assign Interrupt Priority 7 to a shadow register set
+//  0x00060000 | // Assign Interrupt Priority 6 to a shadow register set
+//  0x00050000 | // Assign Interrupt Priority 6 to a shadow register set
+//  0x00040000 | // Assign Interrupt Priority 6 to a shadow register set
+//  0x00030000 | // Assign Interrupt Priority 6 to a shadow register set
+//  0x00020000 | // Assign Interrupt Priority 6 to a shadow register set
+//  0x00010000 | // Assign Interrupt Priority 6 to a shadow register set
+//  0x00000000 | // All interrupt priorities use the shadow set.
+
+    0x00F80000 | // Reserved
+
+    0x01000000 | // Use MII
+//  0x00000000 | // Use RMII
+
+    0x02000000 | // default ethernet IO pins
+//  0x00000000 | // alternate ethernet IO pins
+
+    0x04000000 | // default CAN IO pins
+//  0x00000000 | // alternate CAN IO pins
+
+    0x38000000 | // Reserved
+
+    0x40000000 | // USBID pin is controlled by USB module
+//  0x00000000 | // USBID pin is a port.
+
+    0x80000000 | // Vbuson pin is controlled by USB module
+//  0x00000000 | // Vbuson pin is a port.
+    
+
+
+    0,
 
     // DEVCFG2 at .2FF4 - PLL control word
     0xFFF87888 | // all unused bits remain set to '1'
@@ -67,8 +109,8 @@ unsigned int cfg_words[4] __attribute__((section("PIC32MX_cfg_init"))) = {
 //  0x00000300 | // Divide by 4
 //  0x00000400 | // Divide by 5
 //  0x00000500 | // Divide by 6
-//  0x00000600 | // Divide by 7
-//  0x00000700 | // Divide by 8
+//  0x00000600 | // Divide by 10
+//  0x00000700 | // Divide by 12
     // 00000070:FPLLMUL:PLL Multiplier bits
     0x00000000 | // Multiply by 15 // (8MHz crystal/2=4MHz) x 15 = 60MHz
 //  0x00000010 | // Multiply by 16
@@ -92,7 +134,7 @@ unsigned int cfg_words[4] __attribute__((section("PIC32MX_cfg_init"))) = {
     // DEVCFG1 at .2FF8 - oscillators and clocks
     0xFF600858 | // all unused bits remain set to '1'
     // 00800000:FWDTEN:Watchdog Timer Enable bit
-    0x00000000 | // Disabled
+    0x00000000 | // Disabled -- contorlled by software
 //  0x00800000 | // Enabled
     // 001F0000:WDTPS:Watchdog Timer Postscale Select bits
     0x00000000 | // 1:1
@@ -126,16 +168,16 @@ unsigned int cfg_words[4] __attribute__((section("PIC32MX_cfg_init"))) = {
 //  0x00002000 | // Divide by 4
 //  0x00003000 | // Divide by 8
     // 00000400:OSCIOFNC:CLKO output Enable bit
-    0x00000000 | // Disabled
-//  0x00000400 | // Enabled
+//  0x00000000 | // Enabled
+    0x00000400 | // Disabled
     // 00000300:POSCMOD:Primary Oscillator bits
-//  0x00000000 | // EC oscillator
+//  0x00000000 | // EC oscillator (external clock)
 //  0x00000100 | // XT oscillator
     0x00000200 | // HS oscillator
 //  0x00000300 | // Disabled
     // 00000080:IESO:Internal External Switch Over bit
     0x00000000 | // Disabled
-//  0x00000080 | // Enabled
+//  0x00000080 | // Enabled  (two speed startup)
     // 00000020:FSOSCEN:Secondary oscillator Enable bit
     0x00000000 | // Disabled
 //  0x00000020 | // Enabled - 32.768 kHz
@@ -161,8 +203,8 @@ unsigned int cfg_words[4] __attribute__((section("PIC32MX_cfg_init"))) = {
     // 00FFF000:PWP:Program Flash Write Protect bit
     0x00FFF000 | // Disabled (all sectors writable; subsets can be protected...)
     // 00000008:ICESEL:ICE/ICD Communication Channel Select
-//  0x00000000 | // ICE pins are shared with PGC1, PGD1
-    0x00000008 | // ICE pins are shared with PGC2, PGD2
+    0x00000000 | // ICE pins are shared with PGC1, PGD1
+//  0x00000008 | // ICE pins are shared with PGC2, PGD2
     // 00000003:DEBUG:Background Debugger Enable bit
 //  0x00000002 | // Enabled - Background debug events branch to 0xbfc0480
 //               //         - Do NOT enable this except for debug tools that
