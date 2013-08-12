@@ -56,13 +56,13 @@ MEMORY
   ** Boot flash contains the configuration words required for reset.
   ** The following are KSEG1 logical addresses (??? should change to KSEG0 to enable caches).
   */
-  PIC32MX_flash_user (rx) : ORIGIN = 0xBD000000, LENGTH = 128K /* to BD020000-1, bootloader gets first 128k */
+  PIC32MX_flash_user (rx) : ORIGIN = 0xBD000000, LENGTH = 512K /* to BD020000-1, bootloader gets first 128k */
   /*
   ** When PIC32MX comes out of reset, it branches to the start of the boot flash
   ** The last (4kb) page in Boot Flash Memory contains the DEBUG Page, which is reserved for 
   ** use by (some) debugger tool while debugging (by convention, not by hardware).
   */
-  PIC32MX_flash_boot (rx) : ORIGIN = 0xBFC00000, LENGTH = 0x2000 /* 12k - 4k debug page */
+  PIC32MX_flash_boot (rx) : ORIGIN = 0xBFC00000, LENGTH = 0x2FF0 /* 12k - config registers. We ignore the debug page. */
   PIC32MX_flash_cfg  (r!x): ORIGIN = 0xBFC02FF0, LENGTH = 0x0010
 }
 
@@ -72,7 +72,7 @@ MEMORY
 ** 0xBFC03000-(0x10 config registers + 0x200+ (64 vectors * x20))= 0xBFC025F0
 */
 _vector_spacing = 0x00000001;
-_ebase_address  = 0xBFC02000; /* must be on a 4kb page boundary; rounded down */
+_ebase_address  = 0xBD000000; /* must be on a 4kb page boundary; rounded down */
 
 /* These force the linker to search for particular symbols from
  * the start of the link process and thus ensure the user's
@@ -159,18 +159,18 @@ SECTIONS
 
     . = ALIGN(0x4);
     *(.gcc_except_table .gcc_except_table.*)
-  } >PIC32MX_flash_user
+  } >PIC32MX_flash_boot
   
   .eh_frame_hdr : ALIGN (4)
   {
     KEEP (*(.eh_frame_hdr))
     *(.eh_frame_entry .eh_frame_entry.*)
-  } >PIC32MX_flash_user
+  } >PIC32MX_flash_boot
   
   .eh_frame : ALIGN (4)
   {
     KEEP (*(.eh_frame))
-  }  >PIC32MX_flash_user
+  }  >PIC32MX_flash_boot
   
   /* MDI semihosting uses a pointer in this section.  */
   .sdeosabi : ALIGN (4)
@@ -232,7 +232,7 @@ SECTIONS
     /* Redundant, removed: . = ALIGN (8); */
 
     _etext = .; /* first double-word past end of text, and start address for RAM initialization data stored in ROM */
-  }  >PIC32MX_flash_user
+  }  >PIC32MX_flash_boot
   
   __cs3_region_size_rom = LENGTH(PIC32MX_flash_user); /* just total size of flash */
 
@@ -261,7 +261,7 @@ SECTIONS
     . = ALIGN (8);
     *(.ram)
     _edata = .;
-  } >ram  AT>PIC32MX_flash_user
+  } >ram  AT>PIC32MX_flash_boot
 
   /* Wrong, length just gives 256k size of flash: USER_FLASH_USED = LENGTH(PIC32MX_flash_user)+SIZEOF(.data); */
   
