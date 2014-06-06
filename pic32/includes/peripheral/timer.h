@@ -36,8 +36,8 @@
  * $Name:  $
  *
  *****************************************************************************/
-#ifndef _TIMER_H_
-#define _TIMER_H_
+#ifndef _MC_TIMER_H_
+#define _MC_TIMER_H_
 
 #include <xc.h>
 #include <peripheral/int.h>
@@ -1950,5 +1950,5 @@ void __attribute__((nomips16)) WriteCoreTimer(unsigned int timer);
 #define WritePeriod45(value)	PR4 = (value)
 
 #endif		// _TMR5
-#endif /*TIMER_H_*/
+#endif /*MC_TIMER_H_*/
 
