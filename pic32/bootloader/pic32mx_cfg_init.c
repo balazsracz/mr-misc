@@ -160,8 +160,8 @@ unsigned int cfg_words[4] __attribute__((section("PIC32MX_cfg_init"))) = {
 //  0x00140000 | // 1:1,048,576
     // 0000C000:FCKSM:Clock Switching and Monitor Selection bits
 //  0x00000000 | // Clock Switching Enabled, Clock Monitoring Enabled
-//  0x00004000 | // Clock Switching Enabled, Clock Monitoring Disabled
-    0x00008000 | // Clock Switching Disabled, Clock Monitoring Disabled
+    0x00004000 | // Clock Switching Enabled, Clock Monitoring Disabled
+//  0x00008000 | // Clock Switching Disabled, Clock Monitoring Disabled
     // 00003000:FPBDIV:Bootup PBCLK divider
 //  0x00000000 | // Divide by 1
     0x00001000 | // Divide by 2 PB_Clk = SYS_Clk/2
@@ -172,8 +172,8 @@ unsigned int cfg_words[4] __attribute__((section("PIC32MX_cfg_init"))) = {
     0x00000400 | // Disabled
     // 00000300:POSCMOD:Primary Oscillator bits
 //  0x00000000 | // EC oscillator (external clock)
-//  0x00000100 | // XT oscillator
-    0x00000200 | // HS oscillator
+    0x00000100 | // XT oscillator
+//  0x00000200 | // HS oscillator
 //  0x00000300 | // Disabled
     // 00000080:IESO:Internal External Switch Over bit
     0x00000000 | // Disabled
