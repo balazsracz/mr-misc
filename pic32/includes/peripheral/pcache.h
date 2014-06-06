@@ -370,7 +370,7 @@
  * Note:            This macro cannot be executed in MIPS16 mode
  *
  ********************************************************************/
-void __attribute__ ((nomips16)) CheKseg0CacheOff();
+void __attribute__ ((nomips16)) CheKseg0CacheOff(void);
 
 /*********************************************************************
  * Function:        void CheKseg0CacheOn(void)
@@ -385,6 +385,6 @@ void __attribute__ ((nomips16)) CheKseg0CacheOff();
  * Note:            This macro cannot be executed in MIPS16 mode
  *
  ********************************************************************/
-void __attribute__ ((nomips16)) CheKseg0CacheOn();
+void __attribute__ ((nomips16)) CheKseg0CacheOn(void);
 
 #endif /*PCACHE_H_*/
