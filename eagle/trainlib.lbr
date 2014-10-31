@@ -1734,6 +1734,11 @@ Source: DCJ0202.pdf</description>
 </gates>
 <devices>
 <device name="" package="D-PAK_TO252AA">
+<connects>
+<connect gate="G$2" pin="D" pad="4"/>
+<connect gate="G$2" pin="G" pad="1"/>
+<connect gate="G$2" pin="S" pad="3"/>
+</connects>
 <technologies>
 <technology name=""/>
 </technologies>
