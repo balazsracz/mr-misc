@@ -47,6 +47,9 @@ HCInstinct.init = function(id, debugging) {
     engine.connectControl("[Channel1]","beat_active","HCInstinct.onBeatActive");
     engine.connectControl("[Channel2]","beat_active","HCInstinct.onBeatActive");
 
+    engine.softTakeover("[Master]","crossfader",true);
+    engine.softTakeover("[Master]","headMix",true);
+
     print ("***** Hercules DJ Instinct Control id: \""+id+"\" initialized.");
 };
 
@@ -217,4 +220,34 @@ HCInstinct.tempPitch = function (midino, control, value, status, group) {
     engine.setValue(group, rate, 0);
 };
 
-//HCInstinct.onFwd = function (midino, 
+HCInstinct.onFwd = function(channel, control, value, status, group) {
+  print("skipBeat called. current loop=" +
+        engine.getValue(group,"beatloop"));
+  //engine.getValue(group,"rate");
+    engine.setValue(group,"loop_in", 1);
+    engine.setValue(group,"beatloop_1_activate",1);
+    
+  //engine.setValue(group,"beatloop_1_toggle",1);
+  var nextpos = engine.getValue(group,"loop_end_position");
+  var cpos = engine.getValue(group,"loop_start_position");
+  print("loop end = " + nextpos);
+  print("loop start = " + cpos);
+  if (group == "[Channel1]") {
+    engine.beginTimer(800, "HCInstinct.stopBeatLoop1", true);
+  } else if (group == "[Channel2]") {
+    engine.beginTimer(800, "HCInstinct.stopBeatLoop2", true);
+  } else {
+    print("Unknown group for skipbeat: " + group);
+  }
+  return;
+}
+
+HCInstinct.stopBeatLoop1 = function() {
+  print("stopping beatloop 1. current loop=" +
+      engine.getValue("[Channel1]","beatloop"));
+  engine.setValue("[Channel1]","beatloop_1_toggle",1);
+}
+HCInstinct.stopBeatLoop2 = function() {
+  print("stopping beatloop 2");
+  engine.setValue("[Channel2]","beatloop_1_toggle",1);
+}
