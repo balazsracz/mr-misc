@@ -221,6 +221,7 @@ HCInstinct.tempPitch = function (midino, control, value, status, group) {
 };
 
 HCInstinct.onFwd = function(channel, control, value, status, group) {
+    if (value != 0x7F) return;
   print("skipBeat called. current loop=" +
         engine.getValue(group,"beatloop"));
   //engine.getValue(group,"rate");
