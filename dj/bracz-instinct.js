@@ -11,14 +11,19 @@ HCInstinct.pitchSwitches["A"] = [0,0];
 HCInstinct.pitchSwitches["B"] = [0,0];
 
 HCInstinct.pitchB = [0,0];
+
+HCInstinct.beat_downsample = 3;
+
 // ----------   Functions    ----------
 
 HCInstinct.deck1 = {
     led_beat: 23,
+    group: "[Channel1]",
 };
 
 HCInstinct.deck2 = {
     led_beat: 49,
+    group: "[Channel2]",
 }
 
 HCInstinct.getDeck = function(group) {
@@ -130,7 +135,33 @@ HCInstinct.wheelTouch1 = function (channel, control, value, status) {
 };
 
 
+HCInstinct.wheelTranslate = function(deck, value) {
+    if (!deck.beats_translate) {
+        print("not translating now");
+        return;
+    }
+    if (value < 64) {
+        deck.beats_ofs = deck.beats_ofs - 1;
+        if (deck.beats_ofs <= -HCInstinct.beat_downsample) {
+            print("translate -");
+            engine.setValue(deck.group, "beats_translate_plus", 1);
+            engine.setValue(deck.group, "beats_translate_plus", 0);
+            deck.beats_ofs = 0;
+        } else {
+            print("no translate ofs " + deck.beats_ofs);
+        }
+    } else {
+        deck.beats_ofs = deck.beats_ofs + 1;
+        if (deck.beats_ofs >= HCInstinct.beat_downsample) {
+            engine.setValue(deck.group, "beats_translate_minus", 1);
+            engine.setValue(deck.group, "beats_translate_minus", 0);
+            deck.beats_ofs = 0;
+        }
+    }
+}
+
 HCInstinct.wheelTurn0 = function (channel, control, value, status) {
+    HCInstinct.wheelTranslate(HCInstinct.deck1, value);
     return;
     // See if we're on scratching.
     //if (HCInstinct.scratching[0] == false )  return;
@@ -142,6 +173,7 @@ HCInstinct.wheelTurn0 = function (channel, control, value, status) {
 };
 
 HCInstinct.wheelTurn1 = function (channel, control, value, status) {
+    HCInstinct.wheelTranslate(HCInstinct.deck2, value);
     return;
     // See if we're on scratching.
     if (HCInstinct.scratching[1] == false )  return;
@@ -289,4 +321,20 @@ HCInstinct.rew2 = function(group) {
 HCInstinct.rew3 = function(group) {
     print("going to hotcue1 on group " + group);
     engine.setValue(group,"hotcue_1_goto",1);
+}
+
+HCInstinct.onSoftButton =  function(channel, control, value, status, group) {
+    print("soft button on " + channel + " control " + control + " vlaue " + value + " group " + group);
+    if (control == 42 || control == 16) {
+        var deck = HCInstinct.getDeck(group);
+        if (value < 0x40) {
+            print("stopping beat translate on deck " + deck.group)
+            deck.beats_translate = false;
+        } else {
+            print("starting beat translate on deck " + deck.group)
+            deck.beats_translate = true;
+            deck.beats_ofs = 0;
+        }
+    }
+    return;
 }
