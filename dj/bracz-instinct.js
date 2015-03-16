@@ -252,3 +252,41 @@ HCInstinct.stopBeatLoop2 = function() {
   print("stopping beatloop 2");
   engine.setValue("[Channel2]","beatloop_1_toggle",1);
 }
+
+HCInstinct.onBack = function(channel, control, value, status, group) {
+    if (value != 0x7F) return;
+    print("rewind8 called. current loop=" +
+          engine.getValue(group,"beatloop"));
+    engine.setValue(group,"beatloop_8_activate",0);
+    engine.setValue(group,"hotcue_1_set",1);
+    engine.beginTimer(200, "HCInstinct.rew1(\""+group+"\")", true);
+}
+
+HCInstinct.rew1 = function(group) {
+    print("rew1 " + group);
+    engine.setValue(group,"beatloop_8_activate",1);
+    engine.beginTimer(200, "HCInstinct.rew2(\""+group+"\")", true);
+}
+
+HCInstinct.rew2 = function(group) {
+    print("rew2 " + group);
+    var nextpos = engine.getValue(group,"loop_end_position");
+    var cpos = engine.getValue(group,"loop_start_position");
+    var new_start_pos = cpos - (nextpos - cpos);
+    print("loop end = " + nextpos);
+    print("loop start = " + cpos);
+    print("new start pos = " + new_start_pos);
+    engine.setValue(group,"beatloop_8_toggle",1);
+    engine.setValue(group,"loop_start_position",-1);
+    engine.setValue(group,"loop_end_position",-1);
+    //engine.setValue(group,"hotcue_1_enabled",1);
+    engine.setValue(group,"hotcue_1_position",new_start_pos);
+    var after = engine.getValue(group,"hotcue_1_position");
+    print("hotcue 1 is " + new_start_pos);
+    engine.beginTimer(200, "HCInstinct.rew3(\""+group+"\")", true);
+}
+
+HCInstinct.rew3 = function(group) {
+    print("going to hotcue1 on group " + group);
+    engine.setValue(group,"hotcue_1_goto",1);
+}
