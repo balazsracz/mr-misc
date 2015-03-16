@@ -84,15 +84,6 @@
                 </options>
             </control>
             <control>
-                <group>[Channel1]</group>
-                <key>HCInstinct.onFwd</key>
-                <status>0x80</status>
-                <midino>0x14</midino>
-                <options>
-                    <script-binding/>
-                </options>
-            </control>
-            <control>
                 <group>[Channel2]</group>
                 <key>HCInstinct.pitch</key>
                 <status>0x90</status>
@@ -186,15 +177,6 @@
                 <group>[Channel1]</group>
                 <key>HCInstinct.onBack</key>
                 <status>0x90</status>
-                <midino>0x13</midino>
-                <options>
-                    <script-binding/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel1]</group>
-                <key>HCInstinct.onBack</key>
-                <status>0x80</status>
                 <midino>0x13</midino>
                 <options>
                     <script-binding/>
@@ -804,15 +786,6 @@
                 </options>
             </control>
             <control>
-                <group>[Channel2]</group>
-                <key>HCInstinct.onFwd</key>
-                <status>0x80</status>
-                <midino>0x2E</midino>
-                <options>
-                    <script-binding/>
-                </options>
-            </control>
-            <control>
                 <group>[Master]</group>
                 <key>headMix</key>
                 <status>0xB0</status>
@@ -855,15 +828,6 @@
                 <midino>0x35</midino>
                 <options>
                     <script-binding/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel2]</group>
-                <key>HCInstinct.onBack</key>
-                <status>0x80</status>
-                <midino>0x2D</midino>
-                <options>
-                    <normal/>
                 </options>
             </control>
             <control>
