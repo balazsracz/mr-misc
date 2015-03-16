@@ -216,3 +216,5 @@ HCInstinct.tempPitch = function (midino, control, value, status, group) {
     engine.setValue(group, rate, 1);
     engine.setValue(group, rate, 0);
 };
+
+//HCInstinct.onFwd = function (midino, 
