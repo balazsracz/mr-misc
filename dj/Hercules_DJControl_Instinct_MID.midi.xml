@@ -22,7 +22,7 @@
             </control>
             <control>
                 <group>[Channel2]</group>
-                <key>HCInstinct.wheelTurn1</key>
+                <key>HCInstinct.wheelTurn</key>
                 <status>0xB0</status>
                 <midino>0x33</midino>
                 <options>
@@ -58,7 +58,7 @@
             </control>
             <control>
                 <group>[Channel1]</group>
-                <key>HCInstinct.wheelTurn0</key>
+                <key>HCInstinct.wheelTurn</key>
                 <status>0xB0</status>
                 <midino>0x32</midino>
                 <options>
@@ -94,6 +94,15 @@
             </control>
             <control>
                 <group>[Channel2]</group>
+                <key>HCInstinct.wheelRotate</key>
+                <status>0xB0</status>
+                <midino>0x31</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel2]</group>
                 <key>HCInstinct.pitch</key>
                 <status>0x90</status>
                 <midino>0x2B</midino>
@@ -108,6 +117,15 @@
                 <midino>0x15</midino>
                 <options>
                     <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel1]</group>
+                <key>HCInstinct.wheelRotate</key>
+                <status>0xB0</status>
+                <midino>0x30</midino>
+                <options>
+                    <script-binding/>
                 </options>
             </control>
             <control>
@@ -562,7 +580,7 @@
             </control>
             <control>
                 <group>[Channel2]</group>
-                <key>HCInstinct.wheelTouch1</key>
+                <key>HCInstinct.wheelTouch</key>
                 <status>0x90</status>
                 <midino>0x34</midino>
                 <options>
@@ -742,7 +760,7 @@
             </control>
             <control>
                 <group>[Channel1]</group>
-                <key>HCInstinct.wheelTouch0</key>
+                <key>HCInstinct.wheelTouch</key>
                 <status>0x90</status>
                 <midino>0x1A</midino>
                 <options>
@@ -898,14 +916,14 @@
                 <group>[Channel1]</group>
                 <key>loop_enabled</key>
                 <status>0x90</status>
-                <midino>0x09</midino>
+                <midino>0x0A</midino>
                 <minimum>0.5</minimum>
             </output>
             <output>
                 <group>[Channel1]</group>
                 <key>loop_enabled</key>
                 <status>0x90</status>
-                <midino>0x0A</midino>
+                <midino>0x09</midino>
                 <minimum>0.5</minimum>
             </output>
             <output>
@@ -926,14 +944,14 @@
                 <group>[Channel2]</group>
                 <key>loop_enabled</key>
                 <status>0x90</status>
-                <midino>0x23</midino>
+                <midino>0x24</midino>
                 <minimum>0.5</minimum>
             </output>
             <output>
                 <group>[Channel2]</group>
                 <key>loop_enabled</key>
                 <status>0x90</status>
-                <midino>0x24</midino>
+                <midino>0x23</midino>
                 <minimum>0.5</minimum>
             </output>
             <output>
