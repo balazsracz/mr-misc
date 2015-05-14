@@ -19,11 +19,15 @@ HCInstinct.beat_downsample = 3;
 HCInstinct.deck1 = {
     led_beat: 23,
     group: "[Channel1]",
+    scratching: false,
+    edeck : 1,
 };
 
 HCInstinct.deck2 = {
     led_beat: 49,
     group: "[Channel2]",
+    scratching: false,
+    edeck : 2,
 }
 
 HCInstinct.getDeck = function(group) {
@@ -111,18 +115,21 @@ HCInstinct.wheelTouch = function (channel, control, value, status) {
         return;
     }
     print("wheel touch " + deck.group + " control " + control + " value " + value);
-    return;
-    if (value == 0x7F && !HCInstinct.scratching[0]) { // catch only first touch
+    var play = engine.getValue(deck.group, "play");
+    if (play) {
+        print("not scratching on playing deck");
+        value = 0;
+    }
+    if (value == 0x7F && !deck.scratching) { // catch only first touch
         var alpha = 1.0/8;
         var beta = alpha/32;
-        engine.scratchEnable(1, 128, 33+1/3, alpha, beta);
+        engine.scratchEnable(deck.edeck, 128, 33+1/3, alpha, beta);
         // Keep track of whether we're scratching on this virtual deck
-        HCInstinct.scratching[0] = true;
-
+        deck.scratching = true;
     }
     else {    //  button up
-        engine.scratchDisable(1);
-        HCInstinct.scratching[0] = false;
+        engine.scratchDisable(deck.edeck);
+        deck.scratching = false;
     }
 
 };
@@ -160,15 +167,12 @@ HCInstinct.wheelTurn = function (channel, control, value, status) {
         deck = HCInstinct.deck1;
     }
     print("wheel push-turn " + deck.group + " control " + control + " value " + value);
-    HCInstinct.wheelTranslate(deck, value);
-    return;
-    // See if we're on scratching.
-    //if (HCInstinct.scratching[0] == false )  return;
+    if (!deck.scratching)  return;
     
     var newValue;
     if (value-64 > 0) newValue = value-128; // 7F, 7E, 7D
     else newValue = value;
-    engine.scratchTick(1,newValue);
+    engine.scratchTick(deck.edeck ,newValue);
 };
 
 HCInstinct.wheelRotate = function (channel, control, value, status) {
@@ -179,6 +183,7 @@ HCInstinct.wheelRotate = function (channel, control, value, status) {
         deck = HCInstinct.deck1;
     }
     print("wheel rotate " + deck.group + " control " + control + " value " + value);
+    HCInstinct.wheelTranslate(deck, value);
     return;
     // See if we're on scratching.
     //if (HCInstinct.scratching[0] == false )  return;
