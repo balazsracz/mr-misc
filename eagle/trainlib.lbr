@@ -2054,6 +2054,16 @@ Source: DCJ0202.pdf</description>
 <technology name=""/>
 </technologies>
 </device>
+<device name="SMALL" package="MICRO3">
+<connects>
+<connect gate="G$1" pin="D" pad="3"/>
+<connect gate="G$1" pin="G" pad="1"/>
+<connect gate="G$1" pin="S" pad="2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
 </devices>
 </deviceset>
 </devicesets>
