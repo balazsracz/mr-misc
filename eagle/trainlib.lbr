@@ -2080,7 +2080,11 @@ Source: DCJ0202.pdf</description>
 <gate name="G$1" symbol="CAN-NODE" x="0" y="0"/>
 </gates>
 <devices>
-<device name="">
+<device name="" package="R0805H">
+<connects>
+<connect gate="G$1" pin="CANRX" pad="1"/>
+<connect gate="G$1" pin="CANTX" pad="2"/>
+</connects>
 <technologies>
 <technology name=""/>
 </technologies>
