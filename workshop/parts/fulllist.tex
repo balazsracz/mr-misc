@@ -1,0 +1,100 @@
+\documentclass[a4paper,times,twocolumn]{article}
+
+\usepackage{times}
+\usepackage{graphicx}
+
+\newcommand{\smalllabel}[1]{
+\fbox {
+\vbox to 0.60in {
+\noindent #1}}
+}
+
+\newcommand{\tlabel}[1]{
+\noindent \hspace{-8pt}
+}
+
+\begin{document}
+
+
+\newcommand{\Xmax}[3]{$\mathrm{#1}_\textrm{max}$=$#3\mathrm{#2}$}
+\newcommand{\Pmax}[1]{\Xmax{P}{W}{#1}}
+\newcommand{\Imax}[1]{\Xmax{I}{A}{#1}}
+\newcommand{\Umax}[1]{\Xmax{U}{V}{#1}}
+
+
+\newcommand{\resistor}[7]{
+\smalllabel{
+RESISTOR #1 \textbf{R=#2$\Omega$} \\
+\Pmax{#3} #6 \\
+\Umax{#4} \Imax{#5} \\
+#7
+}
+}
+
+
+\newcommand{\dipsocket}[3]{
+\smalllabel{
+#1 SOCKET #2'' \\
+\\
+\\
+#3
+}
+}
+
+\newcommand{\zener}[6]{
+\smalllabel{
+ZENER DIODE \textbf{#1{}V} #2 \\
+#3 \Pmax{#4} \\
+\Imax{#5} \\
+#6
+}
+}
+
+\newcommand{\lomexline}[3]{
+L(#1) \hfill #3 pcs \hfill #2 CHF \hfill \raisebox{0in}[0pt][0pt]{\includegraphics[height=0.6in]{../qr/#1.png}}
+}
+
+\newcommand{\cercap}[5]{
+\smalllabel{
+\noindent{}CER. CAPACITOR \\
+\textbf{#1} #3 \\
+\Umax{#2} size #4 \\
+#5
+}
+}
+
+\newcommand{\elco}[5]{
+\smalllabel{
+\noindent{}ELCO \textbf{#1} #3 \\
+\Umax{#2} size #4 \\
+Take care for polarity! \\
+#5
+}
+}
+
+\newcommand{\crystal}[2]{
+\smalllabel{
+CRYSTAL OSCILLATOR \\
+\textbf{#1} \\
+\\
+#2
+}
+}
+
+
+\newcommand{\unknown}[2]{
+\smalllabel{
+#1 \\
+#2
+}
+}
+
+\newcommand{\filllabel}{
+}
+
+
+\include{resistors}%
+\include{other}%
+\include{rest}%
+
+\end{document}
