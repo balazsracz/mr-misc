@@ -31,6 +31,8 @@ clean:
 hex: $(CSRCS) $(ASRCS)
 	$(CC) $(OPTS) $(DIROPTS) $+
 
+flash: hex
+	pk2cmd /P /M /F bin/main.hex
 
 obj/%.p1: %.c
 	$(CC) $(OPTS) --pass1 -o$@ $< #$(filter-out $^,$(CSRCS))

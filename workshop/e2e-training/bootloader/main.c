@@ -324,6 +324,20 @@ void main(void)
 {
     TRISC = 0;
     LATC = 0;
+    ANSEL = 0;
+    ANSELH = 0;
+    TRISB = 0xff;
+    WPUB4 = 1;
+    WPUB5 = 1;
+    WPUB6 = 1;
+
+    for (uint8_t k = 0; k < 6; ++k) {
+      LATC = (1<<k);
+      for (unsigned u = 0; u < 4; ++u) {
+        for (unsigned int i = 0; i < 65530; ++i);
+      }
+    }
+    LATC = 0;
 
     //Assuming the I/O pin check entry method is enabled, check the I/O pin value
     //to see if we should stay in bootloader mode, or jump to normal applicaiton 
@@ -473,6 +487,9 @@ void BootMain(void)
         
         ProcessIO();        //This is where all the actual bootloader related data transfer/self programming takes
                             //place see ProcessIO() function in the BootPIC[xxxx].c file.
+        if (RB5 == 0) {
+          asm("reset");
+        }
     }//end while    
 }    
 
