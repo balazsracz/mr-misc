@@ -120,6 +120,7 @@ void main(void)
       green_on = counter & 4 ? 1 : 0;
       rgb[0] = red_on ? 10 : 0;
       rgb[1] = green_on ? 10 : 0;
+      rgb[2] = yellow_on ? 10 : 0;
     }
     if (!PORTBbits.RB5) {
       PEIE = 0;
