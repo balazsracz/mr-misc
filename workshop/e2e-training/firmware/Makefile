@@ -8,6 +8,8 @@ OPTS= --summary=+hex,+psect --outdir=bin/ --objdir=obj/
 USBSRCS= usb/usb_descriptors.c usb/usb_device.c usb/usb_function_cdc.c usb/usb_serial_lib.c
 USBOPTS= -Iusb/ -Iusb/include/
 
+USBPROD= s8-usbserial s9-usb-echo sa-usb-command
+
 
 blink.hex: blink.c Makefile
 	mkdir -p obj bin
@@ -17,6 +19,22 @@ blink.hex: blink.c Makefile
 
 blflash: blink.hex
 	mphidflash -w $< -r
+
+%.hex: %.c
+	$(CC) $(OPTS) $(14K50OPTS)  $<
+	cp bin/$@ flash.hex
+
+% : %.c
+	$(CC) $(OPTS) $(14K50OPTS)  $<
+	cp bin/$@.hex flash.hex
+
+$(USBPROD) : % : %.c
+	$(CC) $(OPTS) $(USBOPTS) $(14K50OPTS) $< $(USBSRCS)
+	cp bin/$@.hex flash.hex
+
+
+flash:
+	mphidflash -w flash.hex -r
 
 clean:
 	rm -f bin/* obj/*

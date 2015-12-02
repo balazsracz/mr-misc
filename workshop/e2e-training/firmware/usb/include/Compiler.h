@@ -137,9 +137,11 @@
 	#if defined(HI_TECH_C)
 	    #define ROM                 	const
 		#define rom
+#if !defined(__XC8)
 	    #define Nop()               	asm("NOP");
 		#define ClrWdt()				asm("CLRWDT");
 	    #define Reset()					asm("RESET");
+#endif
 	#endif
     
 // Definitions that apply to all 16-bit and 32-bit products
