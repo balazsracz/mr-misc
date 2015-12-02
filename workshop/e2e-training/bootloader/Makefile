@@ -18,7 +18,7 @@ CC=/home/bracz/prg/hitech/picc-18/pro/9.66/bin/picc18
 OPTS+= -D__XC8__ -D__XC__ -I.
 endif
 
-OPTS+= --chip=18F14K50 --mode=pro  -P --summary=+psect,+hex --rom=0-13FF
+OPTS+= --chip=18F14K50 --mode=pro  -P --summary=+psect,+hex --rom=0-FFF
 DIROPTS= --outdir=bin/ --objdir=obj/
 
 
