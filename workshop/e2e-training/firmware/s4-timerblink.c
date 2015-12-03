@@ -60,7 +60,7 @@ void main(void)
     TMR0 = 42098;
     ++counter;
     LED_GRE = counter & 1;
-    mydelay(100000);
+    //mydelay(100000);
     if (!BUT_RED && !BUT_YEL) {
       LATC = 0;
 #asm

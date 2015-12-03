@@ -25,7 +25,7 @@ blink.hex: blink.c Makefile
 
 
 blflash: blink.hex
-	mphidflash -w $< -r
+	$(FLASH) -w $< -r
 
 %.hex: %.c
 	mkdir -p obj bin
@@ -43,7 +43,7 @@ $(USBPROD) : % : %.c
 
 
 flash:
-	mphidflash -w flash.hex -r
+	$(FLASH) -w flash.hex -r
 
 clean:
 	rm -f bin/* obj/*
