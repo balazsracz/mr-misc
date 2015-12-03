@@ -1,6 +1,13 @@
 
 
+ifeq ($(shell uname),Linux)
 CC=/opt/microchip/xc8/v1.35/bin/xc8
+FLASH=../flash-app/mphidflash-linux64
+else
+CC=/Applications/microchip/xc8/v1.35/bin/xc8
+FLASH=../flash-app/mphidflash-1.6-osx-64
+endif
+
 
 14K50OPTS=--chip=18F14K50 --codeoffset=0x1000 --rom=1000-3FFD
 OPTS= --summary=+hex,+psect --outdir=bin/ --objdir=obj/
