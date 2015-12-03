@@ -28,10 +28,12 @@ blflash: blink.hex
 	mphidflash -w $< -r
 
 %.hex: %.c
+	mkdir -p obj bin
 	$(CC) $(OPTS) $(14K50OPTS)  $<
 	cp bin/$@ flash.hex
 
 % : %.c
+	mkdir -p obj bin
 	$(CC) $(OPTS) $(14K50OPTS)  $<
 	cp bin/$@.hex flash.hex
 
