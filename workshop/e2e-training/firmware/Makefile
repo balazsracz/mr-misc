@@ -15,7 +15,8 @@ OPTS= --summary=+hex,+psect --outdir=bin/ --objdir=obj/
 USBSRCS= usb/usb_descriptors.c usb/usb_device.c usb/usb_function_cdc.c usb/usb_serial_lib.c
 USBOPTS= -Iusb/ -Iusb/include/
 
-USBPROD= s8-usbserial s9-usb-echo sa-usb-command t9-usb-listen
+
+USBPROD= s8-usbserial s9-usb-echo sa-usb-command t9-usb-listen prod-firmware
 
 
 blink.hex: blink.c Makefile
