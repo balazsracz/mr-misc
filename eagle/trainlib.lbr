@@ -24,7 +24,7 @@
 <layer number="14" name="Route14" color="1" fill="6" visible="no" active="no"/>
 <layer number="15" name="Route15" color="4" fill="6" visible="no" active="no"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="no" active="yes"/>
-<layer number="17" name="Pads" color="2" fill="1" visible="no" active="yes"/>
+<layer number="17" name="Pads" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="18" name="Vias" color="2" fill="1" visible="no" active="yes"/>
 <layer number="19" name="Unrouted" color="6" fill="1" visible="no" active="yes"/>
 <layer number="20" name="Dimension" color="15" fill="1" visible="no" active="yes"/>
@@ -1093,6 +1093,32 @@ Source: GLX-S-88M.pdf</description>
 <wire x1="1.5" y1="0.8" x2="-1.5" y2="0.8" width="0.127" layer="21"/>
 <circle x="-1.1" y="-0.4" radius="0.14141875" width="0.127" layer="21"/>
 </package>
+<package name="ESP12-HUZZAH">
+<pad name="RST" x="-10.16" y="12.7" drill="0.8" shape="long"/>
+<wire x1="-12.7" y1="19.05" x2="12.7" y2="19.05" width="0.127" layer="21"/>
+<wire x1="12.7" y1="19.05" x2="12.7" y2="-19.05" width="0.127" layer="21"/>
+<wire x1="12.7" y1="-19.05" x2="-12.7" y2="-19.05" width="0.127" layer="21"/>
+<wire x1="-12.7" y1="-19.05" x2="-12.7" y2="19.05" width="0.127" layer="21"/>
+<pad name="A" x="-10.16" y="10.16" drill="0.8" shape="long"/>
+<pad name="EN" x="-10.16" y="7.62" drill="0.8" shape="long"/>
+<pad name="16" x="-10.16" y="5.08" drill="0.8" shape="long"/>
+<pad name="14" x="-10.16" y="2.54" drill="0.8" shape="long"/>
+<pad name="12" x="-10.16" y="0" drill="0.8" shape="long"/>
+<pad name="13" x="-10.16" y="-2.54" drill="0.8" shape="long"/>
+<pad name="V+" x="-10.16" y="-5.08" drill="0.8" shape="long"/>
+<pad name="VBAT" x="-10.16" y="-7.62" drill="0.8" shape="long"/>
+<pad name="GND" x="-10.16" y="-10.16" drill="0.8" shape="long"/>
+<pad name="TX" x="10.16" y="12.7" drill="0.8" shape="long"/>
+<pad name="RX" x="10.16" y="10.16" drill="0.8" shape="long"/>
+<pad name="5" x="10.16" y="7.62" drill="0.8" shape="long"/>
+<pad name="4" x="10.16" y="5.08" drill="0.8" shape="long"/>
+<pad name="0" x="10.16" y="2.54" drill="0.8" shape="long"/>
+<pad name="2" x="10.16" y="0" drill="0.8" shape="long"/>
+<pad name="15" x="10.16" y="-2.54" drill="0.8" shape="long"/>
+<pad name="3V3" x="10.16" y="-5.08" drill="0.8" shape="long"/>
+<pad name="LDO_EN" x="10.16" y="-7.62" drill="0.8" shape="long"/>
+<pad name="GND2" x="10.16" y="-10.16" drill="0.8" shape="long"/>
+</package>
 </packages>
 <symbols>
 <symbol name="L9BUS">
@@ -1641,6 +1667,32 @@ Source: GLX-S-88M.pdf</description>
 <pin name="D" x="5.08" y="2.54" visible="off" length="middle" direction="pas" rot="R180"/>
 <pin name="S" x="5.08" y="-2.54" visible="off" length="middle" direction="pas" rot="R180"/>
 <pin name="G" x="-5.08" y="-2.54" visible="off" length="short" direction="pas"/>
+</symbol>
+<symbol name="ESP12-HUZZAH">
+<wire x1="-20.32" y1="22.86" x2="-20.32" y2="-33.02" width="0.254" layer="94"/>
+<wire x1="-20.32" y1="-33.02" x2="20.32" y2="-33.02" width="0.254" layer="94"/>
+<wire x1="20.32" y1="-33.02" x2="20.32" y2="22.86" width="0.254" layer="94"/>
+<wire x1="20.32" y1="22.86" x2="-20.32" y2="22.86" width="0.254" layer="94"/>
+<pin name="RST" x="-25.4" y="17.78" length="middle"/>
+<pin name="A" x="-25.4" y="12.7" length="middle"/>
+<pin name="EN" x="-25.4" y="7.62" length="middle"/>
+<pin name="16" x="-25.4" y="2.54" length="middle"/>
+<pin name="14" x="-25.4" y="-2.54" length="middle"/>
+<pin name="12" x="-25.4" y="-7.62" length="middle"/>
+<pin name="13" x="-25.4" y="-12.7" length="middle"/>
+<pin name="V+" x="-25.4" y="-17.78" length="middle" direction="pwr"/>
+<pin name="VBAT" x="-25.4" y="-22.86" length="middle" direction="pwr"/>
+<pin name="GND1" x="-25.4" y="-27.94" length="middle" direction="pwr"/>
+<pin name="TX" x="25.4" y="17.78" length="middle" rot="R180"/>
+<pin name="RX" x="25.4" y="12.7" length="middle" rot="R180"/>
+<pin name="5" x="25.4" y="7.62" length="middle" rot="R180"/>
+<pin name="4" x="25.4" y="2.54" length="middle" rot="R180"/>
+<pin name="0" x="25.4" y="-2.54" length="middle" rot="R180"/>
+<pin name="2" x="25.4" y="-7.62" length="middle" rot="R180"/>
+<pin name="15" x="25.4" y="-12.7" length="middle" rot="R180"/>
+<pin name="3V3" x="25.4" y="-17.78" length="middle" direction="pwr" rot="R180"/>
+<pin name="LDO_EN" x="25.4" y="-22.86" length="middle" rot="R180"/>
+<pin name="GND2" x="25.4" y="-27.94" length="middle" direction="pwr" rot="R180"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -2332,6 +2384,40 @@ P-channel:  110mOhm, 2.5A Imax&lt;br&gt;</description>
 <connect gate="P" pin="D" pad="4"/>
 <connect gate="P" pin="G" pad="3"/>
 <connect gate="P" pin="S" pad="2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="ESP12-HUZZAH">
+<gates>
+<gate name="G" symbol="ESP12-HUZZAH" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="ESP12-HUZZAH">
+<connects>
+<connect gate="G" pin="0" pad="0"/>
+<connect gate="G" pin="12" pad="12"/>
+<connect gate="G" pin="13" pad="13"/>
+<connect gate="G" pin="14" pad="14"/>
+<connect gate="G" pin="15" pad="15"/>
+<connect gate="G" pin="16" pad="16"/>
+<connect gate="G" pin="2" pad="2"/>
+<connect gate="G" pin="3V3" pad="3V3"/>
+<connect gate="G" pin="4" pad="4"/>
+<connect gate="G" pin="5" pad="5"/>
+<connect gate="G" pin="A" pad="A"/>
+<connect gate="G" pin="EN" pad="EN"/>
+<connect gate="G" pin="GND1" pad="GND"/>
+<connect gate="G" pin="GND2" pad="GND2"/>
+<connect gate="G" pin="LDO_EN" pad="LDO_EN"/>
+<connect gate="G" pin="RST" pad="RST"/>
+<connect gate="G" pin="RX" pad="RX"/>
+<connect gate="G" pin="TX" pad="TX"/>
+<connect gate="G" pin="V+" pad="V+"/>
+<connect gate="G" pin="VBAT" pad="VBAT"/>
 </connects>
 <technologies>
 <technology name=""/>
