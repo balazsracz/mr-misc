@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "dependencies": {
     "serialport": "*",
-    "google-spreadsheet": "*"
+    "google-spreadsheet": "*",
+    "trim": "0.0.1"
   }
 }
