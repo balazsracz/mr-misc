@@ -26,6 +26,7 @@ void mydelay(long t) {
 
 void main(void)
 {
+  init();
   uint8_t counter = 0;
   while (1){
     ++counter;
