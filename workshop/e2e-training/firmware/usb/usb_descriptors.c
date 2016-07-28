@@ -177,7 +177,7 @@ ROM USB_DEVICE_DESCRIPTOR device_dsc=
     0x00,                   // Protocol code
     USB_EP0_BUFF_SIZE,          // Max packet size for EP0, see usb_config.h
     0x04D8,                 // Vendor ID
-    0x000A,                 // Product ID: CDC RS-232 Emulation Demo
+    0x0F3A,                 // Product ID: CDC RS-232 Emulation Demo
     0x0100,                 // Device release number in BCD format
     0x01,                   // Manufacturer string index
     0x02,                   // Product string index
@@ -283,10 +283,9 @@ sizeof(sd001),USB_DESCRIPTOR_STRING,
 }};
 
 //Product string descriptor
-ROM struct{BYTE bLength;BYTE bDscType;WORD string[25];}sd002={
+ROM struct{BYTE bLength;BYTE bDscType;WORD string[14];}sd002={
 sizeof(sd002),USB_DESCRIPTOR_STRING,
-{'C','D','C',' ','R','S','-','2','3','2',' ',
-'E','m','u','l','a','t','i','o','n',' ','D','e','m','o'}
+{'T','r','a','i','n','i','n','g',' ','B','o','a','r','d'}
 };
 
 //Array of configuration descriptors
