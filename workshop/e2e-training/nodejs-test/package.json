@@ -1,0 +1,9 @@
+{
+  "name": "logger-nodejs-test",
+  "version": "0.0.1",
+  "dependencies": {
+    "serialport": "*",
+    "google-spreadsheet": "*",
+    "trim": "0.0.1"
+  }
+}

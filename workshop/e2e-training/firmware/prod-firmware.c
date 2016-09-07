@@ -230,28 +230,33 @@ void printhex(uint8_t value, char* buf) {
 
 char usb_buf[8];
 
+void send_const_string(const ROM char* data) {
+  int l = strlen(data);
+  mUSBUSARTTxRom(data, l);
+}
+
 void send_any_response() {
   if (parseerror) {
     parseerror = 0;
-    putrsUSBUSART("error\n");
+    send_const_string("error\n");
     return;
   }
   if (respond_pong) {
     respond_pong = 0;
-    putrsUSBUSART("pong\n");
+    send_const_string("pong\n");
     return;
   }
   if (respond_state) {
     respond_state = 0;
     switch (state) {
     case STATE_RED: 
-      putrsUSBUSART("red\n");
+      send_const_string("red\n");
       break;
     case STATE_YEL: 
-      putrsUSBUSART("yellow\n");
+      send_const_string("yellow\n");
       break;
     case STATE_GRE: 
-      putrsUSBUSART("green\n");
+      send_const_string("green\n");
       break;
     }
     return;

@@ -1,0 +1,1003 @@
+[p PRO_MODE GLOBOPT AUTOSTATIC IEEE_DBL LFSROK SPACEOPT IEEE_FLT ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 18F14K50 ]
+[d frameptr 4065 ]
+"62 /opt/microchip/xc8/v1.35/sources/common/float.c
+[v ___ftpack __ftpack `(f  1 e 4 0 ]
+"86 /opt/microchip/xc8/v1.35/sources/common/ftadd.c
+[v ___ftadd __ftadd `(f  1 e 4 0 ]
+"54 /opt/microchip/xc8/v1.35/sources/common/ftdiv.c
+[v ___ftdiv __ftdiv `(f  1 e 4 0 ]
+"62 /opt/microchip/xc8/v1.35/sources/common/ftmul.c
+[v ___ftmul __ftmul `(f  1 e 4 0 ]
+"20 /opt/microchip/xc8/v1.35/sources/common/ftsub.c
+[v ___ftsub __ftsub `(f  1 e 4 0 ]
+"10 /opt/microchip/xc8/v1.35/sources/common/sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"245
+[v ___flsub __flsub `(d  1 e 4 0 ]
+"11 /opt/microchip/xc8/v1.35/sources/common/sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 4 0 ]
+"8 /opt/microchip/xc8/v1.35/sources/common/sprcmul.c
+[v ___flmul __flmul `(d  1 e 4 0 ]
+"15 /opt/microchip/xc8/v1.35/sources/common/Umul32.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+"333 /mnt/shared/bl2/bootloader/BootPIC18NonJ.c
+[v _UserInit UserInit `(v  1 e 0 0 ]
+"359
+[v _ProcessIO ProcessIO `(v  1 e 0 0 ]
+"618
+[v _SignFlash SignFlash `(v  1 e 0 0 ]
+"709
+[v _ResetDeviceCleanly ResetDeviceCleanly `(v  1 e 0 0 ]
+"722
+[v _WriteFlashBlock WriteFlashBlock `(v  1 e 0 0 ]
+"834
+[v _WriteConfigBits WriteConfigBits `(v  1 e 0 0 ]
+"871
+[v _WriteEEPROM WriteEEPROM `(v  1 e 0 0 ]
+"893
+[v _UnlockAndActivate UnlockAndActivate `(v  1 e 0 0 ]
+"323 /mnt/shared/bl2/bootloader/main.c
+[v _main main `(v  1 e 0 0 ]
+"430
+[v _BootMain BootMain `(v  1 e 0 @48 ]
+"520
+[v _InitializeSystem InitializeSystem `(v  1 e 0 0 ]
+"606
+[v _BlinkUSBStatus BlinkUSBStatus `(v  1 e 0 0 ]
+"637
+[v _LowVoltageCheck LowVoltageCheck `(v  1 e 0 0 ]
+"695
+[v _USBCBWakeFromSuspend USBCBWakeFromSuspend `(v  1 e 0 0 ]
+"731
+[v _USBCBSuspend USBCBSuspend `(v  1 e 0 0 ]
+"778
+[v _USBCBInitEP USBCBInitEP `(v  1 e 0 0 ]
+"829
+[v _USBCBCheckOtherReq USBCBCheckOtherReq `(v  1 e 0 0 ]
+"326 /mnt/shared/bl2/bootloader/usb_device.c
+[v _USBDeviceInit USBDeviceInit `(v  1 e 0 0 ]
+"354
+[v _USBSoftAttach USBSoftAttach `(v  1 e 0 0 ]
+"406
+[v _USBCheckBusStatus USBCheckBusStatus `(v  1 e 0 0 ]
+"472
+[v _USBDeviceTasks USBDeviceTasks `(v  1 e 0 0 ]
+"618
+[v _USBSuspend USBSuspend `(v  1 e 0 0 ]
+"710
+[v _USBWakeFromSuspend USBWakeFromSuspend `(v  1 e 0 0 ]
+"753
+[v _USBProtocolResetHandler USBProtocolResetHandler `(v  1 e 0 0 ]
+"821
+[v _USBCtrlTrfSetupHandler USBCtrlTrfSetupHandler `(v  1 e 0 0 ]
+"1024
+[v _USBCtrlTrfInHandler USBCtrlTrfInHandler `(v  1 e 0 0 ]
+"1094
+[v _USBCtrlTrfTxService USBCtrlTrfTxService `(v  1 e 0 0 ]
+"1178
+[v _USBCtrlEPServiceComplete USBCtrlEPServiceComplete `(v  1 e 0 0 ]
+"1325
+[v _USBCheckStdRequest USBCheckStdRequest `(v  1 e 0 0 ]
+"1392
+[v _USBStdGetDscHandler USBStdGetDscHandler `(v  1 e 0 0 ]
+"1440
+[v _USBStdSetCfgHandler USBStdSetCfgHandler `(v  1 e 0 0 ]
+"1489
+[v _USBStdGetStatusHandler USBStdGetStatusHandler `(v  1 e 0 0 ]
+"1547
+[v _USBStdFeatureReqHandler USBStdFeatureReqHandler `(v  1 e 0 0 ]
+"1592
+[v _LoadBDTandSetUOWN LoadBDTandSetUOWN `(v  1 e 0 0 ]
+"1624
+[v _USBDisableWithLongDelay USBDisableWithLongDelay `(v  1 e 0 0 ]
+"1634
+[v _DelayRoutine DelayRoutine `(v  1 e 0 0 ]
+"1651
+[v _ClearWatchdog ClearWatchdog `(v  1 e 0 0 ]
+"73 /mnt/shared/bl2/bootloader/usb_device_hid.c
+[v _USBCheckHIDRequest USBCheckHIDRequest `(v  1 e 0 0 ]
+"139
+[v _HIDGetReportHandler HIDGetReportHandler `(v  1 e 0 0 ]
+"144
+[v _HIDSetReportHandler HIDSetReportHandler `(v  1 e 0 0 ]
+"171
+[v _HIDInitEP HIDInitEP `(v  1 e 0 0 ]
+"229
+[v _HIDTxReport HIDTxReport `(v  1 e 0 0 ]
+"284
+[v _HIDRxReport HIDRxReport `(uc  1 e 1 0 ]
+"49 /opt/microchip/xc8/v1.35/include/pic18f14k50.h
+[v _UEP0 UEP0 `VEuc  1 e 1 @3923 ]
+"180
+[v _UEP1 UEP1 `VEuc  1 e 1 @3924 ]
+"311
+[v _UEP2 UEP2 `VEuc  1 e 1 @3925 ]
+"442
+[v _UEP3 UEP3 `VEuc  1 e 1 @3926 ]
+"573
+[v _UEP4 UEP4 `VEuc  1 e 1 @3927 ]
+"704
+[v _UEP5 UEP5 `VEuc  1 e 1 @3928 ]
+"835
+[v _UEP6 UEP6 `VEuc  1 e 1 @3929 ]
+"966
+[v _UEP7 UEP7 `VEuc  1 e 1 @3930 ]
+"1097
+[v _UEIE UEIE `VEuc  1 e 1 @3931 ]
+"1147
+[v _UADDR UADDR `VEuc  1 e 1 @3932 ]
+"1368
+[v _UIE UIE `VEuc  1 e 1 @3936 ]
+[s S1503 . 1 `uc 1 URSTIE 1 0 :1:0 
+`uc 1 UERRIE 1 0 :1:1 
+`uc 1 ACTVIE 1 0 :1:2 
+`uc 1 TRNIE 1 0 :1:3 
+`uc 1 IDLEIE 1 0 :1:4 
+`uc 1 STALLIE 1 0 :1:5 
+`uc 1 SOFIE 1 0 :1:6 
+]
+"1384
+[u S1511 . 1 `S1503 1 . 1 0 ]
+[v _UIEbits UIEbits `VES1511  1 e 1 @3936 ]
+"1423
+[v _UCFG UCFG `VEuc  1 e 1 @3937 ]
+"1485
+[v _UIR UIR `VEuc  1 e 1 @3938 ]
+[s S1402 . 1 `uc 1 URSTIF 1 0 :1:0 
+`uc 1 UERRIF 1 0 :1:1 
+`uc 1 ACTVIF 1 0 :1:2 
+`uc 1 TRNIF 1 0 :1:3 
+`uc 1 IDLEIF 1 0 :1:4 
+`uc 1 STALLIF 1 0 :1:5 
+`uc 1 SOFIF 1 0 :1:6 
+]
+"1501
+[u S1410 . 1 `S1402 1 . 1 0 ]
+[v _UIRbits UIRbits `VES1410  1 e 1 @3938 ]
+"1540
+[v _USTAT USTAT `VEuc  1 e 1 @3939 ]
+[s S1430 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 PPBI 1 0 :1:1 
+`uc 1 DIR 1 0 :1:2 
+`uc 1 ENDP0 1 0 :1:3 
+`uc 1 ENDP1 1 0 :1:4 
+`uc 1 ENDP2 1 0 :1:5 
+`uc 1 ENDP3 1 0 :1:6 
+]
+"1556
+[u S1438 . 1 `S1430 1 . 1 0 ]
+[v _USTATbits USTATbits `VES1438  1 e 1 @3939 ]
+"1590
+[v _UCON UCON `VEuc  1 e 1 @3940 ]
+[s S525 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 SUSPND 1 0 :1:1 
+`uc 1 RESUME 1 0 :1:2 
+`uc 1 USBEN 1 0 :1:3 
+`uc 1 PKTDIS 1 0 :1:4 
+`uc 1 SE0 1 0 :1:5 
+`uc 1 PPBRST 1 0 :1:6 
+]
+"1606
+[u S533 . 1 `S525 1 . 1 0 ]
+[v _UCONbits UCONbits `VES533  1 e 1 @3940 ]
+"2290
+[v _ANSEL ANSEL `VEuc  1 e 1 @3966 ]
+"2334
+[v _ANSELH ANSELH `VEuc  1 e 1 @3967 ]
+[s S37 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 RB4 1 0 :1:4 
+`uc 1 RB5 1 0 :1:5 
+`uc 1 RB6 1 0 :1:6 
+`uc 1 RB7 1 0 :1:7 
+]
+"2559
+[s S69 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 SDI 1 0 :1:4 
+`uc 1 RX 1 0 :1:5 
+`uc 1 SCL 1 0 :1:6 
+`uc 1 TX 1 0 :1:7 
+]
+[s S75 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 SDA 1 0 :1:4 
+`uc 1 DT 1 0 :1:5 
+`uc 1 SCK 1 0 :1:6 
+`uc 1 CK 1 0 :1:7 
+]
+[s S81 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 AN10 1 0 :1:4 
+`uc 1 AN11 1 0 :1:5 
+]
+[s S85 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 CCP2_PA2 1 0 :1:3 
+]
+[s S88 . 1 `uc 1 RB0 1 0 :1:0 
+]
+[s S90 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 RB1 1 0 :1:1 
+]
+[s S93 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 RB2 1 0 :1:2 
+]
+[s S96 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 RB3 1 0 :1:3 
+]
+[u S99 . 1 `S37 1 . 1 0 `S69 1 . 1 0 `S75 1 . 1 0 `S81 1 . 1 0 `S85 1 . 1 0 `S88 1 . 1 0 `S90 1 . 1 0 `S93 1 . 1 0 `S96 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES99  1 e 1 @3969 ]
+"3169
+[v _LATC LATC `VEuc  1 e 1 @3979 ]
+[s S181 . 1 `uc 1 LATC0 1 0 :1:0 
+`uc 1 LATC1 1 0 :1:1 
+`uc 1 LATC2 1 0 :1:2 
+`uc 1 LATC3 1 0 :1:3 
+`uc 1 LATC4 1 0 :1:4 
+`uc 1 LATC5 1 0 :1:5 
+`uc 1 LATC6 1 0 :1:6 
+`uc 1 LATC7 1 0 :1:7 
+]
+"3217
+[s S190 . 1 `uc 1 LC0 1 0 :1:0 
+]
+[s S192 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 LC1 1 0 :1:1 
+]
+[s S195 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 LC2 1 0 :1:2 
+]
+[s S198 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 LC3 1 0 :1:3 
+]
+[s S201 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 LC4 1 0 :1:4 
+]
+[s S204 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 LC5 1 0 :1:5 
+]
+[s S207 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 LC6 1 0 :1:6 
+]
+[s S210 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 LC7 1 0 :1:7 
+]
+[u S213 . 1 `S181 1 . 1 0 `S190 1 . 1 0 `S192 1 . 1 0 `S195 1 . 1 0 `S198 1 . 1 0 `S201 1 . 1 0 `S204 1 . 1 0 `S207 1 . 1 0 `S210 1 . 1 0 ]
+[v _LATCbits LATCbits `VES213  1 e 1 @3979 ]
+"3382
+[v _TRISB TRISB `VEuc  1 e 1 @3987 ]
+[s S31 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 TRISB4 1 0 :1:4 
+`uc 1 TRISB5 1 0 :1:5 
+`uc 1 TRISB6 1 0 :1:6 
+`uc 1 TRISB7 1 0 :1:7 
+]
+"3408
+[u S43 . 1 `S31 1 . 1 0 `S37 1 . 1 0 ]
+[v _TRISBbits TRISBbits `VES43  1 e 1 @3987 ]
+"3511
+[v _TRISC TRISC `VEuc  1 e 1 @3988 ]
+[s S256 . 1 `uc 1 TRISC0 1 0 :1:0 
+`uc 1 TRISC1 1 0 :1:1 
+`uc 1 TRISC2 1 0 :1:2 
+`uc 1 TRISC3 1 0 :1:3 
+`uc 1 TRISC4 1 0 :1:4 
+`uc 1 TRISC5 1 0 :1:5 
+`uc 1 TRISC6 1 0 :1:6 
+`uc 1 TRISC7 1 0 :1:7 
+]
+"3543
+[s S265 . 1 `uc 1 RC0 1 0 :1:0 
+`uc 1 RC1 1 0 :1:1 
+`uc 1 RC2 1 0 :1:2 
+`uc 1 RC3 1 0 :1:3 
+`uc 1 RC4 1 0 :1:4 
+`uc 1 RC5 1 0 :1:5 
+`uc 1 RC6 1 0 :1:6 
+`uc 1 RC7 1 0 :1:7 
+]
+[u S274 . 1 `S256 1 . 1 0 `S265 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES274  1 e 1 @3988 ]
+[s S1473 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 TMR3IE 1 0 :1:1 
+`uc 1 USBIE 1 0 :1:2 
+`uc 1 BCLIE 1 0 :1:3 
+`uc 1 EEIE 1 0 :1:4 
+`uc 1 C2IE 1 0 :1:5 
+`uc 1 C1IE 1 0 :1:6 
+`uc 1 OSCFIE 1 0 :1:7 
+]
+"4041
+[s S1482 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 CMIE 1 0 :1:6 
+]
+[u S1485 . 1 `S1473 1 . 1 0 `S1482 1 . 1 0 ]
+[v _PIE2bits PIE2bits `VES1485  1 e 1 @4000 ]
+[s S306 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 TMR3IF 1 0 :1:1 
+`uc 1 USBIF 1 0 :1:2 
+`uc 1 BCLIF 1 0 :1:3 
+`uc 1 EEIF 1 0 :1:4 
+`uc 1 C2IF 1 0 :1:5 
+`uc 1 C1IF 1 0 :1:6 
+`uc 1 OSCFIF 1 0 :1:7 
+]
+"4106
+[s S315 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 CMIF 1 0 :1:6 
+]
+[u S318 . 1 `S306 1 . 1 0 `S315 1 . 1 0 ]
+[v _PIR2bits PIR2bits `VES318  1 e 1 @4001 ]
+"4215
+[v _EECON1 EECON1 `VEuc  1 e 1 @4006 ]
+[s S683 . 1 `uc 1 RD 1 0 :1:0 
+`uc 1 WR 1 0 :1:1 
+`uc 1 WREN 1 0 :1:2 
+`uc 1 WRERR 1 0 :1:3 
+`uc 1 FREE 1 0 :1:4 
+`uc 1 . 1 0 :1:5 
+`uc 1 CFGS 1 0 :1:6 
+`uc 1 EEPGD 1 0 :1:7 
+]
+"4236
+[s S692 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 EEFS 1 0 :1:6 
+]
+[u S695 . 1 `S683 1 . 1 0 `S692 1 . 1 0 ]
+[v _EECON1bits EECON1bits `VES695  1 e 1 @4006 ]
+"4280
+[v _EECON2 EECON2 `VEuc  1 e 1 @4007 ]
+"4286
+[v _EEDATA EEDATA `VEuc  1 e 1 @4008 ]
+"4292
+[v _EEADR EEADR `VEuc  1 e 1 @4009 ]
+[s S334 . 1 `uc 1 NOT_BOR 1 0 :1:0 
+]
+"6765
+[s S336 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 NOT_POR 1 0 :1:1 
+]
+[s S339 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 NOT_PD 1 0 :1:2 
+]
+[s S342 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 NOT_TO 1 0 :1:3 
+]
+[s S345 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 NOT_RI 1 0 :1:4 
+]
+[s S348 . 1 `uc 1 nBOR 1 0 :1:0 
+`uc 1 nPOR 1 0 :1:1 
+`uc 1 nPD 1 0 :1:2 
+`uc 1 nTO 1 0 :1:3 
+`uc 1 nRI 1 0 :1:4 
+`uc 1 . 1 0 :1:5 
+`uc 1 SBOREN 1 0 :1:6 
+`uc 1 IPEN 1 0 :1:7 
+]
+[s S357 . 1 `uc 1 BOR 1 0 :1:0 
+`uc 1 POR 1 0 :1:1 
+`uc 1 PD 1 0 :1:2 
+`uc 1 TO 1 0 :1:3 
+`uc 1 RI 1 0 :1:4 
+]
+[u S363 . 1 `S334 1 . 1 0 `S336 1 . 1 0 `S339 1 . 1 0 `S342 1 . 1 0 `S345 1 . 1 0 `S348 1 . 1 0 `S357 1 . 1 0 ]
+[v _RCONbits RCONbits `VES363  1 e 1 @4048 ]
+"6912
+[v _OSCCON OSCCON `VEuc  1 e 1 @4051 ]
+"7476
+[v _INTCON INTCON `VEuc  1 e 1 @4082 ]
+[s S725 . 1 `uc 1 RABIF 1 0 :1:0 
+`uc 1 INT0IF 1 0 :1:1 
+`uc 1 TMR0IF 1 0 :1:2 
+`uc 1 RABIE 1 0 :1:3 
+`uc 1 INT0IE 1 0 :1:4 
+`uc 1 TMR0IE 1 0 :1:5 
+`uc 1 PEIE_GIEL 1 0 :1:6 
+`uc 1 GIE_GIEH 1 0 :1:7 
+]
+"7528
+[s S734 . 1 `uc 1 RBIF 1 0 :1:0 
+`uc 1 INT0IF 1 0 :1:1 
+`uc 1 TMR0IF 1 0 :1:2 
+`uc 1 RBIE 1 0 :1:3 
+`uc 1 INT0IE 1 0 :1:4 
+`uc 1 TMR0IE 1 0 :1:5 
+`uc 1 PEIE 1 0 :1:6 
+`uc 1 GIE 1 0 :1:7 
+]
+[s S743 . 1 `uc 1 RBIF 1 0 :1:0 
+`uc 1 INT0IF 1 0 :1:1 
+`uc 1 TMR0IF 1 0 :1:2 
+`uc 1 RBIE 1 0 :1:3 
+`uc 1 INT0IE 1 0 :1:4 
+`uc 1 TMR0IE 1 0 :1:5 
+`uc 1 GIEL 1 0 :1:6 
+`uc 1 GIEH 1 0 :1:7 
+]
+[s S752 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 INT0F 1 0 :1:1 
+`uc 1 T0IF 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 INT0E 1 0 :1:4 
+`uc 1 T0IE 1 0 :1:5 
+`uc 1 PEIE 1 0 :1:6 
+`uc 1 GIE 1 0 :1:7 
+]
+[s S761 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 GIEL 1 0 :1:6 
+`uc 1 GIEH 1 0 :1:7 
+]
+[u S765 . 1 `S725 1 . 1 0 `S734 1 . 1 0 `S743 1 . 1 0 `S752 1 . 1 0 `S761 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES765  1 e 1 @4082 ]
+"7640
+[v _TABLAT TABLAT `VEuc  1 e 1 @4085 ]
+"7654
+[v _TBLPTRL TBLPTRL `VEuc  1 e 1 @4086 ]
+"7660
+[v _TBLPTRH TBLPTRH `VEuc  1 e 1 @4087 ]
+"7666
+[v _TBLPTRU TBLPTRU `VEuc  1 e 1 @4088 ]
+"7705
+[v _STKPTR STKPTR `VEuc  1 e 1 @4092 ]
+"7880
+[v _ANS10 ANS10 `VEb  1 e 0 @31738 ]
+"8496
+[v _LATC4 LATC4 `VEb  1 e 0 @31836 ]
+"8498
+[v _LATC5 LATC5 `VEb  1 e 0 @31837 ]
+"8720
+[v _RB5 RB5 `VEb  1 e 0 @31757 ]
+"9062
+[v _TRISC4 TRISC4 `VEb  1 e 0 @31908 ]
+"9064
+[v _TRISC5 TRISC5 `VEb  1 e 0 @31909 ]
+"9170
+[v _WPUB4 WPUB4 `VEb  1 e 0 @31684 ]
+"9172
+[v _WPUB5 WPUB5 `VEb  1 e 0 @31685 ]
+"9174
+[v _WPUB6 WPUB6 `VEb  1 e 0 @31686 ]
+"9200
+[v _nRABPU nRABPU `VEb  1 e 0 @32655 ]
+[s S465 . 64 `uc 1 Command 1 0 `ul 1 Address 4 1 `uc 1 Size 1 5 `[58]uc 1 Data 58 6 ]
+"299 /mnt/shared/bl2/bootloader/BootPIC18NonJ.c
+[s S470 . 65 `uc 1 Command 1 0 `uc 1 PacketDataFieldSize 1 1 `uc 1 BytesPerAddress 1 2 `uc 1 Type1 1 3 `ul 1 Address1 4 4 `ul 1 Length1 4 8 `uc 1 Type2 1 12 `ul 1 Address2 4 13 `ul 1 Length2 4 17 `uc 1 Type3 1 21 `ul 1 Address3 4 22 `ul 1 Length3 4 26 `uc 1 Type4 1 30 `ul 1 Address4 4 31 `ul 1 Length4 4 35 `uc 1 Type5 1 39 `ul 1 Address5 4 40 `ul 1 Length5 4 44 `uc 1 Type6 1 48 `ul 1 Address6 4 49 `ul 1 Length6 4 53 `uc 1 VersionFlag 1 57 `[7]uc 1 ExtraPadBytes 7 58 ]
+[s S494 . 2 `uc 1 Command 1 0 `uc 1 LockValue 1 1 ]
+[s S497 . 29 `uc 1 Command 1 0 `ui 1 BootloaderVersion 2 1 `ui 1 ApplicationVersion 2 3 `ul 1 SignatureAddress 4 5 `ui 1 SignatureValue 2 9 `ul 1 ErasePageSize 4 11 `uc 1 Config1LMask 1 15 `uc 1 Config1HMask 1 16 `uc 1 Config2LMask 1 17 `uc 1 Config2HMask 1 18 `uc 1 Config3LMask 1 19 `uc 1 Config3HMask 1 20 `uc 1 Config4LMask 1 21 `uc 1 Config4HMask 1 22 `uc 1 Config5LMask 1 23 `uc 1 Config5HMask 1 24 `uc 1 Config6LMask 1 25 `uc 1 Config6HMask 1 26 `uc 1 Config7LMask 1 27 `uc 1 Config7HMask 1 28 ]
+[u S518 . 65 `[64]uc 1 Contents 64 0 `S465 1 . 64 0 `S470 1 . 65 0 `S494 1 . 2 0 `S497 1 . 29 0 ]
+[v _PacketFromPC PacketFromPC `S518  1 e 65 0 ]
+"303
+[v _PacketToPC PacketToPC `S518  1 e 65 0 ]
+"307
+[v _ProgrammingBuffer ProgrammingBuffer `[64]uc  1 e 64 0 ]
+"311
+[v _BootState BootState `uc  1 e 1 0 ]
+"312
+[v _ErasePageTracker ErasePageTracker `ui  1 e 2 0 ]
+"313
+[v _BufferedDataIndex BufferedDataIndex `uc  1 e 1 0 ]
+"314
+[v _ProgrammedPointer ProgrammedPointer `ul  1 e 4 0 ]
+"315
+[v _ConfigsLockValue ConfigsLockValue `uc  1 e 1 0 ]
+"276 /mnt/shared/bl2/bootloader/main.c
+[v _FlashSignatureWord FlashSignatureWord `Cui  1 e 2 @4102 ]
+[s S1093 _USB_DEV_DSC 18 `uc 1 bLength 1 0 `uc 1 bDscType 1 1 `ui 1 bcdUSB 2 2 `uc 1 bDevCls 1 4 `uc 1 bDevSubCls 1 5 `uc 1 bDevProtocol 1 6 `uc 1 bMaxPktSize0 1 7 `ui 1 idVendor 2 8 `ui 1 idProduct 2 10 `ui 1 bcdDevice 2 12 `uc 1 iMFR 1 14 `uc 1 iProduct 1 15 `uc 1 iSerialNum 1 16 `uc 1 bNumCfg 1 17 ]
+"172 /mnt/shared/bl2/bootloader/usb_descriptors.c
+[v _device_dsc device_dsc `CS1093  1 e 18 0 ]
+"191
+[v _CFG01 CFG01 `C[41]uc  1 e 41 0 ]
+[s S1144 . 4 `uc 1 bLength 1 0 `uc 1 bDscType 1 1 `[1]ui 1 string 2 2 ]
+"244
+[v _sd000 sd000 `CS1144  1 e 4 0 ]
+[s S1148 . 52 `uc 1 bLength 1 0 `uc 1 bDscType 1 1 `[25]ui 1 string 50 2 ]
+"247
+[v _sd001 sd001 `CS1148  1 e 52 0 ]
+[s S1152 . 38 `uc 1 bLength 1 0 `uc 1 bDscType 1 1 `[18]ui 1 string 36 2 ]
+"252
+[v _sd002 sd002 `CS1152  1 e 38 0 ]
+"257
+[v _hid_rpt01 hid_rpt01 `C[29]uc  1 e 29 0 ]
+"280
+[v _USB_SD_Ptr USB_SD_Ptr `C[3]*.31Cuc  1 e 3 0 ]
+"80 /mnt/shared/bl2/bootloader/usb_device.c
+[v _bTRNIFCount bTRNIFCount `uc  1 e 1 0 ]
+"81
+[v _ctrl_trf_state ctrl_trf_state `uc  1 e 1 0 ]
+"82
+[v _ctrl_trf_session_owner ctrl_trf_session_owner `uc  1 e 1 0 ]
+[s S1190 . 2 `uc 1 bLow 1 0 `uc 1 bHigh 1 1 ]
+"83
+[u S1193 _POINTER 3 `S1190 1 . 2 0 `ui 1 _word 2 0 `*.2uc 1 bRam 3 0 `*.2ui 1 wRam 3 0 `*.2Cuc 1 bRom 3 0 `*.2Cus 1 wRom 3 0 ]
+[v _pSrc pSrc `S1193  1 e 3 0 ]
+"84
+[v _pDst pDst `S1193  1 e 3 0 ]
+[s S1200 . 2 `uc 1 LB 1 0 `uc 1 HB 1 1 ]
+"85
+[s S1203 . 2 `uc 1 b0 1 0 :1:0 
+`uc 1 b1 1 0 :1:1 
+`uc 1 b2 1 0 :1:2 
+`uc 1 b3 1 0 :1:3 
+`uc 1 b4 1 0 :1:4 
+`uc 1 b5 1 0 :1:5 
+`uc 1 b6 1 0 :1:6 
+`uc 1 b7 1 0 :1:7 
+`uc 1 b8 1 1 :1:0 
+`uc 1 b9 1 1 :1:1 
+`uc 1 b10 1 1 :1:2 
+`uc 1 b11 1 1 :1:3 
+`uc 1 b12 1 1 :1:4 
+`uc 1 b13 1 1 :1:5 
+`uc 1 b14 1 1 :1:6 
+`uc 1 b15 1 1 :1:7 
+]
+[u S1220 . 2 `us 1 Val 2 0 `[2]uc 1 v 2 0 `S1200 1 byte 2 0 `S1203 1 bits 2 0 ]
+[v _wCount wCount `S1220  1 e 2 0 ]
+"86
+[v _short_pkt_status short_pkt_status `uc  1 e 1 0 ]
+[s S1225 . 8 `[8]uc 1 _byte 8 0 ]
+"87
+[s S1227 . 8 `uc 1 bmRequestType 1 0 `uc 1 bRequest 1 1 `ui 1 wValue 2 2 `ui 1 wIndex 2 4 `ui 1 wLength 2 6 ]
+[s S1233 . 8 `uc 1 . 1 0 :8:0 
+`uc 1 . 1 1 :8:0 
+`S1220 1 W_Value 2 2 `S1220 1 W_Index 2 4 `S1220 1 W_Length 2 6 ]
+[s S1239 . 8 `uc 1 Recipient 1 0 :5:0 
+`uc 1 RequestType 1 0 :2:5 
+`uc 1 DataDir 1 0 :1:7 
+`uc 1 . 1 1 :8:0 
+`uc 1 bFeature 1 2 `uc 1 . 1 3 :8:0 
+`uc 1 . 1 4 :8:0 
+`uc 1 . 1 5 :8:0 
+`uc 1 . 1 6 :8:0 
+`uc 1 . 1 7 :8:0 
+]
+[s S1250 . 8 `uc 1 . 1 0 :8:0 
+`uc 1 . 1 1 :8:0 
+`uc 1 bDscIndex 1 2 `uc 1 bDscType 1 3 `ui 1 wLangID 2 4 `uc 1 . 1 6 :8:0 
+`uc 1 . 1 7 :8:0 
+]
+[s S1258 . 8 `uc 1 . 1 0 :8:0 
+`uc 1 . 1 1 :8:0 
+`uc 1 bDevADR 1 2 `uc 1 bDevADRH 1 3 `uc 1 . 1 4 :8:0 
+`uc 1 . 1 5 :8:0 
+`uc 1 . 1 6 :8:0 
+`uc 1 . 1 7 :8:0 
+]
+[s S1267 . 8 `uc 1 . 1 0 :8:0 
+`uc 1 . 1 1 :8:0 
+`uc 1 bCfgValue 1 2 `uc 1 bCfgRSD 1 3 `uc 1 . 1 4 :8:0 
+`uc 1 . 1 5 :8:0 
+`uc 1 . 1 6 :8:0 
+`uc 1 . 1 7 :8:0 
+]
+[s S1276 . 8 `uc 1 . 1 0 :8:0 
+`uc 1 . 1 1 :8:0 
+`uc 1 bAltID 1 2 `uc 1 bAltID_H 1 3 `uc 1 bIntfID 1 4 `uc 1 bIntfID_H 1 5 `uc 1 . 1 6 :8:0 
+`uc 1 . 1 7 :8:0 
+]
+[s S1285 . 8 `uc 1 . 1 0 :8:0 
+`uc 1 . 1 1 :8:0 
+`uc 1 . 1 2 :8:0 
+`uc 1 . 1 3 :8:0 
+`uc 1 bEPID 1 4 `uc 1 bEPID_H 1 5 `uc 1 . 1 6 :8:0 
+`uc 1 . 1 7 :8:0 
+]
+[s S1294 . 8 `uc 1 . 1 0 :8:0 
+`uc 1 . 1 1 :8:0 
+`uc 1 . 1 2 :8:0 
+`uc 1 . 1 3 :8:0 
+`uc 1 EPNum 1 4 :4:0 
+`uc 1 . 1 4 :3:4 
+`uc 1 EPDir 1 4 :1:7 
+`uc 1 . 1 5 :8:0 
+`uc 1 . 1 6 :8:0 
+`uc 1 . 1 7 :8:0 
+]
+[u S1305 _CTRL_TRF_SETUP 8 `S1225 1 . 8 0 `S1227 1 . 8 0 `S1233 1 . 8 0 `S1239 1 . 8 0 `S1250 1 . 8 0 `S1258 1 . 8 0 `S1267 1 . 8 0 `S1276 1 . 8 0 `S1285 1 . 8 0 `S1294 1 . 8 0 ]
+[v _SetupPkt SetupPkt `S1305  1 e 8 0 ]
+"88
+[v _EP0OutOddNeedsArmingNext EP0OutOddNeedsArmingNext `uc  1 e 1 0 ]
+[s S544 . 1 `uc 1 BC8 1 0 :1:0 
+`uc 1 BC9 1 0 :1:1 
+`uc 1 BSTALL 1 0 :1:2 
+`uc 1 DTSEN 1 0 :1:3 
+`uc 1 INCDIS 1 0 :1:4 
+`uc 1 KEN 1 0 :1:5 
+`uc 1 DTS 1 0 :1:6 
+`uc 1 UOWN 1 0 :1:7 
+]
+"89
+[s S553 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 PID0 1 0 :1:2 
+`uc 1 PID1 1 0 :1:3 
+`uc 1 PID2 1 0 :1:4 
+`uc 1 PID3 1 0 :1:5 
+`uc 1 . 1 0 :2:6 
+]
+[s S560 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 PID 1 0 :4:2 
+`uc 1 . 1 0 :2:6 
+]
+[u S564 _BD_STAT 1 `uc 1 _byte 1 0 `S544 1 . 1 0 `S553 1 . 1 0 `S560 1 . 1 0 ]
+[s S569 . 4 `S564 1 Stat 1 0 `uc 1 Cnt 1 1 `uc 1 ADRL 1 2 `uc 1 ADRH 1 3 ]
+[s S574 . 4 `uc 1 . 1 0 :8:0 
+`uc 1 . 1 1 :8:0 
+`*.39uc 1 ADR 2 2 ]
+[u S578 _BDT 4 `S569 1 . 4 0 `S574 1 . 4 0 ]
+[v _TempBDT TempBDT `S578  1 e 4 0 ]
+"90
+[v _usb_device_state usb_device_state `uc  1 e 1 0 ]
+[s S1353 . 1 `uc 1 RemoteWakeup 1 0 :1:0 
+`uc 1 ctrl_trf_mem 1 0 :1:1 
+]
+"91
+[u S1356 _USB_DEVICE_STATUS 1 `uc 1 _byte 1 0 `S1353 1 . 1 0 ]
+[v _usb_stat usb_stat `S1356  1 e 1 0 ]
+"92
+[v _usb_active_cfg usb_active_cfg `uc  1 e 1 0 ]
+"93
+[v _usb_alt_intf usb_alt_intf `[1]uc  1 e 1 0 ]
+"101
+[v _DeviceIsSoftDetached DeviceIsSoftDetached `uc  1 e 1 0 ]
+"170
+[v _ep0BoEven ep0BoEven `VES578  1 e 4 @512 ]
+"171
+[v _ep0BoOdd ep0BoOdd `VES578  1 e 4 @516 ]
+"172
+[v _ep0Bi ep0Bi `VES578  1 e 4 @520 ]
+"176
+[v _ep1Bo ep1Bo `VES578  1 e 4 @524 ]
+"177
+[v _ep1Bi ep1Bi `VES578  1 e 4 @528 ]
+"254
+[v _EP0OutEvenBuf EP0OutEvenBuf `VE[8]uc  1 e 8 @532 ]
+"255
+[v _EP0OutOddBuf EP0OutOddBuf `VE[8]uc  1 e 8 @540 ]
+"256
+[s S1361 . 8 `uc 1 _byte0 1 0 `uc 1 _byte1 1 1 `uc 1 _byte2 1 2 `uc 1 _byte3 1 3 `uc 1 _byte4 1 4 `uc 1 _byte5 1 5 `uc 1 _byte6 1 6 `uc 1 _byte7 1 7 ]
+[s S1370 . 8 `ui 1 _word0 2 0 `ui 1 _word1 2 2 `ui 1 _word2 2 4 `ui 1 _word3 2 6 ]
+[u S1375 _CTRL_TRF_DATA 8 `S1225 1 . 8 0 `S1361 1 . 8 0 `S1370 1 . 8 0 ]
+[v _CtrlTrfData CtrlTrfData `VES1375  1 e 8 @548 ]
+"263
+[v _hid_report_out hid_report_out `VE[64]uc  1 e 64 @556 ]
+"264
+[v _hid_report_in hid_report_in `VE[64]uc  1 e 64 @620 ]
+"43 /mnt/shared/bl2/bootloader/usb_device_hid.c
+[v _idle_rate idle_rate `uc  1 e 1 0 ]
+"44
+[v _active_protocol active_protocol `uc  1 e 1 0 ]
+"45
+[v _hid_rpt_rx_len hid_rpt_rx_len `uc  1 e 1 0 ]
+"323 /mnt/shared/bl2/bootloader/main.c
+[v _main main `(v  1 e 0 0 ]
+{
+"337
+[v main@i i `ui  1 a 2 11 ]
+"336
+[v main@u u `ui  1 a 2 9 ]
+"334
+[v main@k k `uc  1 a 1 13 ]
+"403
+} 0
+"430
+[v _BootMain BootMain `(v  1 e 0 @48 ]
+{
+"494
+} 0
+"359 /mnt/shared/bl2/bootloader/BootPIC18NonJ.c
+[v _ProcessIO ProcessIO `(v  1 e 0 0 ]
+{
+"361
+[v ProcessIO@i i `uc  1 s 1 i ]
+"362
+[v ProcessIO@pROM pROM `*.33Cuc  1 s 3 pROM ]
+"606
+} 0
+"722
+[v _WriteFlashBlock WriteFlashBlock `(v  1 e 0 0 ]
+{
+"724
+[v WriteFlashBlock@i i `uc  1 s 1 i ]
+"725
+[v WriteFlashBlock@BytesTakenFromBuffer BytesTakenFromBuffer `uc  1 s 1 BytesTakenFromBuffer ]
+"726
+[v WriteFlashBlock@CorrectionFactor CorrectionFactor `uc  1 s 1 CorrectionFactor ]
+"729
+[v WriteFlashBlock@pROM pROM `*.33Cuc  1 s 3 pROM ]
+"831
+} 0
+"871
+[v _WriteEEPROM WriteEEPROM `(v  1 e 0 0 ]
+{
+"873
+[v WriteEEPROM@i i `uc  1 s 1 i ]
+"884
+} 0
+"834
+[v _WriteConfigBits WriteConfigBits `(v  1 e 0 0 ]
+{
+"836
+[v WriteConfigBits@i i `uc  1 s 1 i ]
+"868
+} 0
+"472 /mnt/shared/bl2/bootloader/usb_device.c
+[v _USBDeviceTasks USBDeviceTasks `(v  1 e 0 0 ]
+{
+[s S544 . 1 `uc 1 BC8 1 0 :1:0 
+`uc 1 BC9 1 0 :1:1 
+`uc 1 BSTALL 1 0 :1:2 
+`uc 1 DTSEN 1 0 :1:3 
+`uc 1 INCDIS 1 0 :1:4 
+`uc 1 KEN 1 0 :1:5 
+`uc 1 DTS 1 0 :1:6 
+`uc 1 UOWN 1 0 :1:7 
+]
+"474
+[s S553 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 PID0 1 0 :1:2 
+`uc 1 PID1 1 0 :1:3 
+`uc 1 PID2 1 0 :1:4 
+`uc 1 PID3 1 0 :1:5 
+`uc 1 . 1 0 :2:6 
+]
+[s S560 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 PID 1 0 :4:2 
+`uc 1 . 1 0 :2:6 
+]
+[u S564 _BD_STAT 1 `uc 1 _byte 1 0 `S544 1 . 1 0 `S553 1 . 1 0 `S560 1 . 1 0 ]
+[s S569 . 4 `S564 1 Stat 1 0 `uc 1 Cnt 1 1 `uc 1 ADRL 1 2 `uc 1 ADRH 1 3 ]
+[s S574 . 4 `uc 1 . 1 0 :8:0 
+`uc 1 . 1 1 :8:0 
+`*.39uc 1 ADR 2 2 ]
+[u S578 _BDT 4 `S569 1 . 4 0 `S574 1 . 4 0 ]
+[v USBDeviceTasks@pBDTEntry pBDTEntry `*.39VES578  1 s 2 pBDTEntry ]
+"475
+[v USBDeviceTasks@i i `uc  1 s 1 i ]
+"593
+} 0
+"710
+[v _USBWakeFromSuspend USBWakeFromSuspend `(v  1 e 0 0 ]
+{
+"722
+} 0
+"695 /mnt/shared/bl2/bootloader/main.c
+[v _USBCBWakeFromSuspend USBCBWakeFromSuspend `(v  1 e 0 0 ]
+{
+"712
+} 0
+"618 /mnt/shared/bl2/bootloader/usb_device.c
+[v _USBSuspend USBSuspend `(v  1 e 0 0 ]
+{
+"620
+[v USBSuspend@UIESave UIESave `uc  1 s 1 UIESave ]
+"693
+} 0
+"731 /mnt/shared/bl2/bootloader/main.c
+[v _USBCBSuspend USBCBSuspend `(v  1 e 0 0 ]
+{
+"750
+} 0
+"821 /mnt/shared/bl2/bootloader/usb_device.c
+[v _USBCtrlTrfSetupHandler USBCtrlTrfSetupHandler `(v  1 e 0 0 ]
+{
+"859
+} 0
+"1178
+[v _USBCtrlEPServiceComplete USBCtrlEPServiceComplete `(v  1 e 0 0 ]
+{
+"1305
+} 0
+"1325
+[v _USBCheckStdRequest USBCheckStdRequest `(v  1 e 0 0 ]
+{
+"1372
+} 0
+"1440
+[v _USBStdSetCfgHandler USBStdSetCfgHandler `(v  1 e 0 0 ]
+{
+"1442
+[v USBStdSetCfgHandler@i i `uc  1 s 1 i ]
+"1471
+} 0
+"1489
+[v _USBStdGetStatusHandler USBStdGetStatusHandler `(v  1 e 0 0 ]
+{
+"1528
+} 0
+"1392
+[v _USBStdGetDscHandler USBStdGetDscHandler `(v  1 e 0 0 ]
+{
+"1421
+} 0
+"1547
+[v _USBStdFeatureReqHandler USBStdFeatureReqHandler `(v  1 e 0 0 ]
+{
+"1582
+} 0
+"829 /mnt/shared/bl2/bootloader/main.c
+[v _USBCBCheckOtherReq USBCBCheckOtherReq `(v  1 e 0 0 ]
+{
+"832
+} 0
+"73 /mnt/shared/bl2/bootloader/usb_device_hid.c
+[v _USBCheckHIDRequest USBCheckHIDRequest `(v  1 e 0 0 ]
+{
+"137
+} 0
+"144
+[v _HIDSetReportHandler HIDSetReportHandler `(v  1 e 0 0 ]
+{
+"148
+} 0
+"139
+[v _HIDGetReportHandler HIDGetReportHandler `(v  1 e 0 0 ]
+{
+"142
+} 0
+"1024 /mnt/shared/bl2/bootloader/usb_device.c
+[v _USBCtrlTrfInHandler USBCtrlTrfInHandler `(v  1 e 0 0 ]
+{
+"1072
+} 0
+"1094
+[v _USBCtrlTrfTxService USBCtrlTrfTxService `(v  1 e 0 0 ]
+{
+"1096
+[v USBCtrlTrfTxService@bytes_to_send bytes_to_send `uc  1 s 1 bytes_to_send ]
+"1148
+} 0
+"618 /mnt/shared/bl2/bootloader/BootPIC18NonJ.c
+[v _SignFlash SignFlash `(v  1 e 0 0 ]
+{
+"620
+[v SignFlash@i i `uc  1 s 1 i ]
+"621
+[v SignFlash@pROM pROM `*.33Cuc  1 s 3 pROM ]
+"697
+} 0
+"893
+[v _UnlockAndActivate UnlockAndActivate `(v  1 e 0 0 ]
+{
+[v UnlockAndActivate@UnlockKey UnlockKey `uc  1 a 1 wreg ]
+[v UnlockAndActivate@UnlockKey UnlockKey `uc  1 a 1 wreg ]
+"895
+[v UnlockAndActivate@UnlockKey UnlockKey `uc  1 a 1 0 ]
+"936
+} 0
+"637 /mnt/shared/bl2/bootloader/main.c
+[v _LowVoltageCheck LowVoltageCheck `(v  1 e 0 0 ]
+{
+"640
+} 0
+"709 /mnt/shared/bl2/bootloader/BootPIC18NonJ.c
+[v _ResetDeviceCleanly ResetDeviceCleanly `(v  1 e 0 0 ]
+{
+"715
+} 0
+"229 /mnt/shared/bl2/bootloader/usb_device_hid.c
+[v _HIDTxReport HIDTxReport `(v  1 e 0 0 ]
+{
+[v HIDTxReport@buffer buffer `*.30uc  1 a 1 wreg ]
+"231
+[v HIDTxReport@i i `uc  1 a 1 3 ]
+"229
+[v HIDTxReport@buffer buffer `*.30uc  1 a 1 wreg ]
+[v HIDTxReport@len len `uc  1 p 1 0 ]
+"237
+[v HIDTxReport@buffer buffer `*.30uc  1 a 1 2 ]
+"249
+} 0
+"284
+[v _HIDRxReport HIDRxReport `(uc  1 e 1 0 ]
+{
+[v HIDRxReport@buffer buffer `*.30uc  1 a 1 wreg ]
+[v HIDRxReport@buffer buffer `*.30uc  1 a 1 wreg ]
+[v HIDRxReport@len len `uc  1 p 1 0 ]
+"286
+[v HIDRxReport@buffer buffer `*.30uc  1 a 1 2 ]
+"312
+} 0
+"520 /mnt/shared/bl2/bootloader/main.c
+[v _InitializeSystem InitializeSystem `(v  1 e 0 0 ]
+{
+"582
+} 0
+"326 /mnt/shared/bl2/bootloader/usb_device.c
+[v _USBDeviceInit USBDeviceInit `(v  1 e 0 0 ]
+{
+"348
+} 0
+"406
+[v _USBCheckBusStatus USBCheckBusStatus `(v  1 e 0 0 ]
+{
+"443
+} 0
+"354
+[v _USBSoftAttach USBSoftAttach `(v  1 e 0 0 ]
+{
+"374
+} 0
+"753
+[v _USBProtocolResetHandler USBProtocolResetHandler `(v  1 e 0 0 ]
+{
+"779
+} 0
+"778 /mnt/shared/bl2/bootloader/main.c
+[v _USBCBInitEP USBCBInitEP `(v  1 e 0 0 ]
+{
+[v USBCBInitEP@ConfigurationIndex ConfigurationIndex `uc  1 a 1 wreg ]
+[v USBCBInitEP@ConfigurationIndex ConfigurationIndex `uc  1 a 1 wreg ]
+"787
+[v USBCBInitEP@ConfigurationIndex ConfigurationIndex `uc  1 a 1 0 ]
+"803
+} 0
+"333 /mnt/shared/bl2/bootloader/BootPIC18NonJ.c
+[v _UserInit UserInit `(v  1 e 0 0 ]
+{
+"340
+} 0
+"171 /mnt/shared/bl2/bootloader/usb_device_hid.c
+[v _HIDInitEP HIDInitEP `(v  1 e 0 0 ]
+{
+"197
+} 0
+"1592 /mnt/shared/bl2/bootloader/usb_device.c
+[v _LoadBDTandSetUOWN LoadBDTandSetUOWN `(v  1 e 0 0 ]
+{
+[v LoadBDTandSetUOWN@BDTIndexToLoad BDTIndexToLoad `uc  1 a 1 wreg ]
+[v LoadBDTandSetUOWN@BDTIndexToLoad BDTIndexToLoad `uc  1 a 1 wreg ]
+[s S544 . 1 `uc 1 BC8 1 0 :1:0 
+`uc 1 BC9 1 0 :1:1 
+`uc 1 BSTALL 1 0 :1:2 
+`uc 1 DTSEN 1 0 :1:3 
+`uc 1 INCDIS 1 0 :1:4 
+`uc 1 KEN 1 0 :1:5 
+`uc 1 DTS 1 0 :1:6 
+`uc 1 UOWN 1 0 :1:7 
+]
+"1594
+[s S553 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 PID0 1 0 :1:2 
+`uc 1 PID1 1 0 :1:3 
+`uc 1 PID2 1 0 :1:4 
+`uc 1 PID3 1 0 :1:5 
+`uc 1 . 1 0 :2:6 
+]
+[s S560 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 PID 1 0 :4:2 
+`uc 1 . 1 0 :2:6 
+]
+[u S564 _BD_STAT 1 `uc 1 _byte 1 0 `S544 1 . 1 0 `S553 1 . 1 0 `S560 1 . 1 0 ]
+[s S569 . 4 `S564 1 Stat 1 0 `uc 1 Cnt 1 1 `uc 1 ADRL 1 2 `uc 1 ADRH 1 3 ]
+[s S574 . 4 `uc 1 . 1 0 :8:0 
+`uc 1 . 1 1 :8:0 
+`*.39uc 1 ADR 2 2 ]
+[u S578 _BDT 4 `S569 1 . 4 0 `S574 1 . 4 0 ]
+[v LoadBDTandSetUOWN@pBDTEntry pBDTEntry `*.39VES578  1 s 2 pBDTEntry ]
+"1600
+[v LoadBDTandSetUOWN@BDTIndexToLoad BDTIndexToLoad `uc  1 a 1 0 ]
+"1617
+} 0
+"1624
+[v _USBDisableWithLongDelay USBDisableWithLongDelay `(v  1 e 0 0 ]
+{
+"1630
+} 0
+"1634
+[v _DelayRoutine DelayRoutine `(v  1 e 0 0 ]
+{
+[v DelayRoutine@DelayAmount DelayAmount `ui  1 p 2 0 ]
+"1641
+} 0
+"1651
+[v _ClearWatchdog ClearWatchdog `(v  1 e 0 0 ]
+{
+"1654
+} 0
+"606 /mnt/shared/bl2/bootloader/main.c
+[v _BlinkUSBStatus BlinkUSBStatus `(v  1 e 0 0 ]
+{
+"609
+[v BlinkUSBStatus@led_count led_count `ui  1 s 2 led_count ]
+"625
+} 0

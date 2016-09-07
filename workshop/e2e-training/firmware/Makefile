@@ -16,7 +16,7 @@ USBSRCS= usb/usb_descriptors.c usb/usb_device.c usb/usb_function_cdc.c usb/usb_s
 USBOPTS= -Iusb/ -Iusb/include/
 
 
-USBPROD= s8-usbserial s9-usb-echo sa-usb-command t9-usb-listen prod-firmware
+USBPROD= s8-usbserial s9-usb-echo sa-usb-command t9-usb-listen solder-test-firmware prod-firmware
 
 
 blink.hex: blink.c Makefile
