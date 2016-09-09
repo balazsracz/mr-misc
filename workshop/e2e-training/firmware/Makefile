@@ -1,7 +1,7 @@
 
 
 ifeq ($(shell uname),Linux)
-CC=/opt/microchip/xc8/v1.35/bin/xc8
+CC=/opt/microchip/xc8/v1.38/bin/xc8
 FLASH=../flash-app/mphidflash-linux64
 else
 CC=/Applications/microchip/xc8/v1.35/bin/xc8
@@ -16,7 +16,7 @@ USBSRCS= usb/usb_descriptors.c usb/usb_device.c usb/usb_function_cdc.c usb/usb_s
 USBOPTS= -Iusb/ -Iusb/include/
 
 
-USBPROD= s8-usbserial s9-usb-echo sa-usb-command t9-usb-listen solder-test-firmware prod-firmware
+USBPROD= s8-usbserial s9-usb-echo sa-usb-command t9-usb-listen solder-test-firmware prod-firmware test-brokenusb
 
 
 blink.hex: blink.c Makefile
