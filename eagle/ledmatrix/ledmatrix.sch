@@ -89,33 +89,21 @@ F 3 "" H 1400 750 50  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 Wire Wire Line
-	3800 2300 3900 2300
-Wire Wire Line
-	3900 2300 3900 2750
-Wire Wire Line
-	3900 2750 2200 2750
-Wire Wire Line
-	2200 2750 2200 3300
-Wire Wire Line
-	2200 3300 2400 3300
+	2200 1400 2200 4600
 Wire Wire Line
 	3800 4200 3900 4200
 Wire Wire Line
 	3900 4200 3900 4600
 Wire Wire Line
-	3900 4600 2250 4600
-Wire Wire Line
-	2250 4600 2250 5050
-Wire Wire Line
-	2250 5050 2400 5050
+	3900 4600 2200 4600
 Wire Wire Line
 	1400 1600 2400 1600
 Wire Wire Line
 	1400 5250 2400 5250
 Wire Wire Line
-	2800 2400 2800 2550
+	2800 2550 2800 2400
 Wire Wire Line
-	2800 2550 1600 2550
+	1600 2550 2800 2550
 Wire Wire Line
 	1600 950  1600 6750
 Wire Wire Line
@@ -146,7 +134,6 @@ Wire Wire Line
 Connection ~ 1500 3050
 Wire Wire Line
 	1400 950  1400 6750
-Connection ~ 1950 1600
 Wire Wire Line
 	2400 1900 1300 1900
 Wire Wire Line
@@ -157,10 +144,6 @@ Connection ~ 1300 1900
 Wire Wire Line
 	1300 5550 2400 5550
 Connection ~ 1300 3800
-Wire Wire Line
-	2400 1400 1200 1400
-Wire Wire Line
-	1200 1400 1200 950 
 $Comp
 L BSS138 Q1
 U 1 1 57CDE0D7
@@ -653,8 +636,6 @@ F 3 "" H 4150 5000 50  0000 L CNN
 	1    4150 5000
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	3950 5050 3800 5050
 $Comp
 L LED D17
 U 1 1 57D0EB2B
@@ -829,18 +810,10 @@ Wire Wire Line
 	5450 5100 5550 5100
 Wire Wire Line
 	5550 5100 5550 5350
-Wire Wire Line
-	4350 5150 3800 5150
-Wire Wire Line
-	3800 5250 4750 5250
-Wire Wire Line
-	3800 5350 5150 5350
 Connection ~ 6850 5250
 Connection ~ 6850 5150
 Wire Wire Line
 	6850 5050 7250 5050
-Wire Wire Line
-	3950 1400 3800 1400
 $Comp
 L BSS138 Q9
 U 1 1 57D103CA
@@ -1294,12 +1267,6 @@ F 3 "" H 1400 6950 50  0000 C CNN
 	1    1400 6950
 	0    -1   1    0   
 $EndComp
-Wire Wire Line
-	3800 5950 3800 6350
-Wire Wire Line
-	3800 6350 1200 6350
-Wire Wire Line
-	1200 6350 1200 6750
 Connection ~ 1300 5550
 Connection ~ 1400 1600
 Wire Wire Line
@@ -1322,7 +1289,6 @@ $EndComp
 Connection ~ 1850 1150
 Connection ~ 2400 2000
 Connection ~ 2800 2550
-NoConn ~ 3800 5550
 NoConn ~ 3800 5650
 NoConn ~ 3800 5750
 $Comp
@@ -1350,11 +1316,7 @@ $EndComp
 Connection ~ 2150 1150
 Connection ~ 2150 2550
 Wire Wire Line
-	3950 3300 3950 5450
-Wire Wire Line
-	3950 5450 3800 5450
-Wire Wire Line
-	3800 3800 4400 3800
+	3950 3300 3950 5550
 Wire Wire Line
 	5200 4000 4400 4000
 Wire Wire Line
@@ -1371,4 +1333,70 @@ Wire Wire Line
 	4350 3950 4350 4000
 Wire Wire Line
 	4350 4000 3800 4000
+Wire Wire Line
+	3950 1400 3950 3250
+Wire Wire Line
+	3950 3250 3900 3250
+Wire Wire Line
+	3900 3250 3900 3800
+Wire Wire Line
+	3900 3800 3800 3800
+Wire Wire Line
+	4400 3800 4000 3800
+Wire Wire Line
+	4000 3800 4000 5650
+Wire Wire Line
+	4000 5650 3800 5650
+Wire Wire Line
+	3950 5550 3800 5550
+Wire Wire Line
+	5150 5350 5150 5450
+Wire Wire Line
+	5150 5450 3800 5450
+Wire Wire Line
+	4750 5250 4750 5350
+Wire Wire Line
+	4750 5350 3800 5350
+Wire Wire Line
+	4350 5150 4350 5250
+Wire Wire Line
+	4350 5250 3800 5250
+Wire Wire Line
+	3800 5150 3900 5150
+Wire Wire Line
+	3900 5150 3900 5050
+Wire Wire Line
+	3900 5050 3950 5050
+Text Label 1800 1600 0    60   ~ 0
+clk
+Text Label 1800 1900 0    60   ~ 0
+latch
+Wire Wire Line
+	3800 2300 3800 2800
+Wire Wire Line
+	3800 2800 1200 2800
+Wire Wire Line
+	1200 2800 1200 950 
+Wire Wire Line
+	1200 6750 1200 5050
+Wire Wire Line
+	1200 5050 2400 5050
+Text Label 1750 5050 0    60   ~ 0
+ser_in
+Wire Wire Line
+	2200 1400 2400 1400
+Wire Wire Line
+	2400 3300 2150 3300
+Wire Wire Line
+	2150 3300 2150 6250
+Wire Wire Line
+	2150 6250 3800 6250
+Wire Wire Line
+	3800 6250 3800 5950
+Text Label 2950 2800 0    60   ~ 0
+ser_out
+Text Label 2900 4600 0    60   ~ 0
+casc_u2u1
+Text Label 2950 6250 0    60   ~ 0
+casc_u3u2
 $EndSCHEMATC
