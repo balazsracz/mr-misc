@@ -1,0 +1,171 @@
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: alloca.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: assert.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: conio.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: ctype.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: dsplib_def.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: dsplib_dsp.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: dsplib_video.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: errno.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: fcntl.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: fftc.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: float.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: ieee754.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: InstrumentedTrace.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: inttypes.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: iso646.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: lega-c
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: libc_thread.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: limits.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: locale.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: machine
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: mathf.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: math.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: mchp_dsp_wrapper.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: mips
+diff -ur ./peripheral/int.h /opt/microchip/xc32/v1.21/pic32-libs/include/peripheral/int.h
+--- ./peripheral/int.h	2013-08-12 02:28:30.033969267 +0200
++++ /opt/microchip/xc32/v1.21/pic32-libs/include/peripheral/int.h	2013-04-17 22:11:14.000000000 +0200
+@@ -471,7 +471,7 @@
+   Remarks:
+     None.
+   *****************************************************************************/
+-static inline void __attribute__ ((always_inline)) INTSingleVectorRegisterSet(INT_SV_SS reg_set)
++extern inline void __attribute__ ((always_inline)) INTSingleVectorRegisterSet(INT_SV_SS reg_set)
+ {
+     INTCONCLR   = reg_set;
+     INTCONSET    = reg_set;
+@@ -511,7 +511,7 @@
+   Remarks:
+     The user can refer to the device file to get the vector number defines.
+   *****************************************************************************/
+-static inline unsigned int __attribute__ ((always_inline)) INTGetInterruptVectorNumber(void)
++extern inline unsigned int __attribute__ ((always_inline)) INTGetInterruptVectorNumber(void)
+ {
+     return (unsigned int)(INTSTATbits.VEC);
+ }
+@@ -544,7 +544,7 @@
+   Remarks:
+     None.
+   *****************************************************************************/
+-static inline INT_PRIORITY __attribute__ ((always_inline)) INTGetInterruptVectorPriority(void)
++extern inline INT_PRIORITY __attribute__ ((always_inline)) INTGetInterruptVectorPriority(void)
+ {
+     return (INT_PRIORITY)(INTSTATbits.SRIPL);
+ }
+@@ -586,7 +586,7 @@
+   Remarks:
+     None.
+   *****************************************************************************/
+-static inline void __attribute__ ((always_inline)) INTGetInterruptVectorNumberAndPriority(unsigned int *number, INT_PRIORITY *priority)
++extern inline void __attribute__ ((always_inline)) INTGetInterruptVectorNumberAndPriority(unsigned int *number, INT_PRIORITY *priority)
+ {
+     *number     = INTSTAT;
+     *priority   = (INT_PRIORITY)((*number >> 8) & 7);
+@@ -898,7 +898,7 @@
+   Remarks:
+     None
+   *****************************************************************************/
+-static inline void __attribute__ ((always_inline)) INTSetIntProximityTimerReload(unsigned int time)
++extern inline void __attribute__ ((always_inline)) INTSetIntProximityTimerReload(unsigned int time)
+ {
+     IPTMR = time;
+ }
+@@ -931,7 +931,7 @@
+   Remarks:
+     None
+   *****************************************************************************/
+-static inline unsigned int __attribute__ ((always_inline)) INTGetIntProximityTimer(void)
++extern inline unsigned int __attribute__ ((always_inline)) INTGetIntProximityTimer(void)
+ {
+     return IPTMR;
+ }
+@@ -962,7 +962,7 @@
+   Remarks:
+     None
+   *****************************************************************************/
+-static inline void __attribute__ ((always_inline)) INTSetTemporalProximityControl(INT_TPC_GROUP level)
++extern inline void __attribute__ ((always_inline)) INTSetTemporalProximityControl(INT_TPC_GROUP level)
+ {
+     INTCONCLR = INT_TPC_DISABLE;
+ 
+diff -ur ./peripheral/pcache.h /opt/microchip/xc32/v1.21/pic32-libs/include/peripheral/pcache.h
+--- ./peripheral/pcache.h	2013-08-14 05:36:57.630954315 +0200
++++ /opt/microchip/xc32/v1.21/pic32-libs/include/peripheral/pcache.h	2013-04-17 22:11:14.000000000 +0200
+@@ -370,7 +370,7 @@
+  * Note:            This macro cannot be executed in MIPS16 mode
+  *
+  ********************************************************************/
+-void __attribute__ ((nomips16)) CheKseg0CacheOff(void);
++void __attribute__ ((nomips16)) CheKseg0CacheOff();
+ 
+ /*********************************************************************
+  * Function:        void CheKseg0CacheOn(void)
+@@ -385,6 +385,6 @@
+  * Note:            This macro cannot be executed in MIPS16 mode
+  *
+  ********************************************************************/
+-void __attribute__ ((nomips16)) CheKseg0CacheOn(void);
++void __attribute__ ((nomips16)) CheKseg0CacheOn();
+ 
+ #endif /*PCACHE_H_*/
+diff -ur ./peripheral/pps.h /opt/microchip/xc32/v1.21/pic32-libs/include/peripheral/pps.h
+--- ./peripheral/pps.h	2013-08-11 05:49:26.920876314 +0200
++++ /opt/microchip/xc32/v1.21/pic32-libs/include/peripheral/pps.h	2013-04-17 22:11:14.000000000 +0200
+@@ -6,7 +6,7 @@
+ /*
+ Example Code:
+ 
+-// ********************* Assign UART 2 signals onto pins using PPS ***********************************
++/* ********************* Assign UART 2 signals onto pins using PPS ***********************************
+     PPSInput(2,U2RX, RPA9);  //Assign U2RX to pin RPA09
+     PPSInput(3,U2CTS,RPC3);  //Assign U2CTS to pin RPC3
+     PPSOutput(4,RPC4,U2TX);   //Assign U2TX to pin RPC4
+diff -ur ./peripheral/timer.h /opt/microchip/xc32/v1.21/pic32-libs/include/peripheral/timer.h
+--- ./peripheral/timer.h	2014-06-01 16:53:15.407018876 +0200
++++ /opt/microchip/xc32/v1.21/pic32-libs/include/peripheral/timer.h	2013-04-17 22:11:14.000000000 +0200
+@@ -36,8 +36,8 @@
+  * $Name:  $
+  *
+  *****************************************************************************/
+-#ifndef _MC_TIMER_H_
+-#define _MC_TIMER_H_
++#ifndef _TIMER_H_
++#define _TIMER_H_
+ 
+ #include <xc.h>
+ #include <peripheral/int.h>
+@@ -1950,5 +1950,5 @@
+ #define WritePeriod45(value)	PR4 = (value)
+ 
+ #endif		// _TMR5
+-#endif /*MC_TIMER_H_*/
++#endif /*TIMER_H_*/
+ 
+Only in .: pic32.patch
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: pthread.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: sched.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: setjmp.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: signal.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: stdarg.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: stdbool.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: stddef.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: stdint.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: stdio.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: string.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: strings.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/sys: cdefs.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/sys: clock.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/sys: endian.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/sys: errno.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/sys: fcntl.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/sys: limits.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/sys: posix.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/sys: signal.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/sys: swap.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/sys: time.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/sys: types.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/sys: uio.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/sys: wait.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: time.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: unixio.h
+Only in /opt/microchip/xc32/v1.21/pic32-libs/include/: wchar.h
