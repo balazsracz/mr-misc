@@ -1680,6 +1680,18 @@ grid 5.08 mm, diameter 8.5 mm</description>
 <rectangle x1="-1.4732" y1="0.2032" x2="-1.3462" y2="0.3302" layer="51"/>
 <rectangle x1="-1.1176" y1="0.5842" x2="-0.9906" y2="0.7112" layer="51"/>
 <wire x1="-1.27" y1="0" x2="1.27" y2="0" width="0.254" layer="1"/>
+<polygon width="0.127" layer="41">
+<vertex x="-0.508" y="1.143"/>
+<vertex x="0.508" y="1.143"/>
+<vertex x="0.508" y="0.254"/>
+<vertex x="-0.508" y="0.254"/>
+</polygon>
+<polygon width="0.127" layer="41">
+<vertex x="-0.508" y="-0.254"/>
+<vertex x="0.508" y="-0.254"/>
+<vertex x="0.508" y="-1.143"/>
+<vertex x="-0.508" y="-1.143"/>
+</polygon>
 </package>
 <package name="JP4F">
 <description>&lt;b&gt;JUMPER&lt;/b&gt;</description>
@@ -1957,6 +1969,18 @@ grid 5.08 mm, diameter 8.5 mm</description>
 <wire x1="1.397" y1="-1.143" x2="1.397" y2="1.143" width="0.1524" layer="21"/>
 <wire x1="-1.397" y1="-1.143" x2="-1.397" y2="1.143" width="0.1524" layer="21"/>
 <wire x1="-1.143" y1="1.397" x2="1.143" y2="1.397" width="0.1524" layer="21"/>
+<polygon width="0.127" layer="29">
+<vertex x="-0.3048" y="0.254"/>
+<vertex x="-0.3048" y="0.3048" curve="-270"/>
+<vertex x="-0.3048" y="-0.3048"/>
+<vertex x="-0.3048" y="-0.254"/>
+</polygon>
+<polygon width="0.127" layer="29">
+<vertex x="-0.508" y="0.508"/>
+<vertex x="-0.889" y="0.889" curve="-270"/>
+<vertex x="-0.889" y="-0.889"/>
+<vertex x="-0.508" y="-0.508" curve="270"/>
+</polygon>
 <polygon width="0.127" layer="1">
 <vertex x="-0.3048" y="0.254"/>
 <vertex x="-0.3048" y="0.3048" curve="-270"/>
