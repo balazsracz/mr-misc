@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="no" active="no"/>
@@ -449,6 +449,18 @@ grid 5.08 mm, diameter 8.5 mm</description>
 <rectangle x1="-1.4732" y1="0.2032" x2="-1.3462" y2="0.3302" layer="51"/>
 <rectangle x1="-1.1176" y1="0.5842" x2="-0.9906" y2="0.7112" layer="51"/>
 <wire x1="-1.27" y1="0" x2="1.27" y2="0" width="0.254" layer="1"/>
+<polygon width="0.127" layer="41">
+<vertex x="-0.508" y="1.143"/>
+<vertex x="0.508" y="1.143"/>
+<vertex x="0.508" y="0.254"/>
+<vertex x="-0.508" y="0.254"/>
+</polygon>
+<polygon width="0.127" layer="41">
+<vertex x="-0.508" y="-0.254"/>
+<vertex x="0.508" y="-0.254"/>
+<vertex x="0.508" y="-1.143"/>
+<vertex x="-0.508" y="-1.143"/>
+</polygon>
 </package>
 <package name="JP8F">
 <wire x1="-2.794" y1="4.064" x2="-4.826" y2="4.064" width="0.1524" layer="21"/>
@@ -868,6 +880,18 @@ grid 5.08 mm, diameter 8.5 mm</description>
 <wire x1="1.397" y1="-1.143" x2="1.397" y2="1.143" width="0.1524" layer="21"/>
 <wire x1="-1.397" y1="-1.143" x2="-1.397" y2="1.143" width="0.1524" layer="21"/>
 <wire x1="-1.143" y1="1.397" x2="1.143" y2="1.397" width="0.1524" layer="21"/>
+<polygon width="0.127" layer="29">
+<vertex x="-0.3048" y="0.254"/>
+<vertex x="-0.3048" y="0.3048" curve="-270"/>
+<vertex x="-0.3048" y="-0.3048"/>
+<vertex x="-0.3048" y="-0.254"/>
+</polygon>
+<polygon width="0.127" layer="29">
+<vertex x="-0.508" y="0.508"/>
+<vertex x="-0.889" y="0.889" curve="-270"/>
+<vertex x="-0.889" y="-0.889"/>
+<vertex x="-0.508" y="-0.508" curve="270"/>
+</polygon>
 <polygon width="0.127" layer="1">
 <vertex x="-0.3048" y="0.254"/>
 <vertex x="-0.3048" y="0.3048" curve="-270"/>
@@ -18445,13 +18469,13 @@ Source: www.vishay.com/docs/31508/somc.pdf</description>
 <library name="SPCoast">
 <packages>
 <package name="POWER_USAGE">
-<wire x1="0.3175" y1="0.635" x2="-0.3175" y2="0.635" width="0.127" layer="51" curve="-306.869898"/>
-<wire x1="0" y1="0.3175" x2="0" y2="1.27" width="0.127" layer="51"/>
-<wire x1="0" y1="-0.7366" x2="0" y2="-1.905" width="0.127" layer="51"/>
-<circle x="0" y="0" radius="0.3175" width="0.127" layer="51"/>
-<text x="-1.27" y="-3.175" size="1.27" layer="51" rot="R90">&gt;VALUE</text>
-<text x="0.3175" y="-2.54" size="1.27" layer="51" rot="R90">-</text>
-<text x="0.3175" y="1.5875" size="1.27" layer="51" rot="R90">+</text>
+<wire x1="0.3175" y1="0.635" x2="-0.3175" y2="0.635" width="0.127" layer="25" curve="-306.869898"/>
+<wire x1="0" y1="0.3175" x2="0" y2="1.27" width="0.127" layer="25"/>
+<wire x1="0" y1="-0.7366" x2="0" y2="-1.905" width="0.127" layer="25"/>
+<circle x="0" y="0" radius="0.3175" width="0.127" layer="25"/>
+<text x="-1.27" y="-3.175" size="1.27" layer="25" rot="R90">&gt;VALUE</text>
+<text x="0.3175" y="-2.54" size="1.27" layer="25" rot="R90">-</text>
+<text x="0.3175" y="1.5875" size="1.27" layer="25" rot="R90">+</text>
 </package>
 <package name="DIL08">
 <description>&lt;b&gt;Dual In Line Package&lt;/b&gt;</description>
@@ -25897,7 +25921,7 @@ www.irf.com&lt;p&gt;
 <attribute name="AUTHOR" value="Balazs Racz"/>
 <attribute name="DOCUMENT_NUMBER" value="none"/>
 <attribute name="DRAWING_TITLE" value="OpenLCB IO Board for Nucleo"/>
-<attribute name="LICENSE" value="[placeholder for license]"/>
+<attribute name="LICENSE" value="Licensed by the Solderpad Hardware Lic. V2.0"/>
 <attribute name="REVISION" value="A"/>
 <attribute name="YEAR" value="2018"/>
 </attributes>

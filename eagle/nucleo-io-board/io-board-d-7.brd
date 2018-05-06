@@ -6,21 +6,21 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="5" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="2" altunitdist="mil" altunit="mil"/>
+<grid distance="12.5" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="2" altunitdist="mil" altunit="mil"/>
 <layers>
-<layer number="1" name="Top" color="4" fill="1" visible="no" active="yes"/>
-<layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
+<layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
+<layer number="16" name="Bottom" color="1" fill="1" visible="no" active="yes"/>
 <layer number="17" name="Pads" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="18" name="Vias" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="19" name="Unrouted" color="6" fill="1" visible="yes" active="yes"/>
 <layer number="20" name="Dimension" color="24" fill="1" visible="yes" active="yes"/>
-<layer number="21" name="tPlace" color="7" fill="1" visible="no" active="yes"/>
-<layer number="22" name="bPlace" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="23" name="tOrigins" color="15" fill="1" visible="no" active="yes"/>
-<layer number="24" name="bOrigins" color="15" fill="1" visible="yes" active="yes"/>
-<layer number="25" name="tNames" color="58" fill="1" visible="no" active="yes"/>
-<layer number="26" name="bNames" color="58" fill="1" visible="yes" active="yes"/>
-<layer number="27" name="tValues" color="58" fill="1" visible="no" active="yes"/>
+<layer number="21" name="tPlace" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="22" name="bPlace" color="7" fill="1" visible="no" active="yes"/>
+<layer number="23" name="tOrigins" color="15" fill="1" visible="yes" active="yes"/>
+<layer number="24" name="bOrigins" color="15" fill="1" visible="no" active="yes"/>
+<layer number="25" name="tNames" color="58" fill="1" visible="yes" active="yes"/>
+<layer number="26" name="bNames" color="58" fill="1" visible="no" active="yes"/>
+<layer number="27" name="tValues" color="58" fill="1" visible="yes" active="yes"/>
 <layer number="28" name="bValues" color="58" fill="1" visible="no" active="yes"/>
 <layer number="29" name="tStop" color="7" fill="3" visible="no" active="yes"/>
 <layer number="30" name="bStop" color="7" fill="6" visible="no" active="yes"/>
@@ -32,10 +32,10 @@
 <layer number="36" name="bGlue" color="7" fill="5" visible="no" active="yes"/>
 <layer number="37" name="tTest" color="7" fill="1" visible="no" active="yes"/>
 <layer number="38" name="bTest" color="7" fill="1" visible="no" active="yes"/>
-<layer number="39" name="tKeepout" color="4" fill="11" visible="no" active="yes"/>
-<layer number="40" name="bKeepout" color="1" fill="11" visible="yes" active="yes"/>
-<layer number="41" name="tRestrict" color="4" fill="10" visible="no" active="yes"/>
-<layer number="42" name="bRestrict" color="1" fill="10" visible="yes" active="yes"/>
+<layer number="39" name="tKeepout" color="4" fill="11" visible="yes" active="yes"/>
+<layer number="40" name="bKeepout" color="1" fill="11" visible="no" active="yes"/>
+<layer number="41" name="tRestrict" color="4" fill="10" visible="yes" active="yes"/>
+<layer number="42" name="bRestrict" color="1" fill="10" visible="no" active="yes"/>
 <layer number="43" name="vRestrict" color="2" fill="10" visible="no" active="yes"/>
 <layer number="44" name="Drills" color="7" fill="1" visible="no" active="yes"/>
 <layer number="45" name="Holes" color="7" fill="1" visible="yes" active="yes"/>
@@ -44,8 +44,8 @@
 <layer number="48" name="Document" color="7" fill="1" visible="no" active="yes"/>
 <layer number="49" name="Reference" color="7" fill="1" visible="no" active="yes"/>
 <layer number="50" name="dxf" color="7" fill="1" visible="no" active="no"/>
-<layer number="51" name="tDocu" color="7" fill="1" visible="no" active="yes"/>
-<layer number="52" name="bDocu" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="51" name="tDocu" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="52" name="bDocu" color="7" fill="1" visible="no" active="yes"/>
 <layer number="53" name="tGND_GNDA" color="7" fill="9" visible="no" active="no"/>
 <layer number="54" name="bGND_GNDA" color="1" fill="9" visible="no" active="no"/>
 <layer number="56" name="wert" color="7" fill="1" visible="no" active="no"/>
@@ -152,8 +152,8 @@ PWR
 =OUT
 || IN
 :: LOC</text>
-<text x="54.864" y="67.437" size="1.016" layer="25" font="vector" ratio="15">MISO|MOSI|CK|CS|LAT|5V|12V|GND</text>
-<text x="22.733" y="67.31" size="1.016" layer="25" font="vector" ratio="15">SCL|SDA|5V|GND</text>
+<text x="54.864" y="67.1195" size="1.016" layer="25" font="vector" ratio="15">MISO|MOSI|CK|CS|LAT|5V|12V|GND</text>
+<text x="22.7838" y="67.1068" size="1.016" layer="25" font="vector" ratio="15">SCL|SDA|5V|GND</text>
 <text x="22.8854" y="7.2136" size="1.016" layer="25" font="vector" ratio="15">5V  | GND</text>
 <polygon width="0.127" layer="21">
 <vertex x="1.27" y="7.366"/>
@@ -171,9 +171,9 @@ PWR
 <vertex x="1.016" y="52.578"/>
 </polygon>
 <polygon width="0.127" layer="21">
-<vertex x="51.943" y="5.588"/>
-<vertex x="51.943" y="6.858"/>
-<vertex x="51.308" y="6.223"/>
+<vertex x="51.943" y="4.953"/>
+<vertex x="51.943" y="6.223"/>
+<vertex x="51.308" y="5.588"/>
 </polygon>
 <polygon width="0.127" layer="21">
 <vertex x="76.2" y="2.413"/>
@@ -181,9 +181,9 @@ PWR
 <vertex x="75.565" y="3.048"/>
 </polygon>
 <polygon width="0.127" layer="21">
-<vertex x="15.748" y="0.889"/>
-<vertex x="15.748" y="0.381"/>
-<vertex x="16.256" y="0.635"/>
+<vertex x="15.7988" y="1.6891"/>
+<vertex x="15.7988" y="1.1811"/>
+<vertex x="16.3068" y="1.4351"/>
 </polygon>
 <polygon width="0.127" layer="21">
 <vertex x="7.366" y="1.651"/>
@@ -417,6 +417,18 @@ grid 5.08 mm, diameter 8.5 mm</description>
 <wire x1="1.397" y1="-1.143" x2="1.397" y2="1.143" width="0.1524" layer="21"/>
 <wire x1="-1.397" y1="-1.143" x2="-1.397" y2="1.143" width="0.1524" layer="21"/>
 <wire x1="-1.143" y1="1.397" x2="1.143" y2="1.397" width="0.1524" layer="21"/>
+<polygon width="0.127" layer="29">
+<vertex x="-0.3048" y="0.254"/>
+<vertex x="-0.3048" y="0.3048" curve="-270"/>
+<vertex x="-0.3048" y="-0.3048"/>
+<vertex x="-0.3048" y="-0.254"/>
+</polygon>
+<polygon width="0.127" layer="29">
+<vertex x="-0.508" y="0.508"/>
+<vertex x="-0.889" y="0.889" curve="-270"/>
+<vertex x="-0.889" y="-0.889"/>
+<vertex x="-0.508" y="-0.508" curve="270"/>
+</polygon>
 <polygon width="0.127" layer="1">
 <vertex x="-0.3048" y="0.254"/>
 <vertex x="-0.3048" y="0.3048" curve="-270"/>
@@ -467,6 +479,18 @@ grid 5.08 mm, diameter 8.5 mm</description>
 <rectangle x1="-1.4732" y1="0.2032" x2="-1.3462" y2="0.3302" layer="51"/>
 <rectangle x1="-1.1176" y1="0.5842" x2="-0.9906" y2="0.7112" layer="51"/>
 <wire x1="-1.27" y1="0" x2="1.27" y2="0" width="0.254" layer="1"/>
+<polygon width="0.127" layer="41">
+<vertex x="-0.508" y="1.143"/>
+<vertex x="0.508" y="1.143"/>
+<vertex x="0.508" y="0.254"/>
+<vertex x="-0.508" y="0.254"/>
+</polygon>
+<polygon width="0.127" layer="41">
+<vertex x="-0.508" y="-0.254"/>
+<vertex x="0.508" y="-0.254"/>
+<vertex x="0.508" y="-1.143"/>
+<vertex x="-0.508" y="-1.143"/>
+</polygon>
 </package>
 <package name="JP8F">
 <wire x1="-2.794" y1="4.064" x2="-4.826" y2="4.064" width="0.1524" layer="21"/>
@@ -2178,13 +2202,13 @@ Based on the following sources:
 <library name="SPCoast">
 <packages>
 <package name="POWER_USAGE">
-<wire x1="0.3175" y1="0.635" x2="-0.3175" y2="0.635" width="0.127" layer="51" curve="-306.869898"/>
-<wire x1="0" y1="0.3175" x2="0" y2="1.27" width="0.127" layer="51"/>
-<wire x1="0" y1="-0.7366" x2="0" y2="-1.905" width="0.127" layer="51"/>
-<circle x="0" y="0" radius="0.3175" width="0.127" layer="51"/>
-<text x="-1.27" y="-3.175" size="1.27" layer="51" rot="R90">&gt;VALUE</text>
-<text x="0.3175" y="-2.54" size="1.27" layer="51" rot="R90">-</text>
-<text x="0.3175" y="1.5875" size="1.27" layer="51" rot="R90">+</text>
+<wire x1="0.3175" y1="0.635" x2="-0.3175" y2="0.635" width="0.127" layer="25" curve="-306.869898"/>
+<wire x1="0" y1="0.3175" x2="0" y2="1.27" width="0.127" layer="25"/>
+<wire x1="0" y1="-0.7366" x2="0" y2="-1.905" width="0.127" layer="25"/>
+<circle x="0" y="0" radius="0.3175" width="0.127" layer="25"/>
+<text x="-1.27" y="-3.175" size="1.27" layer="25" rot="R90">&gt;VALUE</text>
+<text x="0.3175" y="-2.54" size="1.27" layer="25" rot="R90">-</text>
+<text x="0.3175" y="1.5875" size="1.27" layer="25" rot="R90">+</text>
 </package>
 <package name="SO-08">
 <description>&lt;B&gt;Small Outline Narrow Plastic Gull Wing&lt;/B&gt;&lt;p&gt;
@@ -3807,7 +3831,7 @@ design rules under a new name.</description>
 </element>
 <element name="X5" library="trainlib" package="1X08_TERMINAL" value="PORTE" x="55.88" y="3.1" smashed="yes">
 <attribute name="NAME" x="54.61" y="5.005" size="1.016" layer="25" font="vector" ratio="15"/>
-<attribute name="VALUE" x="54.05" y="1.27" size="1.016" layer="27" font="vector" ratio="15" rot="R90"/>
+<attribute name="VALUE" x="54.05" y="0.635" size="1.016" layer="27" font="vector" ratio="15" rot="R90"/>
 </element>
 <element name="RN1" library="resistor-dil" library_urn="urn:adsk.eagle:library:342" package="DIL16" package3d_urn="urn:adsk.eagle:package:24913/1" value="" x="59.69" y="57.15" smashed="yes" rot="R270">
 <attribute name="MF" value="" x="80.518" y="57.15" size="1.778" layer="27" rot="R270" display="off"/>
@@ -3820,10 +3844,9 @@ design rules under a new name.</description>
 <element name="RN2" library="resistor-sil" library_urn="urn:adsk.eagle:library:347" package="SIL9" package3d_urn="urn:adsk.eagle:package:25282/1" value="10K" x="52.07" y="55.88" smashed="yes" rot="R90">
 <attribute name="MF" value="" x="31.242" y="55.88" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="MPN" value="" x="31.242" y="55.88" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="NAME" x="48.006" y="45.339" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="47.6885" y="45.339" size="1.016" layer="25" font="vector" ratio="15"/>
 <attribute name="OC_FARNELL" value="unknown" x="31.242" y="55.88" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="OC_NEWARK" value="unknown" x="31.242" y="55.88" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="VALUE" x="50.8" y="52.07" size="1.016" layer="27" font="vector" ratio="15" rot="R90"/>
 </element>
 <element name="U2" library="74xx-us" library_urn="urn:adsk.eagle:library:88" package="DIL16" package3d_urn="urn:adsk.eagle:package:2922/1" value="74HC166" x="71.12" y="57.15" smashed="yes" rot="R270">
 <attribute name="NAME" x="70.104" y="45.593" size="1.016" layer="25" font="vector" ratio="15"/>
@@ -3855,10 +3878,10 @@ design rules under a new name.</description>
 <attribute name="NAME" x="5.005" y="71.628" size="1.016" layer="25" font="vector" ratio="15" rot="R270"/>
 </element>
 <element name="+12V" library="SPCoast" package="POWER_USAGE" value="9-15V DC" x="95.885" y="18.288" smashed="yes" rot="R270">
-<attribute name="VALUE" x="86.106" y="6.731" size="1.27" layer="51" font="vector" ratio="15"/>
+<attribute name="VALUE" x="86.106" y="6.731" size="1.27" layer="25" font="vector" ratio="15"/>
 </element>
 <element name="U12" library="trainlib" package="DIL18-THIN" value="" x="66.04" y="11.43" smashed="yes">
-<attribute name="NAME" x="54.61" y="16.129" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="54.6608" y="16.3449" size="1.016" layer="25" font="vector" ratio="15"/>
 <attribute name="VALUE" x="56.515" y="10.795" size="1.27" layer="27" ratio="10"/>
 </element>
 <element name="U8" library="trainlib" package="SO-08" value="AP1509-50" x="93.1164" y="59.5376" smashed="yes" rot="R270">
@@ -3872,7 +3895,7 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="83.566" y="61.722" size="1.27" layer="27" ratio="10" rot="R270"/>
 </element>
 <element name="C1" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C1206" package3d_urn="urn:adsk.eagle:package:23618/2" value="" x="90.7288" y="76.9874" smashed="yes" rot="R90">
-<attribute name="NAME" x="88.1634" y="76.454" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="87.8459" y="76.454" size="1.016" layer="25" font="vector" ratio="15"/>
 <attribute name="VALUE" x="93.2688" y="75.7174" size="1.27" layer="27" rot="R90"/>
 </element>
 <element name="C2" library="rcl" library_urn="urn:adsk.eagle:library:334" package="E2,5-5" package3d_urn="urn:adsk.eagle:package:23344/1" value="" x="97.79" y="68.58" smashed="yes" rot="R270">
@@ -3884,11 +3907,11 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="92.837" y="1.016" size="1.27" layer="27" ratio="10" rot="R90"/>
 </element>
 <element name="U9" library="linear" library_urn="urn:adsk.eagle:library:262" package="DIL14" package3d_urn="urn:adsk.eagle:package:16407/2" value="LM324N" x="27.94" y="31.75" smashed="yes" rot="R270">
-<attribute name="NAME" x="24.892" y="41.021" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="24.5745" y="41.021" size="1.016" layer="25" font="vector" ratio="15"/>
 <attribute name="VALUE" x="25.527" y="40.0558" size="1.016" layer="27" font="vector" ratio="15" rot="R270"/>
 </element>
 <element name="U10" library="linear" library_urn="urn:adsk.eagle:library:262" package="DIL14" package3d_urn="urn:adsk.eagle:package:16407/2" value="LM324N" x="44.45" y="31.75" smashed="yes" rot="R270">
-<attribute name="NAME" x="38.8112" y="37.6174" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="38.9001" y="36.2712" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
 <attribute name="VALUE" x="42.037" y="38.989" size="1.016" layer="27" font="vector" ratio="15" rot="R270"/>
 </element>
 <element name="R1" library="rcl" package="R0805" value="10k" x="40.894" y="42.037" smashed="yes">
@@ -3902,23 +3925,23 @@ design rules under a new name.</description>
 <attribute name="NAME" x="5.005" y="28.8544" size="1.016" layer="25" font="vector" ratio="15" rot="R270"/>
 </element>
 <element name="SJ1" library="trainlib" package="SJ_RND2" value="" x="80.01" y="4.953" smashed="yes" rot="MR180">
-<attribute name="NAME" x="81.5975" y="5.715" size="1.27" layer="26" font="vector" ratio="15" rot="MR180"/>
+<attribute name="NAME" x="81.915" y="5.715" size="1.27" layer="26" font="vector" ratio="15" rot="MR180"/>
 </element>
 <element name="SJ3" library="trainlib" package="SJW-C" value="" x="76.835" y="3.683" smashed="yes" rot="MR270">
 <attribute name="NAME" x="74.93" y="5.08" size="1.27" layer="26" font="vector" ratio="15" rot="MR0"/>
 <attribute name="VALUE" x="76.835" y="2.683" size="0.02" layer="28" rot="MR270"/>
 </element>
 <element name="SJ2" library="trainlib" package="SJ_RND2" value="" x="80.01" y="8.001" smashed="yes" rot="MR180">
-<attribute name="NAME" x="81.5975" y="8.89" size="1.27" layer="26" font="vector" ratio="15" rot="MR180"/>
+<attribute name="NAME" x="81.915" y="8.89" size="1.27" layer="26" font="vector" ratio="15" rot="MR180"/>
 </element>
 <element name="SJ6" library="trainlib" package="SJ_RND2" value="" x="78.994" y="21.717" smashed="yes" rot="MR180">
-<attribute name="NAME" x="80.645" y="22.5425" size="1.27" layer="26" font="vector" ratio="15" rot="MR180"/>
+<attribute name="NAME" x="80.9625" y="22.5425" size="1.27" layer="26" font="vector" ratio="15" rot="MR180"/>
 </element>
 <element name="SJ5" library="trainlib" package="SJ_RND2" value="" x="78.994" y="15.367" smashed="yes" rot="MR180">
-<attribute name="NAME" x="80.645" y="16.1925" size="1.27" layer="26" font="vector" ratio="15" rot="MR180"/>
+<attribute name="NAME" x="80.9625" y="16.1925" size="1.27" layer="26" font="vector" ratio="15" rot="MR180"/>
 </element>
 <element name="SJ4" library="trainlib" package="SJ_RND2" value="" x="78.994" y="18.542" smashed="yes" rot="MR180">
-<attribute name="NAME" x="80.645" y="19.3675" size="1.27" layer="26" font="vector" ratio="15" rot="MR180"/>
+<attribute name="NAME" x="80.9625" y="19.3675" size="1.27" layer="26" font="vector" ratio="15" rot="MR180"/>
 </element>
 <element name="U13" library="74xx-eu" library_urn="urn:adsk.eagle:library:85" package="DIL16" package3d_urn="urn:adsk.eagle:package:2009/1" value="74AHCT595N" x="66.04" y="34.29" smashed="yes">
 <attribute name="NAME" x="55.499" y="31.369" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
@@ -3926,17 +3949,17 @@ design rules under a new name.</description>
 </element>
 <element name="X4" library="trainlib" package="1X08_TERMINAL" value="PORTD" x="31.75" y="3.1" smashed="yes">
 <attribute name="NAME" x="30.48" y="5.005" size="1.016" layer="25" font="vector" ratio="15"/>
-<attribute name="VALUE" x="52.3482" y="1.27" size="1.016" layer="27" font="vector" ratio="15" rot="R90"/>
+<attribute name="VALUE" x="52.3482" y="0.635" size="1.016" layer="27" font="vector" ratio="15" rot="R90"/>
 </element>
 <element name="U14" library="trainlib" package="DIL18-THIN" value="" x="41.91" y="11.43" smashed="yes">
-<attribute name="NAME" x="31.115" y="16.0782" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="31.115" y="16.3957" size="1.016" layer="25" font="vector" ratio="15"/>
 <attribute name="VALUE" x="32.385" y="10.795" size="1.27" layer="27" ratio="10"/>
 </element>
 <element name="SJ7" library="trainlib" package="SJ_RND2" value="" x="25.019" y="6.35" smashed="yes" rot="MR0">
 <attribute name="NAME" x="26.67" y="6.985" size="1.27" layer="26" font="vector" ratio="15" rot="MR180"/>
 </element>
 <element name="SJ9" library="trainlib" package="SJW-C" value="" x="52.705" y="4.191" smashed="yes" rot="MR270">
-<attribute name="NAME" x="54.6227" y="6.2611" size="1.27" layer="26" font="vector" ratio="15" rot="MR180"/>
+<attribute name="NAME" x="54.61" y="6.4516" size="1.27" layer="26" font="vector" ratio="15" rot="MR180"/>
 <attribute name="VALUE" x="52.705" y="3.191" size="0.02" layer="28" rot="MR270"/>
 </element>
 <element name="SJ8" library="trainlib" package="SJ_RND2" value="" x="55.372" y="10.287" smashed="yes" rot="MR180">
@@ -3946,10 +3969,10 @@ design rules under a new name.</description>
 <attribute name="NAME" x="32.7025" y="19.3675" size="1.27" layer="26" font="vector" ratio="15" rot="MR180"/>
 </element>
 <element name="SJ11" library="trainlib" package="SJ_RND2" value="" x="40.64" y="18.796" smashed="yes" rot="MR90">
-<attribute name="NAME" x="42.2275" y="19.3675" size="1.27" layer="26" font="vector" ratio="15" rot="MR180"/>
+<attribute name="NAME" x="42.545" y="19.3675" size="1.27" layer="26" font="vector" ratio="15" rot="MR180"/>
 </element>
 <element name="SJ10" library="trainlib" package="SJ_RND2" value="" x="26.543" y="14.732" smashed="yes" rot="MR0">
-<attribute name="NAME" x="27.94" y="16.51" size="1.27" layer="26" font="vector" ratio="15" rot="MR0"/>
+<attribute name="NAME" x="27.94" y="16.8275" size="1.27" layer="26" font="vector" ratio="15" rot="MR0"/>
 </element>
 <element name="JP1" library="trainlib" package="JP4F" value="" x="26.67" y="71.12" smashed="yes">
 <attribute name="NAME" x="22.479" y="71.374" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
@@ -3959,7 +3982,7 @@ design rules under a new name.</description>
 <attribute name="NAME" x="76.581" y="74.168" size="1.016" layer="25" font="vector" ratio="15"/>
 </element>
 <element name="JP5" library="trainlib" package="JP3Q" value="" x="10.668" y="76.2" smashed="yes" rot="R90">
-<attribute name="NAME" x="13.4874" y="72.4916" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="13.4874" y="72.1741" size="1.016" layer="25" font="vector" ratio="15"/>
 <attribute name="VALUE" x="16.51" y="72.771" size="1.27" layer="27" ratio="10" rot="R90"/>
 </element>
 <element name="JP6" library="trainlib" package="JP3Q" value="" x="10.668" y="4.064" smashed="yes" rot="R90">
@@ -3980,143 +4003,143 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="15.218" y="27.146" size="1.778" layer="27" rot="R270"/>
 </element>
 <element name="Q1" library="transistor-small-signal" library_urn="urn:adsk.eagle:library:401" package="SOT23" package3d_urn="urn:adsk.eagle:package:29752/1" value="" x="55.88" y="13.208" smashed="yes">
-<attribute name="NAME" x="58.547" y="12.065" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
+<attribute name="NAME" x="58.8645" y="12.065" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
 <attribute name="VALUE" x="53.975" y="10.033" size="1.27" layer="27"/>
 </element>
 <element name="Q2" library="transistor-small-signal" library_urn="urn:adsk.eagle:library:401" package="SOT23" package3d_urn="urn:adsk.eagle:package:29752/1" value="" x="58.42" y="13.208" smashed="yes" rot="MR0">
-<attribute name="NAME" x="56.8325" y="13.97" size="1.27" layer="26" font="vector" ratio="15" rot="MR270"/>
+<attribute name="NAME" x="56.515" y="13.97" size="1.27" layer="26" font="vector" ratio="15" rot="MR270"/>
 <attribute name="VALUE" x="60.325" y="10.033" size="1.27" layer="28" rot="MR0"/>
 </element>
 <element name="R3" library="rcl" package="R0603" value="" x="55.88" y="9.398" smashed="yes" rot="R90">
-<attribute name="NAME" x="55.245" y="8.763" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
+<attribute name="NAME" x="54.9275" y="8.763" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
 <attribute name="VALUE" x="57.785" y="8.763" size="1.27" layer="27" rot="R90"/>
 </element>
 <element name="R4" library="rcl" package="R0603" value="" x="58.42" y="9.398" smashed="yes" rot="MR90">
-<attribute name="NAME" x="59.055" y="8.763" size="1.27" layer="26" font="vector" ratio="15" rot="MR90"/>
+<attribute name="NAME" x="59.3725" y="8.763" size="1.27" layer="26" font="vector" ratio="15" rot="MR90"/>
 <attribute name="VALUE" x="56.515" y="8.763" size="1.27" layer="28" rot="MR90"/>
 </element>
 <element name="Q3" library="transistor-small-signal" library_urn="urn:adsk.eagle:library:401" package="SOT23" package3d_urn="urn:adsk.eagle:package:29752/1" value="" x="60.96" y="13.208" smashed="yes">
-<attribute name="NAME" x="63.627" y="12.065" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
+<attribute name="NAME" x="63.9445" y="12.065" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
 <attribute name="VALUE" x="59.055" y="10.033" size="1.27" layer="27"/>
 </element>
 <element name="R5" library="rcl" package="R0603" value="" x="60.96" y="9.398" smashed="yes" rot="R90">
-<attribute name="NAME" x="60.325" y="8.763" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
+<attribute name="NAME" x="60.0075" y="8.763" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
 <attribute name="VALUE" x="62.865" y="8.763" size="1.27" layer="27" rot="R90"/>
 </element>
 <element name="R6" library="rcl" package="R0603" value="" x="63.5" y="9.398" smashed="yes" rot="MR90">
-<attribute name="NAME" x="64.135" y="8.763" size="1.27" layer="26" font="vector" ratio="15" rot="MR90"/>
+<attribute name="NAME" x="64.4525" y="8.763" size="1.27" layer="26" font="vector" ratio="15" rot="MR90"/>
 <attribute name="VALUE" x="61.595" y="8.763" size="1.27" layer="28" rot="MR90"/>
 </element>
 <element name="R7" library="rcl" package="R0603" value="" x="66.04" y="9.398" smashed="yes" rot="R90">
-<attribute name="NAME" x="65.405" y="8.763" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
+<attribute name="NAME" x="65.0875" y="8.763" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
 <attribute name="VALUE" x="67.945" y="8.763" size="1.27" layer="27" rot="R90"/>
 </element>
 <element name="R8" library="rcl" package="R0603" value="" x="68.58" y="9.398" smashed="yes" rot="MR90">
-<attribute name="NAME" x="69.215" y="8.763" size="1.27" layer="26" font="vector" ratio="15" rot="MR90"/>
+<attribute name="NAME" x="69.5325" y="8.763" size="1.27" layer="26" font="vector" ratio="15" rot="MR90"/>
 <attribute name="VALUE" x="66.675" y="8.763" size="1.27" layer="28" rot="MR90"/>
 </element>
 <element name="R9" library="rcl" package="R0603" value="" x="71.12" y="9.398" smashed="yes" rot="R90">
-<attribute name="NAME" x="70.485" y="8.763" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
+<attribute name="NAME" x="70.1675" y="8.763" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
 <attribute name="VALUE" x="73.025" y="8.763" size="1.27" layer="27" rot="R90"/>
 </element>
 <element name="R10" library="rcl" package="R0603" value="" x="73.66" y="9.398" smashed="yes" rot="MR90">
-<attribute name="NAME" x="74.295" y="8.763" size="1.27" layer="26" font="vector" ratio="15" rot="MR90"/>
+<attribute name="NAME" x="74.6252" y="10.1727" size="1.27" layer="26" font="vector" ratio="15" rot="MR180"/>
 <attribute name="VALUE" x="71.755" y="8.763" size="1.27" layer="28" rot="MR90"/>
 </element>
 <element name="Q4" library="transistor-small-signal" library_urn="urn:adsk.eagle:library:401" package="SOT23" package3d_urn="urn:adsk.eagle:package:29752/1" value="" x="63.5" y="13.208" smashed="yes" rot="MR0">
-<attribute name="NAME" x="61.9125" y="13.97" size="1.27" layer="26" font="vector" ratio="15" rot="MR270"/>
+<attribute name="NAME" x="61.595" y="13.97" size="1.27" layer="26" font="vector" ratio="15" rot="MR270"/>
 <attribute name="VALUE" x="65.405" y="10.033" size="1.27" layer="28" rot="MR0"/>
 </element>
 <element name="Q5" library="transistor-small-signal" library_urn="urn:adsk.eagle:library:401" package="SOT23" package3d_urn="urn:adsk.eagle:package:29752/1" value="" x="66.04" y="13.208" smashed="yes">
-<attribute name="NAME" x="68.707" y="12.065" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
+<attribute name="NAME" x="69.0245" y="12.065" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
 <attribute name="VALUE" x="64.135" y="10.033" size="1.27" layer="27"/>
 </element>
 <element name="Q6" library="transistor-small-signal" library_urn="urn:adsk.eagle:library:401" package="SOT23" package3d_urn="urn:adsk.eagle:package:29752/1" value="" x="68.58" y="13.208" smashed="yes" rot="MR0">
-<attribute name="NAME" x="66.9925" y="13.97" size="1.27" layer="26" font="vector" ratio="15" rot="MR270"/>
+<attribute name="NAME" x="66.675" y="13.97" size="1.27" layer="26" font="vector" ratio="15" rot="MR270"/>
 <attribute name="VALUE" x="70.485" y="10.033" size="1.27" layer="28" rot="MR0"/>
 </element>
 <element name="Q7" library="transistor-small-signal" library_urn="urn:adsk.eagle:library:401" package="SOT23" package3d_urn="urn:adsk.eagle:package:29752/1" value="" x="71.12" y="13.208" smashed="yes">
-<attribute name="NAME" x="73.787" y="12.065" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
+<attribute name="NAME" x="74.1045" y="12.065" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
 <attribute name="VALUE" x="69.215" y="10.033" size="1.27" layer="27"/>
 </element>
 <element name="Q8" library="transistor-small-signal" library_urn="urn:adsk.eagle:library:401" package="SOT23" package3d_urn="urn:adsk.eagle:package:29752/1" value="" x="73.66" y="13.208" smashed="yes" rot="MR0">
-<attribute name="NAME" x="72.0725" y="13.97" size="1.27" layer="26" font="vector" ratio="15" rot="MR270"/>
+<attribute name="NAME" x="71.755" y="13.97" size="1.27" layer="26" font="vector" ratio="15" rot="MR270"/>
 <attribute name="VALUE" x="75.565" y="10.033" size="1.27" layer="28" rot="MR0"/>
 </element>
 <element name="Q9" library="transistor-small-signal" library_urn="urn:adsk.eagle:library:401" package="SOT23" package3d_urn="urn:adsk.eagle:package:29752/1" value="" x="31.75" y="13.208" smashed="yes">
-<attribute name="NAME" x="34.417" y="12.065" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
+<attribute name="NAME" x="34.7345" y="12.065" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
 <attribute name="VALUE" x="29.845" y="10.033" size="1.27" layer="27"/>
 </element>
 <element name="Q10" library="transistor-small-signal" library_urn="urn:adsk.eagle:library:401" package="SOT23" package3d_urn="urn:adsk.eagle:package:29752/1" value="" x="34.29" y="13.208" smashed="yes" rot="MR0">
-<attribute name="NAME" x="32.7025" y="14.2875" size="1.27" layer="26" font="vector" ratio="15" rot="MR270"/>
+<attribute name="NAME" x="32.385" y="13.97" size="1.27" layer="26" font="vector" ratio="15" rot="MR270"/>
 <attribute name="VALUE" x="36.195" y="10.033" size="1.27" layer="28" rot="MR0"/>
 </element>
 <element name="R11" library="rcl" package="R0603" value="" x="31.75" y="9.398" smashed="yes" rot="R90">
-<attribute name="NAME" x="31.115" y="8.763" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
+<attribute name="NAME" x="30.7975" y="8.4455" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
 <attribute name="VALUE" x="33.655" y="8.763" size="1.27" layer="27" rot="R90"/>
 </element>
 <element name="R12" library="rcl" package="R0603" value="" x="34.29" y="9.398" smashed="yes" rot="MR90">
-<attribute name="NAME" x="34.925" y="8.763" size="1.27" layer="26" font="vector" ratio="15" rot="MR90"/>
+<attribute name="NAME" x="35.2425" y="10.16" size="1.27" layer="26" font="vector" ratio="15" rot="MR180"/>
 <attribute name="VALUE" x="32.385" y="8.763" size="1.27" layer="28" rot="MR90"/>
 </element>
 <element name="Q11" library="transistor-small-signal" library_urn="urn:adsk.eagle:library:401" package="SOT23" package3d_urn="urn:adsk.eagle:package:29752/1" value="" x="36.83" y="13.208" smashed="yes">
-<attribute name="NAME" x="39.497" y="11.43" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
+<attribute name="NAME" x="39.8145" y="11.43" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
 <attribute name="VALUE" x="34.925" y="10.033" size="1.27" layer="27"/>
 </element>
 <element name="R13" library="rcl" package="R0603" value="" x="36.83" y="9.398" smashed="yes" rot="R90">
-<attribute name="NAME" x="36.195" y="8.763" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
+<attribute name="NAME" x="35.8775" y="8.4455" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
 <attribute name="VALUE" x="38.735" y="8.763" size="1.27" layer="27" rot="R90"/>
 </element>
 <element name="R14" library="rcl" package="R0603" value="" x="39.37" y="9.398" smashed="yes" rot="MR90">
-<attribute name="NAME" x="40.005" y="8.763" size="1.27" layer="26" font="vector" ratio="15" rot="MR90"/>
+<attribute name="NAME" x="40.3225" y="10.16" size="1.27" layer="26" font="vector" ratio="15" rot="MR180"/>
 <attribute name="VALUE" x="37.465" y="8.763" size="1.27" layer="28" rot="MR90"/>
 </element>
 <element name="R15" library="rcl" package="R0603" value="" x="41.91" y="9.398" smashed="yes" rot="R90">
-<attribute name="NAME" x="41.275" y="8.763" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
+<attribute name="NAME" x="40.9575" y="8.4455" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
 <attribute name="VALUE" x="43.815" y="8.763" size="1.27" layer="27" rot="R90"/>
 </element>
 <element name="R16" library="rcl" package="R0603" value="" x="44.45" y="9.398" smashed="yes" rot="MR90">
-<attribute name="NAME" x="45.085" y="8.763" size="1.27" layer="26" font="vector" ratio="15" rot="MR90"/>
+<attribute name="NAME" x="45.4025" y="10.16" size="1.27" layer="26" font="vector" ratio="15" rot="MR180"/>
 <attribute name="VALUE" x="42.545" y="8.763" size="1.27" layer="28" rot="MR90"/>
 </element>
 <element name="R17" library="rcl" package="R0603" value="" x="46.99" y="9.398" smashed="yes" rot="R90">
-<attribute name="NAME" x="46.355" y="8.763" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
+<attribute name="NAME" x="46.0375" y="8.4455" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
 <attribute name="VALUE" x="48.895" y="8.763" size="1.27" layer="27" rot="R90"/>
 </element>
 <element name="R18" library="rcl" package="R0603" value="" x="49.53" y="9.398" smashed="yes" rot="MR90">
-<attribute name="NAME" x="50.165" y="8.763" size="1.27" layer="26" font="vector" ratio="15" rot="MR90"/>
+<attribute name="NAME" x="50.3555" y="10.16" size="1.27" layer="26" font="vector" ratio="15" rot="MR180"/>
 <attribute name="VALUE" x="47.625" y="8.763" size="1.27" layer="28" rot="MR90"/>
 </element>
 <element name="Q12" library="transistor-small-signal" library_urn="urn:adsk.eagle:library:401" package="SOT23" package3d_urn="urn:adsk.eagle:package:29752/1" value="" x="39.37" y="13.208" smashed="yes" rot="MR0">
-<attribute name="NAME" x="37.7825" y="14.2875" size="1.27" layer="26" font="vector" ratio="15" rot="MR270"/>
+<attribute name="NAME" x="37.465" y="13.97" size="1.27" layer="26" font="vector" ratio="15" rot="MR270"/>
 <attribute name="VALUE" x="41.275" y="10.033" size="1.27" layer="28" rot="MR0"/>
 </element>
 <element name="Q13" library="transistor-small-signal" library_urn="urn:adsk.eagle:library:401" package="SOT23" package3d_urn="urn:adsk.eagle:package:29752/1" value="" x="41.91" y="13.208" smashed="yes">
-<attribute name="NAME" x="44.577" y="11.43" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
+<attribute name="NAME" x="44.8945" y="11.43" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
 <attribute name="VALUE" x="40.005" y="10.033" size="1.27" layer="27"/>
 </element>
 <element name="Q14" library="transistor-small-signal" library_urn="urn:adsk.eagle:library:401" package="SOT23" package3d_urn="urn:adsk.eagle:package:29752/1" value="" x="44.45" y="13.208" smashed="yes" rot="MR0">
-<attribute name="NAME" x="42.8625" y="14.2875" size="1.27" layer="26" font="vector" ratio="15" rot="MR270"/>
+<attribute name="NAME" x="42.545" y="13.97" size="1.27" layer="26" font="vector" ratio="15" rot="MR270"/>
 <attribute name="VALUE" x="46.355" y="10.033" size="1.27" layer="28" rot="MR0"/>
 </element>
 <element name="Q15" library="transistor-small-signal" library_urn="urn:adsk.eagle:library:401" package="SOT23" package3d_urn="urn:adsk.eagle:package:29752/1" value="" x="46.99" y="13.208" smashed="yes">
-<attribute name="NAME" x="49.657" y="11.43" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
+<attribute name="NAME" x="49.9745" y="11.43" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
 <attribute name="VALUE" x="45.085" y="10.033" size="1.27" layer="27"/>
 </element>
 <element name="Q16" library="transistor-small-signal" library_urn="urn:adsk.eagle:library:401" package="SOT23" package3d_urn="urn:adsk.eagle:package:29752/1" value="" x="49.53" y="13.208" smashed="yes" rot="MR0">
-<attribute name="NAME" x="47.9425" y="14.2875" size="1.27" layer="26" font="vector" ratio="15" rot="MR270"/>
+<attribute name="NAME" x="47.625" y="13.97" size="1.27" layer="26" font="vector" ratio="15" rot="MR270"/>
 <attribute name="VALUE" x="51.435" y="10.033" size="1.27" layer="28" rot="MR0"/>
 </element>
 <element name="R19" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="69.85" y="41.91" smashed="yes" rot="R90">
-<attribute name="NAME" x="68.58" y="43.815" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="68.58" y="44.1325" size="1.016" layer="25" font="vector" ratio="15"/>
 <attribute name="VALUE" x="72.39" y="41.275" size="1.27" layer="27" rot="R90"/>
 </element>
 <element name="R20" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="73.66" y="41.91" smashed="yes" rot="R90">
-<attribute name="NAME" x="72.39" y="43.815" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="72.39" y="44.1325" size="1.016" layer="25" font="vector" ratio="15"/>
 <attribute name="VALUE" x="76.2" y="41.275" size="1.27" layer="27" rot="R90"/>
 </element>
 <element name="U5" library="trainlib" package="DIL08-LONG" value="TC4426/28" x="48.26" y="25.4" smashed="yes" rot="R270">
-<attribute name="NAME" x="45.339" y="30.734" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="45.0215" y="30.734" size="1.016" layer="25" font="vector" ratio="15"/>
 <attribute name="VALUE" x="49.657" y="29.8196" size="1.016" layer="27" font="vector" ratio="15" rot="R270"/>
 </element>
 <element name="U6" library="trainlib" package="DIL08-LONG" value="TC4426/28" x="48.26" y="38.1" smashed="yes" rot="R270">
@@ -4124,7 +4147,7 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="49.657" y="42.5196" size="1.016" layer="27" font="vector" ratio="15" rot="R270"/>
 </element>
 <element name="U3" library="trainlib" package="DIL08-LONG" value="TC4426/28" x="31.75" y="25.4" smashed="yes" rot="R270">
-<attribute name="NAME" x="28.829" y="30.734" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="28.5115" y="30.734" size="1.016" layer="25" font="vector" ratio="15"/>
 <attribute name="VALUE" x="33.147" y="29.6164" size="1.016" layer="27" font="vector" ratio="15" rot="R270"/>
 </element>
 <element name="U4" library="trainlib" package="DIL08-LONG" value="TC4426/28" x="31.75" y="38.1" smashed="yes" rot="R270">
@@ -4132,7 +4155,7 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="33.147" y="42.5704" size="1.016" layer="27" font="vector" ratio="15" rot="R270"/>
 </element>
 <element name="R21" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="67.31" y="41.91" smashed="yes" rot="R90">
-<attribute name="NAME" x="66.04" y="43.815" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="66.04" y="44.1325" size="1.016" layer="25" font="vector" ratio="15"/>
 <attribute name="VALUE" x="69.85" y="41.275" size="1.27" layer="27" rot="R90"/>
 </element>
 <element name="D2" library="diode" library_urn="urn:adsk.eagle:library:210" package="DO41-7.6" package3d_urn="urn:adsk.eagle:package:43421/1" value="" x="83.82" y="6.35" smashed="yes" rot="R90">
@@ -4140,10 +4163,10 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="86.741" y="4.318" size="1.27" layer="27" ratio="10" rot="R90"/>
 </element>
 <element name="R40" library="tcs" package="PTC1812" value="500mA" x="80.01" y="5.08" smashed="yes" rot="R90">
-<attribute name="NAME" x="83.0834" y="3.5814" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
+<attribute name="NAME" x="77.6859" y="3.8989" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
 </element>
 <element name="SJ13" library="trainlib" package="SJ_RND2" value="" x="72.136" y="54.61" smashed="yes" rot="MR90">
-<attribute name="NAME" x="73.3425" y="56.1975" size="1.27" layer="26" font="vector" ratio="15" rot="MR0"/>
+<attribute name="NAME" x="73.3425" y="56.515" size="1.27" layer="26" font="vector" ratio="15" rot="MR0"/>
 </element>
 <element name="SJ14" library="trainlib" package="SJ_RND2" value="" x="24.257" y="42.545" smashed="yes" rot="MR180">
 <attribute name="NAME" x="26.035" y="44.7675" size="1.27" layer="26" font="vector" ratio="15" rot="MR180"/>
@@ -4153,7 +4176,7 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="69.977" y="43.037" size="0.02" layer="28" rot="MR90"/>
 </element>
 <element name="SJ16" library="trainlib" package="SJ_RND2" value="" x="73.406" y="41.91" smashed="yes" rot="MR90">
-<attribute name="NAME" x="75.565" y="43.4975" size="1.27" layer="26" font="vector" ratio="15" rot="MR0"/>
+<attribute name="NAME" x="75.565" y="43.815" size="1.27" layer="26" font="vector" ratio="15" rot="MR0"/>
 </element>
 <element name="SJ17" library="trainlib" package="SJ_RND2" value="" x="73.66" y="22.987" smashed="yes" rot="R270">
 <attribute name="NAME" x="76.454" y="22.225" size="1.016" layer="25" font="vector" ratio="15"/>
@@ -4167,19 +4190,19 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="51.689" y="76.708" size="1.27" layer="27" rot="R270"/>
 </element>
 <element name="R25" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="84.074" y="68.072" smashed="yes" rot="R270">
-<attribute name="NAME" x="85.09" y="67.945" size="1.016" layer="25" font="vector" ratio="15" rot="R270"/>
+<attribute name="NAME" x="85.4075" y="67.6275" size="1.016" layer="25" font="vector" ratio="15" rot="R270"/>
 <attribute name="VALUE" x="81.534" y="68.707" size="1.27" layer="27" rot="R270"/>
 </element>
 <element name="R24" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="84.074" y="72.644" smashed="yes" rot="R270">
-<attribute name="NAME" x="85.09" y="74.93" size="1.016" layer="25" font="vector" ratio="15" rot="R270"/>
+<attribute name="NAME" x="85.4075" y="74.93" size="1.016" layer="25" font="vector" ratio="15" rot="R270"/>
 <attribute name="VALUE" x="81.534" y="73.279" size="1.27" layer="27" rot="R270"/>
 </element>
 <element name="R26" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="27.559" y="15.24" smashed="yes">
-<attribute name="NAME" x="28.9052" y="17.1196" size="1.016" layer="25" font="vector" ratio="15" rot="R180"/>
+<attribute name="NAME" x="28.9052" y="17.4371" size="1.016" layer="25" font="vector" ratio="15" rot="R180"/>
 <attribute name="VALUE" x="26.924" y="12.7" size="1.27" layer="27"/>
 </element>
 <element name="R27" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="24.003" y="15.24" smashed="yes" rot="R180">
-<attribute name="NAME" x="25.146" y="17.145" size="1.016" layer="25" font="vector" ratio="15" rot="R180"/>
+<attribute name="NAME" x="25.146" y="17.4625" size="1.016" layer="25" font="vector" ratio="15" rot="R180"/>
 <attribute name="VALUE" x="24.638" y="17.78" size="1.27" layer="27" rot="R180"/>
 </element>
 <element name="R28" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/2" value="" x="61.722" y="48.26" smashed="yes" rot="R180">
@@ -4187,31 +4210,31 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="62.357" y="50.165" size="1.27" layer="27" rot="R180"/>
 </element>
 <element name="R29" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/2" value="" x="61.722" y="50.8" smashed="yes" rot="R180">
-<attribute name="NAME" x="60.071" y="49.2125" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="60.071" y="49.0093" size="1.016" layer="25" font="vector" ratio="15"/>
 <attribute name="VALUE" x="62.357" y="52.705" size="1.27" layer="27" rot="R180"/>
 </element>
 <element name="R30" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/2" value="" x="61.722" y="53.34" smashed="yes" rot="R180">
-<attribute name="NAME" x="60.071" y="51.7525" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="60.071" y="51.5493" size="1.016" layer="25" font="vector" ratio="15"/>
 <attribute name="VALUE" x="62.357" y="55.245" size="1.27" layer="27" rot="R180"/>
 </element>
 <element name="R31" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/2" value="" x="61.722" y="55.88" smashed="yes" rot="R180">
-<attribute name="NAME" x="60.071" y="54.2925" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="60.071" y="54.0893" size="1.016" layer="25" font="vector" ratio="15"/>
 <attribute name="VALUE" x="62.357" y="57.785" size="1.27" layer="27" rot="R180"/>
 </element>
 <element name="R32" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/2" value="" x="61.722" y="58.42" smashed="yes" rot="R180">
-<attribute name="NAME" x="60.071" y="56.8325" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="60.071" y="56.6293" size="1.016" layer="25" font="vector" ratio="15"/>
 <attribute name="VALUE" x="62.357" y="60.325" size="1.27" layer="27" rot="R180"/>
 </element>
 <element name="R33" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/2" value="" x="61.722" y="60.96" smashed="yes" rot="R180">
-<attribute name="NAME" x="60.071" y="59.3725" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="60.071" y="59.1693" size="1.016" layer="25" font="vector" ratio="15"/>
 <attribute name="VALUE" x="62.357" y="62.865" size="1.27" layer="27" rot="R180"/>
 </element>
 <element name="R34" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/2" value="" x="61.722" y="63.5" smashed="yes" rot="R180">
-<attribute name="NAME" x="60.071" y="61.9125" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="60.071" y="61.7093" size="1.016" layer="25" font="vector" ratio="15"/>
 <attribute name="VALUE" x="62.357" y="65.405" size="1.27" layer="27" rot="R180"/>
 </element>
 <element name="R35" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/2" value="" x="61.722" y="66.04" smashed="yes" rot="R180">
-<attribute name="NAME" x="60.071" y="64.4525" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="60.071" y="64.2493" size="1.016" layer="25" font="vector" ratio="15"/>
 <attribute name="VALUE" x="62.357" y="67.945" size="1.27" layer="27" rot="R180"/>
 </element>
 <element name="R36" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/2" value="" x="33.782" y="48.26" smashed="yes" rot="R180">
@@ -4219,77 +4242,77 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="34.417" y="50.165" size="1.27" layer="27" rot="R180"/>
 </element>
 <element name="R37" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/2" value="" x="33.782" y="50.8" smashed="yes" rot="R180">
-<attribute name="NAME" x="32.004" y="49.2125" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="32.004" y="49.0093" size="1.016" layer="25" font="vector" ratio="15"/>
 <attribute name="VALUE" x="34.417" y="52.705" size="1.27" layer="27" rot="R180"/>
 </element>
 <element name="R38" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/2" value="" x="33.782" y="53.34" smashed="yes" rot="R180">
-<attribute name="NAME" x="31.877" y="51.7525" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="31.877" y="51.5493" size="1.016" layer="25" font="vector" ratio="15"/>
 <attribute name="VALUE" x="34.417" y="55.245" size="1.27" layer="27" rot="R180"/>
 </element>
 <element name="R39" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/2" value="" x="33.782" y="55.88" smashed="yes" rot="R180">
-<attribute name="NAME" x="31.877" y="54.2925" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="31.877" y="54.0893" size="1.016" layer="25" font="vector" ratio="15"/>
 <attribute name="VALUE" x="34.417" y="57.785" size="1.27" layer="27" rot="R180"/>
 </element>
 <element name="R41" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/2" value="" x="33.782" y="58.42" smashed="yes" rot="R180">
-<attribute name="NAME" x="31.877" y="56.8325" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="31.877" y="56.6293" size="1.016" layer="25" font="vector" ratio="15"/>
 <attribute name="VALUE" x="34.417" y="60.325" size="1.27" layer="27" rot="R180"/>
 </element>
 <element name="R42" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/2" value="" x="33.782" y="60.96" smashed="yes" rot="R180">
-<attribute name="NAME" x="31.877" y="59.3725" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="31.877" y="59.1693" size="1.016" layer="25" font="vector" ratio="15"/>
 <attribute name="VALUE" x="34.417" y="62.865" size="1.27" layer="27" rot="R180"/>
 </element>
 <element name="R43" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/2" value="" x="33.782" y="63.5" smashed="yes" rot="R180">
-<attribute name="NAME" x="31.877" y="61.9125" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="31.877" y="61.7093" size="1.016" layer="25" font="vector" ratio="15"/>
 <attribute name="VALUE" x="34.417" y="65.405" size="1.27" layer="27" rot="R180"/>
 </element>
 <element name="R44" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/2" value="" x="33.782" y="66.04" smashed="yes" rot="R180">
-<attribute name="NAME" x="31.877" y="64.4525" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="31.877" y="64.2493" size="1.016" layer="25" font="vector" ratio="15"/>
 <attribute name="VALUE" x="34.417" y="67.945" size="1.27" layer="27" rot="R180"/>
 </element>
 <element name="R45" library="trainlib" package="R0603" value="" x="58.928" y="66.04" smashed="yes">
-<attribute name="NAME" x="57.3405" y="64.4525" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="57.3405" y="64.2493" size="1.016" layer="25" font="vector" ratio="15"/>
 </element>
 <element name="R46" library="trainlib" package="R0603" value="" x="58.928" y="63.5" smashed="yes">
-<attribute name="NAME" x="57.3405" y="61.9125" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="57.3405" y="61.7093" size="1.016" layer="25" font="vector" ratio="15"/>
 </element>
 <element name="R47" library="trainlib" package="R0603" value="" x="58.928" y="60.96" smashed="yes">
-<attribute name="NAME" x="57.3405" y="59.3725" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="57.3405" y="59.1693" size="1.016" layer="25" font="vector" ratio="15"/>
 </element>
 <element name="R48" library="trainlib" package="R0603" value="" x="58.928" y="58.42" smashed="yes">
-<attribute name="NAME" x="57.3405" y="56.8325" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="57.3405" y="56.6293" size="1.016" layer="25" font="vector" ratio="15"/>
 </element>
 <element name="R49" library="trainlib" package="R0603" value="" x="58.928" y="55.88" smashed="yes">
-<attribute name="NAME" x="57.3405" y="54.2925" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="57.3405" y="54.0893" size="1.016" layer="25" font="vector" ratio="15"/>
 </element>
 <element name="R50" library="trainlib" package="R0603" value="" x="58.928" y="53.34" smashed="yes">
-<attribute name="NAME" x="57.3405" y="51.7525" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="57.3405" y="51.5493" size="1.016" layer="25" font="vector" ratio="15"/>
 </element>
 <element name="R51" library="trainlib" package="R0603" value="" x="58.928" y="50.8" smashed="yes">
-<attribute name="NAME" x="57.3405" y="49.2125" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="57.3405" y="49.0093" size="1.016" layer="25" font="vector" ratio="15"/>
 </element>
 <element name="R52" library="trainlib" package="R0603" value="" x="58.928" y="48.26" smashed="yes">
 <attribute name="NAME" x="57.5945" y="45.7835" size="1.016" layer="25" font="vector" ratio="15"/>
 </element>
 <element name="R53" library="trainlib" package="R0603" value="" x="30.988" y="66.04" smashed="yes">
-<attribute name="NAME" x="29.1465" y="64.4525" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="29.1465" y="64.2493" size="1.016" layer="25" font="vector" ratio="15"/>
 </element>
 <element name="R54" library="trainlib" package="R0603" value="" x="30.988" y="63.5" smashed="yes">
-<attribute name="NAME" x="29.1465" y="61.9125" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="29.1465" y="61.7093" size="1.016" layer="25" font="vector" ratio="15"/>
 </element>
 <element name="R55" library="trainlib" package="R0603" value="" x="30.988" y="60.96" smashed="yes">
-<attribute name="NAME" x="29.1465" y="59.3725" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="29.1465" y="59.1693" size="1.016" layer="25" font="vector" ratio="15"/>
 </element>
 <element name="R56" library="trainlib" package="R0603" value="" x="30.988" y="58.42" smashed="yes">
-<attribute name="NAME" x="29.1465" y="56.8325" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="29.1465" y="56.6293" size="1.016" layer="25" font="vector" ratio="15"/>
 </element>
 <element name="R57" library="trainlib" package="R0603" value="" x="30.988" y="55.88" smashed="yes">
-<attribute name="NAME" x="29.1465" y="54.2925" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="29.1465" y="54.0893" size="1.016" layer="25" font="vector" ratio="15"/>
 </element>
 <element name="R58" library="trainlib" package="R0603" value="" x="30.988" y="53.34" smashed="yes">
-<attribute name="NAME" x="29.1465" y="51.7525" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="29.1465" y="51.5493" size="1.016" layer="25" font="vector" ratio="15"/>
 </element>
 <element name="R59" library="trainlib" package="R0603" value="" x="30.988" y="50.8" smashed="yes">
-<attribute name="NAME" x="29.1465" y="49.2125" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="29.1465" y="49.0093" size="1.016" layer="25" font="vector" ratio="15"/>
 </element>
 <element name="R60" library="trainlib" package="R0603" value="" x="30.988" y="48.26" smashed="yes">
 <attribute name="NAME" x="29.6545" y="45.7835" size="1.016" layer="25" font="vector" ratio="15"/>
@@ -4300,7 +4323,7 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="48.514" y="71.755" size="1.27" layer="27" rot="R270"/>
 </element>
 <element name="SJ18" library="trainlib" package="SJ_RND2" value="" x="37.084" y="70.866" smashed="yes" rot="R270">
-<attribute name="NAME" x="38.481" y="69.342" size="1.016" layer="25" font="vector" ratio="15" rot="R180"/>
+<attribute name="NAME" x="38.481" y="69.0245" size="1.016" layer="25" font="vector" ratio="15" rot="R180"/>
 </element>
 <element name="C3" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="" x="35.814" y="74.422" smashed="yes" rot="R90">
 <attribute name="NAME" x="35.052" y="76.962" size="1.016" layer="25" font="vector" ratio="15"/>
@@ -4311,7 +4334,7 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="40.64" y="73.152" size="1.27" layer="27" rot="R90"/>
 </element>
 <element name="C5" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="" x="62.23" y="41.91" smashed="yes" rot="R90">
-<attribute name="NAME" x="61.595" y="43.815" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="61.595" y="44.1325" size="1.016" layer="25" font="vector" ratio="15"/>
 <attribute name="VALUE" x="64.77" y="40.64" size="1.27" layer="27" rot="R90"/>
 </element>
 <element name="C6" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C1206" package3d_urn="urn:adsk.eagle:package:23618/2" value="" x="25.908" y="31.496" smashed="yes">
@@ -4319,39 +4342,39 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="24.638" y="28.956" size="1.27" layer="27"/>
 </element>
 <element name="C7" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C1206" package3d_urn="urn:adsk.eagle:package:23618/2" value="" x="35.306" y="31.496" smashed="yes" rot="R180">
-<attribute name="NAME" x="38.4048" y="33.6804" size="1.016" layer="25" font="vector" ratio="15" rot="R180"/>
+<attribute name="NAME" x="38.7223" y="33.9979" size="1.016" layer="25" font="vector" ratio="15" rot="R180"/>
 <attribute name="VALUE" x="36.576" y="34.036" size="1.27" layer="27" rot="R180"/>
 </element>
 <element name="C8" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C1206" package3d_urn="urn:adsk.eagle:package:23618/2" value="" x="15.113" y="77.34" smashed="yes" rot="R90">
-<attribute name="NAME" x="14.4496" y="73.8378" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="14.4496" y="73.5203" size="1.016" layer="25" font="vector" ratio="15"/>
 <attribute name="VALUE" x="17.653" y="76.07" size="1.27" layer="27" rot="R90"/>
 </element>
 <element name="C9" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C1206" package3d_urn="urn:adsk.eagle:package:23618/2" value="" x="15.113" y="5.458" smashed="yes" rot="R90">
-<attribute name="NAME" x="14.859" y="1.5464" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
+<attribute name="NAME" x="14.9636" y="2.794" size="1.016" layer="25" font="vector" ratio="15" rot="R180"/>
 <attribute name="VALUE" x="17.653" y="4.188" size="1.27" layer="27" rot="R90"/>
 </element>
 <element name="R62" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="18.542" y="75.819" smashed="yes">
-<attribute name="NAME" x="20.32" y="75.1205" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="20.6375" y="75.1205" size="1.016" layer="25" font="vector" ratio="15"/>
 <attribute name="VALUE" x="17.907" y="73.279" size="1.27" layer="27"/>
 </element>
 <element name="R63" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="18.542" y="77.724" smashed="yes">
-<attribute name="NAME" x="20.32" y="77.1525" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="20.6375" y="77.1525" size="1.016" layer="25" font="vector" ratio="15"/>
 <attribute name="VALUE" x="17.907" y="75.184" size="1.27" layer="27"/>
 </element>
 <element name="C10" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C1206" package3d_urn="urn:adsk.eagle:package:23618/2" value="" x="84.074" y="62.865" smashed="yes" rot="R90">
-<attribute name="NAME" x="83.185" y="60.325" size="1.016" layer="25" font="vector" ratio="15" rot="R270"/>
+<attribute name="NAME" x="83.185" y="60.0075" size="1.016" layer="25" font="vector" ratio="15" rot="R270"/>
 <attribute name="VALUE" x="86.614" y="61.595" size="1.27" layer="27" rot="R90"/>
 </element>
 <element name="C11" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="" x="55.88" y="43.434" smashed="yes" rot="R270">
-<attribute name="NAME" x="54.991" y="40.64" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="54.991" y="40.3225" size="1.016" layer="25" font="vector" ratio="15"/>
 <attribute name="VALUE" x="53.34" y="44.704" size="1.27" layer="27" rot="R270"/>
 </element>
 <element name="JP7" library="trainlib" package="JP3Q" value="" x="19.05" y="4.064" smashed="yes" rot="R90">
-<attribute name="NAME" x="16.383" y="0.889" size="1.016" layer="25" font="vector" ratio="15" rot="R90"/>
+<attribute name="NAME" x="15.621" y="1.4605" size="1.016" layer="25" font="vector" ratio="15" rot="R180"/>
 <attribute name="VALUE" x="24.892" y="0.635" size="1.27" layer="27" ratio="10" rot="R90"/>
 </element>
 <element name="R64" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="17.78" y="10.033" smashed="yes" rot="R270">
-<attribute name="NAME" x="15.875" y="11.43" size="1.016" layer="25" font="vector" ratio="15" rot="R270"/>
+<attribute name="NAME" x="15.5575" y="11.43" size="1.016" layer="25" font="vector" ratio="15" rot="R270"/>
 <attribute name="VALUE" x="15.24" y="10.668" size="1.27" layer="27" rot="R270"/>
 </element>
 <element name="R65" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="20.32" y="10.033" smashed="yes" rot="R270">
@@ -4363,23 +4386,21 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="22.352" y="5.08" size="1.27" layer="27" ratio="10"/>
 </element>
 <element name="R66" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="19.177" y="15.24" smashed="yes">
-<attribute name="NAME" x="20.32" y="17.145" size="1.016" layer="25" font="vector" ratio="15" rot="R180"/>
+<attribute name="NAME" x="20.32" y="17.4625" size="1.016" layer="25" font="vector" ratio="15" rot="R180"/>
 <attribute name="VALUE" x="18.542" y="12.7" size="1.27" layer="27"/>
 </element>
 <element name="R67" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="19.177" y="13.081" smashed="yes">
-<attribute name="NAME" x="15.0368" y="12.573" size="1.016" layer="25" font="vector" ratio="15"/>
+<attribute name="NAME" x="15.875" y="14.605" size="1.016" layer="25" font="vector" ratio="15" rot="R270"/>
 <attribute name="VALUE" x="18.542" y="10.541" size="1.27" layer="27"/>
 </element>
 <element name="X6" library="SPCoast" package="SCREWTERMINAL-3.5MM-2_LOCK" value="" x="24.003" y="3.683" smashed="yes">
 <attribute name="VALUE" x="22.733" y="4.953" size="0.4064" layer="27"/>
 </element>
-<element name="D3" library="trainlib" package="DO214AA-NODOC" value="DIODEDO-214AA-NODOC" x="86.614" y="59.69" smashed="yes" rot="R270">
-<attribute name="VALUE" x="83.908" y="62.33" size="1.27" layer="27" ratio="10" rot="R270"/>
+<element name="D3" library="trainlib" package="DO214AA-NODOC" value="DIODEDO-214AA-NODOC" x="86.614" y="59.69" smashed="yes" rot="R270"/>
+<element name="D4" library="trainlib" package="DO214AA-NODOC" value="DIODEDO-214AA-NODOC" x="84.074" y="6.096" smashed="yes" rot="R90"/>
+<element name="SJ19" library="trainlib" package="SJ_RND2" value="" x="43.688" y="57.15" smashed="yes" rot="MR270">
+<attribute name="NAME" x="41.783" y="55.245" size="1.016" layer="26" font="vector" ratio="15" rot="MR180"/>
 </element>
-<element name="D4" library="trainlib" package="DO214AA-NODOC" value="DIODEDO-214AA-NODOC" x="84.074" y="6.096" smashed="yes" rot="R90">
-<attribute name="VALUE" x="86.78" y="3.456" size="1.27" layer="27" ratio="10" rot="R90"/>
-</element>
-<element name="SJ19" library="trainlib" package="SJ_RND2" value="" x="43.688" y="57.15" rot="MR270"/>
 </elements>
 <signals>
 <signal name="VDD">
@@ -4680,11 +4701,9 @@ design rules under a new name.</description>
 <wire x1="47.625" y1="31.877" x2="48.133" y2="31.877" width="0.254" layer="16"/>
 <wire x1="48.133" y1="31.877" x2="48.26" y2="31.75" width="0.254" layer="16"/>
 <wire x1="46.0756" y1="30.3276" x2="47.625" y2="31.877" width="0.254" layer="16"/>
-<wire x1="92.71" y1="30.475" x2="94.49" y2="29.455" width="0.8128" layer="1"/>
 <wire x1="94.49" y1="29.455" x2="94.49" y2="29.663025" width="0.8128" layer="1"/>
 <wire x1="98.3488" y1="33.521825" x2="94.49" y2="29.663025" width="0.8128" layer="1"/>
 <wire x1="98.3488" y1="48.7172" x2="98.3488" y2="33.521825" width="0.8128" layer="1"/>
-<wire x1="94.49" y1="47.235" x2="92.71" y2="48.255" width="0.8128" layer="1"/>
 <wire x1="92.71" y1="44.205" x2="92.701" y2="44.196" width="0.8128" layer="1"/>
 <wire x1="92.701" y1="44.196" x2="91.313" y2="44.196" width="0.8128" layer="1"/>
 <wire x1="91.313" y1="44.196" x2="91.059" y2="44.45" width="0.8128" layer="1"/>
@@ -5224,6 +5243,18 @@ design rules under a new name.</description>
 <wire x1="86.614" y1="57.14" x2="86.614" y2="56.007" width="0.6096" layer="1"/>
 <wire x1="86.614" y1="56.007" x2="86.487" y2="55.88" width="0.6096" layer="1"/>
 <via x="44.958" y="48.0568" extent="1-16" drill="0.35"/>
+<via x="0.635" y="71.628" extent="1-16" drill="0.35"/>
+<via x="4.953" y="68.961" extent="1-16" drill="0.35"/>
+<via x="4.953" y="66.675" extent="1-16" drill="0.35"/>
+<via x="5.08" y="64.135" extent="1-16" drill="0.35"/>
+<via x="2.286" y="50.8" extent="1-16" drill="0.35"/>
+<via x="36.703" y="59.69" extent="1-16" drill="0.35"/>
+<wire x1="92.71" y1="48.255" x2="93.47" y2="48.255" width="0.6096" layer="16"/>
+<wire x1="93.47" y1="48.255" x2="94.49" y2="47.235" width="0.6096" layer="16"/>
+<wire x1="92.71" y1="30.475" x2="93.47" y2="30.475" width="0.6096" layer="16"/>
+<wire x1="93.47" y1="30.475" x2="94.49" y2="29.455" width="0.6096" layer="16"/>
+<via x="5.08" y="61.595" extent="1-16" drill="0.35"/>
+<wire x1="5.08" y1="64.135" x2="5.08" y2="61.595" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="CANH">
 <contactref element="J2" pad="1"/>
@@ -5256,9 +5287,11 @@ design rules under a new name.</description>
 <wire x1="56.896" y1="75.648425" x2="56.85445" y2="75.689975" width="0.254" layer="16"/>
 <wire x1="56.85445" y1="75.689975" x2="56.848" y2="75.946" width="0.254" layer="16"/>
 <via x="56.848" y="75.946" extent="1-16" drill="0.35"/>
-<wire x1="56.848" y1="75.946" x2="57.229" y2="76.327" width="0.254" layer="1"/>
+<wire x1="56.848" y1="75.946" x2="57.61" y2="75.184" width="0.254" layer="1"/>
 <wire x1="74.12815" y1="76.327" x2="74.43295" y2="76.0222" width="0.254" layer="1"/>
-<wire x1="57.229" y1="76.327" x2="74.12815" y2="76.327" width="0.254" layer="1"/>
+<wire x1="57.61" y1="75.184" x2="59.563" y2="75.184" width="0.254" layer="1"/>
+<wire x1="59.563" y1="75.184" x2="60.706" y2="76.327" width="0.254" layer="1"/>
+<wire x1="60.706" y1="76.327" x2="74.12815" y2="76.327" width="0.254" layer="1"/>
 <wire x1="74.43295" y1="76.0222" x2="81.7118" y2="76.0222" width="0.254" layer="1"/>
 <wire x1="81.7118" y1="76.0222" x2="82.55" y2="75.184" width="0.254" layer="1"/>
 <wire x1="82.55" y1="75.184" x2="82.55" y2="73.8632" width="0.254" layer="1"/>
@@ -5326,7 +5359,11 @@ design rules under a new name.</description>
 <via x="56.134" y="76.581" extent="1-16" drill="0.35"/>
 <wire x1="56.134" y1="76.581" x2="56.388" y2="76.835" width="0.254" layer="1"/>
 <wire x1="74.338575" y1="76.835" x2="74.643375" y2="76.5302" width="0.254" layer="1"/>
-<wire x1="56.388" y1="76.835" x2="74.338575" y2="76.835" width="0.254" layer="1"/>
+<wire x1="56.388" y1="76.835" x2="57.023" y2="76.835" width="0.254" layer="1"/>
+<wire x1="57.023" y1="76.835" x2="58.039" y2="75.819" width="0.254" layer="1"/>
+<wire x1="58.039" y1="75.819" x2="59.436" y2="75.819" width="0.254" layer="1"/>
+<wire x1="59.436" y1="75.819" x2="60.452" y2="76.835" width="0.254" layer="1"/>
+<wire x1="60.452" y1="76.835" x2="74.338575" y2="76.835" width="0.254" layer="1"/>
 <wire x1="82.2198" y1="76.5302" x2="83.312" y2="75.438" width="0.254" layer="1"/>
 <wire x1="83.312" y1="75.438" x2="83.312" y2="74.93" width="0.254" layer="1"/>
 <via x="83.312" y="74.93" extent="1-16" drill="0.35"/>
@@ -5844,7 +5881,11 @@ design rules under a new name.</description>
 <wire x1="74.8538" y1="77.0382" x2="74.549" y2="77.343" width="0.254" layer="1"/>
 <wire x1="54.549" y1="77.343" x2="54.229" y2="77.023" width="0.254" layer="1"/>
 <wire x1="83.2358" y1="77.0382" x2="74.8538" y2="77.0382" width="0.254" layer="1"/>
-<wire x1="74.549" y1="77.343" x2="54.549" y2="77.343" width="0.254" layer="1"/>
+<wire x1="74.549" y1="77.343" x2="60.198" y2="77.343" width="0.254" layer="1"/>
+<wire x1="60.198" y1="77.343" x2="59.182" y2="76.327" width="0.254" layer="1"/>
+<wire x1="59.182" y1="76.327" x2="58.293" y2="76.327" width="0.254" layer="1"/>
+<wire x1="58.293" y1="76.327" x2="57.277" y2="77.343" width="0.254" layer="1"/>
+<wire x1="57.277" y1="77.343" x2="54.549" y2="77.343" width="0.254" layer="1"/>
 <wire x1="84.074" y1="73.594" x2="84.902" y2="73.594" width="0.254" layer="1"/>
 <wire x1="84.902" y1="73.594" x2="85.344" y2="73.152" width="0.254" layer="1"/>
 <wire x1="85.344" y1="73.152" x2="85.344" y2="70.292" width="0.254" layer="1"/>
@@ -7183,11 +7224,12 @@ design rules under a new name.</description>
 <wire x1="54.229" y1="10.287" x2="52.07" y2="8.128" width="0.508" layer="16"/>
 <wire x1="52.07" y1="5.715" x2="52.705" y2="5.461" width="0.508" layer="16"/>
 <wire x1="52.07" y1="5.715" x2="52.07" y2="7.62" width="0.508" layer="16"/>
-<wire x1="44.82196875" y1="6.35" x2="45.60936875" y2="5.5626" width="0.508" layer="16"/>
 <wire x1="25.273" y1="6.35" x2="44.82196875" y2="6.35" width="0.508" layer="16"/>
-<wire x1="52.07" y1="5.5626" x2="45.60936875" y2="5.5626" width="0.508" layer="16"/>
 <wire x1="52.705" y1="5.461" x2="52.6034" y2="5.5626" width="0.254" layer="16"/>
-<wire x1="52.6034" y1="5.5626" x2="52.07" y2="5.5626" width="0.254" layer="16"/>
+<wire x1="52.07" y1="5.5626" x2="52.6034" y2="5.5626" width="0.254" layer="16"/>
+<wire x1="44.82196875" y1="6.35" x2="45.22836875" y2="5.9436" width="0.508" layer="16"/>
+<wire x1="51.689" y1="5.9436" x2="52.07" y2="5.5626" width="0.508" layer="16"/>
+<wire x1="45.22836875" y1="5.9436" x2="51.689" y2="5.9436" width="0.508" layer="16"/>
 </signal>
 <signal name="LPOWB">
 <contactref element="U14" pad="10"/>
@@ -7577,13 +7619,13 @@ design rules under a new name.</description>
 <wire x1="53.9468" y1="13.6144" x2="53.9468" y2="13.5608" width="0.254" layer="16"/>
 <wire x1="53.9468" y1="13.5608" x2="53.848" y2="13.462" width="0.254" layer="16"/>
 <wire x1="53.848" y1="13.462" x2="53.8452" y2="11.2748" width="0.254" layer="16"/>
-<wire x1="50.8" y1="8.2296" x2="50.8" y2="7.2136" width="0.254" layer="16"/>
-<wire x1="50.8" y1="7.2136" x2="49.784" y2="6.1976" width="0.254" layer="16"/>
-<wire x1="45.8724" y1="6.1976" x2="44.45" y2="7.62" width="0.254" layer="16"/>
+<wire x1="50.8" y1="7.2136" x2="50.8" y2="8.2296" width="0.254" layer="16"/>
 <wire x1="58.1152" y1="17.272" x2="54.864" y2="17.272" width="0.254" layer="16"/>
 <wire x1="53.8452" y1="11.2748" x2="50.8" y2="8.2296" width="0.254" layer="16"/>
-<wire x1="49.784" y1="6.1976" x2="45.8724" y2="6.1976" width="0.254" layer="16"/>
 <wire x1="44.45" y1="7.62" x2="44.45" y2="8.548" width="0.254" layer="16"/>
+<wire x1="50.8" y1="7.2136" x2="50.165" y2="6.5786" width="0.254" layer="16"/>
+<wire x1="45.4914" y1="6.5786" x2="44.45" y2="7.62" width="0.254" layer="16"/>
+<wire x1="50.165" y1="6.5786" x2="45.4914" y2="6.5786" width="0.254" layer="16"/>
 </signal>
 <signal name="N$99">
 <contactref element="Q14" pad="3"/>
@@ -8029,7 +8071,7 @@ design rules under a new name.</description>
 <wire x1="47.879" y1="57.15" x2="45.6184" y2="57.15" width="0.254" layer="1"/>
 <via x="45.6184" y="57.15" extent="1-16" drill="0.35"/>
 <wire x1="45.6184" y1="57.15" x2="44.958" y2="57.15" width="0.254" layer="16"/>
-<wire x1="44.958" y1="57.15" x2="43.942" y2="56.134" width="0.254" layer="16"/>
+<wire x1="43.942" y1="56.134" x2="44.958" y2="57.15" width="0.254" layer="16"/>
 <wire x1="43.942" y1="56.134" x2="43.18" y2="56.134" width="0.254" layer="16"/>
 <wire x1="43.18" y1="56.134" x2="42.799" y2="56.515" width="0.254" layer="16"/>
 <wire x1="42.799" y1="56.515" x2="42.799" y2="56.896" width="0.254" layer="16"/>
@@ -8054,7 +8096,7 @@ design rules under a new name.</description>
 <wire x1="33.782" y1="54.991" x2="33.782" y2="56.896" width="0.254" layer="1"/>
 <wire x1="72.136" y1="55.626" x2="72.136" y2="56.515" width="0.254" layer="16"/>
 <contactref element="SJ19" pad="P$2"/>
-<wire x1="43.942" y1="56.134" x2="43.688" y2="56.134" width="0" layer="19" extent="16-16"/>
+<wire x1="43.688" y1="56.134" x2="43.942" y2="56.134" width="0.254" layer="16"/>
 </signal>
 <signal name="I2CSCL">
 <contactref element="U$1" pad="PB6"/>
@@ -8370,9 +8412,9 @@ design rules under a new name.</description>
 <wire x1="22.352" y1="67.31" x2="27.6352" y2="67.31" width="0.6096" layer="1"/>
 <wire x1="27.6352" y1="67.31" x2="27.94" y2="67.6148" width="0.6096" layer="1"/>
 <wire x1="27.94" y1="67.6148" x2="31.75" y2="67.6148" width="0.6096" layer="1"/>
-<wire x1="57.658" y1="76.962" x2="56.515" y2="78.105" width="0.6096" layer="16"/>
-<via x="56.515" y="78.105" extent="1-16" drill="0.35"/>
-<wire x1="56.515" y1="78.105" x2="74.93" y2="78.105" width="0.6096" layer="1"/>
+<via x="58.801" y="77.089" extent="1-16" drill="0.35"/>
+<wire x1="58.801" y1="77.089" x2="59.817" y2="78.105" width="0.6096" layer="1"/>
+<wire x1="59.817" y1="78.105" x2="74.93" y2="78.105" width="0.6096" layer="1"/>
 <wire x1="74.93" y1="78.105" x2="75.311" y2="77.724" width="0.6096" layer="1"/>
 <wire x1="75.311" y1="77.724" x2="88.5922" y2="77.724" width="0.6096" layer="1"/>
 <wire x1="90.7288" y1="75.5874" x2="88.5922" y2="77.724" width="0.6096" layer="1"/>
@@ -8386,7 +8428,8 @@ design rules under a new name.</description>
 <wire x1="55.5752" y1="70.8152" x2="55.61249375" y2="70.8152" width="0.6096" layer="16"/>
 <wire x1="53.594" y1="68.834" x2="55.5752" y2="70.8152" width="0.6096" layer="16"/>
 <wire x1="55.61249375" y1="70.8152" x2="57.658" y2="72.86070625" width="0.6096" layer="16"/>
-<wire x1="57.658" y1="72.86070625" x2="57.658" y2="76.962" width="0.6096" layer="16"/>
+<wire x1="57.658" y1="75.946" x2="58.801" y2="77.089" width="0.6096" layer="16"/>
+<wire x1="57.658" y1="72.86070625" x2="57.658" y2="75.946" width="0.6096" layer="16"/>
 </signal>
 <signal name="E_MOSI">
 <contactref element="SJ16" pad="P$2"/>
@@ -8707,27 +8750,6 @@ design rules under a new name.</description>
 <signal name="GND4">
 <contactref element="U$1" pad="GND4"/>
 </signal>
-<signal name="N$64">
-<via x="5.08" y="61.595" extent="1-16" drill="0.35"/>
-</signal>
-<signal name="N$69">
-<via x="4.953" y="68.961" extent="1-16" drill="0.35"/>
-</signal>
-<signal name="N$70">
-<via x="4.953" y="66.675" extent="1-16" drill="0.35"/>
-</signal>
-<signal name="N$71">
-<via x="5.08" y="64.135" extent="1-16" drill="0.35"/>
-</signal>
-<signal name="N$193">
-<via x="36.703" y="59.69" extent="1-16" drill="0.35"/>
-</signal>
-<signal name="N$228">
-<via x="0.635" y="71.628" extent="1-16" drill="0.35"/>
-</signal>
-<signal name="N$229">
-<via x="2.286" y="50.8" extent="1-16" drill="0.35"/>
-</signal>
 <signal name="TDRV2">
 <contactref element="U10" pad="3"/>
 <contactref element="U6" pad="4"/>
@@ -8766,206 +8788,204 @@ design rules under a new name.</description>
 <approved hash="5,16,93acf0da805382f7"/>
 <approved hash="5,16,e8343fb06ad708af"/>
 <approved hash="5,16,1b4b03db2382a6ff"/>
-<approved hash="7,39,27edf815f872278a"/>
-<approved hash="7,39,551961bc2cdd0700"/>
-<approved hash="7,39,f7e3868906028e82"/>
-<approved hash="7,39,33c9e431e41433ec"/>
-<approved hash="7,39,a569ac12634593d4"/>
-<approved hash="7,39,aec874307415aeed"/>
-<approved hash="3,1,1cf866c066861cbe"/>
-<approved hash="5,1,54448f95f1e51120"/>
-<approved hash="3,1,5d1a9d50522862e5"/>
-<approved hash="7,39,c1ec18141873c18b"/>
-<approved hash="7,39,05194607ba669400"/>
-<approved hash="7,39,c1981860184bc1b3"/>
-<approved hash="7,39,05095f25a3109444"/>
-<approved hash="7,39,42805a8c08140f60"/>
-<approved hash="7,39,27f9f801f8d7272f"/>
-<approved hash="7,39,5118ce193d304948"/>
-<approved hash="7,39,3a4e52a84ae9c976"/>
-<approved hash="7,39,27c1f839ffd2202a"/>
-<approved hash="7,39,5519496a038f0084"/>
-<approved hash="7,39,2799f861f84a27b2"/>
-<approved hash="7,39,5509789e35ab0744"/>
-<approved hash="7,39,3a43e93ff163c966"/>
-<approved hash="7,39,5109009ef3aa4944"/>
-<approved hash="7,39,27e1f819f83327cb"/>
-<approved hash="7,39,4243ed3ebf630f66"/>
-<approved hash="7,39,8919c2046065d600"/>
-<approved hash="7,39,892bfe595c5cd656"/>
-<approved hash="7,39,c1cc183418d1c129"/>
-<approved hash="19,16,9b3ae9c8ab2c4460"/>
-<approved hash="19,16,01b480fddba00e90"/>
-<approved hash="19,16,898de930667952bd"/>
-<approved hash="19,16,7da2945894387dc2"/>
-<approved hash="19,16,cbc2542d39182ff8"/>
-<approved hash="7,39,6471f2b463d99864"/>
-<approved hash="7,39,050e9d2d612d9476"/>
-<approved hash="7,39,890e192ebb2ed676"/>
-<approved hash="7,39,c19818601875c18d"/>
-<approved hash="7,39,e0808734d8ac4260"/>
-<approved hash="7,39,c1f8180018d6c12e"/>
-<approved hash="7,39,64800b379aaf9860"/>
-<approved hash="7,39,056a847778639406"/>
-<approved hash="7,39,3a518fe09790c958"/>
-<approved hash="7,39,27c1f839fbd7242f"/>
-<approved hash="7,39,42518be1d9900f58"/>
-<approved hash="7,39,552b5de110e40756"/>
-<approved hash="7,39,512b25e1d6e54956"/>
-<approved hash="7,39,27cdf835f8d02728"/>
-<approved hash="7,39,e087593406ad4266"/>
-<approved hash="7,39,c1cc183418d2c12a"/>
-<approved hash="7,39,424e56a904e90f76"/>
-<approved hash="7,39,5518b619fb310748"/>
-<approved hash="7,39,27fdf805f83a27c2"/>
-<approved hash="7,39,051808239507e3c4"/>
-<approved hash="7,39,4b82b413525fd636"/>
-<approved hash="7,39,f1581e201e4af132"/>
-<approved hash="7,39,c482e410f6ddccb7"/>
-<approved hash="7,39,551987218f844744"/>
-<approved hash="7,39,e051565909284258"/>
+<approved hash="5,16,b433ac82f5c3d323"/>
+<approved hash="5,16,e8343fb06ad708af"/>
+<approved hash="5,16,1b4b03db2382a6ff"/>
 <approved hash="7,39,4bf2298a29814bf9"/>
-<approved hash="7,39,556aa3cceed80706"/>
-<approved hash="7,39,c1981860184ac1b2"/>
+<approved hash="7,39,05196ed195349384"/>
 <approved hash="7,39,6403ee617f0c9816"/>
-<approved hash="19,16,2d75e51a73f3abc5"/>
+<approved hash="7,39,8919ead24f37d184"/>
+<approved hash="7,39,c1c018381fd3c62b"/>
+<approved hash="7,39,c26e06160686c2fe"/>
+<approved hash="7,39,cb583820384acb32"/>
+<approved hash="7,39,7eee061606727e8a"/>
+<approved hash="7,39,4afc140414734a8b"/>
 <approved hash="7,39,7efc0a040afa7e02"/>
 <approved hash="7,39,49fc14041473498b"/>
-<approved hash="7,39,8efc180418738e8b"/>
-<approved hash="3,16,a918a25257e383fc"/>
-<approved hash="3,16,807bfa43fa018039"/>
-<approved hash="7,39,42719093c2ee0f74"/>
-<approved hash="7,39,5507743b39320776"/>
-<approved hash="7,39,e0717eb721da4264"/>
-<approved hash="7,39,4afc140414734a8b"/>
+<approved hash="7,39,7eee0a160a727e8a"/>
+<approved hash="7,39,5119316ac58e4e84"/>
+<approved hash="7,39,27c1f839ffd2202a"/>
+<approved hash="7,39,f7e3868906028e82"/>
+<approved hash="7,39,33c9e431e41433ec"/>
+<approved hash="7,39,a4e12c06a2be526c"/>
+<approved hash="7,39,764306bd47d14f1a"/>
+<approved hash="7,39,a569ac12634593d4"/>
+<approved hash="7,39,aec874307415aeed"/>
+<approved hash="7,39,e0808734d8ac4260"/>
+<approved hash="7,39,896a0074a260d606"/>
+<approved hash="7,39,c1fc1804183bc1c3"/>
+<approved hash="7,39,051891a26d8a9448"/>
+<approved hash="7,39,891815a1b789d648"/>
+<approved hash="7,39,e04e8b11d4514276"/>
+<approved hash="7,39,644e071296529876"/>
+<approved hash="7,39,c19c1864184ac1b2"/>
+<approved hash="7,39,6471f2b463d99864"/>
+<approved hash="7,39,c1fc18041806c1fe"/>
+<approved hash="7,39,e051565909284258"/>
+<approved hash="7,39,892bfe595c5cd656"/>
+<approved hash="7,39,424e56a904e90f76"/>
+<approved hash="7,39,5518b619fb310748"/>
+<approved hash="7,39,e0714d2b12564274"/>
+<approved hash="7,39,8907d783758ad676"/>
+<approved hash="7,39,c1ec18141876c18e"/>
+<approved hash="7,39,6471c12850559874"/>
+<approved hash="7,39,c1c018381bd6c22e"/>
+<approved hash="7,39,6451da5a4b2b9858"/>
+<approved hash="3,16,d8f69ce9ea11e38e"/>
+<approved hash="5,16,e8343fb06ad708af"/>
+<approved hash="7,39,c1981860184bc1b3"/>
+<approved hash="7,39,05095f25a3109444"/>
+<approved hash="7,39,c1e018181832c1ca"/>
+<approved hash="7,39,6443bc852dd89866"/>
 <approved hash="7,39,ca6e28162886cafe"/>
-<approved hash="7,39,cb583820384acb32"/>
 <approved hash="7,39,cb60381838f3cb8b"/>
 <approved hash="7,39,4b0e387638564b2e"/>
 <approved hash="7,39,4a8039f839d24aaa"/>
 <approved hash="7,39,7efc060406fa7e02"/>
 <approved hash="7,39,abfcf404f473ab8b"/>
-<approved hash="7,39,7eee061606727e8a"/>
-<approved hash="7,39,7eee0a160a727e8a"/>
-<approved hash="7,39,c26e06160686c2fe"/>
+<approved hash="7,39,8efc180418738e8b"/>
 <approved hash="7,39,43f2078a078143f9"/>
-<approved hash="7,39,51070c3bff334976"/>
-<approved hash="7,39,27e1f819f83427cc"/>
-<approved hash="7,39,f8f0a83740ac6d13"/>
-<approved hash="7,39,73b73e35af165f90"/>
-<approved hash="7,39,c19c18641849c1b1"/>
-<approved hash="7,39,516adbcc28d94906"/>
-<approved hash="7,39,3a805e8d4614c960"/>
+<approved hash="7,39,27edf815f877278f"/>
+<approved hash="7,39,42719093c2ee0f74"/>
 <approved hash="7,39,8909db267913d644"/>
-<approved hash="19,16,65b8183352629390"/>
-<approved hash="19,16,0b718830fae1c5d9"/>
-<approved hash="19,16,b449b8b3bdb7b14d"/>
-<approved hash="19,16,0b1c94785b044890"/>
-<approved hash="19,16,5f75ea1a82ab1bd3"/>
-<approved hash="19,16,def52bbc5e3c62ee"/>
-<approved hash="19,16,11971d4029c91f40"/>
-<approved hash="19,16,128277631b9bdd7a"/>
-<approved hash="5,16,18c617cee9af1e86"/>
-<approved hash="19,16,4ceec16e2b14bcf8"/>
-<approved hash="3,16,a3da5a4fd8fe9dfb"/>
-<approved hash="5,16,b433ac82f5c3d323"/>
-<approved hash="7,39,6471c12850559874"/>
-<approved hash="7,39,05075380af899476"/>
-<approved hash="7,39,e04e8b11d4514276"/>
-<approved hash="7,39,c19c1864184ac1b2"/>
-<approved hash="7,39,c1c018381bd6c22e"/>
-<approved hash="7,39,6451da5a4b2b9858"/>
-<approved hash="7,39,f1601e181ef3f18b"/>
-<approved hash="7,39,b9b37af3faf039b0"/>
-<approved hash="7,39,7dab3eebbeebfdab"/>
-<approved hash="3,16,3c7fc747c7463c7e"/>
-<approved hash="7,39,e0714d2b12564274"/>
-<approved hash="7,39,c1ec18141876c18e"/>
-<approved hash="7,39,8919ead24f37d184"/>
-<approved hash="7,39,c1c018381fd3c62b"/>
-<approved hash="3,16,4e158dfb2e20f566"/>
-<approved hash="7,39,c1fc18041806c1fe"/>
-<approved hash="3,16,3ac6cafeca3b3a03"/>
-<approved hash="7,39,27cdf835f8d3272b"/>
-<approved hash="7,39,4287848cd6150f66"/>
-<approved hash="7,39,c1e018181832c1ca"/>
-<approved hash="7,39,6443bc852dd89866"/>
+<approved hash="7,39,c1e018181835c1cd"/>
 <approved hash="3,16,a37edb646e10a69f"/>
 <approved hash="5,16,9c0caf6c79b55525"/>
-<approved hash="7,39,8907d783758ad676"/>
-<approved hash="7,39,c1e018181835c1cd"/>
-<approved hash="19,16,106f7cce7a6a12b0"/>
+<approved hash="7,39,e0717eb721da4264"/>
+<approved hash="7,39,890e192ebb2ed676"/>
+<approved hash="7,39,c19818601875c18d"/>
+<approved hash="7,39,64800b379aaf9860"/>
+<approved hash="7,39,056a847778639406"/>
+<approved hash="7,39,c19c18641849c1b1"/>
+<approved hash="7,39,5109009ef3aa4944"/>
+<approved hash="7,39,2799f861f84a27b2"/>
+<approved hash="7,39,51070c3bff334976"/>
+<approved hash="7,39,27e1f819f83427cc"/>
+<approved hash="19,16,0b718830fae1c5d9"/>
+<approved hash="19,16,65b8183352629390"/>
+<approved hash="19,16,b449b8b3bdb7b14d"/>
+<approved hash="19,16,4ceec16e2b14bcf8"/>
+<approved hash="5,16,18c617cee9af1e86"/>
+<approved hash="19,16,128277631b9bdd7a"/>
+<approved hash="19,16,11971d4029c91f40"/>
+<approved hash="7,39,42518be1d9900f58"/>
+<approved hash="7,39,552b5de110e40756"/>
+<approved hash="7,39,b9b37af3faf039b0"/>
+<approved hash="7,39,73b73e35af165f90"/>
+<approved hash="3,1,1cf866c066861cbe"/>
+<approved hash="5,1,54448f95f1e51120"/>
+<approved hash="3,16,a010f66654e59ce8"/>
+<approved hash="3,16,80777e4f7e02803a"/>
+<approved hash="19,16,a0dcdfbbeb36fa43"/>
 <approved hash="19,16,b60624dea6d13072"/>
+<approved hash="19,16,106f7cce7a6a12b0"/>
 <approved hash="19,16,6a37cacdca1e6ae4"/>
 <approved hash="19,16,b4be1d7d1ad192a9"/>
-<approved hash="7,39,a4e12c06a2be526c"/>
-<approved hash="7,39,3a7194928ceec974"/>
-<approved hash="7,39,05196ed195349384"/>
-<approved hash="3,16,a010f66654e59ce8"/>
+<approved hash="7,39,c1981860184ac1b2"/>
+<approved hash="7,39,c1f8180018d6c12e"/>
+<approved hash="7,39,e087593406ad4266"/>
+<approved hash="7,39,8919c2046065d600"/>
+<approved hash="7,39,c1cc183418d2c12a"/>
+<approved hash="7,39,6487d53744ae9866"/>
+<approved hash="7,39,27fdf805f83a27c2"/>
+<approved hash="7,39,5118ce193d304948"/>
+<approved hash="7,39,3a4e52a84ae9c976"/>
+<approved hash="7,39,279df865f84b27b3"/>
+<approved hash="7,39,c1cc183418d1c129"/>
 <approved hash="7,39,052b7a5a865f9456"/>
-<approved hash="7,39,e04330866fdb4266"/>
-<approved hash="7,39,5119316ac58e4e84"/>
-<approved hash="7,39,896a0074a260d606"/>
+<approved hash="7,39,f1601e181ef3f18b"/>
+<approved hash="7,39,551987218f844744"/>
+<approved hash="7,39,f1581e201e4af132"/>
+<approved hash="7,39,4b82b413525fd636"/>
+<approved hash="7,39,2799f861f84b27b3"/>
 <approved hash="7,39,4203bfdaedb70f16"/>
-<approved hash="19,16,a0dcdfbbeb36fa43"/>
-<approved hash="3,16,a7c3c1fbc0b3a68b"/>
-<approved hash="3,16,d8d69f2dee55e3d6"/>
-<approved hash="7,39,e00362623d0f4216"/>
-<approved hash="7,39,510ec29631974976"/>
+<approved hash="19,16,9b3ae9c8ab2c4460"/>
+<approved hash="3,16,ae15768fdbef9368"/>
+<approved hash="3,16,007f7a477a8500bd"/>
+<approved hash="3,1,5d1a9d50522862e5"/>
 <approved hash="7,39,2799f861f874278c"/>
 <approved hash="7,39,550eba96f7960776"/>
-<approved hash="7,39,4271a30ff1620f64"/>
-<approved hash="7,39,3a71a70ebf62c964"/>
-<approved hash="7,39,27fdf805f80727ff"/>
-<approved hash="7,39,891815a1b789d648"/>
-<approved hash="7,39,c1fc1804183bc1c3"/>
-<approved hash="7,39,644e071296529876"/>
-<approved hash="7,39,051891a26d8a9448"/>
-<approved hash="3,16,3bc6c1fec0433a7b"/>
-<approved hash="3,16,acb69cbc2e046b89"/>
-<approved hash="3,1,99d5d9e07617a696"/>
-<approved hash="3,16,82f7fecffe8a82b2"/>
-<approved hash="7,39,2799f861f84b27b3"/>
-<approved hash="7,39,279df865f84b27b3"/>
-<approved hash="7,39,279df865f84827b0"/>
-<approved hash="3,16,acb690bc22046b89"/>
-<approved hash="3,16,0a7e7f4640b83580"/>
-<approved hash="3,16,d8f69ce9ea11e38e"/>
-<approved hash="5,16,e8343fb06ad708af"/>
+<approved hash="7,39,42805a8c08140f60"/>
+<approved hash="7,39,556aa3cceed80706"/>
 <approved hash="3,16,51f191e63619f699"/>
-<approved hash="7,39,511919bceadc4900"/>
-<approved hash="3,16,bbc541fd4046ba7e"/>
-<approved hash="5,16,af896b809a78408f"/>
-<approved hash="3,16,a0b69ca32e036786"/>
-<approved hash="7,39,764306bd47d14f1a"/>
-<approved hash="7,39,27edf815f877278f"/>
-<approved hash="3,1,8ff9f5c1f5048f3c"/>
-<approved hash="3,16,a647c07fc0bfa687"/>
-<approved hash="3,16,80777e4f7e02803a"/>
-<approved hash="7,39,6487d53744ae9866"/>
-<approved hash="7,39,3a87808d9815c966"/>
-<approved hash="3,16,a2e1da0a57ba9fb9"/>
-<approved hash="3,16,b7c64cfe4c3db705"/>
-<approved hash="5,16,1b4b03db2382a6ff"/>
+<approved hash="5,16,43266f62ceac5407"/>
 <approved hash="3,16,800c7e347d03833b"/>
-<approved hash="3,16,59d199ee561666a9"/>
-<approved hash="3,16,b9c243fa4041ba79"/>
+<approved hash="5,16,b35f5296ec2eed7c"/>
+<approved hash="7,39,279df865f84827b0"/>
+<approved hash="3,16,3c7fc747c7463c7e"/>
+<approved hash="7,39,c1ec18141873c18b"/>
+<approved hash="7,39,05075380af899476"/>
+<approved hash="7,39,3a805e8d4614c960"/>
+<approved hash="7,39,27f9f801f8d7272f"/>
+<approved hash="7,39,3a7194928ceec974"/>
+<approved hash="3,16,a0b69ca32e036786"/>
+<approved hash="7,39,5507743b39320776"/>
+<approved hash="19,16,898de930667952bd"/>
+<approved hash="19,16,01b480fddba00e90"/>
+<approved hash="19,16,7da2945894387dc2"/>
+<approved hash="19,16,2d75e51a73f3abc5"/>
+<approved hash="7,39,c482e410f6ddccb7"/>
 <approved hash="7,39,3a03bbdba3b7c916"/>
-<approved hash="3,16,007f7a477a8500bd"/>
-<approved hash="3,16,ae15768fdbef9368"/>
-<approved hash="5,1,8fbf01422e8e860e"/>
-<approved hash="5,16,9e505a4a4b721285"/>
-<approved hash="5,16,0b53ff6ddda5c900"/>
-<approved hash="5,16,211c6645947469a9"/>
-<approved hash="5,16,90e5a5ffe05e2143"/>
-<approved hash="5,16,e73c39c4683f3441"/>
-<approved hash="5,16,e5b92676257a7769"/>
-<approved hash="5,16,c65a963479079f86"/>
-<approved hash="5,16,877927bcb00ed7c7"/>
-<approved hash="5,16,fddc4c80425746f7"/>
+<approved hash="7,39,27edf815f872278a"/>
+<approved hash="7,39,551961bc2cdd0700"/>
+<approved hash="7,39,4243ed3ebf630f66"/>
+<approved hash="7,39,5509789e35ab0744"/>
+<approved hash="7,39,27cdf835f8d3272b"/>
+<approved hash="7,39,4287848cd6150f66"/>
+<approved hash="7,39,4271a30ff1620f64"/>
+<approved hash="7,39,27fdf805f80727ff"/>
+<approved hash="19,16,0b1c94785b044890"/>
+<approved hash="7,39,511919bceadc4900"/>
+<approved hash="7,39,3a87808d9815c966"/>
+<approved hash="7,39,510ec29631974976"/>
+<approved hash="3,16,a3da5a4fd8fe9dfb"/>
+<approved hash="5,16,b433ac82f5c3d323"/>
+<approved hash="7,39,05194607ba669400"/>
+<approved hash="7,39,512b25e1d6e54956"/>
+<approved hash="7,39,3a518fe09790c958"/>
+<approved hash="3,16,0a7e7f4640b83580"/>
+<approved hash="7,39,27c1f839fbd7242f"/>
+<approved hash="7,39,3a43e93ff163c966"/>
+<approved hash="7,39,27e1f819f83327cb"/>
+<approved hash="3,16,a7c3c1fbc0b3a68b"/>
+<approved hash="3,16,d8d69f2dee55e3d6"/>
+<approved hash="19,16,cbc2542d39182ff8"/>
+<approved hash="7,39,050e9d2d612d9476"/>
+<approved hash="3,16,a647c07fc0bfa687"/>
+<approved hash="3,16,3bc6c1fec0433a7b"/>
 <approved hash="5,16,e4556e011224f9a2"/>
-<approved hash="5,16,88c31cef8340293d"/>
-<approved hash="5,16,2bea2b2f5c6b8213"/>
+<approved hash="7,39,5519496a038f0084"/>
+<approved hash="7,39,e04330866fdb4266"/>
+<approved hash="7,39,3a71a70ebf62c964"/>
+<approved hash="3,16,3ac6cafeca3b3a03"/>
+<approved hash="5,16,90e5a5ffe05e2143"/>
+<approved hash="3,16,4e158dfb2e20f566"/>
+<approved hash="7,39,f8f0a83740ac6d13"/>
+<approved hash="7,39,7dab3eebbeebfdab"/>
+<approved hash="3,1,99d5d9e07617a696"/>
+<approved hash="7,39,27cdf835f8d02728"/>
+<approved hash="3,16,807bfa43fa018039"/>
+<approved hash="5,16,e5b92676257a7769"/>
+<approved hash="3,16,a2e1da0a57ba9fb9"/>
+<approved hash="7,39,516adbcc28d94906"/>
+<approved hash="3,16,bbc541fd4046ba7e"/>
+<approved hash="3,1,8ff9f5c1f5048f3c"/>
+<approved hash="3,16,acb690bc22046b89"/>
+<approved hash="7,39,051808239507e3c4"/>
+<approved hash="7,39,e00362623d0f4216"/>
+<approved hash="19,16,5f75ea1a82ab1bd3"/>
+<approved hash="3,16,acb69cbc2e046b89"/>
+<approved hash="19,16,def52bbc5e3c62ee"/>
+<approved hash="3,16,b9c243fa4041ba79"/>
+<approved hash="3,16,59d199ee561666a9"/>
+<approved hash="5,16,9e505a4a4b721285"/>
+<approved hash="3,16,a918a25257e383fc"/>
+<approved hash="3,16,82f7fecffe8a82b2"/>
+<approved hash="3,16,b7c64cfe4c3db705"/>
+<approved hash="7,39,cd8014781455cdad"/>
+<approved hash="7,39,ceee18161845cebd"/>
+<approved hash="7,39,8bee141614458bbd"/>
+<approved hash="7,39,cdd814201456cdae"/>
 </errors>
 </board>
 </drawing>
