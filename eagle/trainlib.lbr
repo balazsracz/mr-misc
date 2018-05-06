@@ -2214,6 +2214,10 @@ Source: http://www.nxp.com/documents/data_sheet/PCA82C250.pdf</description>
 <text x="-2.64" y="1.436" size="1.27" layer="25" ratio="10">&gt;NAME</text>
 <text x="-2.64" y="-2.706" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
 </package>
+<package name="REVISION">
+<text x="-5.08" y="0" size="1.016" layer="21" font="vector" ratio="15">Rev. &gt;REVISION</text>
+<text x="-5.08" y="-2.54" size="1.016" layer="21" font="vector" ratio="15">&gt;DATE</text>
+</package>
 </packages>
 <symbols>
 <symbol name="L9BUS">
