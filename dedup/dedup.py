@@ -85,14 +85,82 @@ class DFile:
   pass
 
 class ORule:
-  __slots__ = ("file", "hasfilename", "missfile", "prefix", "count", "totalsize", "prefix_files", "prefix_bytes", "rule")
+  """Aggregate data about a selected top rule, including files we are writing
+  about hits and misses.
+  """
+  __slots__ = ("file", # output file object for matches
+               "hasfilename", # name of the output file for matches
+               "missfile", # output file object for misses
+               "prefix", # path prefix in the source filesystem
+               "count", # number of files matching this rule
+               "totalsize", # total bytes of file matching this rule
+               "prefix_files", # number of files in the src filesystem matching this path prefix
+               "prefix_bytes", # total bytes occupied by prefix_files
+               "rule" # unused
+  )
   def __init__(self):
     self.prefix_files = 0
     self.prefix_bytes = 0
+    self.count = 0
+    self.totalsize = 0
   pass
 
+class GenRule:
+  """One specific transformation from source to dest filesystem."""
+  __slots__ = (
+      "name", # string key for the rule
+      "src_parent",  # filesystem name for source end
+      "src_prefix", # prefix to cut off from source filename
+      "dst_parent", # filesystem name for dst end
+      "dst_prefix" # prefix to add on the dst end
+      )
+
+  def __init__(self, source, dest):
+    """ Generates a rule.
+    @param source is a DFile object on the source filesystem
+    @param dest is a DFile object on the dest filesystem.
+    """
+    common_suffix = os.path.commonprefix([source.fullpath[::-1], dest.fullpath[::-1]])[::-1]
+    source_head = source.fullpath[:len(source.fullpath) - len(common_suffix)]
+    dest_head = dest.fullpath[:len(dest.fullpath) - len(common_suffix)]
+    #print (source, dest)
+    #print("rule: %s %s common %s src %s dst %s" % (source.fullpath, dest.fullpath, common_suffix, source_head, dest_head))
+    self.src_parent = source.parent
+    self.src_prefix = source_head
+    self.dst_parent = dest.parent
+    self.dst_prefix = dest_head
+    self.name = "%s:%s -> %s:%s" % (
+        source.parent,
+        source_head,
+        dest.parent,
+        dest_head)
+
+  def __str__(self):
+    return self.name
+
+  def __hash__(self):
+    return self.name.__hash__()
+
+  def __eq__(self, other):
+    return self.name.__eq__(other)
+
+  def __lt__(self, other):
+    return self.name.__lt__(other)
+
+  def __gt__(self, other):
+    return self.name.__gt__(other)
+
+  def apply(self, sourcefile):
+    """Returns the desired fullpath of the destination file, or None if
+    this path does not match the rule (prefix)"""
+    if not sourcefile.fullpath.startswith(self.src_prefix):
+      return None
+    dpath = self.dst_prefix + sourcefile.fullpath[len(self.src_prefix):]
+    return dpath
+
 class ParsedInput:
-  __slots__ = ("rootfiledict")
+  __slots__ = ("rootfiledict" # Dictionary of filename => file object
+  )
 
   def __init__(self, inp):
     self.rootfiledict = defaultdict(dict)
@@ -150,6 +218,7 @@ def save_input():
 def process_input():
   global inp,pinp
   pinp = ParsedInput(inp)
+  return pinp
 
 def load_sizes():
   global pinp
@@ -178,22 +247,11 @@ def load_input():
   pf.close()
 
 
-def generate_rule(source, dest):
-  common_suffix = os.path.commonprefix([source.fullpath[::-1], dest.fullpath[::-1]])[::-1]
-  source_head = source.fullpath[:len(source.fullpath) - len(common_suffix)]
-  dest_head = dest.fullpath[:len(dest.fullpath) - len(common_suffix)]
-  #print (source, dest)
-  #print("rule: %s %s common %s src %s dst %s" % (source.fullpath, dest.fullpath, common_suffix, source_head, dest_head))
-  return "%s:%s -> %s:%s" % (
-      source.parent,
-      source_head,
-      dest.parent,
-      dest_head), source_head, dest_head
-
 def cover(root):
   global inp, pinp
   print("Computing cover for %s" % (root))
   rules = defaultdict(lambda: [0, 0])
+  ruleobj = {}
   not_found = []
   counter = 0
   skipped = 0
@@ -204,19 +262,18 @@ def cover(root):
       continue
     for candidate in inp.md5sums[sourcefile.md5sum]:
       if candidate is sourcefile: continue
-      rule, src_head, dest_head = generate_rule(sourcefile, candidate)
-      l = rules[rule]
+      rule = GenRule(sourcefile, candidate)
+      l = rules[rule.name]
       l[1] += 1
       l[0] += sourcefile.size
-      if len(l) == 2:
-        l.append(src_head)
-        l.append(dest_head)
+      if rule.name not in ruleobj:
+        ruleobj[rule.name] = rule
       found = True
     if not found: not_found.append(sourcefile)
     counter += 1
     if counter % 1000 == 0:
-      print("%d files...\r" % (counter), end='', flush=True)
-  print("%d files...\n%d skipped" % (counter, skipped))
+      print("%d files   (+ %d skipped)...\r" % (counter, skipped), end='', flush=True)
+  print("\n%d files (+ %d skipped)" % (counter, skipped))
   toprules = [(v, k) for k, v in rules.items()]
   toprules.sort(reverse=True)
   print("%d rules, %d files not covered" % (len(toprules), len(not_found)))
@@ -225,37 +282,36 @@ def cover(root):
   shutil.rmtree(dirname, ignore_errors=True)
   os.makedirs(dirname, exist_ok=False)
   needed_top_rules = toprules[:50]
-  for (freq, rule) in needed_top_rules:
+  for (freq, rulename) in needed_top_rules:
     r = ORule()
-    needrules[rule] = r;
-    filename = "cover-%s/%s.list" % (root, str.translate(rule,str.maketrans(': />','____'))[:100])
+    rule = ruleobj[rulename]
+    filename = "cover-%s/%s.list" % (root, str.translate(rule.name,str.maketrans(': />','____'))[:100])
     r.file = open(filename, "w", encoding="iso-8859-2")
     r.hasfilename = filename
-    filename = "cover-%s/%s.missing" % (root, str.translate(rule,str.maketrans(': />','____'))[:100])
+    filename = "cover-%s/%s.missing" % (root, str.translate(rule.name,str.maketrans(': />','____'))[:100])
     r.missfile = open(filename, "w", encoding="iso-8859-2")
-    r.prefix = freq[2]
-    r.count = freq[1]
-    r.totalsize = freq[0]
+    r.prefix = rule.src_prefix
     needrules[rule] = r
   # Find all occurences of top rules
   counter = 0
   for sourcefile in inp.rootfiles[root]:
     found = False
     missedrules = {}
-    for name, r in needrules.items():
-      if sourcefile.fullpath.startswith(r.prefix):
+    for rule, r in needrules.items():
+      dst_fullpath = rule.apply(sourcefile)
+      if dst_fullpath is not None:
         r.prefix_files += 1
         r.prefix_bytes += sourcefile.size
-        missedrules[name] = r
-    if True or len(inp.md5sums[sourcefile.md5sum]) <= 20:
-      for candidate in inp.md5sums[sourcefile.md5sum]:
-        if candidate is sourcefile: continue
-        rule, src_head = generate_rule(sourcefile, candidate)
-        if rule in needrules:
-          print(sourcefile.fullpath, end='', file=needrules[rule].file, flush=False)
-          del missedrules[rule]
-    for name, r in missedrules.items():
-        print(sourcefile.fullpath, end='', file=r.missfile, flush=False)
+        dstfile = pinp.rootfiledict[rule.dst_parent].get(dst_fullpath)
+        if (dstfile is not None and
+           sourcefile.md5sum == dstfile.md5sum):
+          # have hit
+          r.count += 1
+          r.totalsize += sourcefile.size
+          print(sourcefile.fullpath, end='', file=r.file, flush=False)
+          pass
+        else:
+          print(sourcefile.fullpath, end='', file=r.missfile, flush=False)
     counter += 1
     if counter % 1000 == 0:
       print("%d files...\r" % (counter), end='', flush=True)
