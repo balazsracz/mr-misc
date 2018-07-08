@@ -1,7 +1,7 @@
 #ifndef _ARDUINO_OPENMRN_H_
 #define _ARDUINO_OPENMRN_H_
 
-#include "openlcb/SimpleStack.h"
+#include "openlcb/SimpleStack.hxx"
 
 
 class OpenMRN {
