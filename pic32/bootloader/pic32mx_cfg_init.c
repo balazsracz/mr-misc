@@ -176,8 +176,8 @@ unsigned int cfg_words[4] __attribute__((section("PIC32MX_cfg_init"))) = {
 //  0x00000200 | // HS oscillator
 //  0x00000300 | // Disabled
     // 00000080:IESO:Internal External Switch Over bit
-    0x00000000 | // Disabled
-//  0x00000080 | // Enabled  (two speed startup)
+//    0x00000000 | // Disabled
+    0x00000080 | // Enabled  (two speed startup)
     // 00000020:FSOSCEN:Secondary oscillator Enable bit
     0x00000000 | // Disabled
 //  0x00000020 | // Enabled - 32.768 kHz

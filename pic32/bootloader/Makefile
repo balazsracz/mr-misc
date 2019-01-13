@@ -1,7 +1,8 @@
 # Makefile - C++ demo - Minimal demo blinks lights on the USB Starter Board
 # 26Sep09 DRNadler (minor cleanup)
 
-PREFIX=/opt/CodeSourcery/Sourcery_CodeBench_Lite_for_MIPS_ELF/bin/mips-sde-elf
+#PREFIX=/opt/CodeSourcery/Sourcery_CodeBench_Lite_for_MIPS_ELF/bin/mips-sde-elf
+PREFIX=/opt/CodeSourcery/mips-2013.11/bin/mips-sde-elf
 CC=$(PREFIX)-gcc
 CPP=$(PREFIX)-g++
 AS=$(PREFIX)-as
@@ -12,7 +13,7 @@ OBJDUMP=$(PREFIX)-objdump
 OBJCOPY=$(PREFIX)-objcopy
 SIZE=$(PREFIX)-size
 
-BASEDEFINES= -D__PIC32MX__ -D__XC32 -D__32MX795F512H__ -D__PIC32_FEATURE_SET__=795 -DDEMO_BOARD_USB_STARTER_KIT
+BASEDEFINES= -D__PIC32MX__ -D__XC32 -D__32MX795F512H__ -D__PIC32_FEATURE_SET__=795 -DDEMO_BOARD_USB_STARTER_KIT -fgnu89-inline
 CDEFINES=$(BASEDEFINES) -D__LANGUAGE_C__ -DTRANSPORT_LAYER_USB
 ADEFINES=$(BASEDEFINES) -D__LANGUAGE_ASSEMBLY__ -fdollars-in-identifiers
 # -EL - little-endian
@@ -126,7 +127,7 @@ bootloader.hex: Makefile $(LDSCRIPT) PIC32MX-reset.S $(OBJS) # regs.S
 #	# Note: Physical address = LMA & 0x1FFFffff
 #	# Some device programmers take care of this but sadly not Microchip's...
 #	# Create an ELF with adjusted LMAs prior creating the HEX file.
-	$(OBJCOPY) --change-section-lma .PIC32MX_cfg_init-0xA0000000 --change-section-lma .boot_flash_text-0xA0000000 --change-section-lma .text-0xA0000000 --change-section-lma .eh_frame-0xA0000000 --change-section-lma .rodata-0xA0000000 --change-section-lma .data-0xA0000000 --change-section-lma .vector_4-0xA0000000 --change-section-lma .vector_24-0xA0000000 --change-section-lma .reset-0xA0000000 --change-section-lma .boot-0xA0000000 --change-section-lma .eh_frame_hdr-0xA0000000 bootloader.elf tmp.elf
+	$(OBJCOPY) --change-section-lma .PIC32MX_cfg_init-0xA0000000 --change-section-lma .boot_flash_text-0xA0000000 --change-section-lma .text-0xA0000000 --change-section-lma .eh_frame-0xA0000000 --change-section-lma .rodata-0xA0000000 --change-section-lma .data-0xA0000000 --change-section-lma .vector_4-0xA0000000 --change-section-lma .vector_24-0xA0000000 --change-section-lma .reset-0xA0000000 --change-section-lma .boot-0xA0000000 --change-section-lma .eh_frame_hdr-0xA0000000  -R .MIPS.abiflags bootloader.elf tmp.elf
 	@echo "**************************************************************"
 	@echo === VERIFY NO "BF.." or "BD.." LMA in the sections below ! ===
 	@echo "**************************************************************"
